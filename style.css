@@ -1,0 +1,473 @@
+.weaponSection>div, .gearSection>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainGrid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.weaponSection, .gearSection {
+    display: grid;
+}
+
+.meleeWeaponSection, .necklaceSection {
+    grid-row: 1;
+    grid-column: 1;
+}
+.rangeWeaponSection, .charmSection {
+    grid-row: 1;
+    grid-column: 2;
+}
+.trinketSection {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 3.3px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+  background: #ffd3d3;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0.2px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #000000;
+  height: 15px;
+  width: 11px;
+  border-radius: 3px;
+  background: #f3ffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffeded;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+  background: #ffd3d3;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0.2px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #000000;
+  height: 15px;
+  width: 11px;
+  border-radius: 3px;
+  background: #f3ffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ffb9b9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ffd3d3;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0.2px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #000000;
+  height: 15px;
+  width: 11px;
+  border-radius: 3px;
+  background: #f3ffff;
+  cursor: pointer;
+  height: 8.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #ffd3d3;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffeded;
+}
+
+body {
+    background-color: #0e0c0a;
+}
+
+.mainGrid {
+    padding: 5px;
+    //border: 3px solid #a66f42;
+}
+
+.mainGrid>div {
+    margin: 0px 20px 20px 20px;
+}
+
+.weaponSection, .gearSection { 
+    grid-column-gap: 15px; 
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    height: 35px;
+    margin: 4px 0;
+    border: 0;
+    border: 1px solid black;
+    color: #c7c7c7;
+    /* border-top: 3px solid #a66f42; */
+    background: #313131 url('https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-128.png') no-repeat;
+    background-size: 20px;
+    background-position:  right 10px center;
+    font-family: 'Arial';
+    padding-left: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* -webkit-border-radius: 4px; */
+    -moz-border-radius: 4px;
+    /* border-radius: 4px; */
+}
+
+input {
+    width: 100%;
+    height: 33px;
+    padding: 0;
+    margin: 4px 0;
+    border: 0;
+    border: 1px solid black;
+    /* border-top: 3px solid #4b5fc3; */
+    color: #c7c7c7;
+    background: #313131;
+    font-family: 'Arial';
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* -webkit-border-radius: 4px; */
+    -moz-border-radius: 4px;
+    /* border-radius: 4px; */
+    text-align: center;
+}
+
+.weaponSection>div, .gearSection>div {
+    display: grid !important;
+    grid-template-columns: auto 58px;
+}
+
+.weaponSection>div>h2 {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+
+}
+
+.weaponSection>div>select:nth-of-type(1) {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+}
+
+.weaponSection>div>select:nth-of-type(2) {
+    grid-row: 3;
+    grid-column: 1;    
+}
+
+.weaponSection>div>select:nth-of-type(3) {
+    grid-row: 4;
+    grid-column: 1;
+}
+
+.weaponSection>div>select:nth-of-type(4) {
+    grid-row: 5;
+    grid-column: 1;
+    
+}
+
+.weaponSection>div>select:nth-of-type(5) {
+    grid-row: 6;
+    grid-column: 1 / span 2;
+    
+}
+
+.weaponSection>div>input:nth-of-type(1) {
+    grid-row: 3;
+    grid-column: 2;
+    
+}
+
+.weaponSection>div>input:nth-of-type(2) {
+    grid-row: 4;
+    grid-column: 2;
+    
+}
+
+.weaponSection>div>input:nth-of-type(3) {
+    grid-row: 5;
+    grid-column: 2;
+    
+}
+
+.gearSection>div>h2 {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+
+}
+
+.gearSection>div>select:nth-of-type(1) {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.gearSection>div>select:nth-of-type(2) {
+    grid-row: 3;
+    grid-column: 1;    
+}
+
+.gearSection>div>select:nth-of-type(3) {
+    grid-row: 4;
+    grid-column: 1;
+}
+
+.gearSection>div>select:nth-of-type(4) {
+    grid-row: 5;
+    grid-column: 1 / span 2;
+    
+}
+
+.gearSection>div>input:nth-of-type(1) {
+    grid-row: 2;
+    grid-column: 2;
+    
+}
+
+.gearSection>div>input:nth-of-type(2) {
+    grid-row: 3;
+    grid-column: 2;
+    
+}
+
+.gearSection>div>input:nth-of-type(3) {
+    grid-row: 4;
+    grid-column: 2;
+    
+}
+
+
+.talentSection>div {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #313131;
+    color: #c7c7c7;
+    font-family: sans-serif;
+    display: grid;
+    font-size: 14px;
+    grid-template-columns: repeat(3, calc(33.33% - 10px));
+    grid-column-gap: 10px;
+}
+
+.talentSection>div>div:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+.talentSection>div>div:nth-child(2) {
+    grid-row: 1;
+    grid-column: 2;
+}
+.talentSection>div>div:nth-child(3) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.talentSection>div>div {
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+	cursor: pointer;
+}
+.talentSection>div>div>span:first-child {
+    padding-bottom:5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #b9b9aa;
+}
+.talentSection>div>div>span:nth-child(2) {
+    line-height: 18px;
+}
+
+.heroSection {
+    height: 80px;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    margin-bottom: 0 !important;
+}
+
+.heroSection>div {
+    outline: 1px solid #a66f42;
+    margin-left: 1px;
+    box-shadow: inset 0 0 0 1000px #ffffff25;
+}
+
+.heroSection>div:hover {
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.heroSection>div.selected {
+    box-shadow: none;
+    cursor: default;
+}
+
+.heroSection .markusHero {
+    grid-column: 1;
+    background: url('images/markus.png');
+    background-position: -130px -88px;
+}
+.heroSection .bardinHero {
+    grid-column: 2;
+    background-image: url('images/bardin.png');
+    background-position: -219px -291px;
+}
+.heroSection .kerillianHero {
+    grid-column: 3;
+    background: url('images/kerillian.png');
+    background-position: -137px -113px;
+}
+.heroSection .victorHero {
+    grid-column: 4;
+    background: url('images/victor.png');
+    background-position: -199px -145px;
+}
+.heroSection .siennaHero {
+    grid-column: 5;
+    background: url('images/sienna.png') 300% 300%;
+    background-position: -295px -142px;
+}
+
+.classSection {
+    height: 35px;
+    display: grid;
+    color: #fff;
+    grid-template-columns: repeat(3, 33.33%);
+}
+
+.classSection>div {
+    outline: 1px solid #a66f42;
+    margin-left: 1px;
+    margin-right: -1px;
+    margin-top: 1px;
+    background: #030c15;
+    box-shadow: inset 0 0 0 1000px #ffffff15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.classSection>div.selected {
+    box-shadow: none;
+    cursor: default;
+}
+
+.classSection>div:hover {
+    box-shadow: none;
+    cursor: pointer;
+}
+
+body {
+    font-family: sans-serif;
+}
+.meleeQualitySelection, input[name='meleePowerLevel'],
+.rangeQualitySelection, input[name='rangePowerLevel'],
+.necklaceQualitySelection, input[name='necklacePowerLevel'],
+.charmQualitySelection, input[name='charmPowerLevel'],
+.trinketQualitySelection, input[name='trinketPowerLevel'] {
+    display: none;
+}
+
+/* hide up/down arrows ("spinners") on input fields marked type="number" */
+input[type="number"] {
+  -moz-appearance:textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.gearSection {
+    margin-bottom: 30px !important;
+}
+
+.talentSection>div>div.selected {
+    border: 2px solid #8BC34A;
+    margin: -2px;
+    background: #dedede;
+    color: black;
+}
+
+.traitDescription {
+    grid-column: 1 / span 2;
+    grid-row: 7;
+    height: 50px;
+    color: #afafaf;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    display: flex;
+    justify-content: center;
+    margin-top: -5px;
+    padding: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
+    z-index: -1;
+}
+
+.weaponSection {
+    grid-template-columns: 50% 50%;
+}
+
+.traitDescription span {
+    align-self: center;
+}
+
+.gearSection {
+    grid-template-columns: repeat(3, calc(33.33% - 10px));
+}
+
+.footer>input {
+    padding: 0px 20px;
+    width: calc(100% - 40px);
+}
+
+.talentSection>div>div.selected>span:first-child {
+    color: black;
+}
