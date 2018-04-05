@@ -39,6 +39,13 @@ function loadSerializedUrl() {
 	loadTalents(talentsHashValue);
 	loadTraits();
 	$(".footer>input")[0].value = getShareableUrl();
+	loadMeleeProperties();
+	if (heroIndex == 1 && careerIndex == 2) {
+		loadSlayerRangeProperties();
+	}
+	else {
+		loadRangeProperties();
+	}
 }
 
 function loadAbilities(heroIndex, careerIndex) {
@@ -646,6 +653,8 @@ function initData() {
 	loadCharmProperties();
 	loadTrinketProperties();
 	loadTraits();
+	loadMeleeProperties();
+	loadRangeProperties();
 	
 	if (window.location.hash) {
 		loadSerializedUrl();
