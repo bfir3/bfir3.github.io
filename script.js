@@ -677,5 +677,7 @@ $(function() {
 			"value": property1.max_value,
 			"step": property1.step
 		});
+		
+		$(e.currentTarget.nextSibling.nextSibling).val(property1.max_value);
 	});
 });
