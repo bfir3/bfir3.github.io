@@ -2051,7 +2051,7 @@
 	"range_traits": [
 		{
 			"name":"Barrage",
-			"description":"Consecutive attacks against the same targets boosts attack power by 5% for 5s"
+			"description":"Consecutive attacks against the same targets boosts attack power by 5% for 5 seconds"
 		},
 		{
 			"name":"Conservative Shooter",

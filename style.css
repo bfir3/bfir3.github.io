@@ -6,6 +6,7 @@
 .mainGrid {
     max-width: 1200px;
     margin: 0 auto;
+    display: grid;
 }
 
 .weaponSection, .gearSection {
@@ -325,6 +326,7 @@ input {
     display: grid;
     grid-template-columns: repeat(5, 20%);
     margin-bottom: 0 !important;
+    grid-row: 1;
 }
 
 .heroSection>div {
@@ -374,6 +376,7 @@ input {
     display: grid;
     color: #fff;
     grid-template-columns: repeat(3, 33.33%);
+    grid-row: 2;
 }
 
 .classSection>div {
@@ -452,7 +455,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .weaponSection {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, calc(50% - 7.5px));
+    grid-row: 6;
 }
 
 .traitDescription span {
@@ -461,6 +465,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .gearSection {
     grid-template-columns: repeat(3, calc(33.33% - 10px));
+    grid-row: 7;
 }
 
 .footer>input {
@@ -470,4 +475,60 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .talentSection>div>div.selected>span:first-child {
     color: black;
+}
+
+.heroClassContent {
+    grid-row: 3;
+    margin-bottom: 5px !important;
+}
+
+.talentSection {
+    grid-row: 4;
+    text-align: center;
+}
+
+.sectionTitle {
+    border-top: 1px solid #313131;
+}
+
+.sectionTitle span {
+    grid-column: 1 / span 3;
+    margin-top: 10px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sectionTitle {
+    background: #313131;
+    color: #c7c7c7;
+    text-align: center;
+    padding-bottom: 10px;
+    display: grid;
+}
+
+.talentSection>div>div:not(.selected):hover {
+    background: #ffffff15;
+}
+
+.heroActiveAbility, .heroPassiveAbility {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    color: #c7c7c7;
+}
+
+.heroActiveAbility>span:first-child, .heroPassiveAbility>span:nth-child(odd) {
+    font-weight: bold;
+    color: #b9b99b;
+}
+
+.heroActiveAbility>span:last-child, .heroPassiveAbility>span:nth-child(even) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gearSectionTitle {
+    grid-row: 5;
 }

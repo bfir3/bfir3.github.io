@@ -40,6 +40,19 @@ function loadSerializedUrl() {
 	$(".footer>input")[0].value = getShareableUrl();
 }
 
+function loadAbilities(heroIndex, careerIndex) {
+	$(".heroActiveAbility")[0].innerHTML = '';
+	$(".heroPassiveAbility")[0].innerHTML = '';
+	
+	var skillName = _data.heroes[heroIndex].careers[careerIndex].skill.name;
+	var skillDescription = _data.heroes[heroIndex].careers[careerIndex].skill.description;
+	$(".heroActiveAbility").append(`<span>${skillName}</span><span>${skillDescription}</span>`);
+	
+	for (let ability of _data.heroes[heroIndex].careers[careerIndex].passives) {
+		$(".heroPassiveAbility").append(`<span>${ability.name}</span><span>${ability.description}</span>`);
+	}
+}
+
 function loadMeleeWeapon(serializedString) {
 	let params = serializedString.split(';');
 	let id = params[0].split(':')[1];
@@ -165,6 +178,7 @@ function loadHero(heroIndex, careerIndex) {
 			i++;
 	}
 	loadCareers(heroIndex, careerIndex);
+	loadAbilities(heroIndex, careerIndex);
 }
 
 function loadCareers(heroIndex, careerIndex) {
@@ -589,6 +603,7 @@ $(function() {
         let index = Array.prototype.indexOf.call($(e.currentTarget.parentElement).children(),e.currentTarget);
         loadHero(index, 0);
 		$(".footer>input")[0].value = getShareableUrl();
+		$(".talentSection>div>div").removeClass("selected")
     });
 	
 	$(".classSection>div").click((e) => { 
@@ -598,6 +613,7 @@ $(function() {
         let heroIndex = Array.prototype.indexOf.call($(".heroSection").children(),$(".heroSection>div.selected")[0]);
 		loadHero(heroIndex, index);
 		$(".footer>input")[0].value = getShareableUrl();
+		$(".talentSection>div>div").removeClass("selected")
     });
 	
 	$(".meleeSelection").change((e) => { 
