@@ -624,14 +624,6 @@ $(function() {
 		$(".footer>input")[0].value = getShareableUrl();
     });		
 	
-	$(".meleeProperty1Selection").change((e) => { 
-        loadMeleeProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });		
-	$(".meleeProperty2Selection").change((e) => { 
-        loadMeleeProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });	
 	$(".rangeProperty1Selection").change((e) => { 
         loadRangeProperties();
 		$(".footer>input")[0].value = getShareableUrl();
@@ -673,4 +665,17 @@ $(function() {
 	$('input[type="number"]').change((e) => { 
 		$(".footer>input")[0].value = getShareableUrl();
     });
+	
+	$(".propertySelection").change((e) => { console.log(e.currentTarget.nextSibling.nextSibling); 
+		let property1Text = e.currentTarget.options[e.currentTarget.selectedIndex].text
+		
+		let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+		
+		$(e.currentTarget.nextSibling.nextSibling).attr({ 
+			"min": property1.min_value,
+			"max": property1.max_value,
+			"value": property1.max_value,
+			"step": property1.step
+		});
+	});
 });
