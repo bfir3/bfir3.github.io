@@ -257,6 +257,11 @@ function loadRangeWeapons(heroIndex, careerIndex) {
 		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
 	}
 	loadRangeProperties();
+	$(".rangeTraitSelection")[0].innerHTML = '';
+	i = 0;
+	for (var rangeTrait of _data.range_traits) {
+		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
+	}
 }
 
 function loadRangeProperties() {
@@ -308,6 +313,11 @@ function loadSlayerRangeWeapons() {
 		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
 	}
 	loadSlayerRangeProperties();
+	$(".rangeTraitSelection")[0].innerHTML = '';
+	i = 0;
+	for (var rangeTrait of _data.melee_traits) {
+		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
+	}
 }
 
 function loadSlayerRangeProperties() {
