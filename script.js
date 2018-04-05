@@ -423,7 +423,7 @@ function getSerializedUrl() {
 }
 
 function getShareableUrl() {
-	return 'https://24kev.in/files/projects/v2builds/index.html#' + getSerializedUrl();
+	return 'http://verminbuilds.com/#' + getSerializedUrl();
 }
 
 function getHeroIndex() {
