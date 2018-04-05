@@ -116,7 +116,7 @@ function loadSerializedUrl() {
 		"value": property2.max_value,
 		"step": property2.step
 	});
-}
+	
 	property1Text = $(".charmProperty1Selection")[0].options[$(".charmProperty1Selection")[0].selectedIndex].text
 	property2Text = $(".charmProperty2Selection")[0].options[$(".charmProperty2Selection")[0].selectedIndex].text
 	
