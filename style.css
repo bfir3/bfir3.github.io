@@ -532,3 +532,76 @@ input[type="number"]::-webkit-inner-spin-button {
 .gearSectionTitle {
     grid-row: 5;
 }
+
+.classSection {
+    margin-bottom: 1px !important;
+}
+@media(max-width: 1200px) { 
+    .heroSection {
+        height: 35px;
+    }
+    .heroSection>div {
+        background: #030c15 !important;
+        content: 'Test';
+        margin-right:-1px;
+        display: grid;
+        align-content: center;
+        color: #c7c7c7;
+        text-align:center;
+    }
+    .heroSection>div:nth-child(1)::after {
+        content:'Markus';
+    }
+    .heroSection>div:nth-child(2)::after {
+        content:'Bardin';
+    }
+    .heroSection>div:nth-child(3)::after {
+        content:'Kerillian';
+    }
+    .heroSection>div:nth-child(4)::after {
+        content:'Victor';
+    }
+    .heroSection>div:nth-child(5)::after {
+        content:'Sienna';
+    }
+    .weaponSection {
+        grid-row-gap: 15px;
+    }
+    .meleeWeaponSection {
+        grid-column: 1 / span 2;
+    }
+    .rangeWeaponSection {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+    }
+    .gearSection {
+        grid-row-gap: 15px;
+    }
+    .necklaceSection {
+        grid-column: 1 / span 3;
+    }
+    .charmSection {
+        grid-row: 2;
+        grid-column: 1 / span 3;
+    }
+    .trinketSection {
+        grid-row: 3;
+        grid-column: 1 / span 3;
+    }
+
+    .talentSection>div>div:nth-child(1) {
+        grid-row: 1;
+        grid-column: 1 / span 3;
+    }
+    .talentSection>div>div:nth-child(2) {
+        grid-row: 2;
+        grid-column: 1 / span 3;
+    }
+    .talentSection>div>div:nth-child(3) {
+        grid-row: 3;
+        grid-column: 1 / span 3;
+    }
+    .talentSection>div {
+        border-bottom: 3px solid #313131;
+    }
+}
