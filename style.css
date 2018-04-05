@@ -456,7 +456,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .weaponSection {
     grid-template-columns: repeat(2, calc(50% - 7.5px));
-    grid-row: 6;
+    grid-row: 7;
 }
 
 .traitDescription span {
@@ -465,7 +465,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .gearSection {
     grid-template-columns: repeat(3, calc(33.33% - 10px));
-    grid-row: 7;
+    grid-row: 8;
 }
 
 .footer>input {
@@ -484,7 +484,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .talentSection {
-    grid-row: 4;
+    grid-row: 5;
     text-align: center;
 }
 
@@ -506,6 +506,7 @@ input[type="number"]::-webkit-inner-spin-button {
     text-align: center;
     padding-bottom: 10px;
     display: grid;
+    grid-row: 4;
 }
 
 .talentSection>div>div:not(.selected):hover {
@@ -531,7 +532,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .gearSectionTitle {
-    grid-row: 5;
+    grid-row: 6;
 }
 
 .classSection {
