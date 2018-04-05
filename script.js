@@ -624,39 +624,6 @@ $(function() {
 		$(".footer>input")[0].value = getShareableUrl();
     });		
 	
-	$(".rangeProperty1Selection").change((e) => { 
-        loadRangeProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".rangeProperty2Selection").change((e) => { 
-        loadRangeProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".necklaceProperty1Selection").change((e) => { 
-        loadNecklaceProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".necklaceProperty2Selection").change((e) => { 
-        loadNecklaceProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".charmProperty1Selection").change((e) => { 
-        loadCharmProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".charmProperty2Selection").change((e) => { 
-        loadCharmProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".trinketProperty1Selection").change((e) => { 
-        loadTrinketProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	$(".trinketProperty2Selection").change((e) => { 
-        loadTrinketProperties();
-		$(".footer>input")[0].value = getShareableUrl();
-    });
-	
 	$(".traitSelection").change((e) => { 
         loadTraits();
 		$(".footer>input")[0].value = getShareableUrl();
@@ -679,5 +646,6 @@ $(function() {
 		});
 		
 		$(e.currentTarget.nextSibling.nextSibling).val(property1.max_value);
+		$(".footer>input")[0].value = getShareableUrl();
 	});
 });
