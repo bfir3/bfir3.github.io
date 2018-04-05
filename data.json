@@ -42,7 +42,7 @@
         ],
         "skill":{
           "name":"Morale Boost",
-          "description":"Markus grants nearby party members a boost of temprary health and staggers nearby enemies."
+          "description":"Markus grants nearby party members a boost of temporary health and staggers nearby enemies."
         },
         "talents":[
           [
