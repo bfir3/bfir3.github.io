@@ -1,5 +1,6 @@
 'use strict';
 var _data;
+var _properties;
 var career_select;
 var talents_div;
 var share_link;
@@ -585,6 +586,7 @@ $(function() {
 		dataType: 'json',
 		success: function(data) {
 			_data = data[0];
+			_properties = _data.melee_properties.concat(_data.range_properties).concat(_data.necklace_properties).concat(_data.charm_properties).concat(_data.trinket_properties);
 			initData();
 		}
 	});
@@ -636,7 +638,7 @@ $(function() {
 	$(".propertySelection").change((e) => { console.log(e.currentTarget.nextSibling.nextSibling); 
 		let property1Text = e.currentTarget.options[e.currentTarget.selectedIndex].text
 		
-		let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+		let property1 = _properties.filter(function (item) { return item.name.includes(property1Text); })[0];
 		
 		$(e.currentTarget.nextSibling.nextSibling).attr({ 
 			"min": property1.min_value,
