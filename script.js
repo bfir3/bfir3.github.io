@@ -673,5 +673,4 @@ $(function() {
 	$('input[type="number"]').change((e) => { 
 		$(".footer>input")[0].value = getShareableUrl();
     });
-	
 });
