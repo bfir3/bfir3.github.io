@@ -428,10 +428,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .talentSection>div>div.selected {
-    border: 2px solid #8BC34A;
     margin: -2px;
-    background: #dedede;
     color: black;
+	border: 2px solid #afafaf;    
+	background: #9a9c9b;
 }
 
 .traitDescription {
@@ -608,4 +608,9 @@ select {
     .talentSection>div {
         border-bottom: 3px solid #313131;
     }
+}
+
+.talentSection>div>div.selected {
+	border: 1px solid #afafaf;    
+	background: #9a9c9b;
 }
