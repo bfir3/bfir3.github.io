@@ -200,6 +200,11 @@ function loadCareers(heroIndex, careerIndex) {
 		heroCareers[i++].innerHTML = '<span>' + career.name + '</span>';
 	}
 	loadMeleeWeapons(heroIndex,careerIndex);
+	if (heroIndex == 1 && careerIndex == 2) {
+		loadSlayerRangeWeapons();
+		return;
+	}
+	
 	loadRangeWeapons(heroIndex,careerIndex);
 }
 
@@ -255,6 +260,70 @@ function loadRangeWeapons(heroIndex, careerIndex) {
 }
 
 function loadRangeProperties() {
+	$(".rangeProperty1Selection")[0].innerHTML = '';
+	$(".rangeProperty2Selection")[0].innerHTML = '';
+	i = 0;
+	for (var rangeProperty of _data.range_properties) {
+		$(".rangeProperty1Selection").append(new Option(rangeProperty.name, i));
+		if (i == 1) {
+			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++, true, true));
+		}
+		else {
+			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++));
+		}
+	}
+	
+	let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
+	let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
+	
+	let property1 = _data.range_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+	let property2 = _data.range_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$('input[name="rangeProperty1"]').attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"value": property1.max_value,
+		"step": property1.step
+	});
+	
+	$('input[name="rangeProperty2"]').attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"value": property2.max_value,
+		"step": property2.step
+	});
+	
+	$('input[name="rangeProperty1"]').val(property1.max_value);
+	$('input[name="rangeProperty2"]').val(property2.max_value);
+}
+
+function loadSlayerRangeWeapons() {
+	$(".rangeSelection")[0].innerHTML = '';
+	
+	let heroCareer = _data.heroes[1].careers[2];		
+	let rangeWeapons = _data.melee_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
+	let i = 0;
+		
+	for (var rangeWeapon of rangeWeapons) {
+		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
+	}
+	loadSlayerRangeProperties();
+}
+
+function loadSlayerRangeProperties() {
+	$(".rangeProperty1Selection")[0].innerHTML = '';
+	$(".rangeProperty2Selection")[0].innerHTML = '';
+	i = 0;
+	for (var rangeProperty of _data.melee_properties) {
+		$(".rangeProperty1Selection").append(new Option(rangeProperty.name, i));
+		if (i == 1) {
+			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++, true, true));
+		}
+		else {
+			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++));
+		}
+	}
+	
 	let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
 	let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
 	
@@ -635,7 +704,7 @@ $(function() {
 		$(".footer>input")[0].value = getShareableUrl();
     });
 	
-	$(".propertySelection").change((e) => { console.log(e.currentTarget.nextSibling.nextSibling); 
+	$(".propertySelection").change((e) => { 
 		let property1Text = e.currentTarget.options[e.currentTarget.selectedIndex].text
 		
 		let property1 = _properties.filter(function (item) { return item.name.includes(property1Text); })[0];
