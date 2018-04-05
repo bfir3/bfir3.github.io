@@ -39,13 +39,119 @@ function loadSerializedUrl() {
 	loadTalents(talentsHashValue);
 	loadTraits();
 	$(".footer>input")[0].value = getShareableUrl();
-	loadMeleeProperties();
+		
+	let property1Text = $(".meleeProperty1Selection")[0].options[$(".meleeProperty1Selection")[0].selectedIndex].text
+	let property2Text = $(".meleeProperty2Selection")[0].options[$(".meleeProperty2Selection")[0].selectedIndex].text
+	
+	let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+	let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$('input[name="meleeProperty1"]').attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"step": property1.step
+	});
+	
+	$('input[name="meleeProperty2"]').attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"step": property2.step
+	});
+	
 	if (heroIndex == 1 && careerIndex == 2) {
-		loadSlayerRangeProperties();
+		let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
+		let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
+		
+		let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+		let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+		
+		$('input[name="rangeProperty1"]').attr({ 
+			"min": property1.min_value,
+			"max": property1.max_value,
+			"step": property1.step
+		});
+		
+		$('input[name="rangeProperty2"]').attr({ 
+			"min": property2.min_value,
+			"max": property2.max_value,
+			"step": property2.step
+		});
 	}
-	else {
-		loadRangeProperties();
+	else {	
+		let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
+		let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
+		
+		let property1 = _data.range_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+		let property2 = _data.range_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+		
+		$('input[name="rangeProperty1"]').attr({ 
+			"min": property1.min_value,
+			"max": property1.max_value,
+			"step": property1.step
+		});
+		
+		$('input[name="rangeProperty2"]').attr({ 
+			"min": property2.min_value,
+			"max": property2.max_value,
+			"step": property2.step
+		});
 	}
+	
+	property1Text = $(".necklaceProperty1Selection")[0].options[$(".necklaceProperty1Selection")[0].selectedIndex].text
+	property2Text = $(".necklaceProperty2Selection")[0].options[$(".necklaceProperty2Selection")[0].selectedIndex].text
+	
+	property1 = _data.necklace_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+	property2 = _data.necklace_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$('input[name="necklaceProperty1"]').attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"value": property1.max_value,
+		"step": property1.step
+	});
+	
+	$('input[name="necklaceProperty2"]').attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"value": property2.max_value,
+		"step": property2.step
+	});
+}
+	property1Text = $(".charmProperty1Selection")[0].options[$(".charmProperty1Selection")[0].selectedIndex].text
+	property2Text = $(".charmProperty2Selection")[0].options[$(".charmProperty2Selection")[0].selectedIndex].text
+	
+	property1 = _data.charm_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+	property2 = _data.charm_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$('input[name="charmProperty1"]').attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"step": property1.step
+	});
+	
+	$('input[name="charmProperty2"]').attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"step": property2.step
+	});
+
+	property1Text = $(".trinketProperty1Selection")[0].options[$(".trinketProperty1Selection")[0].selectedIndex].text
+	property2Text = $(".trinketProperty2Selection")[0].options[$(".trinketProperty2Selection")[0].selectedIndex].text
+	
+	property1 = _data.trinket_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
+	property2 = _data.trinket_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$('input[name="trinketProperty1"]').attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"step": property1.step
+	});
+	
+	$('input[name="trinketProperty2"]').attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"step": property2.step
+	});
 }
 
 function loadAbilities(heroIndex, careerIndex) {
