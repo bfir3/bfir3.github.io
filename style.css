@@ -616,3 +616,7 @@ select {
 	border: 1px solid #afafaf;    
 	background: #9a9c9b;
 }
+
+.classSection>div:not(.selected) {
+    color: #9c9c9c;
+}

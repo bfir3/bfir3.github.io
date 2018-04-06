@@ -6,6 +6,7 @@
     "careers":[
       {
         "name":"Mercenary",
+		"health":"125",
         "passives":[
           {
             "name":"Paced Strikes",
@@ -42,13 +43,14 @@
         ],
         "skill":{
           "name":"Morale Boost",
-          "description":"Markus grants nearby party members a boost of temporary health and staggers nearby enemies."
+          "description":"Markus grants nearby party members a boost of temporary health and staggers nearby enemies.",
+		  "cooldown":"180"
         },
         "talents":[
           [
             {
               "name":"Ready for Action",
-              "description":"Increases stamina regeneration by 30.0%.",
+              "description":"Increases stamina regeneration by 30%.",
 			  "modifiers": [
 				  {
 					"name":"Stamina regeneration",
@@ -58,7 +60,7 @@
             },
             {
               "name":"And Stay Down!",
-              "description":"Increases critical hit chance by 5.0%.",
+              "description":"Increases critical hit chance by 5%.",
 			  "modifiers": [
 				  {
 				    "name":"Critical Chance",
@@ -68,7 +70,7 @@
             },
             {
               "name":"Battle Scars",
-              "description":"Increases healing effects by 30.0%.",
+              "description":"Increases healing effects by 30%.",
 			  "modifiers": [
 				  {
 				    "name":"Healing Effects",
@@ -80,7 +82,7 @@
           [
             {
               "name":"The More The Merrier!",
-              "description":"Increases Power by 3.0% for every nearby enemy and stacks up to 5 times.",
+              "description":"Increases Power by 3% for every nearby enemy and stacks up to 5 times.",
 			  "modifiers": [
 				  {
 				    "name":"Power",
@@ -92,7 +94,7 @@
             },
             {
               "name":"Desperate Defiance",
-              "description":"Reduces damage taken by 25.0% when below 50.0% health.",
+              "description":"Reduces damage taken by 35% when below 50% health.",
 			  "modifiers": [
 				  {
 				    "name":"Damage Taken Reduction",
@@ -103,7 +105,7 @@
             },
             {
               "name":"Shrug it Off",
-              "description":"Reduces the attack interruption time when taking damage by 35.0%.",
+              "description":"Reduces the attack interruption time when taking damage by 35%.",
 			  "modifiers": [
 				  {
 				    "name":"Attack Interruption Reduction",
@@ -115,7 +117,7 @@
           [
             {
               "name":"Reikland Reaper",
-              "description":"Increases Power by 10% when Paced Strikes is active.",
+              "description":"Increases Power by 15% when Paced Strikes is active.",
 			  "modifiers": [
 				  {
 				    "name":"Power",
@@ -126,7 +128,7 @@
             },
             {
               "name":"Blade Barrier",
-              "description":"Reduces damage taken by 25.0% when Paced Strikes is active.",
+              "description":"Reduces damage taken by 25% when Paced Strikes is active.",
 			  "modifiers": [
 				  {
 				    "name":"Damage Taken Reduction",
@@ -209,6 +211,7 @@
       },
       {
         "name":"Huntsman",
+		"health":"100",
         "passives":[
           {
             "name":"Waste Not, Want Not",
@@ -225,17 +228,18 @@
         ],
         "skill":{
           "name":"Hunter's Prowl",
-          "description":"Markus disappears from sight for a brief period, allowing him to ambush foes."
+          "description":"Markus disappears from sight for a brief period, allowing him to ambush foes.",
+		  "cooldown":"90"
         },
         "talents":[
           [
             {
               "name":"Keep 'Em Coming",
-              "description":"Increases reload speed by 20.0%."
+              "description":"Increases reload speed by 20%."
             },
             {
               "name":"On Target",
-              "description":"Reduces ranged weapon spread by 25.0%."
+              "description":"Reduces ranged weapon spread by 25%."
             },
             {
               "name":"Ourdoorsman",
@@ -245,7 +249,7 @@
           [
             {
               "name":"Scavenger",
-              "description":"When Bosses are killed Markus gains 30.0% of his maximum ammo."
+              "description":"When Bosses are killed, Markus gains 100% of his maximum ammo."
             },
             {
               "name":"Make 'Em Bleed",
@@ -263,11 +267,11 @@
             },
             {
               "name":"Makin' It Look Easy",
-              "description":"After scoring a ranged headshot Markus gains 10% increased critical hit chance."
+              "description":"After scoring a ranged headshot Markus gains 25% increased critical hit chance."
             },
             {
               "name":"Thrill of the Hunt",
-              "description":"Ranged headshots Increase reload speed by 20.0% for 2 seconds."
+              "description":"Ranged headshots Increase reload speed by 35% for 2 seconds."
             }
           ],
           [
@@ -287,7 +291,7 @@
           [
             {
               "name":"Blend In",
-              "description":"Reduces the cooldown of Hunter's Prowl by 30.0%."
+              "description":"Reduces the cooldown of Hunter's Prowl by 30%."
             },
             {
               "name":"Hunter's Respite",
@@ -302,6 +306,7 @@
       },
       {
         "name":"Foot Knight",
+		"health":"150",
           "passives":[
           {
             "name":"Protective Presence",
@@ -318,27 +323,28 @@
         ],
         "skill":{
           "name":"Valiant Charge",
-          "description":"Markus charges forward, slamming into enemies and knocking them back."
+          "description":"Markus charges forward, slamming into enemies and knocking them back.",
+		  "cooldown":"30"
         },
         "talents":[
           [
             {
               "name":"Bulwark",
-              "description":"Increases effective block and push angle by 30.0%."
+              "description":"Increases effective block and push angle by 50%."
             },
             {
               "name":"Bastion of the Reik",
-              "description":"Increases maximum Health by 25.0%."
+              "description":"Increases maximum Health by 25%."
             },
             {
               "name":"Onslaught",
-              "description":"Increases attack speed by 5.0%."
+              "description":"Increases attack speed by 5%."
             }
           ],
           [
             {
               "name":"Regroup",
-              "description":"Reviving party members grant them 50.0% damage reduction for 10 seconds."
+              "description":"Reviving party members grant them 50% damage reduction for 10 seconds."
             },
             {
               "name":"Counter-Attack",
@@ -346,7 +352,7 @@
             },
             {
               "name":"Build Momentum",
-              "description":"Successful charged attacks grant 40.0% increased stamina regeneration for 2 seconds."
+              "description":"Successful charged attacks grant 40% increased stamina regeneration for 2 seconds."
             }
           ],
           [
@@ -356,11 +362,11 @@
             },
             {
               "name":"Defensive Formation",
-              "description":"Increases damage reduction from Protective Presence by 5.0%."
+              "description":"Increases damage reduction from Protective Presence by 5%."
             },
             {
               "name":"Drillmaster",
-              "description":"Protective Presence also increases movement speed by 5.0%."
+              "description":"Protective Presence also increases movement speed by 5%."
             }
           ],
           [
@@ -380,7 +386,7 @@
           [
             {
               "name":"A Life of Battle.",
-              "description":"Reduces the cooldown of Valiant Charge by 30.0%."
+              "description":"Reduces the cooldown of Valiant Charge by 30%."
             },
             {
               "name":"Glory Hound",
@@ -388,7 +394,7 @@
             },
             {
               "name":"Hold Ground",
-              "description":"Valiant Charge grants a 100.0% reduction to stamina block cost for 10 seconds. "
+              "description":"Valiant Charge grants a 100% reduction to stamina block cost for 10 seconds. "
             }
           ]
         ]
@@ -400,6 +406,7 @@
     "careers":[
       {
         "name":"Ranger Veteran",
+		"health":"100",
          "passives":[
           {
             "name":"Survivalist",
@@ -416,7 +423,8 @@
         ],
         "skill":{
           "name":"Disengage",
-          "description":" Bardin deploys a smoke bomb that conceals him from enemies whilst he stays inside the cloud."
+          "description":"Bardin deploys a smoke bomb that conceals him from enemies whilst he stays inside the cloud.",
+		  "cooldown":"120"
         },
         "talents":[
           [
@@ -426,25 +434,25 @@
             },
             {
               "name":"Apply Pressure",
-              "description":"Increases effect of healing by 30.0%."
+              "description":"Increases effect of healing by 30%."
             },
             {
               "name":"Foe-Feller",
-              "description":"Increases attack speed by 5.0%."
+              "description":"Increases attack speed by 5%."
             }
           ],
           [
             {
               "name":"Last Resort",
-              "description":"Bardin gains a 15.0% Power increase when out of ammunition."
+              "description":"Bardin gains a 25% Power increase when out of ammunition."
             },
             {
               "name":"No Dawdling!",
-              "description":"Increases movement speed by 5.0%."
+              "description":"Increases movement speed by 5%."
             },
             {
               "name":"Curl Up",
-              "description":"While grabbed or pounced all damage taken is reduced by 50.0%."
+              "description":"While grabbed or pounced all damage taken is reduced by 50%."
             }
           ],
           [
@@ -482,7 +490,7 @@
             },
             {
               "name":"Preparation",
-              "description":"Reduces the cooldown of Disengage by 30.0%."
+              "description":"Reduces the cooldown of Disengage by 30%."
             },
             {
               "name":"Catch a Breath",
@@ -493,6 +501,7 @@
       },
       {
         "name":"Iron Breaker",
+		"health":"150",
           "passives":[
           {
             "name":"Gromril Armour",
@@ -513,7 +522,8 @@
         ],
         "skill":{
           "name":"Impenetrable",
-          "description":"Bardin taunts all nearby man-sized enemies, gains increased defense and can block any attack for the next 10 seconds."
+          "description":"Bardin taunts all nearby man-sized enemies, gains increased defense and can block any attack for the next 10 seconds.",
+		  "cooldown":"180"
         },
         "talents":[
           [
@@ -590,6 +600,7 @@
       },
       {
         "name":"Slayer",
+		"health":"100",
         "passives":[
           {
             "name":"Trophy Hunter",
@@ -602,7 +613,8 @@
         ],
         "skill":{
           "name":"Leap",
-          "description":"Bardin leaps forward to stun a target, and gain a burst of attack speed."
+          "description":"Bardin leaps forward to stun a target, and gains a burst of attack speed.",
+		  "cooldown":"30"
         },
         "talents":[
           [
@@ -616,17 +628,17 @@
             },
             {
               "name":"See it Coming",
-              "description":"Increases Dodge Range by 10.0%."
+              "description":"Increases Dodge Range by 20%."
             }
           ],
           [
             {
               "name":"Oblivious to Pain",
-              "description":"Damage taken from one attack is reduced to 15 damage or half of its original value whichever is highest."
+              "description":"Damage taken from one attack is reduced to 10 damage or half of its original value whichever is highest."
             },
             {
               "name":"Stunty Saviour",
-              "description":"Increases movement speed by 5.0% when Bardin is the last hero standing."
+              "description":"Increases movement speed by 15% when Bardin is the last hero standing."
             },
             {
               "name":"Crippling Wounds",
@@ -636,7 +648,7 @@
           [
             {
               "name":"Unstoppable!",
-              "description":"Increases the duration of the buffs gained from Trophy Hunter."
+              "description":"Increases the duration of the buffs gained from Trophy Hunter to 5 seconds."
             },
             {
               "name":"Moving Target",
@@ -672,7 +684,7 @@
             },
             {
               "name":"No Escape",
-              "description":"After Leap Bardin also increases movement speed by 25.0%."
+              "description":"After Leap Bardin also increases movement speed by 25%."
             }
           ]
         ]
@@ -684,7 +696,8 @@
     "careers":[
       {
         "name":"Waystalker",
-                "passives":[
+		"health":"100",
+		"passives":[
           {
             "name":"Amaranthe",
             "description":"Kerillian regenerates health over time when below half health."
@@ -700,31 +713,32 @@
         ],
         "skill":{
           "name":"Trueshot Volley",
-          "description":"Kerillian shoots a volley of arrows that seek out enemies in her path."
+          "description":"Kerillian shoots a volley of arrows that seek out enemies in her path.",
+		  "cooldown":"90"
         },
         "talents":[
           [
             {
               "name":"Fury of Anath Raema",
-              "description":"Increases attack speed by 5.0%."
+              "description":"Increases attack speed by 5%."
             },
             {
               "name":"Morai-Heg's Scorn",
-              "description":"Increases critical hit chance by 5.0%."
+              "description":"Increases critical hit chance by 5%."
             },
             {
               "name":"Hukon's Tenacity",
-              "description":"Increases stamina regeneration by 30.0%."
+              "description":"Increases stamina regeneration by 30%."
             }
           ],
           [
             {
               "name":"Ironfeather Flights",
-              "description":"Returns 30.0% ammunition on boss death."
+              "description":"Returns 30% ammunition on boss death."
             },
             {
               "name":"Daughter of the Hunt",
-              "description":"While above 25.0% health, Kerillian's critical hits gain 30% additional power boost."
+              "description":"While above 45% health, Kerillian's critical hits gain 30% additional power boost."
             },
             {
               "name":"Arcane Bodkins",
@@ -762,7 +776,7 @@
           [
             {
               "name":"Asrai Focus",
-              "description":"Reduces the cooldown of Trueshot Volley by 30.0%."
+              "description":"Reduces the cooldown of Trueshot Volley by 30%."
             },
             {
               "name":"Lifebloom Arrows",
@@ -777,6 +791,7 @@
       },
       {
         "name":"Handmaiden",
+		"health":"125",
           "passives":[
           {
             "name":"The Dance of Seasons",
@@ -793,7 +808,8 @@
         ],
         "skill":{
           "name":"Dash",
-          "description":"Kerillian dashes forward through enemies. Hitting enemies with this ability causes them to bleed."
+          "description":"Kerillian dashes forward through enemies. Hitting enemies with this ability causes them to bleed.",
+		  "cooldown":"30"
         },
         "talents":[
           [
@@ -803,11 +819,11 @@
             },
             {
               "name":"Wraithwillow Stance",
-              "description":"Increases area for effective blocks and pushes by 30.0%."
+              "description":"Increases area for effective blocks and pushes by 50%."
             },
             {
               "name":"Quiver of Plenty",
-              "description":"Increases ammunition amount by 40.0%. "
+              "description":"Increases ammunition amount by 40%. "
             }
           ],
           [
@@ -817,25 +833,25 @@
             },
             {
               "name":"Eldrazor's Precision",
-              "description":"Increases Power Level by 15.0% but reduces attack speed by 5.0%."
+              "description":"Increases Power Level by 15% but reduces attack speed by 5%."
             },
             {
               "name":"Defiance",
-              "description":"Reduce damage taken by 50.0% when Kerillian is the last hero standing."
+              "description":"Reduce damage taken by 50% when Kerillian is the last hero standing."
             }
           ],
           [
             {
               "name":"Gladerunner",
-              "description":"Increases movement speed by 5.0%."
+              "description":"Increases movement speed by 5%."
             },
             {
               "name":"Shadowstep",
-              "description":"Further increases dodge distance by 10.0%."
+              "description":"Further increases dodge distance by 20%."
             },
             {
               "name":"Hukon's Tenacity",
-              "description":"Increases stamina regeneration speed by an additional 30.0%."
+              "description":"Increases stamina regeneration speed by an additional 50%."
             }
           ],
           [
@@ -863,13 +879,14 @@
             },
             {
               "name":"Handmaiden's Grace",
-              "description":"Reduces the cooldown of Dash by 30.0%"
+              "description":"Reduces the cooldown of Dash by 30%"
             }
           ]
         ]
       },
       {
         "name":"Shade",
+		"health":"100",
         "passives":[
           {
             "name":"Murderous Prowess",
@@ -882,7 +899,8 @@
         ],
         "skill":{
           "name":"Infiltrate",
-          "description":"Kerillian becomes undetectable and can pass through enemies. Lasts for 10 seconds, or until she attacks."
+          "description":"Kerillian becomes undetectable and can pass through enemies. Lasts for 10 seconds, or until she attacks.",
+		  "cooldown":"60"
         },
         "talents":[
           [
@@ -896,7 +914,7 @@
             },
             {
               "name":"Shadowstep",
-              "description":"Increases dodge range by 10%."
+              "description":"Increases dodge range by 20%."
             }
           ],
           [
@@ -964,6 +982,7 @@
     "careers":[
       {
         "name":"Witch Hunter Captain",
+		"health":"100",
          "passives":[
           {
             "name":"Witch-Hunt",
@@ -980,13 +999,14 @@
         ],
         "skill":{
           "name":"Animosity",
-          "description":"Victor pushes back nearby enemies, and boosts nearby allies' critial hit chance for 6 seconds."
+          "description":"Victor pushes back nearby enemies, and boosts nearby allies' critial hit chance for 6 seconds.",
+		  "cooldown":"180"
         },
         "talents":[
           [
             {
               "name":"Charmed Life",
-              "description":"Increase dodge range by 10.0%."
+              "description":"Increase dodge range by 20%."
             },
             {
               "name":"Unflagging Spirit",
@@ -994,7 +1014,7 @@
             },
             {
               "name":"Always Prepared",
-              "description":"Increase maximum ammunition by 30.0%."
+              "description":"Increase maximum ammunition by 30%."
             }
           ],
           [
@@ -1008,13 +1028,13 @@
             },
             {
               "name":"Suffer No Heresy",
-              "description":"Reduce the damage taken when disabled by 50.0%."
+              "description":"Reduce the damage taken when disabled by 50%."
             }
           ],
           [
             {
               "name":"Marked for Death",
-              "description":"Witch-Hunt grants 10.0% increase attack speed for 4 seconds when taggable enemies die."
+              "description":"Witch-Hunt grants 10% increase attack speed for 4 seconds when taggable enemies die."
             },
             {
               "name":"Justice's Bounty",
@@ -1022,7 +1042,7 @@
             },
             {
               "name":"Wild Fervour",
-              "description":"Increase critical hit chance by 8.0% for 4 seconds when taggable enemies die."
+              "description":"Increase critical hit chance by 8% for 4 seconds when taggable enemies die."
             }
           ],
           [
@@ -1042,7 +1062,7 @@
           [
             {
               "name":"Redoubled Purpse",
-              "description":"Reduce the cooldown of animosity by 30.0%."
+              "description":"Reduce the cooldown of animosity by 30%."
             },
             {
               "name":"Resonating Faith",
@@ -1050,13 +1070,14 @@
             },
             {
               "name":"Fierce Oratory",
-              "description":"Increase the radius of animosity by 50.0%."
+              "description":"Increase the radius of animosity by 50%."
             }
           ]
         ]
       },
       {
         "name":"Bounty Hunter",
+		"health":"100",
         "passives":[
           {
             "name":"Blessed Shots",
@@ -1073,31 +1094,32 @@
         ],
         "skill":{
           "name":"Locked and Loaded",
-          "description":"Victor fires a powerful shot that pierces enemies."
+          "description":"Victor fires a powerful shot that pierces enemies.",
+		  "cooldown":"90"
         },
         "talents":[
           [
             {
               "name":"Swift Reload",
-              "description":"Increases reload speed by 20.0%"
+              "description":"Increases reload speed by 20%"
             },
             {
               "name":"Make Them Count",
-              "description":"Reduces ranged weapon spread by 25.0%."
+              "description":"Reduces ranged weapon spread by 25%."
             },
             {
               "name":"Vicious Virtue",
-              "description":"Increases attack speed by 5.0%."
+              "description":"Increases attack speed by 5%."
             }
           ],
           [
             {
               "name":"Leave None Behind",
-              "description":"Increases revive speed by 30.0%"
+              "description":"Increases revive speed by 30%"
             },
             {
               "name":"Necessary Means",
-              "description":"Gain 10.0% increased Power when out of ammunition"
+              "description":"Gain 25% increased Power when out of ammunition"
             },
             {
               "name":"Crippling Strike",
@@ -1135,7 +1157,7 @@
           [
             {
               "name":"Encore",
-              "description":"Reduces cooldown of Locked and Loaded by 30.0%."
+              "description":"Reduces cooldown of Locked and Loaded by 30%."
             },
             {
               "name":"Double-shotted",
@@ -1150,7 +1172,8 @@
       },
       {
         "name":"Zealot",
-         "passives":[
+		"health":"150",
+		"passives":[
           {
             "name":"Fiery Faith",
             "description":"Power increases by 5% for every 25 health missing to a maximum bonus of 20%."
@@ -1166,41 +1189,42 @@
         ],
         "skill":{
           "name":"Holy Fervor",
-          "description":"Victor charges forward and gains 25% increased attack speed for 5 seconds."
+          "description":"Victor charges forward and gains 25% increased attack speed for 5 seconds.",
+		  "cooldown":"40"
         },
         "talents":[
           [
             {
               "name":"Holy Endurance",
-              "description":"Increases stamina regeneration speed by 30.0%."
+              "description":"Increases stamina regeneration speed by 30%."
             },
             {
               "name":"Saint of Battle",
-              "description":"Increases critical hit chance by 5.0%."
+              "description":"Increases critical hit chance by 5%."
             },
             {
               "name":"Strong of Will",
-              "description":"Reduces stun duration by 35.0%"
+              "description":"Reduces stun duration by 35%"
             }
           ],
           [
             {
               "name":"No Surrender!",
-              "description":"Increases Power by 3.0% for every nearby enemy and stacks up to 5 times."
+              "description":"Increases Power by 3% for every nearby enemy and stacks up to 5 times."
             },
             {
               "name":"Flagellant",
-              "description":"Damage taken from one attack is reduced to 15 damage or half its original value whichever is highest."
+              "description":"Damage taken from one attack is reduced to 10 damage or half its original value whichever is highest."
             },
             {
               "name":"Suppress Pain",
-              "description":"Reduces damage taken by 25.0% while below 50.0% health."
+              "description":"Reduces damage taken by 35% while below 50% health."
             }
           ],
           [
             {
               "name":"Shield of Faith",
-              "description":"Fiery Faith also increases block and push angle by 10.0% per 25 health missing. This effect stacks up to 5 times."
+              "description":"Fiery Faith also increases block and push angle by 10% per 25 health missing. This effect stacks up to 5 times."
             },
             {
               "name":"Holy Crusader",
@@ -1228,7 +1252,7 @@
           [
             {
               "name":"Frother",
-              "description":"Reduces the cooldown of Holy Fervour by 30.0%."
+              "description":"Reduces the cooldown of Holy Fervour by 30%."
             },
             {
               "name":"Pleasure from Pain",
@@ -1248,6 +1272,7 @@
     "careers":[
       {
         "name":"Battle Wizard",
+		"health":"100",
         "passives":[
           {
             "name":"Tranquility",
@@ -1264,13 +1289,14 @@
         ],
         "skill":{
           "name":"Fire Walk",
-          "description":"Sienna teleports forward, leaving a blanket of fire in her wake."
+          "description":"Sienna teleports forward, leaving a blanket of fire in her wake.",
+		  "cooldown":"40"
         },
         "talents":[
           [
             {
               "name":"Cauterise Wounds",
-              "description":"Increases healing recieved by 20.0%."
+              "description":"Increases healing recieved by 30%."
             },
             {
               "name":"Fuelled by Fire",
@@ -1278,7 +1304,7 @@
             },
             {
               "name":"Voracious Conjuring",
-              "description":"Increases ranged attack charge speed by 15.0%."
+              "description":"Increases ranged attack charge speed by 15%."
             }
           ],
           [
@@ -1288,21 +1314,21 @@
             },
             {
               "name":"Molten Skin",
-              "description":"Reduces damage taken by 50.0% when Sienna is the last hero standing."
+              "description":"Reduces damage taken by 50% when Sienna is the last hero standing."
             },
             {
               "name":"Flickerform",
-              "description":"Reduces stun duration from being hit by enemies by 35.0%."
+              "description":"Reduces stun duration from being hit by enemies by 35%."
             }
           ],
           [
             {
               "name":"Burning Vigour",
-              "description":"Reduces stamina cost of blocking attacks by 40.0% when Tranquility is active."
+              "description":"Reduces stamina cost of blocking attacks by 40% when Tranquility is active."
             },
             {
               "name":"Rechannel",
-              "description":"When Tranquility is active, Sienna's ranged charge time is reduced by 40.0%."
+              "description":"When Tranquility is active, Sienna's ranged charge time is reduced by 40%."
             },
             {
               "name":"Centered",
@@ -1326,7 +1352,7 @@
           [
             {
               "name":"Volan's Quickening",
-              "description":"Reduces the cooldown of Fire Walk by 30.0%."
+              "description":"Reduces the cooldown of Fire Walk by 30%."
             },
             {
               "name":"Lava Walker",
@@ -1341,6 +1367,7 @@
       },
       {
         "name":"Pyromancer",
+		"health":"100",
         "passives":[
           {
             "name":"Critical Mass",
@@ -1353,7 +1380,8 @@
         ],
         "skill":{
           "name":"The Burning Head",
-          "description":"Sienna unleashes a fiery projectile that seeks out foes."
+          "description":"Sienna unleashes a fiery projectile that seeks out foes.",
+		  "cooldown":"40"
         },
         "talents":[
           [
@@ -1430,7 +1458,8 @@
       },
       {
         "name":"Unchained",
-         "passives":[
+		"health":"150",
+        "passives":[
           {
             "name":"Blood Magic",
             "description":"50% damage taken transfered to Overcharge."
@@ -1450,27 +1479,28 @@
         ],
         "skill":{
           "name":"Living Bomb",
-          "description":"Sienna explodes, dealing damage to surrounding enemies and clearing her Overcharge."
+          "description":"Sienna explodes, dealing damage to surrounding enemies and clearing her Overcharge.",
+		  "cooldown":"180"
         },
         "talents":[
           [
             {
               "name":"Backblast",
-              "description":"Increases effective block and push arc by 30.0%."
+              "description":"Increases effective block and push arc by 50%."
             },
             {
               "name":"Form of the Fire Wind",
-              "description":"Increases max overcharge by 25.0%."
+              "description":"Increases max overcharge by 25%."
             },
             {
               "name":"Volcanic Body",
-              "description":"Increases maximum health by 20.0%."
+              "description":"Increases maximum health by 20%."
             }
           ],
           [
             {
               "name":"Feuerbach's Fury",
-              "description":"Successful charged melee attacks grant 40.0% increased stamina regeneration for 2 seconds."
+              "description":"Successful charged melee attacks grant 40% increased stamina regeneration for 2 seconds."
             },
             {
               "name":"Essence Syphon",
@@ -1478,21 +1508,21 @@
             },
             {
               "name":"Seared Nerves",
-              "description":"Revived allies take 50.0% less damage for 10 seconds."
+              "description":"Revived allies take 50% less damage for 10 seconds."
             }
           ],
           [
             {
               "name":"Dissispate",
-              "description":"Reduces damage taken from venting overcharge by 25.0%."
+              "description":"Reduces damage taken from venting overcharge by 50%."
             },
             {
               "name":"Conduit",
-              "description":"Increases rate of venting overcharge by 25.0%."
+              "description":"Increases rate of venting overcharge by 50%."
             },
             {
               "name":"Natural Talent",
-              "description":"Reduces overcharge generated by 15.0%."
+              "description":"Reduces overcharge generated by 15%."
             }
           ],
           [
@@ -1512,7 +1542,7 @@
           [
             {
               "name":"Flame Wave",
-              "description":"Increases the radius of Living Bomb explosion by 50.0%."
+              "description":"Increases the radius of Living Bomb explosion by 50%."
             },
             {
               "name":"Blazing Crescendo",
@@ -1520,7 +1550,7 @@
             },
             {
               "name":"Tick, Tick, Tick...",
-              "description":"Reduces the cooldown of Living Bomb by 30.0%."
+              "description":"Reduces the cooldown of Living Bomb by 30%."
             }
           ]
         ]
