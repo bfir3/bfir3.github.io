@@ -331,8 +331,8 @@ input {
 
 .heroSection>div {
     outline: 1px solid #a66f42;
-    margin-left: 1px;
-    box-shadow: inset 0 0 0 1000px #ffffff25;
+    /* margin-left: 1px; */
+    box-shadow: inset 0 0 0px 100px #ffffff15;
 }
 
 .heroSection>div:hover {
@@ -381,8 +381,8 @@ input {
 
 .classSection>div {
     outline: 1px solid #a66f42;
-    margin-left: 1px;
-    margin-right: -1px;
+    /* margin-left: 1px; */
+    /* margin-right: -1px; */
     margin-top: 1px;
     background: #030c15;
     box-shadow: inset 0 0 0 1000px #ffffff15;
@@ -544,19 +544,19 @@ select {
 
 @media(max-width: 1200px) { 
     .heroSection {
-        height: 35px;
+        /* height: 35px; */
     }
     .heroSection>div {
-        background: #030c15 !important;
-        content: 'Test';
-        margin-right:-1px;
-        display: grid;
-        align-content: center;
-        color: #c7c7c7;
-        text-align:center;
+        /* background: #030c15 !important; */
+        /* content: 'Test'; */
+        /* margin-right:-1px; */
+        /* display: grid; */
+        /* align-content: center; */
+        /* color: #c7c7c7; */
+        /* text-align:center; */
     }
     .heroSection>div:nth-child(1)::after {
-        content:'Markus';
+        /* content:'Markus'; */
     }
     .heroSection>div:nth-child(2)::after {
         content:'Bardin';
@@ -619,4 +619,105 @@ select {
 
 .classSection>div:not(.selected) {
     color: #9c9c9c;
+}
+
+
+
+/* Icon layout */
+
+
+.iconLayout .heroSection .bardinHero {
+    background-repeat: no-repeat;
+    background-image: url(images/icons/heroes/1/icon.png);
+    background-position: center;
+    background-size: contain;
+}
+.iconLayout .heroSection .markusHero {
+    background-repeat: no-repeat;
+    background-image: url(images/icons/heroes/0/icon.png);
+    background-position: center;
+    background-size: contain;
+}
+.iconLayout .heroSection .kerillianHero {
+    background-repeat: no-repeat;
+    background-image: url(images/icons/heroes/2/icon.png);
+    background-position: center;
+    background-size: contain;
+}
+.iconLayout .heroSection .victorHero {
+    background-repeat: no-repeat;
+    background-image: url(images/icons/heroes/3/icon.png);
+    background-position: center;
+    background-size: contain;
+}
+.iconLayout .heroSection .siennaHero {
+    background-repeat: no-repeat;
+    background-image: url(images/icons/heroes/4/icon.png);
+    background-position: center;
+    background-size: contain;
+}
+
+.iconLayout .heroSection>div, .classSection>div {
+    outline: none;
+}
+
+.iconLayout .classSection {
+    height: 50px;
+}
+
+.iconLayout .classSection>div>span{
+    display: none;
+}
+
+.iconLayout .heroClass1, .iconLayout .heroClass2, .iconLayout .heroClass3 {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+.heroSummary {
+    display: flex;
+    grid-template-columns: repeat(2, calc(50% - 10px));
+    grid-column-gap: 20px;
+    justify-content: center;
+}
+
+.stats {
+    justify-content: end;
+    display: grid;
+    margin: 20px 0;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    color: #c7c7c7;
+}
+
+.stats>span:nth-child(1) {
+    grid-column: 1 / span 2 !important;
+    color: #b9b99b;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
+}
+.stats>span:nth-child(even) {
+    grid-column: 1;
+}
+.stats>span:nth-child(odd) {
+    grid-column: 2;
+}
+.stats>span:nth-child(3) {
+    grid-row: 2;
+}
+.stats>span:nth-child(4) {
+    grid-row: 3;
+}
+.stats>span:nth-child(5) {
+    grid-row: 3;
+}
+
+.heroPortrait {
+    min-height: 120px;
+    margin: 5px 0 5px 15px;
+    width: 115px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
 }

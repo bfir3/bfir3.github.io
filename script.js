@@ -152,6 +152,22 @@ function loadSerializedUrl() {
 		"max": property2.max_value,
 		"step": property2.step
 	});
+	
+	loadHeroSummary();
+}
+
+function loadHeroSummary() {
+	let heroIndex = getHeroIndex();
+	let careerIndex = getCareerIndex();
+	$(".heroClass1").css('background',  `url('images/icons/heroes/${heroIndex}/0/icon.png')`);
+	$(".heroClass2").css('background',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
+	$(".heroClass3").css('background',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
+	
+	$(".heroSummaryTitle>span").innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
+	
+	$(".heroPortrait").css('background', `url('images/icons/heroes/${heroIndex}/${careerIndex}/portrait.png')`);
+	$(".stats").children()[2].innerHTML = `${_data.heroes[heroIndex].careers[careerIndex].health}`;
+	$(".stats").children()[4].innerHTML = `${_data.heroes[heroIndex].careers[careerIndex].skill.cooldown} seconds`;
 }
 
 function loadAbilities(heroIndex, careerIndex) {
@@ -754,6 +770,7 @@ function initData() {
 	$(".trinketQualitySelection").append(new Option("White", 4));
 	
 	loadHero(0,0);
+	loadHeroSummary(0, 0);
 	loadNecklaceProperties();
 	loadCharmProperties();
 	loadTrinketProperties();
@@ -805,6 +822,8 @@ $(function() {
         loadHero(index, 0);
 		$(".footer>input")[0].value = getShareableUrl();
 		$(".talentSection>div>div").removeClass("selected")
+		
+		loadHeroSummary();
     });
 	
 	$(".classSection>div").click((e) => { 
@@ -815,6 +834,7 @@ $(function() {
 		loadHero(heroIndex, index);
 		$(".footer>input")[0].value = getShareableUrl();
 		$(".talentSection>div>div").removeClass("selected")
+		loadHeroSummary();
     });
 	
 	$(".meleeSelection").change((e) => { 
