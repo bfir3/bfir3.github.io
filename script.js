@@ -163,7 +163,7 @@ function loadHeroSummary() {
 	$(".heroClass2").css('background',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
 	$(".heroClass3").css('background',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
 	
-	$(".heroSummaryTitle>span").innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
+	$(".heroSummaryTitle>span")[0].innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
 	
 	$(".heroPortrait").css('background', `url('images/icons/heroes/${heroIndex}/${careerIndex}/portrait.png')`);
 	$(".stats").children()[2].innerHTML = `${_data.heroes[heroIndex].careers[careerIndex].health}`;
