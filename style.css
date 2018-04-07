@@ -556,21 +556,6 @@ select {
         /* color: #c7c7c7; */
         /* text-align:center; */
     }
-    .heroSection>div:nth-child(1)::after {
-        /* content:'Markus'; */
-    }
-    .heroSection>div:nth-child(2)::after {
-        content:'Bardin';
-    }
-    .heroSection>div:nth-child(3)::after {
-        content:'Kerillian';
-    }
-    .heroSection>div:nth-child(4)::after {
-        content:'Victor';
-    }
-    .heroSection>div:nth-child(5)::after {
-        content:'Sienna';
-    }
     .weaponSection {
         grid-row-gap: 15px;
     }
