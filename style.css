@@ -722,12 +722,18 @@ select {
     background-size: contain !important;
     background-repeat: no-repeat !important;
 }
+@media(min-width:1200px) {
+.talentContainer {
+    min-width: 220px;
+    max-width: 220px;
+}
+}
 .talentContainer {
     display: grid;
     text-align: left;
-    min-width: 220px;
-    max-width: 220px;
     grid-template-rows: 20px auto;
+    min-width: calc(50%);
+    max-width: calc(50%);
 }
 
 .talentIcon {
@@ -748,6 +754,7 @@ span.talentName {
 
 span.talentDescription {
     line-height: 20px;
+    min-height: 60px;
 }
 
 .selected>.talentContainer>.talentName {
