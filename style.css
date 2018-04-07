@@ -306,9 +306,10 @@ input {
 
 .talentSection>div>div {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
     padding: 7px;
-	cursor: pointer;
+    cursor: pointer;
 }
 .talentSection>div>div>span:first-child {
     padding-bottom:5px;
@@ -720,4 +721,36 @@ select {
     width: 115px;
     background-size: contain !important;
     background-repeat: no-repeat !important;
+}
+.talentContainer {
+    display: grid;
+    text-align: left;
+    min-width: 220px;
+    max-width: 220px;
+    grid-template-rows: 20px auto;
+}
+
+.talentIcon {
+    min-width: 60px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 60px;
+    margin-right: 10px;
+}
+
+span.talentName {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #b9b9aa;
+    height: 20px;
+}
+
+span.talentDescription {
+    line-height: 20px;
+}
+
+.selected>.talentContainer>.talentName {
+    color: #030c15;
+    text-decoration: underline;
 }

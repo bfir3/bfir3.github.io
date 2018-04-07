@@ -297,14 +297,16 @@ function loadHero(heroIndex, careerIndex) {
 	let career = _data.heroes[heroIndex].careers[careerIndex];
 	let talents = career.talents;
 	
-	let i = 1;
-	let y = 1;
+	let i = 0;
+	let y = 0;
 	for (var tier of talents) {
 			for (var talent of tier) {
-				$(".talentSection>.tier" + i + ">.talent" + y)[0].innerHTML = '';
-				$(".talentSection>.tier" + i + ">.talent" + y++).append('<span class="talentName">' +  talent.name + '</span><span class="talentDescription">' + talent.description + '</span>');
+				$(".talentSection>.tier" + i + ">.talent" + y + " .talentIcon").css('background', `url('images/icons/heroes/${heroIndex}/${careerIndex}/talents/${i}/${y}.png')`);
+				$(".talentSection>.tier" + i + ">.talent" + y + " .talentName")[0].innerHTML = talent.name;
+				$(".talentSection>.tier" + i + ">.talent" + y + " .talentDescription")[0].innerHTML = talent.description;
+				y++;
 			}
-			y = 1;
+			y = 0;
 			i++;
 	}
 	loadCareers(heroIndex, careerIndex);
