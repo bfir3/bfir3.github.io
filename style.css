@@ -742,6 +742,7 @@ select {
     background-repeat: no-repeat !important;
     height: 60px;
     margin-right: 10px;
+    border: 1px solid #ffffff35;
 }
 
 span.talentName {
@@ -760,4 +761,7 @@ span.talentDescription {
 .selected>.talentContainer>.talentName {
     color: #030c15;
     text-decoration: underline;
+}
+input.buildName {
+    margin-left: -1px;
 }
