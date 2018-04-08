@@ -836,7 +836,6 @@ function initFirestore() {
 }
 
 $(function() {
-	buildId = guid().split('-')[0]
 	career_select = $('#career-select');
 	talents_div = $('#talents-div');	
 	share_link = $('#share-link');
