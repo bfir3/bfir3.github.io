@@ -42,7 +42,8 @@ function updateBuild() {
 
 function loadBuild() {
 	let hash = window.location.hash.substring(1);
-	if (!hash || hash.length == 0) {
+	if (!hash || hash.length == 0) {	
+		$(".footer>input")[0].value = getShareableUrl();
 		return;
 	}
 	
@@ -933,6 +934,4 @@ $(function() {
 		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
 	});
-	
-	$(".footer>input")[0].value = getShareableUrl();
 });
