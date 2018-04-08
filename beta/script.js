@@ -886,14 +886,6 @@ function initFirestore() {
 
 	// Initialize Cloud Firestore through Firebase
 	db = firebase.firestore();
-	
-	db.collection("builds").add({
-		uid: "0231d5d",
-		name: "test",
-		hash: "hero=00&melee=id:0;q:1;hp:300;p1:0;v1:5;p2:1;v2:2;t:0;&range=id:0;q:1;hp:300;p1:0;v1:5;p2:1;v2:20;t:0;&necklace=q:1;hp:300;p1:0;v1:2;p2:1;v2:30;t:0;&charm=q:1;hp:300;p1:0;v1:5;p2:7;v2:10;t:0;&trinket=q:1;hp:300;p1:0;v1:10;p2:6;v2:30;t:0;&talents=12229"
-	}).then(function (ref) {
-		console.log(ref);
-	});
 }
 
 $(function() {
