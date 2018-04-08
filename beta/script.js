@@ -46,6 +46,7 @@ function loadBuild() {
 	let buildRef = db.collection("builds").doc(hash);
 	
 	buildRef.get().then((doc) => {
+		$(".buildName").val(doc.data().name);
 		loadSerializedUrl(doc.data().hash);
 	});
 }
