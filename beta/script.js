@@ -21,15 +21,18 @@ function guid() {
   });
 }
 
-function updateBuild() {
+function getBuildId() {
 	if (!buildId || buildId.length == 0) {
 		buildId = guid().split('-')[4];
 		window.location.hash = buildId;
 	}
-	
+	return buildId;
+}
+
+function updateBuild() {	
 	var buildName = $(".buildName").val();	
 	
-	db.collection("builds").doc(buildId).set({
+	db.collection("builds").doc(getBuildId()).set({
 		name: buildName,
 		hash: getSerializedUrl()
 	}).then(function (ref) {
@@ -677,7 +680,7 @@ function getSerializedUrl() {
 }
 
 function getShareableUrl() {	
-	return 'http://verminbuilds.com/#' + buildId;
+	return 'http://verminbuilds.com/#' + getBuildId();
 }
 
 function getHeroIndex() {
