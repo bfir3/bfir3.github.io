@@ -740,6 +740,7 @@ function getCareerIndex() {
 }
 
 function initData() {
+	initFirestore();
 	let i = 0;
 	/*
 	for (var meleeWeapon of _data.melee_weapons) {
@@ -874,7 +875,6 @@ function initData() {
 		loadBuild();
 	}
 	
-	initFirestore();
 }
 
 function initFirestore() {
