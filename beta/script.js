@@ -23,7 +23,8 @@ function guid() {
 
 function updateBuild() {
 	if (!buildId || buildId.length == 0) {
-		buildId = guid().split('-')[0];
+		buildId = guid().split('-')[4];
+		window.location.hash = buildId;
 	}
 	
 	var buildName = $(".buildName").val();	
@@ -34,40 +35,6 @@ function updateBuild() {
 	}).then(function (ref) {
 		console.log(ref);
 	});
-	
-	/*
-	$.get("getBuilds.php", function(data){
-		var lines = data.split('\n').reverse();
-		var serializedString = "";
-		for (var i = 0; i < lines.length; i++) {
-			var hashVal = lines[i].split('_')[0];
-			
-			if (hashVal == buildId) {
-				lines[i] = `${buildId}_${buildName}_${getSerializedUrl()}`
-				break;
-			}
-		}
-		
-		if (i == lines.length) {
-			lines.push(`${buildId}_${buildName}_${getSerializedUrl()}`);
-		}
-	
-		$.ajax ({
-			method: 'POST',
-			url: 'createBuild.php',
-			data: 
-			{
-				builds: lines
-			},
-			success: function(data) {
-				console.log(data);
-			},
-			error: function(data) {
-				console.log(data);
-			}
-		});
-	});
-	*/
 }
 
 function loadBuild() {
@@ -81,26 +48,8 @@ function loadBuild() {
 	let buildRef = db.collection("builds").doc(buildId);
 	
 	buildRef.get().then((doc) => {
-		console.log(doc.data().uid);
-		console.log(doc.data().hash);
 		loadSerializedUrl(doc.data().hash);
 	});
-	
-	/*
-	$.get("getBuilds.php", function(data){
-		var lines = data.split('\n').reverse();
-		for (var line of lines) {
-			var hashVal = line.split('_')[0];
-			
-			if (hashVal == hash) {
-				$(".buildName").val(line.split('_')[1]);
-				loadSerializedUrl(line.split('_')[2]);
-				return;
-			}
-		}
-	});
-	$(".footer>input")[0].value = getShareableUrl();
-	*/
 }
 
 function loadSerializedUrl(hash) {
