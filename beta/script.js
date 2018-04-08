@@ -43,9 +43,7 @@ function loadBuild() {
 		return;
 	}
 	
-	buildId = hash;
-	
-	let buildRef = db.collection("builds").doc(buildId);
+	let buildRef = db.collection("builds").doc(hash);
 	
 	buildRef.get().then((doc) => {
 		loadSerializedUrl(doc.data().hash);
