@@ -1,0 +1,268 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>verminbuilds</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+	<div class="mainGrid iconLayout">
+		<div class="heroSection">
+			<div class="markusHero selected"></div>
+			<div class="bardinHero"></div>
+			<div class="kerillianHero"></div>
+			<div class="victorHero"></div>
+			<div class="siennaHero"></div>
+		</div>
+		<div class="classSection">
+			<div class="heroClass1"></div>
+			<div class="heroClass2"></div>
+			<div class="heroClass3"></div>
+		</div>
+		<div class="heroClassContent">		
+			<input type="text" class="buildName" placeholder="Name Your Build">
+			<div class="sectionTitle heroSummaryTitle">
+					<span>Bardin Goreksson - Slayer</span>				
+			</div>
+			<div class="heroSummary">
+				<div class="heroPortrait" style="background: url('images/icons/heroes/1/2/portrait.png');"></div>
+				<div class="stats">
+					<span>Base Stats</span>
+					<span>Health</span>
+					<span>150</span>
+					<span>Cooldown</span>
+					<span>90 seconds</span>
+				</div>
+			</div>
+			<div class="sectionTitle">
+				<span>Active Ability</span>				
+			</div>
+			<div class="heroActiveAbility">
+			</div>
+			<div class="sectionTitle">
+				<span>Passives</span>				
+			</div>
+			<div class="heroPassiveAbility">
+			</div>		
+		</div>
+		<div class="gearSectionTitle sectionTitle">
+			<span>Weapons and Gear</span>				
+		</div>
+		<div class="weaponSection">
+			<div class="meleeWeaponSection itemSection">
+				<h2>Melee</h2>
+				<select class="meleeSelection">
+				</select>
+				<select class="meleeQualitySelection">
+				</select>
+				<input type="number" name="meleePowerLevel" min="5" max="300" step="1" value="300"></input>
+				<select class="meleeProperty1Selection propertySelection">
+				</select>
+				<input type="number" name="meleeProperty1" min="" max="" step=""></input>
+				<select class="meleeProperty2Selection propertySelection">
+				</select>
+				<input type="number" name="meleeProperty2" min="" max="" step=""></input>
+				<select class="meleeTraitSelection traitSelection">
+				</select>
+				<div class="traitDescription"><span></span></div>
+			</div>
+			<div class="rangeWeaponSection itemSection">
+				<h2>Range</h2>			
+				<select class="rangeSelection">
+				</select>
+				<select class="rangeQualitySelection">
+				</select>
+				<input type="number" name="rangePowerLevel" min="5" max="300" step="1" value="300"></input>
+				<select class="rangeProperty1Selection propertySelection">
+				</select>
+				<input type="number" name="rangeProperty1" min="" max="" step=""></input>
+				<select class="rangeProperty2Selection propertySelection">
+				</select>
+				<input type="number" name="rangeProperty2" min="" max="" step=""></input>
+				<select class="rangeTraitSelection traitSelection">
+				</select>
+				<div class="traitDescription"><span></span></div>
+			</div>
+		</div>
+		<div class="gearSection">		
+			<div class="necklaceSection itemSection">	
+				<h2>Necklace</h2>		
+				<select class="necklaceQualitySelection">
+				</select>
+				<input type="number" name="necklacePowerLevel" min="5" max="300" step="1" value="300"></input>
+				<select class="necklaceProperty1Selection propertySelection">
+				</select>
+				<input type="number" name="necklaceProperty1" min="" max="" step=""></input>
+				<select class="necklaceProperty2Selection propertySelection">
+				</select>
+				<input type="number" name="necklaceProperty2" min="" max="" step=""></input>
+				<select class="necklaceTraitSelection traitSelection">
+				</select>
+				<div class="traitDescription"><span></span></div>
+			</div>
+			<div class="charmSection itemSection">		
+				<h2>Charm</h2>	
+				<select class="charmQualitySelection">
+				</select>
+				<input type="number" name="charmPowerLevel" min="5" max="300" step="1" value="300"></input>
+				<select class="charmProperty1Selection propertySelection">
+				</select>
+				<input type="number" name="charmProperty1" min="" max="" step=""></input>
+				<select class="charmProperty2Selection propertySelection">
+				</select>
+				<input type="number" name="charmProperty2" min="" max="" step=""></input>
+				<select class="charmTraitSelection traitSelection">
+				</select>
+				<div class="traitDescription"><span></span></div>
+			</div>
+			<div class="trinketSection itemSection">
+				<h2>Trinket</h2>		
+				<select class="trinketQualitySelection">
+				</select>
+				<input type="number" name="trinketPowerLevel" min="5" max="300" step="1" value="300"></input>
+				<select class="trinketProperty1Selection propertySelection">
+				</select>
+				<input type="number" name="trinketProperty1" min="" max="" step=""></input>
+				<select class="trinketProperty2Selection propertySelection">
+				</select>
+				<input type="number" name="trinketProperty2" min="" max="" step=""></input>
+				<select class="trinketTraitSelection traitSelection">
+				</select>
+				<div class="traitDescription"><span></span></div>
+			</div>
+		</div>
+		<div class="sectionTitle">
+			<span>Talents</span>				
+		</div>
+		<div class="talentSection">
+			<div class="tier0">
+				<div class="talent0">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent1">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent2">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+			</div>
+			<div class="tier1">
+				<div class="talent0">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent1">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent2">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+			</div>
+			<div class="tier2">
+				<div class="talent0">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent1">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent2">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+			</div>
+			<div class="tier3">
+				<div class="talent0">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent1">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent2">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+			</div>
+			<div class="tier4">
+				<div class="talent0">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent1">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+				<div class="talent2">
+					<div class="talentIcon"></div>
+					<div class="talentContainer">
+						<span class="talentName"></span>
+						<span class="talentDescription"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<input  onClick="this.select();" type="text"></input>
+		</div>
+	</div>
+
+</body>
+</html>
