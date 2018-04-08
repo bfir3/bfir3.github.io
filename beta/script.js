@@ -26,10 +26,16 @@ function updateBuild() {
 		buildId = guid().split('-')[0];
 	}
 	
-	var buildName = $(".buildName").val();
+	var buildName = $(".buildName").val();	
 	
+	db.collection("builds").doc(buildId).set({
+		name: buildName,
+		hash: getSerializedUrl()
+	}).then(function (ref) {
+		console.log(ref);
+	});
 	
-	
+	/*
 	$.get("getBuilds.php", function(data){
 		var lines = data.split('\n').reverse();
 		var serializedString = "";
@@ -61,6 +67,7 @@ function updateBuild() {
 			}
 		});
 	});
+	*/
 }
 
 function loadBuild() {
@@ -71,6 +78,15 @@ function loadBuild() {
 	
 	buildId = hash;
 	
+	let buildRef = db.collection("builds").doc(buildId);
+	
+	buildRef.get().then((doc) => {
+		console.log(doc.data().uid);
+		console.log(doc.data().hash);
+		loadSerializedUrl(doc.data().hash);
+	});
+	
+	/*
 	$.get("getBuilds.php", function(data){
 		var lines = data.split('\n').reverse();
 		for (var line of lines) {
@@ -84,6 +100,7 @@ function loadBuild() {
 		}
 	});
 	$(".footer>input")[0].value = getShareableUrl();
+	*/
 }
 
 function loadSerializedUrl(hash) {
