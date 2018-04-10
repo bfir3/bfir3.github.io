@@ -25,7 +25,7 @@ function getBuildId() {
 	if (!buildId || buildId.length == 0) {
 		buildId = guid().split('-')[4];
 		window.location.hash = buildId;
-		$(".footer>input")[0].value = 'http://verminbuilds.com/beta/#' + buildId;
+		$(".footer>input")[0].value = 'http://verminbuilds.com/#' + buildId;
 	}
 	return buildId;
 }
