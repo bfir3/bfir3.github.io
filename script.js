@@ -11,9 +11,71 @@ var storage_div;
 var storage_btn;
 var passives;
 var skill;
+var buildId;
+var db;
 
-function loadSerializedUrl() {
+function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function getBuildId() {
+	if (!buildId || buildId.length == 0) {
+		buildId = guid().split('-')[4];
+		window.location.hash = buildId;
+		$(".footer>input")[0].value = 'http://verminbuilds.com/beta/#' + buildId;
+	}
+	return buildId;
+}
+
+function updateBuild() {	
+	var buildName = $(".buildName").val();	
+	var buildDescription = $(".buildDescription").val();	
+	
+	let docRef = db.collection("buildSets").doc(getBuildId());
+	
+	docRef.collection("builds").doc(guid().split('-')[4]).set({
+		name: buildName,
+		description: buildDescription,
+		hash: getSerializedUrl()
+	}).then(function (ref) {
+		console.log(ref);
+	});
+	
+	/*
+	db.collection("builds").doc(getBuildId()).set({
+		name: buildName,
+		hash: getSerializedUrl()
+	}).then(function (ref) {
+		console.log(ref);
+	});
+	*/
+}
+
+function loadBuild() {
 	let hash = window.location.hash.substring(1);
+	if (!hash || hash.length == 0) {	
+		$(".footer>input")[0].value = getShareableUrl();
+		return;
+	}
+	
+	if (hash.indexOf("hero=") >= 0) {
+		loadSerializedUrl(hash);
+		return;
+	}
+		
+	db.collection("buildSets").doc(hash).collection("builds").get().then((queryRef) => {
+		queryRef.forEach((doc) => {
+			$(".buildName").val(doc.data().name);
+			$(".buildDescription").val(doc.data().description);
+			loadSerializedUrl(doc.data().hash);
+		});
+	});
+}
+
+function loadSerializedUrl(hash) {
 	var heroHashValue = hash.split('&').filter((item) => { return item.includes("hero"); })[0].replace("hero=","");
 	var meleeHashValue = hash.split('&').filter((item) => { return item.includes("melee"); })[0].replace("melee=","");
 	var rangeHashValue = hash.split('&').filter((item) => { return item.includes("range"); })[0].replace("range=","");
@@ -38,7 +100,7 @@ function loadSerializedUrl() {
 	loadTrinket(trinketHashValue);
 	loadTalents(talentsHashValue);
 	loadTraits();
-	$(".footer>input")[0].value = getShareableUrl();
+	//$(".footer>input")[0].value = getShareableUrl();
 		
 	let property1Text = $(".meleeProperty1Selection")[0].options[$(".meleeProperty1Selection")[0].selectedIndex].text
 	let property2Text = $(".meleeProperty2Selection")[0].options[$(".meleeProperty2Selection")[0].selectedIndex].text
@@ -638,8 +700,8 @@ function getSerializedUrl() {
 	return getSerializedHero() + '&' + getSerializedWeapon("melee") + '&' + getSerializedWeapon("range") + '&' + getSerializedGear("necklace") + '&' + getSerializedGear("charm") + '&' + getSerializedGear("trinket") + '&' + getSerializedTalents()
 }
 
-function getShareableUrl() {
-	return 'http://verminbuilds.com/#' + getSerializedUrl();
+function getShareableUrl() {	
+	return 'http://verminbuilds.com/#' + getBuildId();
 }
 
 function getHeroIndex() {
@@ -650,6 +712,7 @@ function getCareerIndex() {
 }
 
 function initData() {
+	initFirestore();
 	let i = 0;
 	/*
 	for (var meleeWeapon of _data.melee_weapons) {
@@ -781,23 +844,23 @@ function initData() {
 	loadRangeProperties();
 	
 	if (window.location.hash) {
-		loadSerializedUrl();
+		loadBuild();
 	}
+	
 }
 
-$(function() {
-	career_select = $('#career-select');
-	talents_div = $('#talents-div');	
-	share_link = $('#share-link');
-	save_to_storage_button = $('#save-to-storage-button');
-	save_to_storage_input = $('#save-to-storage-input');
-	storage_list = $('#storage-list');
-	storage_div = $('#storage-div');
-	storage_btn = $('#storage-btn');
-	passives = $('#passives');
-	skill = $('#skill');
-	
-	
+function initFirestore() {
+	firebase.initializeApp({
+	  apiKey: "AIzaSyDtUozP43e9ygkqV0HpKYRFznePouI2zg0",
+	  authDomain: "verminbuilds.firebaseapp.com",
+	  projectId: "verminbuilds"
+	});
+
+	// Initialize Cloud Firestore through Firebase
+	db = firebase.firestore();
+}
+
+$(function() {	
 	$.ajax({
 		url: 'data.json',
 		cache: false,
@@ -812,7 +875,8 @@ $(function() {
 	$(".talentSection>div>div").click((e) => { 
 		$(e.currentTarget.parentElement).children().removeClass('selected'); 
 		$(e.currentTarget).addClass('selected'); 
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
 	});
 	
 	$(".heroSection>div").click((e) => { 
@@ -822,7 +886,8 @@ $(function() {
         $($(".classSection").children()[0]).addClass('selected'); 
         let index = Array.prototype.indexOf.call($(e.currentTarget.parentElement).children(),e.currentTarget);
         loadHero(index, 0);
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
 		$(".talentSection>div>div").removeClass("selected")
 		
 		loadHeroSummary();
@@ -834,26 +899,49 @@ $(function() {
         let index = Array.prototype.indexOf.call($(e.currentTarget.parentElement).children(),e.currentTarget);
         let heroIndex = Array.prototype.indexOf.call($(".heroSection").children(),$(".heroSection>div.selected")[0]);
 		loadHero(heroIndex, index);
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
 		$(".talentSection>div>div").removeClass("selected")
 		loadHeroSummary();
     });
 	
 	$(".meleeSelection").change((e) => { 
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
     });		
 	
 	$(".rangeSelection").change((e) => { 
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
     });		
 	
 	$(".traitSelection").change((e) => { 
         loadTraits();
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
     });
 	
 	$('input[type="number"]').change((e) => { 
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
+    });
+	
+	
+	$('input[type="text"]').change((e) => { 
+		updateBuild();
+    });
+	
+	$('textarea').change((e) => { 
+		updateBuild();
+    });
+	
+	$('input.relatedVideo').change((e) => { 
+		var videoAddress = e.currentTarget.val();
+		if (videoAddress.indexof("twitch.tv") >= 0) {
+
+		} else if (videoAddress.indexOf("") >= 0) {
+			
+		}
     });
 	
 	$(".propertySelection").change((e) => { 
@@ -869,6 +957,7 @@ $(function() {
 		});
 		
 		$(e.currentTarget.nextSibling.nextSibling).val(property1.max_value);
-		$(".footer>input")[0].value = getShareableUrl();
+		//$(".footer>input")[0].value = getShareableUrl();
+		updateBuild();
 	});
 });

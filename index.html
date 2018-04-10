@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
 </head>
 
 <body>
@@ -26,6 +28,11 @@
 			<div class="heroClass3"></div>
 		</div>
 		<div class="heroClassContent">		
+			<input type="text" class="buildName" placeholder="Name Your Build">
+			<textarea type="text" class="buildDescription" placeholder="Build Description" style="margin: 0px 0px 0px -1px; height: 66px; width: 1155px;"></textarea>
+			<input type="text" class="relatedVideo" placeholder="Related Video">
+			<iframe id="ytplayer" class="ytPlayer" type="text/html" width="640" height="360" frameborder="0"></iframe>
+			<iframe class="twitchPlayer" frameborder="0" allowfullscreen="true" scrolling="no" height="360" width="640"></iframe>
 			<div class="sectionTitle heroSummaryTitle">
 					<span>Bardin Goreksson - Slayer</span>				
 			</div>

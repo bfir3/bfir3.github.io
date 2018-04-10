@@ -750,3 +750,35 @@ span.talentDescription {
 input.buildName {
     margin-left: -1px;
 }
+
+textarea.buildDescription {
+    width: calc(100% - 4px);
+    margin-left: -1px !important;
+    border: 1px solid black;
+    /* border-top: 3px solid #4b5fc3; */
+    color: #c7c7c7;
+    background: #313131;
+    font-family: 'Arial';
+    -webkit-appearance: none;
+    resize: vertical;
+    text-align: center;
+    -moz-appearance: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+	margin-bottom: -4px;
+}
+
+iframe {
+    margin: 0 auto;
+    display: flex;
+	display: none;
+}
+
+.relatedVideo {
+	display: none;
+}
+
+input.relatedVideo::after {
+    content: 'show';
+}
