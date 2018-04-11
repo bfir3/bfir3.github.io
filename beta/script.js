@@ -250,6 +250,9 @@ function loadCareers(heroIndex, careerIndex) {
 	}
 	
 	loadRangeWeapons(heroIndex,careerIndex);
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);
 }
 
 function loadMeleeWeapons(heroIndex, careerIndex) {
