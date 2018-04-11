@@ -71,7 +71,7 @@ function loadCareerBuild(buildSetId, buildId) {
 }
 
 function getHashValue(hash, keyString) {
-	hash.split('&').filter((item) => { return item.includes(keyString); })[0].replace(`${keyString}=`,"")
+	return hash.split('&').filter((item) => { return item.includes(keyString); })[0].replace(`${keyString}=`,"");
 }
 
 function loadProperties(propertyName, propertyCollection) {
