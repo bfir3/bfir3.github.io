@@ -182,7 +182,10 @@ function loadSerializedGear(gearName, serializedString) {
 	let property2Value = params[6].split(':')[1];
 	let traitId = params[7].split(':')[1];
 	
-	gearName == "melee" || gearName == "range" ? $(`.${gearName}Selection`)[0].selectedIndex = id;
+	if (gearName == "melee" || gearName == "range") {
+		$(`.${gearName}Selection`)[0].selectedIndex = id;
+	}
+	
 	$(`.${gearName}QualitySelection`)[0].selectedIndex = qualityId;
 	$(`.${gearName}Property1Selection`)[0].selectedIndex = property1Id;
 	$(`.${gearName}Property2Selection`)[0].selectedIndex = property2Id;
