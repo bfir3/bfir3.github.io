@@ -272,33 +272,7 @@ function loadRangeWeapons(heroIndex, careerIndex) {
 	for (let rangeWeapon of rangeWeapons) {
 		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
 	}
-	heroIndex == 1 && careerIndex == 2 ? loadSlayerRangeProperties() : loadRangeProperties();
-}
-
-
-function loadTrinketProperties() {
-	let property1Text = $(".trinketProperty1Selection")[0].options[$(".trinketProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".trinketProperty2Selection")[0].options[$(".trinketProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.trinket_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.trinket_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="trinketProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="trinketProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="trinketProperty1"]').val(property1.max_value);
-	$('input[name="trinketProperty2"]').val(property2.max_value);
+	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);
 }
 
 function loadTraits() {
