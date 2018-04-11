@@ -487,7 +487,7 @@ function initData() {
 	loadHeroSummary(0, 0);
 		
 	loadProperties("melee", _data.melee_properties);	
-	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
+	getHeroIndex() == 1 && getCareerIndex() == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);	
