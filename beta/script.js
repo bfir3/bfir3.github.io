@@ -58,10 +58,11 @@ function loadBuild() {
 	}
 		
 	db.collection("buildSets").doc(hash).collection("builds").get().then((queryRef) => {
-			let doc = queryRef[0];
+		queryRef.forEach((doc) => {
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			loadSerializedUrl(doc.data().hash);
+		});
 	});
 }
 
