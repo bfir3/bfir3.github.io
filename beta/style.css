@@ -830,3 +830,15 @@ select.loadoutSelection {
 .footer {
     grid-row: 9;
 }
+.createBuildButton {
+    cursor: pointer !important;
+	display: none;
+}
+.mainGrid.iconLayout.locked .createBuildButton {
+	display: grid;
+}
+a.homeLink {
+    text-decoration: none;
+    color: #c7c7c7;
+    display: grid;
+}
