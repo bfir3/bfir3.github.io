@@ -842,3 +842,8 @@ a.homeLink {
     color: #c7c7c7;
     display: grid;
 }
+@media(min-width: 800px) {
+.footer {
+    display: none;
+}
+}
