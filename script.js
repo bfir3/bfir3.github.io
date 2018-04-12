@@ -12,6 +12,7 @@ var storage_btn;
 var passives;
 var skill;
 var buildId;
+var buildSetId;
 var db;
 
 function guid() {
@@ -24,19 +25,28 @@ function guid() {
 function getBuildId() {
 	if (!buildId || buildId.length == 0) {
 		buildId = guid().split('-')[4];
-		window.location.hash = buildId;
-		$(".footer>input")[0].value = 'http://verminbuilds.com/#' + buildId;
+		window.location.hash = getBuildSetId() + '-' + buildId;
+		$(".footer>input")[0].value = 'http://verminbuilds.com/#' + getBuildSetId() + '-' + buildId;
 	}
 	return buildId;
+}
+
+function getBuildSetId() {	
+	if (!buildSetId || buildSetId.length == 0) {
+		buildSetId = getUniqueIdentifier();
+		window.location.hash = buildSetId;
+		$(".footer>input").val('http://verminbuilds.com/#' + buildSetId);
+	}
+	return buildSetId;
 }
 
 function updateBuild() {	
 	var buildName = $(".buildName").val();	
 	var buildDescription = $(".buildDescription").val();	
 	
-	let docRef = db.collection("buildSets").doc(getBuildId());
+	let docRef = db.collection("buildSets").doc(getBuildSetId());
 	
-	docRef.collection("builds").doc(guid().split('-')[4]).set({
+	docRef.collection("builds").doc(getBuildId()).set({
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl()
@@ -701,7 +711,7 @@ function getSerializedUrl() {
 }
 
 function getShareableUrl() {	
-	return 'http://verminbuilds.com/#' + getBuildId();
+	return 'http://verminbuilds.com/#' + getBuildSetId() + '-' + getBuildId();
 }
 
 function getHeroIndex() {
