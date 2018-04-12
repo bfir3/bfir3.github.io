@@ -6,6 +6,8 @@ let db;
 let builds;
 let buildSetId;
 
+const DB_NAME = "verminBuildSets";
+
 function getUniqueIdentifier() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -33,7 +35,7 @@ function loadLoadouts() {
 	if ($(".loadoutSelection")[0].options.length > 0) {
 		return;
 	}
-	db.collection("buildSets").doc(getBuildSetId()).collection("builds").get().then((queryRef) => {
+	db.collection(DB_NAME).doc(getBuildSetId()).collection("builds").get().then((queryRef) => {
 		queryRef.forEach((doc) => {
 			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));	
 		});
@@ -108,7 +110,7 @@ function updateBuild() {
 	let buildName = $(".buildName").val();	
 	let buildDescription = $(".buildDescription").val();	
 	
-	let docRef = db.collection("buildSets").doc(getBuildSetId());
+	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
 	
 	docRef.set({
 		buildSetName: "",
@@ -141,7 +143,7 @@ function loadBuild() {
 	
 	if (hash.split('-').length == 2) {		
 		buildSetId = hash.split('-')[0];
-		db.collection("buildSets").doc(hash.split('-')[0]).collection("builds").doc(hash.split('-')[1]).get().then((doc) => {
+		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(hash.split('-')[1]).get().then((doc) => {
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
@@ -154,7 +156,7 @@ function loadBuild() {
 	}
 		
 	buildSetId = hash;
-	db.collection("buildSets").doc(hash).collection("builds").get().then((queryRef) => {
+	db.collection(DB_NAME).doc(hash).collection("builds").get().then((queryRef) => {
 		let buildList = [];
 		queryRef.forEach((doc) => {
 			buildList.push(doc);
