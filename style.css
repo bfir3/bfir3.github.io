@@ -749,6 +749,7 @@ span.talentDescription {
 }
 input.buildName {
     margin-left: -1px;
+    grid-row: 1;
 }
 
 textarea.buildDescription {
@@ -763,9 +764,6 @@ textarea.buildDescription {
     resize: vertical;
     text-align: center;
     -moz-appearance: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
 	margin-bottom: -4px;
 }
 
@@ -773,12 +771,79 @@ iframe {
     margin: 0 auto;
     display: flex;
 	display: none;
-}
-
-.relatedVideo {
-	display: none;
+	margin-bottom: 10px;
 }
 
 input.relatedVideo::after {
     content: 'show';
+}
+
+.buildSelectionContainer {
+    display: grid;
+    grid-template-columns: auto minmax(80px, 200px) 122px;
+}
+
+.newLoadoutButton {
+    background: #313131;
+    border: 1px solid black;
+    margin: 4px 0;
+    width: 120px;
+    text-align: center;
+    align-content: center;
+    display: grid;
+    color: #c7c7c7;
+    grid-row: 1;
+	cursor: pointer;
+}
+
+select.loadoutSelection {
+    max-width: 200px;
+    grid-row: 1;
+}
+
+.buildSelectionContainer input {
+    width: auto !important;
+}
+
+.mainGrid.locked input, .mainGrid.locked .heroSection>div, .mainGrid.locked .classSection>div, .mainGrid.locked select:not(.loadoutSelection), .mainGrid.locked textarea, .mainGrid.locked .button, .mainGrid.locked .talentSection>div>div  {
+	pointer-events:none;
+}
+
+.mainGrid.locked .newLoadoutButton {
+    color: #0c0c0c;
+}
+.mainGrid.iconLayout.locked .heroSection, .mainGrid.iconLayout.locked .classSection {
+    display: none;
+}
+.mainGrid.iconLayout.locked .newLoadoutButton {
+    display: none;
+}
+.mainGrid.iconLayout.locked .buildName {
+    grid-column: 1;
+}
+.mainGrid.iconLayout.locked .loadoutSelection {
+    grid-column: 2 / span 2;
+}
+.mainGrid.iconLayout.locked select.loadoutSelection {
+    max-width: none;
+}
+.footer {
+    grid-row: 9;
+}
+.createBuildButton {
+    cursor: pointer !important;
+	display: none;
+}
+.mainGrid.iconLayout.locked .createBuildButton {
+	display: grid;
+}
+a.homeLink {
+    text-decoration: none;
+    color: #c7c7c7;
+    display: grid;
+}
+@media(min-width: 800px) {
+.footer {
+    display: none;
+}
 }

@@ -1,34 +1,93 @@
 'use strict';
-var _data;
-var _properties;
-var career_select;
-var talents_div;
-var share_link;
-var save_to_storage_button;
-var save_to_storage_input;
-var storage_list;
-var storage_div;
-var storage_btn;
-var passives;
-var skill;
-var buildId;
-var buildSetId;
-var db;
+let _data;
+let _properties;
+let buildId;
+let db;
+let builds;
+let buildSetId;
 
-function guid() {
+const DB_NAME = "verminBuildSets";
+
+function getUniqueIdentifier() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
-  });
+  }).split('-')[4];
+}
+
+function createNewLoadout() {
+	let newBuildId = getUniqueIdentifier();
+	
+	$(".loadoutSelection").append(new Option("New Build", newBuildId));	
+	window.location.hash = getBuildSetId() + '-' + newBuildId;
+	$(".footer>input").val('http://verminbuilds.com/#' + getBuildSetId() + "-" + newBuildId);
+	
+	$(".loadoutSelection")[0].selectedIndex = $(".loadoutSelection")[0].options.length - 1;
+	clearSelections();
+}
+
+function updateLoadoutSelection() {
+	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
+	$(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].text = buildName;
+}
+
+function loadLoadouts() {
+	if ($(".loadoutSelection")[0].options.length > 0) {
+		return;
+	}
+	db.collection(DB_NAME).doc(getBuildSetId()).collection("builds").get().then((queryRef) => {
+		queryRef.forEach((doc) => {
+			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));	
+		});
+		if (window.location.hash.split('-')[1] && window.location.hash.split('-')[1].length > 0) {
+			$(".loadoutSelection")[0].value = window.location.hash.split('-')[1];	
+		}
+	});
+}
+
+function clearSelections() {
+	$(".buildName").val('');
+	$(".buildDescription").val('');
+	$(".relatedVideo").val('');
+	$(".talentSection>div>div").removeClass('selected');
+	$("iframe").hide();
+	
+	let heroIndex = getHeroIndex();
+	let careerIndex = getCareerIndex();
+	
+	loadMeleeWeapons(heroIndex,careerIndex);
+	if (heroIndex == 1 && careerIndex == 2) {
+		loadSlayerRangeWeapons();
+	}
+	else {	
+		loadRangeWeapons(heroIndex,careerIndex);
+	}
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);
 }
 
 function getBuildId() {
-	if (!buildId || buildId.length == 0) {
-		buildId = guid().split('-')[4];
-		window.location.hash = getBuildSetId() + '-' + buildId;
-		$(".footer>input")[0].value = 'http://verminbuilds.com/#' + getBuildSetId() + '-' + buildId;
+	if ($(".loadoutSelection")[0].options.length > 0) {
+		return $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 	}
+	
+	buildId = getUniqueIdentifier();
+	window.location.hash = getBuildSetId() + '-' + buildId;
+	$(".footer>input").val('http://verminbuilds.com/#' + getBuildSetId() + "-" + buildId);
+	
+	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
+	
+	$(".loadoutSelection").append(new Option(buildName, buildId));
 	return buildId;
+	
+	/*
+	if (!buildId || buildId.length == 0) {
+		buildId = getUniqueIdentifier();
+		window.location.hash = buildId;
+		$(".footer>input").val('http://verminbuilds.com/#' + buildId);
+	}
+	return buildId;*/
 }
 
 function getBuildSetId() {	
@@ -40,34 +99,40 @@ function getBuildSetId() {
 	return buildSetId;
 }
 
+function updatePageViews() {
+	// Update view counter for current build based on cookie data/ip address
+}
+
 function updateBuild() {	
-	var buildName = $(".buildName").val();	
-	var buildDescription = $(".buildDescription").val();	
+	if ($(".mainGrid").hasClass('locked')) {
+		return;
+	}
+	let buildName = $(".buildName").val();	
+	let buildDescription = $(".buildDescription").val();	
 	
-	let docRef = db.collection("buildSets").doc(getBuildSetId());
+	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
+	
+	docRef.set({
+		buildSetName: "",
+		buildSetDescription:""		
+	});
 	
 	docRef.collection("builds").doc(getBuildId()).set({
 		name: buildName,
 		description: buildDescription,
-		hash: getSerializedUrl()
+		hash: getSerializedUrl(),
+		videoLink: $(".relatedVideo").val(),
+		pageViews: "",
+		likes: ""
 	}).then(function (ref) {
-		console.log(ref);
+		// successfully added data
 	});
-	
-	/*
-	db.collection("builds").doc(getBuildId()).set({
-		name: buildName,
-		hash: getSerializedUrl()
-	}).then(function (ref) {
-		console.log(ref);
-	});
-	*/
 }
 
 function loadBuild() {
 	let hash = window.location.hash.substring(1);
 	if (!hash || hash.length == 0) {	
-		$(".footer>input")[0].value = getShareableUrl();
+		$(".footer>input").val(getShareableUrl());
 		return;
 	}
 	
@@ -75,24 +140,86 @@ function loadBuild() {
 		loadSerializedUrl(hash);
 		return;
 	}
-		
-	db.collection("buildSets").doc(hash).collection("builds").get().then((queryRef) => {
-		queryRef.forEach((doc) => {
+	
+	if (hash.split('-').length == 2) {		
+		buildSetId = hash.split('-')[0];
+		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(hash.split('-')[1]).get().then((doc) => {
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
+			$(".relatedVideo").val(doc.data().videoLink);
+			if (doc.data().videoLink.length > 0) {
+				loadVideoPlayer(doc.data().videoLink);
+			}
 			loadSerializedUrl(doc.data().hash);
 		});
+		return;
+	}
+		
+	buildSetId = hash;
+	db.collection(DB_NAME).doc(hash).collection("builds").get().then((queryRef) => {
+		let buildList = [];
+		queryRef.forEach((doc) => {
+			buildList.push(doc);
+		});
+		
+		$(".buildName").val(buildList[0].data().name);
+		$(".buildDescription").val(buildList[0].data().description);
+		loadSerializedUrl(buildList[0].data().hash);
+	});
+}
+
+function loadCareerBuild(buildSetId, buildId) {
+	// return build from db based on ids
+}
+
+function getHashValue(hash, keyString) {
+	return hash.split('&').filter((item) => { return item.includes(keyString); })[0].replace(`${keyString}=`,"");
+}
+
+function loadProperties(propertyName, propertyCollection) {
+
+	$(`.${propertyName}Property1Selection`).html('');
+	$(`.${propertyName}Property2Selection`).html('');
+	let i = 0;
+	for (let propertyRef of propertyCollection) {
+		$(`.${propertyName}Property1Selection`).append(new Option(propertyRef.name, i));
+		if (i == 1) {
+			$(`.${propertyName}Property2Selection`).append(new Option(propertyRef.name, i++, true, true));
+		}
+		else {
+			$(`.${propertyName}Property2Selection`).append(new Option(propertyRef.name, i++));
+		}
+	}
+	
+	let property1Text = $(`.${propertyName}Property1Selection`)[0].options[$(`.${propertyName}Property1Selection`)[0].selectedIndex].text
+	let property2Text = $(`.${propertyName}Property2Selection`)[0].options[$(`.${propertyName}Property2Selection`)[0].selectedIndex].text
+	
+	let property1 = propertyCollection.filter(function (item) { return item.name.includes(property1Text); })[0];
+	let property2 = propertyCollection.filter(function (item) { return item.name.includes(property2Text); })[0];
+	
+	$(`input[name='${propertyName}Property1']`).attr({ 
+		"min": property1.min_value,
+		"max": property1.max_value,
+		"value": property1.max_value,
+		"step": property1.step
+	});
+	
+	$(`input[name='${propertyName}Property2']`).attr({ 
+		"min": property2.min_value,
+		"max": property2.max_value,
+		"value": property2.max_value,
+		"step": property2.step
 	});
 }
 
 function loadSerializedUrl(hash) {
-	var heroHashValue = hash.split('&').filter((item) => { return item.includes("hero"); })[0].replace("hero=","");
-	var meleeHashValue = hash.split('&').filter((item) => { return item.includes("melee"); })[0].replace("melee=","");
-	var rangeHashValue = hash.split('&').filter((item) => { return item.includes("range"); })[0].replace("range=","");
-	var necklaceHashValue = hash.split('&').filter((item) => { return item.includes("necklace"); })[0].replace("necklace=","");
-	var charmHashValue = hash.split('&').filter((item) => { return item.includes("charm"); })[0].replace("charm=","");
-	var trinketHashValue = hash.split('&').filter((item) => { return item.includes("trinket"); })[0].replace("trinket=","");
-	var talentsHashValue = hash.split('&').filter((item) => { return item.includes("talents"); })[0].replace("talents=","");
+	let heroHashValue = getHashValue(hash, "hero")
+	let meleeHashValue = getHashValue(hash, "melee")
+	let rangeHashValue = getHashValue(hash, "range")
+	let necklaceHashValue = getHashValue(hash, "necklace")
+	let charmHashValue = getHashValue(hash, "charm")
+	let trinketHashValue = getHashValue(hash, "trinket")
+	let talentsHashValue = getHashValue(hash, "talents")
 	
 	let heroIndex = heroHashValue[0];
 	let careerIndex = heroHashValue[1];
@@ -103,129 +230,23 @@ function loadSerializedUrl(hash) {
 	$($(".classSection").children()[careerIndex]).addClass('selected');
 	
 	loadHero(heroIndex, careerIndex);	
-	loadMeleeWeapon(meleeHashValue);
-	loadRangeWeapon(rangeHashValue);
-	loadNecklace(necklaceHashValue);
-	loadCharm(charmHashValue);
-	loadTrinket(trinketHashValue);
+	loadSerializedWeapon("melee", meleeHashValue);
+	loadSerializedWeapon("range", rangeHashValue);
+	loadSerializedGear("necklace", necklaceHashValue);
+	loadSerializedGear("charm", charmHashValue);
+	loadSerializedGear("trinket", trinketHashValue);
 	loadTalents(talentsHashValue);
 	loadTraits();
-	//$(".footer>input")[0].value = getShareableUrl();
-		
-	let property1Text = $(".meleeProperty1Selection")[0].options[$(".meleeProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".meleeProperty2Selection")[0].options[$(".meleeProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="meleeProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="meleeProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"step": property2.step
-	});
-	
-	if (heroIndex == 1 && careerIndex == 2) {
-		let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
-		let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
-		
-		let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-		let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-		
-		$('input[name="rangeProperty1"]').attr({ 
-			"min": property1.min_value,
-			"max": property1.max_value,
-			"step": property1.step
-		});
-		
-		$('input[name="rangeProperty2"]').attr({ 
-			"min": property2.min_value,
-			"max": property2.max_value,
-			"step": property2.step
-		});
-	}
-	else {	
-		let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
-		let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
-		
-		let property1 = _data.range_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-		let property2 = _data.range_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-		
-		$('input[name="rangeProperty1"]').attr({ 
-			"min": property1.min_value,
-			"max": property1.max_value,
-			"step": property1.step
-		});
-		
-		$('input[name="rangeProperty2"]').attr({ 
-			"min": property2.min_value,
-			"max": property2.max_value,
-			"step": property2.step
-		});
-	}
-	
-	property1Text = $(".necklaceProperty1Selection")[0].options[$(".necklaceProperty1Selection")[0].selectedIndex].text
-	property2Text = $(".necklaceProperty2Selection")[0].options[$(".necklaceProperty2Selection")[0].selectedIndex].text
-	
-	property1 = _data.necklace_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	property2 = _data.necklace_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="necklaceProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="necklaceProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	property1Text = $(".charmProperty1Selection")[0].options[$(".charmProperty1Selection")[0].selectedIndex].text
-	property2Text = $(".charmProperty2Selection")[0].options[$(".charmProperty2Selection")[0].selectedIndex].text
-	
-	property1 = _data.charm_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	property2 = _data.charm_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="charmProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="charmProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"step": property2.step
-	});
-
-	property1Text = $(".trinketProperty1Selection")[0].options[$(".trinketProperty1Selection")[0].selectedIndex].text
-	property2Text = $(".trinketProperty2Selection")[0].options[$(".trinketProperty2Selection")[0].selectedIndex].text
-	
-	property1 = _data.trinket_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	property2 = _data.trinket_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="trinketProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="trinketProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"step": property2.step
-	});
-	
+	loadLoadouts();
 	loadHeroSummary();
+		
+	/*
+	loadProperties("melee", _data.melee_properties);	
+	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);	
+	*/
 }
 
 function loadHeroSummary() {
@@ -238,16 +259,16 @@ function loadHeroSummary() {
 	$(".heroSummaryTitle>span")[0].innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
 	
 	$(".heroPortrait").css('background', `url('images/icons/heroes/${heroIndex}/${careerIndex}/portrait.png')`);
-	$(".stats").children()[2].innerHTML = `${_data.heroes[heroIndex].careers[careerIndex].health}`;
-	$(".stats").children()[4].innerHTML = `${_data.heroes[heroIndex].careers[careerIndex].skill.cooldown} seconds`;
+	$("#healthValue").html(`${_data.heroes[heroIndex].careers[careerIndex].health}`);
+	$("#cooldownValue").html(`${_data.heroes[heroIndex].careers[careerIndex].skill.cooldown} seconds`);
 }
 
 function loadAbilities(heroIndex, careerIndex) {
-	$(".heroActiveAbility")[0].innerHTML = '';
-	$(".heroPassiveAbility")[0].innerHTML = '';
+	$(".heroActiveAbility").html('');
+	$(".heroPassiveAbility").html('');
 	
-	var skillName = _data.heroes[heroIndex].careers[careerIndex].skill.name;
-	var skillDescription = _data.heroes[heroIndex].careers[careerIndex].skill.description;
+	let skillName = _data.heroes[heroIndex].careers[careerIndex].skill.name;
+	let skillDescription = _data.heroes[heroIndex].careers[careerIndex].skill.description;
 	$(".heroActiveAbility").append(`<span>${skillName}</span><span>${skillDescription}</span>`);
 	
 	for (let ability of _data.heroes[heroIndex].careers[careerIndex].passives) {
@@ -255,7 +276,7 @@ function loadAbilities(heroIndex, careerIndex) {
 	}
 }
 
-function loadMeleeWeapon(serializedString) {
+function loadSerializedWeapon(weaponName, serializedString) {
 	let params = serializedString.split(';');
 	let id = params[0].split(':')[1];
 	let qualityId = params[1].split(':')[1];
@@ -266,38 +287,20 @@ function loadMeleeWeapon(serializedString) {
 	let property2Value = params[6].split(':')[1];
 	let traitId = params[7].split(':')[1];
 	
-	$(".meleeSelection")[0].selectedIndex = id;
-	$(".meleeQualitySelection")[0].selectedIndex = qualityId;
-	$(".meleeProperty1Selection")[0].selectedIndex = property1Id;
-	$(".meleeProperty2Selection")[0].selectedIndex = property2Id;
-	$(".meleeTraitSelection")[0].selectedIndex = traitId;
-	$('input[name="meleePowerLevel"]')[0].value = power;
-	$('input[name="meleeProperty1"]')[0].value = property1Value;
-	$('input[name="meleeProperty2"]')[0].value = property2Value;
-}
-
-function loadRangeWeapon(serializedString) {
-	let params = serializedString.split(';');
-	let id = params[0].split(':')[1];
-	let qualityId = params[1].split(':')[1];
-	let power = params[2].split(':')[1];
-	let property1Id = params[3].split(':')[1];
-	let property1Value = params[4].split(':')[1];
-	let property2Id = params[5].split(':')[1];
-	let property2Value = params[6].split(':')[1];
-	let traitId = params[7].split(':')[1];
+	if (weaponName == "melee" || weaponName == "range") {
+		$(`.${weaponName}Selection`)[0].selectedIndex = id;
+	}
 	
-	$(".rangeSelection")[0].selectedIndex = id;
-	$(".rangeQualitySelection")[0].selectedIndex = qualityId;
-	$(".rangeProperty1Selection")[0].selectedIndex = property1Id;
-	$(".rangeProperty2Selection")[0].selectedIndex = property2Id;
-	$(".rangeTraitSelection")[0].selectedIndex = traitId;
-	$('input[name="rangePowerLevel"]')[0].value = power;
-	$('input[name="rangeProperty1"]')[0].value = property1Value;
-	$('input[name="rangeProperty2"]')[0].value = property2Value;
+	$(`.${weaponName}QualitySelection`)[0].selectedIndex = qualityId;
+	$(`.${weaponName}Property1Selection`)[0].selectedIndex = property1Id;
+	$(`.${weaponName}Property2Selection`)[0].selectedIndex = property2Id;
+	$(`.${weaponName}TraitSelection`)[0].selectedIndex = traitId;
+	$(`input[name="${weaponName}PowerLevel"]`)[0].value = power;
+	$(`input[name="${weaponName}Property1"]`)[0].value = property1Value;
+	$(`input[name="${weaponName}Property2"]`)[0].value = property2Value;
 }
 
-function loadNecklace(serializedString) {
+function loadSerializedGear(gearName, serializedString) {
 	let params = serializedString.split(';');
 	let qualityId = params[0].split(':')[1];
 	let power = params[1].split(':')[1];
@@ -307,57 +310,19 @@ function loadNecklace(serializedString) {
 	let property2Value = params[5].split(':')[1];
 	let traitId = params[6].split(':')[1];
 	
-	$(".necklaceQualitySelection")[0].selectedIndex = qualityId;
-	$(".necklaceProperty1Selection")[0].selectedIndex = property1Id;
-	$(".necklaceProperty2Selection")[0].selectedIndex = property2Id;
-	$(".necklaceTraitSelection")[0].selectedIndex = traitId;
-	$('input[name="necklacePowerLevel"]')[0].value = power;
-	$('input[name="necklaceProperty1"]')[0].value = property1Value;
-	$('input[name="necklaceProperty2"]')[0].value = property2Value;
-}
-
-function loadCharm(serializedString) {
-	let params = serializedString.split(';');
-	let qualityId = params[0].split(':')[1];
-	let power = params[1].split(':')[1];
-	let property1Id = params[2].split(':')[1];
-	let property1Value = params[3].split(':')[1];
-	let property2Id = params[4].split(':')[1];
-	let property2Value = params[5].split(':')[1];
-	let traitId = params[6].split(':')[1];
-	
-	$(".charmQualitySelection")[0].selectedIndex = qualityId;
-	$(".charmProperty1Selection")[0].selectedIndex = property1Id;
-	$(".charmProperty2Selection")[0].selectedIndex = property2Id;
-	$(".charmTraitSelection")[0].selectedIndex = traitId;
-	$('input[name="charmPowerLevel"]')[0].value = power;
-	$('input[name="charmProperty1"]')[0].value = property1Value;
-	$('input[name="charmProperty2"]')[0].value = property2Value;
-}
-
-function loadTrinket(serializedString) {
-	let params = serializedString.split(';');
-	let qualityId = params[0].split(':')[1];
-	let power = params[1].split(':')[1];
-	let property1Id = params[2].split(':')[1];
-	let property1Value = params[3].split(':')[1];
-	let property2Id = params[4].split(':')[1];
-	let property2Value = params[5].split(':')[1];
-	let traitId = params[6].split(':')[1];
-	
-	$(".trinketQualitySelection")[0].selectedIndex = qualityId;
-	$(".trinketProperty1Selection")[0].selectedIndex = property1Id;
-	$(".trinketProperty2Selection")[0].selectedIndex = property2Id;
-	$(".trinketTraitSelection")[0].selectedIndex = traitId;
-	$('input[name="trinketPowerLevel"]')[0].value = power;
-	$('input[name="trinketProperty1"]')[0].value = property1Value;
-	$('input[name="trinketProperty2"]')[0].value = property2Value;
+	$(`.${gearName}QualitySelection`)[0].selectedIndex = qualityId;
+	$(`.${gearName}Property1Selection`)[0].selectedIndex = property1Id;
+	$(`.${gearName}Property2Selection`)[0].selectedIndex = property2Id;
+	$(`.${gearName}TraitSelection`)[0].selectedIndex = traitId;
+	$(`input[name="${gearName}PowerLevel"]`)[0].value = power;
+	$(`input[name="${gearName}Property1"]`)[0].value = property1Value;
+	$(`input[name="${gearName}Property2"]`)[0].value = property2Value;
 }
 
 function loadTalents(serializedString) {
 	$(".talentSection>div>div").removeClass('selected');
 	
-	for (var i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i++) {
 		if (serializedString[i] > 2) {
 			continue;
 		}
@@ -371,8 +336,8 @@ function loadHero(heroIndex, careerIndex) {
 	
 	let i = 0;
 	let y = 0;
-	for (var tier of talents) {
-			for (var talent of tier) {
+	for (let tier of talents) {
+			for (let talent of tier) {
 				$(".talentSection>.tier" + i + ">.talent" + y + " .talentIcon").css('background', `url('images/icons/heroes/${heroIndex}/${careerIndex}/talents/${i}/${y}.png')`);
 				$(".talentSection>.tier" + i + ">.talent" + y + " .talentName")[0].innerHTML = talent.name;
 				$(".talentSection>.tier" + i + ">.talent" + y + " .talentDescription")[0].innerHTML = talent.description;
@@ -391,7 +356,7 @@ function loadCareers(heroIndex, careerIndex) {
 	if (!careerIndex){
 		careerIndex = 0;
 	}
-	for (var career of _data.heroes[heroIndex].careers) {
+	for (let career of _data.heroes[heroIndex].careers) {
 		if(careerIndex == i && !heroCareers[i].classList.contains("selected")) {
 			heroCareers[i].classList.value += " selected";
 		}
@@ -405,10 +370,13 @@ function loadCareers(heroIndex, careerIndex) {
 	loadMeleeWeapons(heroIndex,careerIndex);
 	if (heroIndex == 1 && careerIndex == 2) {
 		loadSlayerRangeWeapons();
-		return;
 	}
-	
-	loadRangeWeapons(heroIndex,careerIndex);
+	else {	
+		loadRangeWeapons(heroIndex,careerIndex);
+	}
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);
 }
 
 function loadMeleeWeapons(heroIndex, careerIndex) {
@@ -418,35 +386,10 @@ function loadMeleeWeapons(heroIndex, careerIndex) {
 	let meleeWeapons = _data.melee_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
 	let i = 0;
 		
-	for (var meleeWeapon of meleeWeapons) {
+	for (let meleeWeapon of meleeWeapons) {
 		$(".meleeSelection").append(new Option(meleeWeapon.name, i++));
 	}
-	loadMeleeProperties();
-}
-
-function loadMeleeProperties() {
-	let property1Text = $(".meleeProperty1Selection")[0].options[$(".meleeProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".meleeProperty2Selection")[0].options[$(".meleeProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="meleeProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="meleeProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="meleeProperty1"]').val(property1.max_value);
-	$('input[name="meleeProperty2"]').val(property2.max_value);
+	loadProperties("melee", _data.melee_properties);
 }
 
 function loadRangeWeapons(heroIndex, careerIndex) {
@@ -456,184 +399,10 @@ function loadRangeWeapons(heroIndex, careerIndex) {
 	let rangeWeapons = _data.range_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
 	let i = 0;
 		
-	for (var rangeWeapon of rangeWeapons) {
+	for (let rangeWeapon of rangeWeapons) {
 		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
 	}
-	loadRangeProperties();
-	$(".rangeTraitSelection")[0].innerHTML = '';
-	i = 0;
-	for (var rangeTrait of _data.range_traits) {
-		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
-	}
-}
-
-function loadRangeProperties() {
-	$(".rangeProperty1Selection")[0].innerHTML = '';
-	$(".rangeProperty2Selection")[0].innerHTML = '';
-	let i = 0;
-	for (var rangeProperty of _data.range_properties) {
-		$(".rangeProperty1Selection").append(new Option(rangeProperty.name, i));
-		if (i == 1) {
-			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++, true, true));
-		}
-		else {
-			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++));
-		}
-	}
-	
-	let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.range_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.range_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="rangeProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="rangeProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="rangeProperty1"]').val(property1.max_value);
-	$('input[name="rangeProperty2"]').val(property2.max_value);
-}
-
-function loadSlayerRangeWeapons() {
-	$(".rangeSelection")[0].innerHTML = '';
-	
-	let heroCareer = _data.heroes[1].careers[2];		
-	let rangeWeapons = _data.melee_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
-	let i = 0;
-		
-	for (var rangeWeapon of rangeWeapons) {
-		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
-	}
-	loadSlayerRangeProperties();
-	$(".rangeTraitSelection")[0].innerHTML = '';
-	i = 0;
-	for (var rangeTrait of _data.melee_traits) {
-		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
-	}
-}
-
-function loadSlayerRangeProperties() {
-	$(".rangeProperty1Selection")[0].innerHTML = '';
-	$(".rangeProperty2Selection")[0].innerHTML = '';
-	let i = 0;
-	for (var rangeProperty of _data.melee_properties) {
-		$(".rangeProperty1Selection").append(new Option(rangeProperty.name, i));
-		if (i == 1) {
-			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++, true, true));
-		}
-		else {
-			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++));
-		}
-	}
-	
-	let property1Text = $(".rangeProperty1Selection")[0].options[$(".rangeProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".rangeProperty2Selection")[0].options[$(".rangeProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.melee_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.melee_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="rangeProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="rangeProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="rangeProperty1"]').val(property1.max_value);
-	$('input[name="rangeProperty2"]').val(property2.max_value);
-}
-
-function loadNecklaceProperties() {
-	let property1Text = $(".necklaceProperty1Selection")[0].options[$(".necklaceProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".necklaceProperty2Selection")[0].options[$(".necklaceProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.necklace_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.necklace_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="necklaceProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="necklaceProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="necklaceProperty1"]').val(property1.max_value);
-	$('input[name="necklaceProperty2"]').val(property2.max_value);
-}
-
-function loadCharmProperties() {
-	let property1Text = $(".charmProperty1Selection")[0].options[$(".charmProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".charmProperty2Selection")[0].options[$(".charmProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.charm_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.charm_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="charmProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="charmProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="charmProperty1"]').val(property1.max_value);
-	$('input[name="charmProperty2"]').val(property2.max_value);
-}
-
-function loadTrinketProperties() {
-	let property1Text = $(".trinketProperty1Selection")[0].options[$(".trinketProperty1Selection")[0].selectedIndex].text
-	let property2Text = $(".trinketProperty2Selection")[0].options[$(".trinketProperty2Selection")[0].selectedIndex].text
-	
-	let property1 = _data.trinket_properties.filter(function (item) { return item.name.includes(property1Text); })[0];
-	let property2 = _data.trinket_properties.filter(function (item) { return item.name.includes(property2Text); })[0];
-	
-	$('input[name="trinketProperty1"]').attr({ 
-		"min": property1.min_value,
-		"max": property1.max_value,
-		"value": property1.max_value,
-		"step": property1.step
-	});
-	
-	$('input[name="trinketProperty2"]').attr({ 
-		"min": property2.min_value,
-		"max": property2.max_value,
-		"value": property2.max_value,
-		"step": property2.step
-	});
-	
-	$('input[name="trinketProperty1"]').val(property1.max_value);
-	$('input[name="trinketProperty2"]').val(property2.max_value);
+	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);
 }
 
 function loadTraits() {
@@ -711,7 +480,7 @@ function getSerializedUrl() {
 }
 
 function getShareableUrl() {	
-	return 'http://verminbuilds.com/#' + getBuildSetId() + '-' + getBuildId();
+	return 'http://verminbuilds.com/#' + getBuildId();
 }
 
 function getHeroIndex() {
@@ -725,27 +494,27 @@ function initData() {
 	initFirestore();
 	let i = 0;
 	/*
-	for (var meleeWeapon of _data.melee_weapons) {
+	for (let meleeWeapon of _data.melee_weapons) {
 		$(".meleeSelection").append(new Option(meleeWeapon.name, i++));
 	}
 	
 	i = 0;
-	for (var rangeWeapon of _data.range_weapons) {
+	for (let rangeWeapon of _data.range_weapons) {
 		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
 	*/
 	
 	i = 0;
-	for (var meleeTrait of _data.melee_traits) {
+	for (let meleeTrait of _data.melee_traits) {
 		$(".meleeTraitSelection").append(new Option(meleeTrait.name, i++));
 	}
 	
 	i = 0;
-	for (var rangeTrait of _data.range_traits) {
+	for (let rangeTrait of _data.range_traits) {
 		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
 	}
 	
 	i = 0;
-	for (var meleeProperty of _data.melee_properties) {
+	for (let meleeProperty of _data.melee_properties) {
 		$(".meleeProperty1Selection").append(new Option(meleeProperty.name, i));
 		if (i == 1) {
 			$(".meleeProperty2Selection").append(new Option(meleeProperty.name, i++, true, true));
@@ -756,7 +525,7 @@ function initData() {
 	}
 	
 	i = 0;
-	for (var rangeProperty of _data.range_properties) {
+	for (let rangeProperty of _data.range_properties) {
 		$(".rangeProperty1Selection").append(new Option(rangeProperty.name, i));
 		if (i == 1) {
 			$(".rangeProperty2Selection").append(new Option(rangeProperty.name, i++, true, true));
@@ -767,22 +536,22 @@ function initData() {
 	}
 	
 	i = 0;
-	for (var necklaceTrait of _data.necklace_traits) {
+	for (let necklaceTrait of _data.necklace_traits) {
 		$(".necklaceTraitSelection").append(new Option(necklaceTrait.name, i++));
 	}
 	
 	i = 0;
-	for (var charmTrait of _data.charm_traits) {
+	for (let charmTrait of _data.charm_traits) {
 		$(".charmTraitSelection").append(new Option(charmTrait.name, i++));
 	}
 	
 	i = 0;
-	for (var trinketTrait of _data.trinket_traits) {
+	for (let trinketTrait of _data.trinket_traits) {
 		$(".trinketTraitSelection").append(new Option(trinketTrait.name, i++));
 	}
 	
 	i = 0;
-	for (var necklaceProperty of _data.necklace_properties) {
+	for (let necklaceProperty of _data.necklace_properties) {
 		$(".necklaceProperty1Selection").append(new Option(necklaceProperty.name, i));
 		if (i == 1) {
 		$(".necklaceProperty2Selection").append(new Option(necklaceProperty.name, i++, true, true));
@@ -793,7 +562,7 @@ function initData() {
 	}
 	
 	i = 0;
-	for (var charmProperty of _data.charm_properties) {
+	for (let charmProperty of _data.charm_properties) {
 		$(".charmProperty1Selection").append(new Option(charmProperty.name, i));
 		if (i == 1) {
 		$(".charmProperty2Selection").append(new Option(charmProperty.name, i++));
@@ -804,7 +573,7 @@ function initData() {
 	}
 	
 	i = 0;
-	for (var trinketProperty of _data.trinket_properties) {
+	for (let trinketProperty of _data.trinket_properties) {
 		$(".trinketProperty1Selection").append(new Option(trinketProperty.name, i));
 		if (i == 1) {
 		$(".trinketProperty2Selection").append(new Option(trinketProperty.name, i++, true, true));
@@ -846,17 +615,34 @@ function initData() {
 	
 	loadHero(0,0);
 	loadHeroSummary(0, 0);
-	loadNecklaceProperties();
-	loadCharmProperties();
-	loadTrinketProperties();
+		
+	loadProperties("melee", _data.melee_properties);	
+	getHeroIndex() == 1 && getCareerIndex() == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);	
+	
 	loadTraits();
-	loadMeleeProperties();
-	loadRangeProperties();
 	
 	if (window.location.hash) {
 		loadBuild();
 	}
 	
+}
+
+function loadVideoPlayer(videoAddress) {	
+	if (videoAddress.indexOf("twitch.tv") >= 0) {
+		let videoId = videoAddress.split('/')[videoAddress.split('/').length - 1];
+		$(".twitchPlayer")[0].src = `https://player.twitch.tv/?autoplay=false&video=${videoId}`;
+		$(".twitchPlayer").show();
+		$(".ytPlayer").hide();
+
+	} else if (videoAddress.indexOf("youtube") >= 0) {
+		let videoId = videoAddress.split("v=")[1].split("&")[0];
+		$(".ytPlayer")[0].src = `https://www.youtube.com/embed/${videoId}`;
+		$(".ytPlayer").show();
+		$(".twitchPlayer").hide();
+	}
 }
 
 function initFirestore() {
@@ -882,14 +668,14 @@ $(function() {
 		}
 	});
 	
-	$(".talentSection>div>div").click((e) => { 
+	$(".mainGrid:not(.locked) .talentSection>div>div").click((e) => { 
 		$(e.currentTarget.parentElement).children().removeClass('selected'); 
 		$(e.currentTarget).addClass('selected'); 
 		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
 	});
 	
-	$(".heroSection>div").click((e) => { 
+	$(".mainGrid:not(.locked) .heroSection>div").click((e) => { 
         $(e.currentTarget.parentElement).children().removeClass('selected'); 
         $(".classSection").children().removeClass('selected'); 
         $(e.currentTarget).addClass('selected'); 
@@ -903,58 +689,61 @@ $(function() {
 		loadHeroSummary();
     });
 	
-	$(".classSection>div").click((e) => { 
+	$(".mainGrid:not(.locked) .classSection>div").click((e) => { 
         $(e.currentTarget.parentElement).children().removeClass('selected'); 
         $(e.currentTarget).addClass('selected'); 
         let index = Array.prototype.indexOf.call($(e.currentTarget.parentElement).children(),e.currentTarget);
         let heroIndex = Array.prototype.indexOf.call($(".heroSection").children(),$(".heroSection>div.selected")[0]);
 		loadHero(heroIndex, index);
-		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
 		$(".talentSection>div>div").removeClass("selected")
 		loadHeroSummary();
     });
 	
-	$(".meleeSelection").change((e) => { 
-		//$(".footer>input")[0].value = getShareableUrl();
+	$(".mainGrid:not(.locked) .newLoadoutButton").click((e) => { 
+		let buildName = $(".buildName").val();
+		if (!buildName || buildName.length == 0) {
+			alert("Please give the current build a name before creating a new one");
+			return;
+		}
+        createNewLoadout();
+    });
+	
+	$(".mainGrid:not(.locked) .meleeSelection").change((e) => { 
 		updateBuild();
     });		
 	
-	$(".rangeSelection").change((e) => { 
-		//$(".footer>input")[0].value = getShareableUrl();
+	$(".mainGrid:not(.locked) .rangeSelection").change((e) => { 
 		updateBuild();
     });		
 	
-	$(".traitSelection").change((e) => { 
+	$(".mainGrid:not(.locked) .traitSelection").change((e) => { 
         loadTraits();
-		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
     });
 	
-	$('input[type="number"]').change((e) => { 
-		//$(".footer>input")[0].value = getShareableUrl();
+	$('.mainGrid:not(.locked) input[type="number"]').change((e) => { 
 		updateBuild();
     });
 	
 	
-	$('input[type="text"]').change((e) => { 
+	$('.mainGrid:not(.locked) input[type="text"]').change((e) => { 
 		updateBuild();
-    });
-	
-	$('textarea').change((e) => { 
-		updateBuild();
-    });
-	
-	$('input.relatedVideo').change((e) => { 
-		var videoAddress = e.currentTarget.val();
-		if (videoAddress.indexof("twitch.tv") >= 0) {
-
-		} else if (videoAddress.indexOf("") >= 0) {
-			
+		if (e.currentTarget.classList.value.indexOf("buildName") >= 0) {
+			updateLoadoutSelection();
 		}
     });
 	
-	$(".propertySelection").change((e) => { 
+	$('.mainGrid:not(.locked) textarea').change((e) => { 
+		updateBuild();
+    });
+	
+	$('.mainGrid:not(.locked) input.relatedVideo').change((e) => { 
+		let videoAddress = e.currentTarget.value;
+		loadVideoPlayer(videoAddress);
+    });
+	
+	$(".mainGrid:not(.locked) .propertySelection").change((e) => { 
 		let property1Text = e.currentTarget.options[e.currentTarget.selectedIndex].text
 		
 		let property1 = _properties.filter(function (item) { return item.name.includes(property1Text); })[0];
@@ -970,4 +759,15 @@ $(function() {
 		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
 	});
+	
+	$(".loadoutSelection").change((e) => {
+		window.location.hash = window.location.hash.substring(1).split('-')[0] + '-' + $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
+		loadBuild();
+	});
+});
+
+$(document).ready(() => {
+	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
+		$(".mainGrid").addClass("locked");
+	}
 });
