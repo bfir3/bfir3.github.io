@@ -767,7 +767,7 @@ $(function() {
 });
 
 $(document).ready(() => {
-	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 12) {		
+	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
 	}
 });
