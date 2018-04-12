@@ -133,8 +133,6 @@ function loadBuild() {
 		$(".footer>input").val(getShareableUrl());
 		return;
 	}
-		
-	$(".mainGrid").addClass("locked");
 	
 	if (hash.indexOf("hero=") >= 0) {
 		loadSerializedUrl(hash);
@@ -764,4 +762,10 @@ $(function() {
 		window.location.hash = window.location.hash.substring(1).split('-')[0] + '-' + $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 		loadBuild();
 	});
+});
+
+$(document).ready(() => {
+	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 12) {		
+		$(".mainGrid").addClass("locked");
+	}
 });
