@@ -367,6 +367,21 @@ function loadCareers(heroIndex, careerIndex) {
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);
+	reloadRangeTraits();
+}
+
+function reloadRangeTraits() {
+	let i = 0;
+	if (getHeroIndex() == 1 && getCareerIndex() == 2) {
+		for (let meleeTrait of _data.melee_traits) {
+			$(".meleeTraitSelection").append(new Option(meleeTrait.name, i++));
+		}
+		return;
+	}	
+	i = 0;
+	for (let rangeTrait of _data.range_traits) {
+		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
+	}
 }
 
 function loadMeleeWeapons(heroIndex, careerIndex) {
