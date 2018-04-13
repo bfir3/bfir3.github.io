@@ -56,12 +56,7 @@ function clearSelections() {
 	let careerIndex = getCareerIndex();
 	
 	loadMeleeWeapons(heroIndex,careerIndex);
-	if (heroIndex == 1 && careerIndex == 2) {
-		loadSlayerRangeWeapons();
-	}
-	else {	
-		loadRangeWeapons(heroIndex,careerIndex);
-	}
+	loadRangeWeapons(heroIndex,careerIndex);
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);
@@ -395,8 +390,9 @@ function loadMeleeWeapons(heroIndex, careerIndex) {
 function loadRangeWeapons(heroIndex, careerIndex) {
 	$(".rangeSelection")[0].innerHTML = '';
 	
+	
 	let heroCareer = _data.heroes[heroIndex].careers[careerIndex];		
-	let rangeWeapons = _data.range_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
+	let rangeWeapons = heroIndex == 1 && careerIndex == 2 ? _data.melee_weapons.filter(function (item) { return item.class.includes(heroCareer.name); }) : _data.range_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
 	let i = 0;
 		
 	for (let rangeWeapon of rangeWeapons) {
