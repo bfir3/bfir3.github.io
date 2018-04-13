@@ -372,9 +372,10 @@ function loadCareers(heroIndex, careerIndex) {
 
 function reloadRangeTraits() {
 	let i = 0;
+	$(".rangeTraitSelection").html('');
 	if (getHeroIndex() == 1 && getCareerIndex() == 2) {
 		for (let meleeTrait of _data.melee_traits) {
-			$(".meleeTraitSelection").append(new Option(meleeTrait.name, i++));
+			$(".rangeTraitSelection").append(new Option(meleeTrait.name, i++));
 		}
 		return;
 	}	
