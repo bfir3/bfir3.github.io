@@ -363,12 +363,7 @@ function loadCareers(heroIndex, careerIndex) {
 		heroCareers[i++].innerHTML = '<span>' + career.name + '</span>';
 	}
 	loadMeleeWeapons(heroIndex,careerIndex);
-	if (heroIndex == 1 && careerIndex == 2) {
-		loadSlayerRangeWeapons();
-	}
-	else {	
-		loadRangeWeapons(heroIndex,careerIndex);
-	}
+	loadRangeWeapons(heroIndex,careerIndex);
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);
