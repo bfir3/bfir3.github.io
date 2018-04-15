@@ -352,7 +352,7 @@ function loadCareers(heroIndex, careerIndex) {
 		careerIndex = 0;
 	}
 	for (let career of _data.heroes[heroIndex].careers) {
-		if(careerIndex == i && !heroCareers[i].classList.contains("selected")) {
+		if(careerIndex == i) {
 			heroCareers[i].classList.add("selected");
 		}
 		else {
