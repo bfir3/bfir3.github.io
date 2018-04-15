@@ -663,10 +663,15 @@ function initFirestore() {
 	// Initialize Cloud Firestore through Firebase
 	db = firebase.firestore();
 	
-	if (getCurrentUser()) {
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
 		$(".mainGrid").addClass("loggedIn");
 		$(".userButton").html('logout');
-	}
+		currentUser = user;
+	  } else {
+		// No user is signed in.
+	  }
+	});
 }
 
 $(function() {	
