@@ -356,7 +356,7 @@ function loadCareers(heroIndex, careerIndex) {
 			heroCareers[i].classList.add("selected");
 		}
 		else {
-			heroCareers[i].classList.remove.("selected");
+			heroCareers[i].classList.remove("selected");
 		}
 		
 		heroCareers[i].innerHTML = '';
