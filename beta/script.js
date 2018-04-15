@@ -774,7 +774,7 @@ $(function() {
 	});
 	
 	$(".userButton").click((e) => {
-		$(".userWindow").show();
+		$(".userWindow").css('display','grid');
 	});
 	
 	$(".userWindowCloseButton").click((e) => {
