@@ -120,7 +120,7 @@ function cloneBuild() {
 		videoLink: $(".relatedVideo").val()
 	}, { merge: true }).then(function (ref) {
 		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
-		$(".footer>input").val('http://verminbuilds.com/#' + ${clonedBuildSetId}-${clonedBuildId});
+		$(".footer>input").val(`http://verminbuilds.com/#${clonedBuildSetId}-${clonedBuildId}`);
 	});
 }
 
