@@ -287,7 +287,20 @@
 		<div class="footer">
 			<input  onClick="this.select();" type="text"></input>
 		</div>
+		<span class="userButton">login/register</span>
 	</div>
-	<div class="userWindow"></div>
+	<div class="userWindow">
+		<div class="grid">
+			<span class="headerButton registerTabButton selected">Register</span>
+			<span class="headerButton loginTabButton">Login</span>
+		</div>
+		<input type="text" name="username" placeholder="Username">
+		<input type="text" name="email" placeholder="E-mail">
+		<input type="password" name="password" placeholder="Password">
+		<input type="password" name="password2" placeholder="Verify password">
+		<input type="submit" name="signup_submit" class="registerButton" value="Register">
+		<input type="submit" name="login_submit" class="loginButton" value="Login">
+		<span class="userWindowCloseButton">x</span>
+	</div>
 </body>
 </html>

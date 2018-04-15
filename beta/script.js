@@ -5,6 +5,7 @@ let buildId;
 let db;
 let builds;
 let buildSetId;
+let currentUser;
 
 const DB_NAME = "verminBuildSets";
 
@@ -771,10 +772,95 @@ $(function() {
 		window.location.hash = window.location.hash.substring(1).split('-')[0] + '-' + $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 		loadBuild();
 	});
+	
+	$(".userButton").click((e) => {
+		$(".userWindow").show();
+	});
+	
+	$(".userWindowCloseButton").click((e) => {
+		$(".userWindow").hide();
+	});
+	
+	$(".userWindow .loginTabButton").click((e) => {
+		$(".userWindow").addClass('loginWindow');
+		$(".userWindow").removeClass('registerWindow');
+	});
+	
+	$(".userWindow .registerTabButton").click((e) => {
+		$(".userWindow").addClass('registerWindow');
+		$(".userWindow").removeClass('loginWindow');
+	});
+	
+	$(".registerButton").click((e) => {
+		let username = $('input[name="username"]').val();
+		let email = $('input[name="username"]').val();
+		let pwd = $('input[name="password"]').val();
+		let pwd2 = $('input[name="username"]').val();
+		
+		if (pwd != pwd2) {
+			alert("Passwords don't match");
+			return;
+		}
+		
+		firebase.auth().createUserWithEmailAndPassword(email, pwd).then(function() {
+			let user = getCurrentUser();
+			
+			if (!user) {
+				console.log("could not update user information");
+				return;
+			}
+			
+			user.updateProfile({
+			  displayName: username,
+			}).then(function() {
+				console.log("User information updated");
+			}).catch(function(error) {
+				console.log("Could not update user information");
+			});
+			
+			$(".mainGrid").addClass("loggedIn");
+		}).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+		  // ...
+		  alert(`${errorCode} - ${errorMessage}`);
+		});
+		$(".userWindow").hide();
+	});
+	
+	$(".loginButton").click((e) => {
+		let email = $('input[name="username"]').val();
+		let pwd = $('input[name="password"]').val();
+		
+		firebase.auth().signInWithEmailAndPassword(email, pwd).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+		  // ...
+		  alert(`${errorCode} - ${errorMessage}`);
+		  return;
+		});
+		
+		$(".mainGrid").addClass("loggedIn");		
+		$(".userWindow").hide();
+	});
+	
 });
+
+function getCurrentUser() {
+	if (!currentUser) {
+		currentUser = firebase.auth().currentUser;		
+	}
+	return currentUser;
+}
 
 $(document).ready(() => {
 	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
+	}
+	
+	if (getCurrentUser()) {
+		$(".mainGrid").addClass("loggedIn");
 	}
 });

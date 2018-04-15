@@ -842,7 +842,7 @@ a.homeLink {
     display: grid;
 }
 
-span.navButton {
+span.navButton, .headerButton {
     grid-row: 1;
     justify-self: center;
     color: #c7c7c7;
@@ -857,9 +857,8 @@ span.navButton:hover {
     background: rgba(255,255,255,0.1);
 }
 
-.mainGrid::after {
+.userButton {
     height: 30px;
-    content: 'Sign In/Up';
     position: absolute;
     top: 0;
     right: 0;
@@ -871,11 +870,70 @@ span.navButton:hover {
 }
 
 .userWindow {
-    height: 50%;
-    width: 50%;
+    width: 350px;
     position: fixed;
-    top: 25%;
-    left: 25%;
+    top: 100px;
+    left: calc(50% - 175px);
     border-width: 4px;
     border-image: url('images/border.png') 4 4 stretch!important;
+    border: 4px solid;
+    background: #101010;
+    display: grid;
+    justify-content: center;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+}
+
+.headerButton.selected {
+    border-bottom: 1px solid #6b6b6b;
+}
+
+.headerButton:hover {
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+}
+
+.userWindow input[type="text"],
+.userWindow input[type="password"] {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.userWindow input[type="text"]:focus,
+.userWindow input[type="password"]:focus {
+  border-bottom: 2px solid #16a085;
+  color: #16a085;
+  transition: 0.2s ease;
+}
+
+
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+.loginWindow input[name="username"], .loginWindow input[name="password2"] {
+    display: none;
+}
+
+.userWindowCloseButton {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    color: #c7c7c7;
+    cursor: pointer;
 }
