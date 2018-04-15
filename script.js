@@ -353,10 +353,10 @@ function loadCareers(heroIndex, careerIndex) {
 	}
 	for (let career of _data.heroes[heroIndex].careers) {
 		if(careerIndex == i && !heroCareers[i].classList.contains("selected")) {
-			heroCareers[i].classList.add("selected");
+			heroCareers[i].classList.value += " selected";
 		}
 		else {
-			heroCareers[i].classList.remove("selected");
+			heroCareers[i].classList.value.replace(" selected","");
 		}
 		
 		heroCareers[i].innerHTML = '';
