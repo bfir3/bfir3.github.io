@@ -124,7 +124,7 @@ function updateBuild() {
 	});
 }
 
-function isCookieExpired(buildCookie) {
+function isViewCookieExpired(buildCookie) {
 	return (new Date() - new Date(buildCookie)) > (60 * 60 * 1000);
 }
 
