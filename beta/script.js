@@ -108,21 +108,47 @@ function updateBuild() {
 	
 	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
 	
+	let username = getCurrentUser() ? getCurrentUser().displayName : "";
+	
 	docRef.set({
 		buildSetName: "",
-		buildSetDescription:""		
+		buildSetDescription:"",
+		author: username
 	});
+	
+	let buildRef = docRef.collection("builds").doc(getBuildId())
 	
 	docRef.collection("builds").doc(getBuildId()).set({
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
-		videoLink: $(".relatedVideo").val(),
-		pageViews: "",
-		likes: ""
-	}).then(function (ref) {
+		videoLink: $(".relatedVideo").val()
+	}, { merge: true }).then(function (ref) {
 		// successfully added data
 	});
+}
+
+function isCookieExpired(buildCookie) {
+	return (new Date() - new Date(buildCookie)) > (60 * 60 * 1000);
+}
+
+function updatePageViews(buildSetId, buildId) {
+		
+	let buildCookie = localStorage.getItem(`${buildSetId}-${buildId}`);
+	
+	if (!buildCookie || isViewCookieExpired(buildCookie)) {
+		db.collection(DB_NAME).doc(buildSetId).collection("builds").doc(buildId).get().then((doc) => {
+			let views = doc.data().pageViews ? doc.data().pageViews++ : 1;
+				
+			db.collection(DB_NAME).doc(buildSetId).collection("builds").doc(buildId).set({
+				pageViews: views
+			}, { merge: true }).then(function (ref) {
+				// successfully added data
+			});
+				
+		});
+		localStorage.setItem(`${buildSetId}-${buildId}`, new Date());
+	}
 }
 
 function loadBuild() {
@@ -665,8 +691,9 @@ function initFirestore() {
 	
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
+		let username = user.displayName ? user.displayName + " " : "";
 		$(".mainGrid").addClass("loggedIn");
-		$(".userButton").html(user.displayName + ' logout');
+		$(".userButton").html(`${username}logout`);
 		currentUser = user;
 	  } else {
 		// No user is signed in.
@@ -840,11 +867,11 @@ $(function() {
 			  displayName: username,
 			}).then(function() {
 				console.log("User information updated");
+				$(".userButton").html(`${username} logout`);				
 			}).catch(function(error) {
 				console.log("Could not update user information");
 			});
-			
-			$(".userButton").html(`${username} logout`);			
+					
 			$(".mainGrid").addClass("loggedIn");
 			$(".userWindow").hide();
 		}).catch(function(error) {
@@ -877,10 +904,7 @@ $(function() {
 });
 
 function getCurrentUser() {
-	if (!currentUser) {
-		currentUser = firebase.auth().currentUser;		
-	}
-	return currentUser;
+	return firebase.auth().currentUser;
 }
 
 $(document).ready(() => {
