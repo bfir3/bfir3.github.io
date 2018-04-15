@@ -882,6 +882,7 @@ span.navButton:hover {
     justify-content: center;
     padding-bottom: 5px;
     text-align: center;
+	display: none;
 }
 
 .grid {
