@@ -333,7 +333,7 @@ input {
 .heroSection>div {
     outline: 1px solid #a66f42;
     /* margin-left: 1px; */
-    box-shadow: inset 0 0 0px 100px #ffffff15;
+    box-shadow: inset 0 0 0px 100px rgba(255,255,255,0.1);
 }
 
 .heroSection>div:hover {
@@ -386,7 +386,7 @@ input {
     /* margin-right: -1px; */
     margin-top: 1px;
     background: #030c15;
-    box-shadow: inset 0 0 0 1000px #ffffff15;
+    box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
