@@ -161,7 +161,10 @@ function loadBuild() {
 	
 	if (hash.split('-').length == 2) {		
 		buildSetId = hash.split('-')[0];
-		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(hash.split('-')[1]).get().then((doc) => {
+		let buildChildId = hash.split('-')[1];
+		
+		updatePageViews(buildSetId, buildChildId);
+		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(buildChildId).get().then((doc) => {
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
