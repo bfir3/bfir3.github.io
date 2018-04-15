@@ -821,11 +821,11 @@ select.loadoutSelection {
 }
 .footer {
 }
-.createBuildButton {
-    cursor: pointer !important;
-	display: none;
+.mainGrid.iconLayout.locked .cloneBuildButton {
+	display: grid;
 }
-.mainGrid.iconLayout.locked .createBuildButton {
+
+.mainGrid.iconLayout.locked.editable .editBuildButton {
 	display: grid;
 }
 a.homeLink {
@@ -939,4 +939,9 @@ input[type="submit"] {
     right: 4px;
     color: #c7c7c7;
     cursor: pointer;
+}
+
+.editBuildButton, .cloneBuildButton {
+    cursor: pointer !important;
+	display: none;
 }

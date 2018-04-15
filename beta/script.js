@@ -95,6 +95,35 @@ function getBuildSetId() {
 	return buildSetId;
 }
 
+function cloneBuild() {
+	let buildName = $(".buildName").val();	
+	let buildDescription = $(".buildDescription").val();	
+	let clonedBuildSetId = getUniqueIdentifier();
+	let clonedBuildId = getUniqueIdentifier();
+	
+	let docRef = db.collection(DB_NAME).doc(clonedBuildSetId);
+	
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+	
+	docRef.set({
+		buildSetName: "",
+		buildSetDescription:"",
+		author: authorEmail
+	});
+	
+	let buildRef = docRef.collection("builds").doc(clonedBuildId)
+	
+	buildRef.set({
+		name: buildName,
+		description: buildDescription,
+		hash: getSerializedUrl(),
+		videoLink: $(".relatedVideo").val()
+	}, { merge: true }).then(function (ref) {
+		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+		$(".footer>input").val('http://verminbuilds.com/#' + ${clonedBuildSetId}-${clonedBuildId});
+	});
+}
+
 function updateBuild() {	
 	if ($(".mainGrid").hasClass('locked')) {
 		return;
@@ -104,12 +133,12 @@ function updateBuild() {
 	
 	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
 	
-	let username = getCurrentUser() ? getCurrentUser().displayName : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
 		buildSetName: "",
 		buildSetDescription:"",
-		author: username
+		author: authorEmail
 	});
 	
 	let buildRef = docRef.collection("builds").doc(getBuildId())
@@ -164,7 +193,17 @@ function loadBuild() {
 		let buildChildId = hash.split('-')[1];
 		
 		updatePageViews(buildSetId, buildChildId);
-		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(buildChildId).get().then((doc) => {
+		let buildSetRef = db.collection(DB_NAME).doc(hash.split('-')[0]);
+		
+		buildSetRef.get().then((doc) => {
+			let author = doc.data().author;
+			
+			if (getCurrentUser() && getCurrentUser().email == author) {
+				$(".mainGrid").addClass("editable");
+			}
+		});
+		
+		buildSetRef.collection("builds").doc(buildChildId).get().then((doc) => {
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
@@ -899,7 +938,15 @@ $(function() {
 		  return;
 		});
 	});
+
+	$(".editBuildButton").click((e) => {
+		$(".mainGrid").removeClass("locked");
+	});
 	
+	
+	$(".cloneBuildButton").click((e) => {
+		cloneBuild();
+	});
 });
 
 function getCurrentUser() {
