@@ -889,7 +889,7 @@ span.navButton:hover {
     display: grid;
 }
 
-.headerButton.selected {
+.registerWindow .registerTabButton, .loginWindow .loginTabButton {
     border-bottom: 1px solid #6b6b6b;
 }
 
@@ -927,7 +927,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-.loginWindow input[name="username"], .loginWindow input[name="password2"] {
+.loginWindow input[name="username"], 
+.loginWindow input[name="password2"],
+.loginWindow input.registerButton,
+.registerWindow input.loginButton {
     display: none;
 }
 
