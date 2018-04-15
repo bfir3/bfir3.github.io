@@ -662,6 +662,11 @@ function initFirestore() {
 
 	// Initialize Cloud Firestore through Firebase
 	db = firebase.firestore();
+	
+	if (getCurrentUser()) {
+		$(".mainGrid").addClass("loggedIn");
+		$(".userButton").html('logout');
+	}
 }
 
 $(function() {	
@@ -773,8 +778,16 @@ $(function() {
 		loadBuild();
 	});
 	
-	$(".userButton").click((e) => {
+	$(".mainGrid:not(.loggedIn) .userButton").click((e) => {
 		$(".userWindow").css('display','grid');
+	});
+		
+	$(".mainGrid.loggedIn .userButton").click((e) => {
+		firebase.auth().signOut().then(function() {
+		  alert("You have been logged out");
+		}).catch(function(error) {
+		  alert("An error occurred when logging you out");
+		});
 	});
 	
 	$(".userWindowCloseButton").click((e) => {
@@ -825,6 +838,7 @@ $(function() {
 		  var errorMessage = error.message;
 		  // ...
 		  alert(`${errorCode} - ${errorMessage}`);
+		  return;
 		});
 		$(".userWindow").hide();
 	});
@@ -858,9 +872,5 @@ function getCurrentUser() {
 $(document).ready(() => {
 	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
-	}
-	
-	if (getCurrentUser()) {
-		$(".mainGrid").addClass("loggedIn");
 	}
 });
