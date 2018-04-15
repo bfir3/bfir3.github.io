@@ -844,6 +844,7 @@ $(function() {
 				console.log("Could not update user information");
 			});
 			
+			$(".userButton").html(`${username} logout`);			
 			$(".mainGrid").addClass("loggedIn");
 			$(".userWindow").hide();
 		}).catch(function(error) {
