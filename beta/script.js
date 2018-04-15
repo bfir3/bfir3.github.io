@@ -814,9 +814,9 @@ $(function() {
 	
 	$(".registerButton").click((e) => {
 		let username = $('input[name="username"]').val();
-		let email = $('input[name="username"]').val();
+		let email = $('input[name="email"]').val();
 		let pwd = $('input[name="password"]').val();
-		let pwd2 = $('input[name="username"]').val();
+		let pwd2 = $('input[name="password2"]').val();
 		
 		if (pwd != pwd2) {
 			alert("Passwords don't match");
