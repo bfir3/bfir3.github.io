@@ -845,6 +845,7 @@ $(function() {
 			});
 			
 			$(".mainGrid").addClass("loggedIn");
+			$(".userWindow").hide();
 		}).catch(function(error) {
 		  // Handle Errors here.
 		  var errorCode = error.code;
@@ -853,14 +854,16 @@ $(function() {
 		  alert(`${errorCode} - ${errorMessage}`);
 		  return;
 		});
-		$(".userWindow").hide();
 	});
 	
 	$(".loginButton").click((e) => {
-		let email = $('input[name="username"]').val();
+		let email = $('input[name="email"]').val();
 		let pwd = $('input[name="password"]').val();
 		
-		firebase.auth().signInWithEmailAndPassword(email, pwd).catch(function(error) {
+		firebase.auth().signInWithEmailAndPassword(email, pwd).then(function() {
+			$(".mainGrid").addClass("loggedIn");		
+			$(".userWindow").hide();
+		}).catch(function(error) {
 		  // Handle Errors here.
 		  var errorCode = error.code;
 		  var errorMessage = error.message;
@@ -868,9 +871,6 @@ $(function() {
 		  alert(`${errorCode} - ${errorMessage}`);
 		  return;
 		});
-		
-		$(".mainGrid").addClass("loggedIn");		
-		$(".userWindow").hide();
 	});
 	
 });
