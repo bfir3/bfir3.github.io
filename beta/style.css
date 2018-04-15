@@ -327,13 +327,12 @@ input {
     display: grid;
     grid-template-columns: repeat(5, 20%);
     margin-bottom: 0 !important;
-    grid-row: 1;
 }
 
 .heroSection>div {
     outline: 1px solid #a66f42;
     /* margin-left: 1px; */
-    box-shadow: inset 0 0 0px 100px rgba(255,255,255,0.1);
+    box-shadow: inset 0 0 0px 100px #ffffff15;
 }
 
 .heroSection>div:hover {
@@ -377,7 +376,6 @@ input {
     display: grid;
     color: #fff;
     grid-template-columns: repeat(3, 33.33%);
-    grid-row: 2;
 }
 
 .classSection>div {
@@ -386,7 +384,7 @@ input {
     /* margin-right: -1px; */
     margin-top: 1px;
     background: #030c15;
-    box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.1);
+    box-shadow: inset 0 0 0 1000px #ffffff15;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -457,7 +455,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .weaponSection {
     grid-template-columns: repeat(2, calc(50% - 7.5px));
-    grid-row: 7;
 }
 
 .traitDescription span {
@@ -466,7 +463,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .gearSection {
     grid-template-columns: repeat(3, calc(33.33% - 10px));
-    grid-row: 8;
 }
 
 .footer>input {
@@ -480,12 +476,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .heroClassContent {
-    grid-row: 3;
     margin-bottom: 5px !important;
 }
 
 .talentSection {
-    grid-row: 5;
     text-align: center;
 }
 
@@ -507,7 +501,6 @@ input[type="number"]::-webkit-inner-spin-button {
     text-align: center;
     padding-bottom: 10px;
     display: grid;
-    grid-row: 4;
 }
 
 .talentSection>div>div:not(.selected):hover {
@@ -533,7 +526,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .gearSectionTitle {
-    grid-row: 6;
 }
 
 .classSection {
@@ -803,7 +795,6 @@ select.loadoutSelection {
 
 .buildSelectionContainer input {
     width: auto !important;
-	min-width: calc(100% - 1px);
 }
 
 .mainGrid.locked input, .mainGrid.locked .heroSection>div, .mainGrid.locked .classSection>div, .mainGrid.locked select:not(.loadoutSelection), .mainGrid.locked textarea, .mainGrid.locked .button, .mainGrid.locked .talentSection>div>div  {
@@ -829,7 +820,6 @@ select.loadoutSelection {
     max-width: none;
 }
 .footer {
-    grid-row: 9;
 }
 .createBuildButton {
     cursor: pointer !important;
@@ -847,4 +837,28 @@ a.homeLink {
 .footer {
     display: none;
 }
+}
+.navBar {
+    display: grid;
+}
+
+span.navButton {
+    grid-row: 1;
+    justify-self: center;
+    color: #c7c7c7;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+span.navButton:hover {
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+}
+
+.mainGrid::after {
+	width: 60px;
+	height: 30px;
+	content: 'Sign In/Up';
 }
