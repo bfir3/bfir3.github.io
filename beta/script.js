@@ -95,10 +95,6 @@ function getBuildSetId() {
 	return buildSetId;
 }
 
-function updatePageViews() {
-	// Update view counter for current build based on cookie data/ip address
-}
-
 function updateBuild() {	
 	if ($(".mainGrid").hasClass('locked')) {
 		return;

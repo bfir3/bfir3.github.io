@@ -865,7 +865,6 @@ span.navButton:hover {
     margin: 8px;
     color: #d2dabc;
     font-size: 14px;
-    text-transform: lowercase;
     cursor: pointer;
 }
 
