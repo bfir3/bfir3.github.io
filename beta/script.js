@@ -666,7 +666,7 @@ function initFirestore() {
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 		$(".mainGrid").addClass("loggedIn");
-		$(".userButton").html('logout');
+		$(".userButton").html(user.displayName + ' logout');
 		currentUser = user;
 	  } else {
 		// No user is signed in.
@@ -791,6 +791,7 @@ $(function() {
 			  alert("An error occurred when logging you out");
 			});
 			$(".mainGrid").removeClass('loggedIn');
+			$(".userButton").html('login/register');
 			return;
 		}
 		
@@ -819,6 +820,11 @@ $(function() {
 		
 		if (pwd != pwd2) {
 			alert("Passwords don't match");
+			return;
+		}
+		
+		if (!username || username.length < 3) {
+			alert("Username must be at least 3 characters");
 			return;
 		}
 		
