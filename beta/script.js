@@ -56,12 +56,7 @@ function clearSelections() {
 	let careerIndex = getCareerIndex();
 	
 	loadMeleeWeapons(heroIndex,careerIndex);
-	if (heroIndex == 1 && careerIndex == 2) {
-		loadSlayerRangeWeapons();
-	}
-	else {	
-		loadRangeWeapons(heroIndex,careerIndex);
-	}
+	loadRangeWeapons(heroIndex,careerIndex);
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);
@@ -358,25 +353,36 @@ function loadCareers(heroIndex, careerIndex) {
 	}
 	for (let career of _data.heroes[heroIndex].careers) {
 		if(careerIndex == i && !heroCareers[i].classList.contains("selected")) {
-			heroCareers[i].classList.value += " selected";
+			heroCareers[i].classList.add("selected");
 		}
 		else {
-			heroCareers[i].classList.value.replace(" selected","");
+			heroCareers[i].classList.remove("selected");
 		}
 		
 		heroCareers[i].innerHTML = '';
 		heroCareers[i++].innerHTML = '<span>' + career.name + '</span>';
 	}
 	loadMeleeWeapons(heroIndex,careerIndex);
-	if (heroIndex == 1 && careerIndex == 2) {
-		loadSlayerRangeWeapons();
-	}
-	else {	
-		loadRangeWeapons(heroIndex,careerIndex);
-	}
+	loadRangeWeapons(heroIndex,careerIndex);
 	loadProperties("necklace", _data.necklace_properties);
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);
+	reloadRangeTraits();
+}
+
+function reloadRangeTraits() {
+	let i = 0;
+	$(".rangeTraitSelection").html('');
+	if (getHeroIndex() == 1 && getCareerIndex() == 2) {
+		for (let meleeTrait of _data.melee_traits) {
+			$(".rangeTraitSelection").append(new Option(meleeTrait.name, i++));
+		}
+		return;
+	}	
+	i = 0;
+	for (let rangeTrait of _data.range_traits) {
+		$(".rangeTraitSelection").append(new Option(rangeTrait.name, i++));
+	}
 }
 
 function loadMeleeWeapons(heroIndex, careerIndex) {
@@ -395,8 +401,9 @@ function loadMeleeWeapons(heroIndex, careerIndex) {
 function loadRangeWeapons(heroIndex, careerIndex) {
 	$(".rangeSelection")[0].innerHTML = '';
 	
+	
 	let heroCareer = _data.heroes[heroIndex].careers[careerIndex];		
-	let rangeWeapons = _data.range_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
+	let rangeWeapons = heroIndex == 1 && careerIndex == 2 ? _data.melee_weapons.filter(function (item) { return item.class.includes(heroCareer.name); }) : _data.range_weapons.filter(function (item) { return item.class.includes(heroCareer.name); })
 	let i = 0;
 		
 	for (let rangeWeapon of rangeWeapons) {
