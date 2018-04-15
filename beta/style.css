@@ -803,6 +803,7 @@ select.loadoutSelection {
 
 .buildSelectionContainer input {
     width: auto !important;
+	min-width: calc(100% - 1px);
 }
 
 .mainGrid.locked input, .mainGrid.locked .heroSection>div, .mainGrid.locked .classSection>div, .mainGrid.locked select:not(.loadoutSelection), .mainGrid.locked textarea, .mainGrid.locked .button, .mainGrid.locked .talentSection>div>div  {
