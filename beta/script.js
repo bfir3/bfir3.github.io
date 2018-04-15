@@ -783,16 +783,18 @@ $(function() {
 		loadBuild();
 	});
 	
-	$(".mainGrid:not(.loggedIn) .userButton").click((e) => {
-		$(".userWindow").css('display','grid');
-	});
+	$(".userButton").click((e) => {
+		if ($(".mainGrid").hasClass('loggedIn')) {
+			firebase.auth().signOut().then(function() {
+			  alert("You have been logged out");
+			}).catch(function(error) {
+			  alert("An error occurred when logging you out");
+			});
+			$(".mainGrid").removeClass('loggedIn');
+			return;
+		}
 		
-	$(".mainGrid.loggedIn .userButton").click((e) => {
-		firebase.auth().signOut().then(function() {
-		  alert("You have been logged out");
-		}).catch(function(error) {
-		  alert("An error occurred when logging you out");
-		});
+		$(".userWindow").css('display','grid');
 	});
 	
 	$(".userWindowCloseButton").click((e) => {
