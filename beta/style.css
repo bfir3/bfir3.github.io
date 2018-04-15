@@ -858,7 +858,24 @@ span.navButton:hover {
 }
 
 .mainGrid::after {
-	width: 60px;
-	height: 30px;
-	content: 'Sign In/Up';
+    height: 30px;
+    content: 'Sign In/Up';
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 8px;
+    color: #d2dabc;
+    font-size: 14px;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+
+.userWindow {
+    height: 50%;
+    width: 50%;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    border-width: 4px;
+    border-image: url('images/border.png') 4 4 stretch!important;
 }
