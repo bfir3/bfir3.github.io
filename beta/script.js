@@ -823,7 +823,8 @@ function initFirestore() {
 					{ "data": "careerName" , "title": "Career", "width": "100px" },
 					{ "data": "author", "title": "Author", "width": "100px" },
 					{ "data": "pageViews", "title": "Views", "width": "40px" }
-				]
+				],			
+				"order": [[ 2, "desc" ],[3, "desc"]]
 			});
 			
 			$(".spinner").hide();
