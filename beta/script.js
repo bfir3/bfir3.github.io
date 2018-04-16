@@ -132,8 +132,8 @@ function cloneBuildSet() {
 			
 			let docRef = db.collection("buildTable").doc(clonedBuildId);
 			
-			let buildName = build.name;	
-			let buildDescription = build.description;		
+			let buildName = build.data().name;	
+			let buildDescription = build.data().description;		
 			let author = getCurrentUser() ? getCurrentUser().displayName : "";
 			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 			
@@ -143,10 +143,10 @@ function cloneBuildSet() {
 				authorEmail: authorEmail,
 				name: buildName,
 				description: buildDescription,
-				hash: build.hash,
-				videoLink: build.videoLink
+				hash: build.data().hash,
+				videoLink: build.data().videoLink
 			}, { merge: true }).then(function (ref) {
-				console.log("build cloned successfully");
+				console.log("build set cloned successfully");
 				window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
 				loadLoadouts(true);
 				$(".mainGrid").removeClass('locked');
