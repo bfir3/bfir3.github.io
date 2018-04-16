@@ -70,7 +70,13 @@ function clearSelections() {
 }
 
 function getBuildId() {	
-	return window.location.hash.substring(1).split('-')[1];
+	let buildId = window.location.hash.substring(1).split('-')[1];
+	if (buildId.length > 0) {
+		return buildId;
+	}
+	buildId =  getUniqueIdentifier()
+	window.location.hash = getBuildSetId() + '-' + buildId;
+	return buildId;
 
 	if ($(".loadoutSelection")[0].options.length > 0) {
 		return $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
@@ -85,7 +91,15 @@ function getBuildId() {
 	return buildId;
 }
 
-function getBuildSetId() {	
+function getBuildSetId() {
+	let buildSetId = window.location.hash.substring(1).split('-')[0];
+	if (buildSetId.length > 0) {
+		return buildSetId;
+	}
+	buildSetId = getUniqueIdentifier()
+	window.location.hash = buildSetId;
+	return buildSetId;
+	
 	return window.location.hash.substring(1).split('-')[0];
 	
 	if (!buildSetId || buildSetId.length == 0) {
