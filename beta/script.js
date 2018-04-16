@@ -123,6 +123,38 @@ function cloneBuild() {
 	});
 }
 
+function cloneBuildSet() {
+	
+	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
+		queryRef.forEach((build) => {
+			let docRef = db.collection("buildTable").doc(clonedBuildId);
+			
+			let buildName = build.name;	
+			let buildDescription = build.description;	
+			let clonedBuildSetId = getUniqueIdentifier();
+			let clonedBuildId = getUniqueIdentifier();			
+			let author = getCurrentUser() ? getCurrentUser().displayName : "";
+			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+			
+			docRef.set({
+				buildSetId:clonedBuildSetId,
+				author: author,
+				authorEmail: authorEmail,
+				name: buildName,
+				description: buildDescription,
+				hash: build.hash,
+				videoLink: build.videoLink
+			}, { merge: true }).then(function (ref) {
+				console.log("build cloned successfully");
+				window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+				loadLoadouts(true);
+				$(".mainGrid").removeClass('locked');
+				$(".buildDescription")[0].disabled = false;
+			});
+		});
+	});
+}
+
 function updateBuild() {	
 	if ($(".mainGrid").hasClass('locked')) {
 		return;
@@ -1025,6 +1057,10 @@ $(function() {
 	
 	$(".cloneBuildButton").click((e) => {
 		cloneBuild();
+	});
+	
+	$(".cloneBuildSetButton").click((e) => {
+		cloneBuildSet();
 	});
 
 	$(".createButton").click((e) => {
