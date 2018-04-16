@@ -749,6 +749,7 @@ function initFirestore() {
 		queryRef.docs.some((doc) => {
 			let build = doc.data();
 			build.id = doc.id;
+			build.pageViews = !doc.pageViews ? 0 : doc.pageViews;
 			promises.push(buildList.push(build));
 		});
 	
@@ -987,6 +988,7 @@ $(function() {
 	$(".browseButton").click((e) => {
 		$(".mainGrid").hide();
 		$(".buildBrowserSection").show();
+		window.location.hash = "buildBrowser";
 	});
 });
 
