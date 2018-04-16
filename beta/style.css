@@ -987,3 +987,10 @@ div#buildBrowserTable_length {
 .navBar.flex {
     margin-bottom: 10px;
 }
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 8px 10px;
+    max-width: 300px;
+    overflow: hidden;
+}
+}
