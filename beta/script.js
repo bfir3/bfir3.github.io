@@ -864,6 +864,11 @@ function initFirestore() {
 		$(".mainGrid").addClass("loggedIn");
 		$(".userButton").html(`${username}logout`);
 		$(".myBuildsButton").show();
+		
+		if (window.location.hash.length > 0 && window.location.hash.substring(1) == "myBuilds") {
+			loadMyBuilds();
+		}
+		
 		currentUser = user;
 	  } else {
 		// No user is signed in.
