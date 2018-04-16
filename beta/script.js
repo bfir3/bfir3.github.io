@@ -125,9 +125,9 @@ function cloneBuild() {
 
 function cloneBuildSet() {
 	
+	let clonedBuildSetId = getUniqueIdentifier();
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
 		queryRef.forEach((build) => {
-			let clonedBuildSetId = getUniqueIdentifier();
 			let clonedBuildId = getUniqueIdentifier();		
 			
 			let docRef = db.collection("buildTable").doc(clonedBuildId);
