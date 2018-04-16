@@ -189,9 +189,9 @@ function loadBuild() {
 				return;
 			}
 			
-			let author = doc.data().author;
+			let authorEmail = doc.data().authorEmail;
 			
-			if (getCurrentUser() && getCurrentUser().email == author) {
+			if (getCurrentUser() && getCurrentUser().email == authorEmail) {
 				$(".mainGrid").addClass("editable");
 			}
 			
