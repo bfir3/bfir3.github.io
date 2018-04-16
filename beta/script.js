@@ -220,7 +220,7 @@ function loadBuild() {
 			}
 			loadSerializedUrl(doc.data().hash);
 			$(".spinner").hide();
-			$(".mainGrid").show();
+			$(".mainGrid").removeClass('loading');
 		});
 		return;
 	}
@@ -721,7 +721,7 @@ function initData() {
 	
 	loadTraits();
 	$(".spinner").hide();	
-	$(".mainGrid").show();
+	$(".mainGrid").removeClass('loading');
 }
 
 function loadBuildBrowser() {
@@ -795,7 +795,7 @@ function initFirestore() {
 			});
 			
 			$(".spinner").hide();
-			$(".buildBrowserSection").show();
+			$(".buildBrowserSection").removeClass('loading');
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
