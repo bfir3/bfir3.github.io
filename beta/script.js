@@ -828,8 +828,6 @@ function initFirestore() {
 			
 			$(".spinner").hide();
 			$(".buildBrowserSection").removeClass('loading');
-			$(".mainGrid").hide();
-			$(".buildBrowserSection").show();
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
