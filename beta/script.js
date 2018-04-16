@@ -890,7 +890,7 @@ function initFirestore() {
 				build.id = doc.id;
 				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
 				build.heroName = !getHero(doc.data().hash) ? "" : getHero(doc.data().hash).name.split(' ')[0];
-				build.careerName = !getCareer(doc.data().hash).name ? "" : getCareer(doc.data().hash).name;
+				build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
 				promises.push(buildList.push(build));
 			}
 		});
