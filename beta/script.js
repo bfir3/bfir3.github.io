@@ -206,7 +206,12 @@ function loadBuild() {
 				$(".mainGrid").addClass("editable");
 			}
 			
-			$(".authorLabel").val(`Created By: ${doc.data().author}`);
+			if (doc.data().author && doc.data().author.length > 0) {
+				$(".authorLabel").html(`Created By: ${doc.data().author}`);
+			}
+			else {
+				$(".authorLabel").html('');
+			}
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
