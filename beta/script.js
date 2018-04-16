@@ -37,8 +37,8 @@ function loadLoadouts(force) {
 		return;
 	}
 	
-	$(".loadoutSelection").empty()
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
+		$(".loadoutSelection").empty()
 		if (queryRef.size > 1) {
 			$(".mainGrid").addClass('buildCollection');
 		}
@@ -124,7 +124,7 @@ function cloneBuild() {
 }
 
 function cloneBuildSet() {
-	
+	let promises = [];
 	let clonedBuildSetId = getUniqueIdentifier();
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
 		queryRef.forEach((build) => {
@@ -137,21 +137,24 @@ function cloneBuildSet() {
 			let author = getCurrentUser() ? getCurrentUser().displayName : "";
 			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 			
-			docRef.set({
-				buildSetId:clonedBuildSetId,
-				author: author,
-				authorEmail: authorEmail,
-				name: buildName,
-				description: buildDescription,
-				hash: build.data().hash,
-				videoLink: build.data().videoLink
-			}, { merge: true }).then(function (ref) {
-				console.log("build set cloned successfully");
-				window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
-				loadLoadouts(true);
-				$(".mainGrid").removeClass('locked');
-				$(".buildDescription")[0].disabled = false;
-			});
+			promises.push(docRef.set({
+					buildSetId:clonedBuildSetId,
+					author: author,
+					authorEmail: authorEmail,
+					name: buildName,
+					description: buildDescription,
+					hash: build.data().hash,
+					videoLink: build.data().videoLink
+				}, { merge: true }).then(function (ref) {
+					console.log("build set cloned successfully");
+					window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+					$(".mainGrid").removeClass('locked');
+					$(".buildDescription")[0].disabled = false;
+				});
+			);
+		});
+		Promise.all(promises).then(() => {
+			loadLoadouts(true);
 		});
 	});
 }
