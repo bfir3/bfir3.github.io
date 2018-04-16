@@ -127,12 +127,13 @@ function cloneBuildSet() {
 	
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
 		queryRef.forEach((build) => {
+			let clonedBuildSetId = getUniqueIdentifier();
+			let clonedBuildId = getUniqueIdentifier();		
+			
 			let docRef = db.collection("buildTable").doc(clonedBuildId);
 			
 			let buildName = build.name;	
-			let buildDescription = build.description;	
-			let clonedBuildSetId = getUniqueIdentifier();
-			let clonedBuildId = getUniqueIdentifier();			
+			let buildDescription = build.description;		
 			let author = getCurrentUser() ? getCurrentUser().displayName : "";
 			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 			
