@@ -736,6 +736,12 @@ function initData() {
 	if (window.location.hash) {
 		let hash = window.location.hash.substring(1);
 		
+		if (hash == "myBuilds") {
+			$(".page").hide();
+			loadMyBuilds();
+			return;
+		}
+		
 		if (hash == "buildBrowser") {
 			$(".mainGrid").hide();
 			return;
@@ -777,6 +783,15 @@ function loadVideoPlayer(videoAddress) {
 }
 
 function loadMyBuilds() {
+	$(".mainGrid").hide();
+	$(".myBuildsSection").hide();
+	$(".buildBrowserSection").hide();
+	
+	if ($.fn.DataTable.isDataTable('#myBuildsTable') {
+		$(".myBuildsSection").show();
+		return;
+	}
+	
 	$(".spinner").show();
 	let author = getCurrentUser() ? getCurrentUser().displayName : "";
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
@@ -821,6 +836,7 @@ function loadMyBuilds() {
 			
 			$(".spinner").hide();
 			$(".myBuildsSection").removeClass('loading');
+			$(".myBuildsSection").show();
 			
 			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
@@ -1144,9 +1160,6 @@ $(function() {
 	});
 	
 	$(".myBuildsButton").click((e) => { 
-		$(".mainGrid").hide();
-		$(".myBuildsSection").show();
-		$(".buildBrowserSection").hide();
 		loadMyBuilds();
 		window.location.hash = "myBuilds";
 	});
