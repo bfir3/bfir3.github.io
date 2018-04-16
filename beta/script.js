@@ -1036,6 +1036,10 @@ $(function() {
 		$(".buildBrowserSection").show();
 		window.location.hash = "buildBrowser";
 	});
+	
+	$(".sectionTitle").click((e) => { 
+		$(e.currentTarget).next().toggle(); 
+	});
 });
 
 function getCurrentUser() {
