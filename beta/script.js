@@ -146,7 +146,7 @@ function updatePageViews(buildSetId, buildId) {
 			if (!doc.data()) {
 				return;
 			}
-			let views = doc.data().pageViews != null ? doc.data().pageViews++ : 1;
+			let views = !doc.data().pageViews ? 1 : doc.data().pageViews++;
 				
 			docRef.set({
 				pageViews: views
