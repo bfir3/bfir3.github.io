@@ -780,10 +780,10 @@ function initFirestore() {
 				data: buildList,
 				columns: [
 					{ "data": "name" , "title": "Name" },
-					{ "data": "heroName" , "title": "Hero" },
-					{ "data": "careerName" , "title": "Career" },
-					{ "data": "author", "title": "Author" },
-					{ "data": "pageViews", "title": "Views" }
+					{ "data": "heroName" , "title": "Hero", "width": "50px", "className": "text-center" },
+					{ "data": "careerName" , "title": "Career", "width": "100px", "className": "text-center" },
+					{ "data": "author", "title": "Author", "className": "text-center" },
+					{ "data": "pageViews", "title": "Views", "className": "text-center" }
 				]
 			});
 			

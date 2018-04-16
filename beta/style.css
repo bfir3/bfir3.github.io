@@ -954,7 +954,7 @@ input[type="submit"] {
 	display: none;
 }
 .buildBrowserSection.grid {
-    max-width: 500px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
@@ -993,4 +993,8 @@ table.dataTable tbody th, table.dataTable tbody td {
     max-width: 300px;
     overflow: hidden;
 }
+}
+
+tbody>tr:hover {
+    background: #00BCD4 !important;
 }
