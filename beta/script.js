@@ -777,9 +777,11 @@ function loadVideoPlayer(videoAddress) {
 }
 
 function loadMyBuilds() {
+	$(".spinner").show();
 	let author = getCurrentUser() ? getCurrentUser().displayName : "";
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	let buildList = [];
+	let promises = [];
 	
 	if (!authorEmail || authorEmail.length == 0) {
 		return;
