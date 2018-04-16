@@ -769,6 +769,8 @@ function initFirestore() {
 			if (build.name && build.name.length > 0) {					
 				build.id = doc.id;
 				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+				build.heroName = getHero(doc.data().hash).name;
+				build.careerName = getCareer(doc.data().hash).name;
 				promises.push(buildList.push(build));
 			}
 		});
@@ -778,6 +780,8 @@ function initFirestore() {
 				data: buildList,
 				columns: [
 					{ "data": "name" , "title": "Name" },
+					{ "data": "heroName" , "title": "Hero" },
+					{ "data": "careerName" , "title": "Career" },
 					{ "data": "author", "title": "Author" },
 					{ "data": "pageViews", "title": "Views" }
 				]
@@ -790,6 +794,16 @@ function initFirestore() {
 			} );
 		});
 	});
+}
+
+function getHero(hash) {
+	let heroHashValue = getHashValue(hash, "hero");	
+	return _data.heroes[heroHashValue[0]];
+}
+
+function getCareer(hash) {
+	let heroHashValue = getHashValue(hash, "hero");	
+	return _data.heroes[heroHashValue[0]].careers[heroHashValue[1]];
 }
 
 $(function() {	
