@@ -863,7 +863,7 @@ function initFirestore() {
 		let username = user.displayName ? user.displayName + " " : "";
 		$(".mainGrid").addClass("loggedIn");
 		$(".userButton").html(`${username}logout`);
-		$(".myBuildsButton").show();
+		$(".myBuildsButton").css('visibility', 'visible');
 		
 		if (window.location.hash.length > 0 && window.location.hash.substring(1) == "myBuilds") {
 			loadMyBuilds();
@@ -873,7 +873,7 @@ function initFirestore() {
 	  } else {
 		$(".mainGrid").removeClass("loggedIn");
 		$(".userButton").html("login/register");
-		$(".myBuildsButton").hide();
+		$(".myBuildsButton").css('visibility', 'hidden');
 		// No user is signed in.
 	  }
 	});

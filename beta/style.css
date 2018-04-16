@@ -1156,7 +1156,7 @@ body {
     margin-left: 10px;
 }
 .myBuildsButton {
-	display: none;
+	visibility: hidden;
 	cursor: pointer;
 }
 .myBuildsSection.page.grid {
