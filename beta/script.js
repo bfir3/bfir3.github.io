@@ -735,6 +735,28 @@ function initFirestore() {
 		// No user is signed in.
 	  }
 	});
+	
+	let buildList = [];
+	let promises = [];
+	
+	db.collection("buildTable").get().then((queryRef) => {
+		console.log(queryRef.size);
+		let i = 0;
+		queryRef.docs.some((doc) => {
+			promises.push(buildList.push(doc.data()));
+		});
+	});
+	
+	Promise.all(promises).then((x) => { 	
+		$(".buildBrowserTable").DataTable({
+			ajax: buildList,
+			columns: [
+				{ "data": "name" },
+				{ "data": "author" },
+				{ "data": "pageViews" },
+			]
+		});
+	});
 }
 
 $(function() {	
@@ -944,6 +966,15 @@ $(function() {
 	
 	$(".cloneBuildButton").click((e) => {
 		cloneBuild();
+	});
+
+	$(".createButton").click((e) => {
+		window.location.href = "/";
+	});	
+	
+	$(".browseButton").click((e) => {
+		$(".mainGrid").hide();
+		$(".buildBrowserSection").show();
 	});
 });
 

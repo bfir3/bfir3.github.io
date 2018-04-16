@@ -18,17 +18,19 @@
   <title>verminbuilds</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
   <script src="script.js?v=1.0.102"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
 </head>
 
 <body>
+	<div class="navBar flex">
+		<span class="navButton createButton">Create</span>
+		<span class="navButton browseButton">Browse Builds</span>
+	</div>
 	<div class="mainGrid iconLayout">
-		<div class="navBar flex">
-			<span class="navButton createButton">Create</span>
-			<span class="navButton browseButton">Browse Builds</span>
-		</div>
 		<div class="heroSection">
 			<div class="markusHero selected"></div>
 			<div class="bardinHero"></div>
@@ -289,6 +291,9 @@
 			<input  onClick="this.select();" type="text"></input>
 		</div>
 		<span class="userButton">login/register</span>
+	</div>
+	<div class="buildBrowserSection grid">
+		<table class="buildBrowserTable"></table>
 	</div>
 	<div class="userWindow registerWindow">
 		<div class="grid">

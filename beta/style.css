@@ -949,3 +949,7 @@ input[type="submit"] {
 .flex {
 	display: flex;
 }
+
+.buildBrowserSection {
+	display: none;
+}
