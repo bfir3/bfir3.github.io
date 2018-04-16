@@ -842,6 +842,7 @@ function initFirestore() {
 				window.location.href = `/beta/#${data.buildSetId}-${data.id}`;
 				window.location.reload();
 			} );
+			$('#buildBrowserTable').DataTable().columns.adjust().draw();
 		});
 	});
 }
