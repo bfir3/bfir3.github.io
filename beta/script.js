@@ -39,6 +39,10 @@ function loadLoadouts(force) {
 	
 	$(".loadoutSelection").empty()
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
+		if (queryRef.size > 1) {
+			$(".mainGrid").addClass('buildCollection');
+		}
+		
 		queryRef.forEach((doc) => {
 			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));
 		});
@@ -572,16 +576,20 @@ function getCareerIndex() {
 
 function initData() {
 	initFirestore();
-	let i = 0;
-	/*
-	for (let meleeWeapon of _data.melee_weapons) {
-		$(".meleeSelection").append(new Option(meleeWeapon.name, i++));
+	
+	if (window.location.hash) {
+		let hash = window.location.hash.substring(1);
+		
+		if (hash == "buildBrowser") {
+			loadBuildBrowser();
+			return;
+		}
+		
+		loadBuild();
+		return;
 	}
 	
-	i = 0;
-	for (let rangeWeapon of _data.range_weapons) {
-		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
-	*/
+	let i = 0;
 	
 	i = 0;
 	for (let meleeTrait of _data.melee_traits) {
@@ -702,19 +710,7 @@ function initData() {
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);	
 	
-	loadTraits();
-	
-	if (window.location.hash) {
-		let hash = window.location.hash.substring(1);
-		
-		if (hash == "buildBrowser") {
-			loadBuildBrowser();
-			return;
-		}
-		
-		loadBuild();
-	}
-	
+	loadTraits();	
 }
 
 function loadBuildBrowser() {

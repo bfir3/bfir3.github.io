@@ -828,6 +828,9 @@ select.loadoutSelection {
 .mainGrid.iconLayout.locked.editable .editBuildButton {
 	display: grid;
 }
+.mainGrid.iconLayout.buildCollection.locked.editable .cloneBuildSetButton {
+	display: grid;
+}
 a.homeLink {
     text-decoration: none;
     color: #c7c7c7;
@@ -947,7 +950,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-.editBuildButton, .cloneBuildButton {
+.editBuildButton, .cloneBuildButton, .cloneBuildSetButton {
     cursor: pointer !important;
 	display: none;
 }
@@ -1041,4 +1044,8 @@ tbody>tr:hover {
     left: -4px;
     transform: rotate(-90deg);
     
+}
+
+input.relatedVideo {
+    margin-left: -1px;
 }
