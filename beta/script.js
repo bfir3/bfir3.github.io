@@ -745,16 +745,16 @@ function initFirestore() {
 		queryRef.docs.some((doc) => {
 			promises.push(buildList.push(doc.data()));
 		});
-	});
 	
-	Promise.all(promises).then((x) => { 	
-		$(".buildBrowserTable").DataTable({
-			ajax: buildList,
-			columns: [
-				{ "data": "name" },
-				{ "data": "author" },
-				{ "data": "pageViews" },
-			]
+		Promise.all(promises).then((x) => { 	
+			$(".buildBrowserTable").DataTable({
+				ajax: buildList,
+				columns: [
+					{ "data": "name" },
+					{ "data": "author" },
+					{ "data": "pageViews" },
+				]
+			});
 		});
 	});
 }
