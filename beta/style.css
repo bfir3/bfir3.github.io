@@ -999,7 +999,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     max-width: 300px;
     overflow: hidden;
 }
-}
+
 tbody>tr:hover {
     background: #00BCD4 !important;
 }
@@ -1009,6 +1009,7 @@ tbody>tr:hover {
     border-image: url('images/border.png') 4 4 stretch!important;
     border: 4px solid;
     border-bottom: 4px solid !important;
+	position: relative;
 }
 .redBorder::before, .redBorder::after,
 .redBorder>*:last-child::before, .redBorder>*:last-child::after {
