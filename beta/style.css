@@ -958,10 +958,6 @@ input[type="submit"] {
 .flex {
 	display: flex;
 }
-
-.buildBrowserSection {
-	display: none;
-}
 .buildBrowserSection.grid {
     max-width: 750px;
     margin: 0 auto;
