@@ -1120,3 +1120,14 @@ span.label {
     padding-bottom: 0;
     margin-bottom: 0;
 }
+
+@media (max-width: 800px) {
+    #buildBrowserTable td:nth-child(2), #buildBrowserTable td:nth-child(5),    
+    #buildBrowserTable th:nth-child(2), #buildBrowserTable th:nth-child(5),
+    .dataTables_length {
+        display: none;
+    }
+    .dataTables_filter input {
+        width: 70% !important;
+    }
+}
