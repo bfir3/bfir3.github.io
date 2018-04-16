@@ -141,13 +141,14 @@ function updatePageViews(buildSetId, buildId) {
 	let buildCookie = localStorage.getItem(`${buildSetId}-${buildId}`);
 	
 	if (!buildCookie || isViewCookieExpired(buildCookie)) {
-		db.collection("buildTable").doc(buildId).get().then((doc) => {
+		let docRef = db.collection("buildTable").doc(buildId);
+		docRef.get().then((doc) => {
 			if (!doc.data()) {
 				return;
 			}
 			let views = doc.data().pageViews ? doc.data().pageViews++ : 1;
 				
-			doc.set({
+			docRef.set({
 				pageViews: views
 			}, { merge: true }).then(function (ref) {
 				// successfully added data
