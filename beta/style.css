@@ -797,7 +797,7 @@ select.loadoutSelection {
     width: auto !important;
 }
 
-.mainGrid.locked input, .mainGrid.locked .heroSection>div, .mainGrid.locked .classSection>div, .mainGrid.locked select:not(.loadoutSelection), .mainGrid.locked textarea, .mainGrid.locked .button, .mainGrid.locked .talentSection>div>div  {
+.mainGrid.locked input, .mainGrid.locked .heroSection>div, .mainGrid.locked .classSection>div, .mainGrid.locked select:not(.loadoutSelection), .mainGrid.locked .button, .mainGrid.locked .talentSection>div>div  {
 	pointer-events:none;
 }
 
@@ -1048,4 +1048,11 @@ tbody>tr:hover {
 
 input.relatedVideo {
     margin-left: -1px;
+}
+.mainGrid.iconLayout.locked:not(.buildCollection) .loadoutSelection {
+    display: none;
+}
+
+.mainGrid.iconLayout.locked:not(.buildCollection) .buildName {
+    grid-column: 1 / span 3;
 }

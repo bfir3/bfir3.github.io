@@ -119,6 +119,7 @@ function cloneBuild() {
 		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
 		loadLoadouts(true);
 		$(".mainGrid").removeClass('locked');
+		$(".buildDescription")[0].disabled = false;
 	});
 }
 
@@ -205,6 +206,7 @@ function loadBuild() {
 				$(".mainGrid").addClass("editable");
 			}
 			
+			$(".authorLabel").val(`Created By: ${doc.data().author}`);
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
@@ -311,14 +313,6 @@ function loadSerializedUrl(hash) {
 	loadTraits();
 	loadLoadouts();
 	loadHeroSummary();
-		
-	/*
-	loadProperties("melee", _data.melee_properties);	
-	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
-	loadProperties("necklace", _data.necklace_properties);
-	loadProperties("charm", _data.charm_properties);
-	loadProperties("trinket", _data.trinket_properties);	
-	*/
 }
 
 function loadHeroSummary() {
@@ -785,10 +779,10 @@ function initFirestore() {
 				data: buildList,
 				columns: [
 					{ "data": "name" , "title": "Name" },
-					{ "data": "heroName" , "title": "Hero", "width": "60px", "className": "text-center" },
-					{ "data": "careerName" , "title": "Career", "width": "100px", "className": "text-center" },
-					{ "data": "author", "title": "Author", "width": "100px", "className": "text-center" },
-					{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
+					{ "data": "heroName" , "title": "Hero", "width": "60px" },
+					{ "data": "careerName" , "title": "Career", "width": "100px" },
+					{ "data": "author", "title": "Author", "width": "100px" },
+					{ "data": "pageViews", "title": "Views", "width": "40px" }
 				]
 			});
 			
@@ -1013,6 +1007,7 @@ $(function() {
 
 	$(".editBuildButton").click((e) => {
 		$(".mainGrid").removeClass("locked");
+		$(".buildDescription")[0].disabled = false;
 	});
 	
 	
@@ -1038,5 +1033,6 @@ function getCurrentUser() {
 $(document).ready(() => {
 	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
+		$(".buildDescription")[0].disabled = true;
 	}
 });

@@ -14,7 +14,7 @@
 			"modifiers": [
 				{
 				  "name":"Attack Speed",
-				  "value":"10%",
+				  "value":"0.10",
 				  "duration":"6",
 				  "condition":"Hit 3 enemies in one swing"
 				}
@@ -36,7 +36,7 @@
 			"modifiers": [
 				{
 				  "name":"Critical Chance",
-				  "value":"5%"
+				  "value":"0.05"
 				}
 			]
           }
@@ -44,7 +44,8 @@
         "skill":{
           "name":"Morale Boost",
           "description":"Markus grants nearby party members a boost of temporary health and staggers nearby enemies.",
-		  "cooldown":"180"
+		  "cooldown":"180",
+		  "radius": ""
         },
         "talents":[
           [
