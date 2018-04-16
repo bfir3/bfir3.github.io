@@ -767,6 +767,7 @@ input.relatedVideo::after {
 .buildSelectionContainer {
     display: grid;
     grid-template-columns: auto minmax(80px, 200px) 122px;
+    margin-top: -4px;
 }
 
 .newLoadoutButton {
@@ -1168,7 +1169,7 @@ table#myBuildsTable {
     margin-left: 0 !important;
 }
 .buildSummaryBar {
-    margin-bottom: -4px !important;
+    /* margin-bottom: -4px !important; */
     border: 1px solid white;
     border-bottom: none;
     margin-right: 1px;
