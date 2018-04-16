@@ -220,6 +220,7 @@ function loadBuild() {
 			}
 			loadSerializedUrl(doc.data().hash);
 			$(".spinner").hide();
+			$(".mainGrid").show();
 		});
 		return;
 	}
@@ -720,6 +721,7 @@ function initData() {
 	
 	loadTraits();
 	$(".spinner").hide();	
+	$(".mainGrid").show();
 }
 
 function loadBuildBrowser() {
@@ -793,6 +795,7 @@ function initFirestore() {
 			});
 			
 			$(".spinner").hide();
+			$(".buildBrowserSection").show();
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();

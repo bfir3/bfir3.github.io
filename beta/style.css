@@ -1065,6 +1065,10 @@ span.label {
     padding: 10px 0;
 }
 
+.mainGrid.loading {
+	display: none;
+}
+
 .spinner {
   margin: 0 auto;
   width: 70px;
