@@ -115,11 +115,6 @@ input[type=range]:focus::-ms-fill-upper {
 body {
     background-color: #0e0c0a;
 }
-
-.mainGrid {
-    padding: 5px;
-    //border: 3px solid #a66f42;
-}
 .weaponSection, .gearSection { 
     grid-column-gap: 15px; 
 }
@@ -986,7 +981,8 @@ div.dataTables_length {
     margin-bottom: 10px;
 }
 .navBar.flex {
-    margin-bottom: 10px;
+    border-bottom: 1px solid #444444;
+    border-top: 1px solid #444444;
 }
 
 table.dataTable tbody th, table.dataTable tbody td {
