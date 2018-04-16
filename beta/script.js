@@ -241,9 +241,11 @@ function loadBuild() {
 			
 			if (doc.data().author && doc.data().author.length > 0) {
 				$(".authorLabel").html(`Created By: ${doc.data().author}`);
+				$(".buildSummaryBar").removeClass('hide');
 			}
 			else {
 				$(".authorLabel").html('');
+				$(".buildSummaryBar").addClass('hide');
 			}
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
