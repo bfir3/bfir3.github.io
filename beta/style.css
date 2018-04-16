@@ -1171,3 +1171,9 @@ table#myBuildsTable {
 .dataTables_wrapper .dataTables_filter input {
     margin-left: 0 !important;
 }
+.buildSummaryBar {
+    margin-bottom: -4px !important;
+    border: 1px solid white;
+    border-bottom: none;
+    margin-right: 1px;
+}
