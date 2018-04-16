@@ -743,7 +743,9 @@ function initFirestore() {
 		console.log(queryRef.size);
 		let i = 0;
 		queryRef.docs.some((doc) => {
-			promises.push(buildList.push(doc.data()));
+			let build = doc.data();
+			build.id = doc.id;
+			promises.push(buildList.push(build));
 		});
 	
 		Promise.all(promises).then((x) => { 	
