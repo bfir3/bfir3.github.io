@@ -982,8 +982,7 @@ tbody>tr:nth-child(odd) {
 .dataTables_wrapper .dataTables_paginate .paginate_button, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
     color: #949494 !important;
 }
-
-div#buildBrowserTable_length {
+div.dataTables_length {
     margin-bottom: 10px;
 }
 .navBar.flex {
