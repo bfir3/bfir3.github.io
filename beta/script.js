@@ -747,18 +747,19 @@ function initFirestore() {
 		});
 	
 		Promise.all(promises).then((x) => { 	
-			$("#buildBrowserTable").DataTable({
+			var table = $("#buildBrowserTable").DataTable({
 				data: buildList,
 				columns: [
-					{ "data": "name" },
-					{ "data": "author" },
-					{ "data": "pageViews" },
-					{ "data": "buildSetId" },
-					{ "data": "description" },
-					{ "data": "hash" },
-					{ "data": "videoLink" }
+					{ "data": "name" , "title": "Name" },
+					{ "data": "author", "title": "Author" },
+					{ "data": "pageViews", "title": "Views" }
 				]
 			});
+			
+			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
+				var data = table.row($(this)).data();
+				alert( data[0] + " " + data[1] );
+			} );
 		});
 	});
 }
