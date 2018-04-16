@@ -953,3 +953,23 @@ input[type="submit"] {
 .buildBrowserSection {
 	display: none;
 }
+.buildBrowserSection.grid {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+table#buildBrowserTable {
+    width: 100% !important;
+}
+
+thead {
+    background: #313131;
+    color: #c7c7c7;
+}
+
+tbody>tr:nth-child(even) {
+    background-color: #b3b3b3 !important;
+}
+tbody>tr:nth-child(odd) {
+    background-color: #d0d0d0 !important;
+}
