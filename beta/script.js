@@ -749,7 +749,7 @@ function initFirestore() {
 		queryRef.docs.some((doc) => {
 			let build = doc.data();
 			build.id = doc.id;
-			build.pageViews = !doc.pageViews ? 0 : doc.pageViews;
+			build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
 			promises.push(buildList.push(build));
 		});
 	
