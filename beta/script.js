@@ -825,13 +825,13 @@ function initFirestore() {
 					{ "data": "pageViews", "title": "Views", "width": "40px" }
 				],			
 				columnDefs: [ {
-					targets: [ 2 ],
-					orderData: [ 2, 3 ]
+					targets: [ 1 ],
+					orderData: [ 1, 2 ]
 				}, {
-					targets: [ 3 ],
-					orderData: [ 3, 2 ]
+					targets: [ 2 ],
+					orderData: [ 2, 1 ]
 				} ],
-				"order": [[ 2, "desc" ]]
+				"order": [[ 1, "desc" ]]
 			});
 			
 			$(".spinner").hide();
