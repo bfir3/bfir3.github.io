@@ -138,21 +138,21 @@ function cloneBuildSet() {
 			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 			
 			promises.push(docRef.set({
-					buildSetId:clonedBuildSetId,
-					author: author,
-					authorEmail: authorEmail,
-					name: buildName,
-					description: buildDescription,
-					hash: build.data().hash,
-					videoLink: build.data().videoLink
-				}, { merge: true }).then(function (ref) {
-					console.log("build set cloned successfully");
-					window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
-					$(".mainGrid").removeClass('locked');
-					$(".buildDescription")[0].disabled = false;
-				});
-			);
+				buildSetId:clonedBuildSetId,
+				author: author,
+				authorEmail: authorEmail,
+				name: buildName,
+				description: buildDescription,
+				hash: build.data().hash,
+				videoLink: build.data().videoLink
+			}, { merge: true }).then(function (ref) {
+				console.log("build set cloned successfully");
+				window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+				$(".mainGrid").removeClass('locked');
+				$(".buildDescription")[0].disabled = false;
+			}));
 		});
+		
 		Promise.all(promises).then(() => {
 			loadLoadouts(true);
 		});
