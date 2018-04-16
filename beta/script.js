@@ -36,9 +36,9 @@ function loadLoadouts() {
 	if ($(".loadoutSelection")[0].options.length > 0) {
 		return;
 	}
-	db.collection(DB_NAME).doc(getBuildSetId()).collection("builds").get().then((queryRef) => {
+	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
 		queryRef.forEach((doc) => {
-			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));	
+			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));
 		});
 		if (window.location.hash.split('-')[1] && window.location.hash.split('-')[1].length > 0) {
 			$(".loadoutSelection")[0].value = window.location.hash.split('-')[1];	
@@ -70,27 +70,17 @@ function getBuildId() {
 	
 	buildId = getUniqueIdentifier();
 	window.location.hash = getBuildSetId() + '-' + buildId;
-	$(".footer>input").val('http://verminbuilds.com/#' + getBuildSetId() + "-" + buildId);
 	
 	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
 	
 	$(".loadoutSelection").append(new Option(buildName, buildId));
 	return buildId;
-	
-	/*
-	if (!buildId || buildId.length == 0) {
-		buildId = getUniqueIdentifier();
-		window.location.hash = buildId;
-		$(".footer>input").val('http://verminbuilds.com/#' + buildId);
-	}
-	return buildId;*/
 }
 
 function getBuildSetId() {	
 	if (!buildSetId || buildSetId.length == 0) {
 		buildSetId = getUniqueIdentifier();
 		window.location.hash = buildSetId;
-		$(".footer>input").val('http://verminbuilds.com/#' + buildSetId);
 	}
 	return buildSetId;
 }
@@ -101,26 +91,21 @@ function cloneBuild() {
 	let clonedBuildSetId = getUniqueIdentifier();
 	let clonedBuildId = getUniqueIdentifier();
 	
-	let docRef = db.collection(DB_NAME).doc(clonedBuildSetId);
+	let docRef = db.collection("buildTable").doc(clonedBuildId);
 	
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
-		buildSetName: "",
-		buildSetDescription:"",
-		author: authorEmail
-	});
-	
-	let buildRef = docRef.collection("builds").doc(clonedBuildId)
-	
-	buildRef.set({
+		buildSetId:clonedBuildSetId,
+		author: authorEmail,
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
 		videoLink: $(".relatedVideo").val()
 	}, { merge: true }).then(function (ref) {
+		console.log("build cloned successfully");
 		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
-		$(".footer>input").val(`http://verminbuilds.com/#${clonedBuildSetId}-${clonedBuildId}`);
+		$(".mainGrid").removeClass('locked');
 	});
 }
 
@@ -131,19 +116,13 @@ function updateBuild() {
 	let buildName = $(".buildName").val();	
 	let buildDescription = $(".buildDescription").val();	
 	
-	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
+	let docRef = db.collection("buildTable").doc(getBuildId());
 	
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
-		buildSetName: "",
-		buildSetDescription:"",
-		author: authorEmail
-	});
-	
-	let buildRef = docRef.collection("builds").doc(getBuildId())
-	
-	docRef.collection("builds").doc(getBuildId()).set({
+		buildSetId:getBuildSetId(),
+		author: authorEmail,
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
@@ -162,13 +141,14 @@ function updatePageViews(buildSetId, buildId) {
 	let buildCookie = localStorage.getItem(`${buildSetId}-${buildId}`);
 	
 	if (!buildCookie || isViewCookieExpired(buildCookie)) {
-		db.collection(DB_NAME).doc(buildSetId).collection("builds").doc(buildId).get().then((doc) => {
+		db.collection("buildTable").doc(buildId).get().then((doc) => {
 			let views = doc.data().pageViews ? doc.data().pageViews++ : 1;
 				
-			db.collection(DB_NAME).doc(buildSetId).collection("builds").doc(buildId).set({
+			doc.set({
 				pageViews: views
 			}, { merge: true }).then(function (ref) {
 				// successfully added data
+				console.log("page view data added");
 			});
 				
 		});
@@ -193,17 +173,15 @@ function loadBuild() {
 		let buildChildId = hash.split('-')[1];
 		
 		updatePageViews(buildSetId, buildChildId);
-		let buildSetRef = db.collection(DB_NAME).doc(hash.split('-')[0]);
+		let buildRef = db.collection("buildTable").doc(buildChildId);
 		
-		buildSetRef.get().then((doc) => {
+		buildRef.get().then((doc) => {
 			let author = doc.data().author;
 			
 			if (getCurrentUser() && getCurrentUser().email == author) {
 				$(".mainGrid").addClass("editable");
 			}
-		});
-		
-		buildSetRef.collection("builds").doc(buildChildId).get().then((doc) => {
+			
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
@@ -216,15 +194,26 @@ function loadBuild() {
 	}
 		
 	buildSetId = hash;
-	db.collection(DB_NAME).doc(hash).collection("builds").get().then((queryRef) => {
+	db.collection("buildTable").where("buildSetId", "==", buildSetId).get().then((queryRef) => {
 		let buildList = [];
 		queryRef.forEach((doc) => {
 			buildList.push(doc);
 		});
 		
-		$(".buildName").val(buildList[0].data().name);
-		$(".buildDescription").val(buildList[0].data().description);
-		loadSerializedUrl(buildList[0].data().hash);
+		let doc = buildList[0];
+		let author = doc.data().author;
+		
+		if (getCurrentUser() && getCurrentUser().email == author) {
+			$(".mainGrid").addClass("editable");
+		}
+		
+		$(".buildName").val(doc.data().name);
+		$(".buildDescription").val(doc.data().description);
+		$(".relatedVideo").val(doc.data().videoLink);
+		if (doc.data().videoLink.length > 0) {
+			loadVideoPlayer(doc.data().videoLink);
+		}
+		loadSerializedUrl(doc.data().hash);
 	});
 }
 
