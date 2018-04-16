@@ -776,6 +776,60 @@ function loadVideoPlayer(videoAddress) {
 	}
 }
 
+function loadMyBuilds() {
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+	let buildList = [];
+	
+	if (!authorEmail || authorEmail.length == 0) {
+		return;
+	}
+	
+	db.collection("buildTable").where("authorEmail", "==", authorEmail).get().then((queryRef) => {
+		let i = 0;
+		queryRef.docs.some((doc) => {
+			let build = doc.data();
+			if (build.name && build.name.length > 0) {					
+				build.id = doc.id;
+				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+				build.heroName = getHero(doc.data().hash).name.split(' ')[0];
+				build.careerName = getCareer(doc.data().hash).name;
+				promises.push(buildList.push(build));
+			}
+		});
+	
+		Promise.all(promises).then((x) => { 	
+			var table = $("#myBuildsTable").DataTable({
+				data: buildList,
+				columns: [
+					{ "data": "name" , "title": "Name" },
+					{ "data": "heroName" , "title": "Hero", "width": "60px" },
+					{ "data": "careerName" , "title": "Career", "width": "100px" },
+					{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
+				],			
+				columnDefs: [ {
+					targets: [ 1 ],
+					orderData: [ 1, 2 ]
+				}, {
+					targets: [ 2 ],
+					orderData: [ 2, 1 ]
+				} ],
+				"order": [[ 1, "asc" ]]
+			});
+			
+			$(".spinner").hide();
+			$(".myBuildsSection").removeClass('loading');
+			
+			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
+				var data = table.row($(this)).data();
+				window.location.href = `/beta/#${data.buildSetId}-${data.id}`;
+				window.location.reload();
+			} );
+			$('#myBuildsTable').DataTable().columns.adjust().draw();
+		});
+	});
+}
+
 function initFirestore() {
 	firebase.initializeApp({
 	  apiKey: "AIzaSyDtUozP43e9ygkqV0HpKYRFznePouI2zg0",
@@ -791,6 +845,7 @@ function initFirestore() {
 		let username = user.displayName ? user.displayName + " " : "";
 		$(".mainGrid").addClass("loggedIn");
 		$(".userButton").html(`${username}logout`);
+		$(".myBuildsButton").show();
 		currentUser = user;
 	  } else {
 		// No user is signed in.
@@ -1077,12 +1132,21 @@ $(function() {
 	
 	$(".browseButton").click((e) => {
 		$(".mainGrid").hide();
+		$(".myBuildsSection").hide();
 		$(".buildBrowserSection").show();
 		window.location.hash = "buildBrowser";
 	});
 	
 	$(".sectionTitle").click((e) => { 
 		$(e.currentTarget).next().toggle(); 
+	});
+	
+	$(".myBuildsButton").click((e) => { 
+		$(".mainGrid").hide();
+		$(".myBuildsSection").show();
+		$(".buildBrowserSection").hide();
+		loadMyBuilds();
+		window.location.hash = "myBuilds";
 	});
 });
 

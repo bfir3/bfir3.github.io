@@ -1156,3 +1156,7 @@ body {
 .buildCountLabel {
     margin-left: 10px;
 }
+.myBuildsButton {
+	display: none;
+	cursor: pointer;
+}
