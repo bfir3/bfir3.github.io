@@ -871,6 +871,9 @@ function initFirestore() {
 		
 		currentUser = user;
 	  } else {
+		$(".mainGrid").removeClass("loggedIn");
+		$(".userButton").html("login/register");
+		$(".myBuildsButton").hide();
 		// No user is signed in.
 	  }
 	});
