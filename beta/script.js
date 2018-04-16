@@ -702,7 +702,7 @@ function initData() {
 		let hash = window.location.hash.substring(1);
 		
 		if (hash == "buildBrowser") {
-			loadBuildBrowser();
+			$(".mainGrid").hide();
 			return;
 		}
 		
@@ -722,11 +722,6 @@ function initData() {
 	loadTraits();
 	$(".spinner").hide();	
 	$(".mainGrid").removeClass('loading');
-}
-
-function loadBuildBrowser() {
-	$(".mainGrid").hide();
-	$(".buildBrowserSection").show();
 }
 
 function loadVideoPlayer(videoAddress) {	
