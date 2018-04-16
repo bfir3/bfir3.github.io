@@ -747,12 +747,16 @@ function initFirestore() {
 		});
 	
 		Promise.all(promises).then((x) => { 	
-			$(".buildBrowserTable").DataTable({
+			$("#buildBrowserTable").DataTable({
 				ajax: buildList,
 				columns: [
 					{ "data": "name" },
 					{ "data": "author" },
 					{ "data": "pageViews" },
+					{ "data": "buildSetId" },
+					{ "data": "description" },
+					{ "data": "hash" },
+					{ "data": "videoLink" }
 				]
 			});
 		});
