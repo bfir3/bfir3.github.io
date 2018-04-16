@@ -219,6 +219,7 @@ function loadBuild() {
 				loadVideoPlayer(doc.data().videoLink);
 			}
 			loadSerializedUrl(doc.data().hash);
+			$(".spinner").hide();
 		});
 		return;
 	}
@@ -718,7 +719,7 @@ function initData() {
 	loadProperties("trinket", _data.trinket_properties);	
 	
 	loadTraits();
-	
+	$(".spinner").hide();	
 }
 
 function loadBuildBrowser() {
@@ -790,6 +791,8 @@ function initFirestore() {
 					{ "data": "pageViews", "title": "Views", "width": "40px" }
 				]
 			});
+			
+			$(".spinner").hide();
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
