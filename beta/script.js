@@ -32,10 +32,12 @@ function updateLoadoutSelection() {
 	$(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].text = buildName;
 }
 
-function loadLoadouts() {
-	if ($(".loadoutSelection")[0].options.length > 0) {
+function loadLoadouts(force) {
+	if ($(".loadoutSelection")[0].options.length > 0 && !force) {
 		return;
 	}
+	
+	$(".loadoutSelection").empty()
 	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
 		queryRef.forEach((doc) => {
 			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));
@@ -63,7 +65,9 @@ function clearSelections() {
 	loadProperties("trinket", _data.trinket_properties);
 }
 
-function getBuildId() {
+function getBuildId() {	
+	return window.location.hash.substring(1).split('-')[1];
+
 	if ($(".loadoutSelection")[0].options.length > 0) {
 		return $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 	}
@@ -78,6 +82,8 @@ function getBuildId() {
 }
 
 function getBuildSetId() {	
+	return window.location.hash.substring(1).split('-')[0];
+	
 	if (!buildSetId || buildSetId.length == 0) {
 		buildSetId = getUniqueIdentifier();
 		window.location.hash = buildSetId;
@@ -107,6 +113,7 @@ function cloneBuild() {
 	}, { merge: true }).then(function (ref) {
 		console.log("build cloned successfully");
 		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+		loadLoadouts(true);
 		$(".mainGrid").removeClass('locked');
 	});
 }
@@ -167,7 +174,6 @@ function updatePageViews(buildSetId, buildId) {
 function loadBuild() {
 	let hash = window.location.hash.substring(1);
 	if (!hash || hash.length == 0) {	
-		$(".footer>input").val(getShareableUrl());
 		return;
 	}
 	
