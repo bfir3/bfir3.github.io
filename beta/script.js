@@ -748,7 +748,7 @@ function initFirestore() {
 	
 		Promise.all(promises).then((x) => { 	
 			$("#buildBrowserTable").DataTable({
-				ajax: buildList,
+				data: buildList,
 				columns: [
 					{ "data": "name" },
 					{ "data": "author" },
