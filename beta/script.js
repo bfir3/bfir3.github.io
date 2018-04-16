@@ -787,7 +787,7 @@ function loadMyBuilds() {
 	$(".myBuildsSection").hide();
 	$(".buildBrowserSection").hide();
 	
-	if ($.fn.DataTable.isDataTable('#myBuildsTable') {
+	if ($.fn.DataTable.isDataTable('#myBuildsTable')) {
 		$(".myBuildsSection").show();
 		return;
 	}
