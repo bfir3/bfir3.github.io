@@ -283,7 +283,7 @@ input {
     display: grid;
     font-size: 14px;
     grid-template-columns: repeat(3, calc(33.33% - 10px));
-    grid-column-gap: 10px;
+    grid-column-gap: 15px;
 }
 
 .talentSection>div>div:nth-child(1) {
@@ -471,11 +471,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .heroClassContent {
-    margin-bottom: 5px !important;
+    /* margin-bottom: 5px !important; */
 }
 
 .talentSection {
     text-align: center;
+    margin: 5px 1px 10px 3px;
 }
 
 .sectionTitle {
@@ -1113,4 +1114,9 @@ span.label {
 
 .weaponAndGearContainer {
     margin-top: 10px;
+}
+.talentSection>div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
