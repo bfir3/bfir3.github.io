@@ -760,6 +760,9 @@ function initFirestore() {
 		let i = 0;
 		queryRef.docs.some((doc) => {
 			let build = doc.data();
+			if (!build.name || build.name.length == 0) {
+				continue;
+			}
 			build.id = doc.id;
 			build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
 			promises.push(buildList.push(build));
