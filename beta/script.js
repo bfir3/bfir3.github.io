@@ -822,7 +822,7 @@ function initFirestore() {
 					{ "data": "heroName" , "title": "Hero", "width": "60px" },
 					{ "data": "careerName" , "title": "Career", "width": "100px" },
 					{ "data": "author", "title": "Author", "width": "100px" },
-					{ "data": "pageViews", "title": "Views", "width": "40px" }
+					{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
 				],			
 				columnDefs: [ {
 					targets: [ 1 ],
@@ -831,7 +831,7 @@ function initFirestore() {
 					targets: [ 2 ],
 					orderData: [ 2, 1 ]
 				} ],
-				"order": [[ 1, "desc" ]]
+				"order": [[ 1, "asc" ]]
 			});
 			
 			$(".spinner").hide();
