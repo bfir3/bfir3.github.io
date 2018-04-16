@@ -93,11 +93,13 @@ function cloneBuild() {
 	
 	let docRef = db.collection("buildTable").doc(clonedBuildId);
 	
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
 		buildSetId:clonedBuildSetId,
-		author: authorEmail,
+		author: author,
+		authorEmail: authorEmail,
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
@@ -118,11 +120,13 @@ function updateBuild() {
 	
 	let docRef = db.collection("buildTable").doc(getBuildId());
 	
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
 	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
 		buildSetId:getBuildSetId(),
-		author: authorEmail,
+		author: author,
+		authorEmail: authorEmail,
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
@@ -760,7 +764,7 @@ function initFirestore() {
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
-				alert( data[0] + " " + data[1] );
+				window.location.href = `/#${data.buildSetId}-${data.id}`;
 			} );
 		});
 	});
