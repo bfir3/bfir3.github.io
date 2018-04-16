@@ -801,7 +801,7 @@ function initFirestore() {
 	let promises = [];
 	
 	db.collection("buildTable").get().then((queryRef) => {
-		console.log(queryRef.size);
+		$(".buildCountLabel").html(`${queryRef.size} Builds Created`);
 		let i = 0;
 		queryRef.docs.some((doc) => {
 			let build = doc.data();
