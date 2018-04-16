@@ -1000,7 +1000,44 @@ table.dataTable tbody th, table.dataTable tbody td {
     overflow: hidden;
 }
 }
-
 tbody>tr:hover {
     background: #00BCD4 !important;
+}
+
+.redBorder {
+    border-width: 4px;
+    border-image: url('images/border.png') 4 4 stretch!important;
+    border: 4px solid;
+    border-bottom: 4px solid !important;
+}
+.redBorder::before, .redBorder::after,
+.redBorder>*:last-child::before, .redBorder>*:last-child::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-image: url('images/border_corner.png');
+    background-repeat: no-repeat;
+    width: 27px;
+    height: 27px;    
+}
+.redBorder::before {
+    top: -4px;
+    left: -4px;
+}
+.redBorder::after {
+    top: -4px;
+    right: -4px;
+    transform: rotate(90deg);
+}
+.redBorder>*:last-child::before {
+    bottom: -4px;
+    right: -4px;
+    transform: rotate(180deg);
+
+} 
+.redBorder>*:last-child::after {
+    bottom: -4px;
+    left: -4px;
+    transform: rotate(-90deg);
+    
 }
