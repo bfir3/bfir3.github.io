@@ -221,6 +221,7 @@ function loadBuild() {
 			loadSerializedUrl(doc.data().hash);
 			$(".spinner").hide();
 			$(".mainGrid").removeClass('loading');
+			$(".mainGrid").show();
 			$(".buildBrowserSection").hide();
 		});
 		return;
@@ -723,6 +724,7 @@ function initData() {
 	loadTraits();
 	$(".spinner").hide();	
 	$(".mainGrid").removeClass('loading');
+	$(".mainGrid").show();
 	$(".buildBrowserSection").hide();
 }
 
@@ -792,8 +794,9 @@ function initFirestore() {
 			});
 			
 			$(".spinner").hide();
-			$(".mainGrid").hide();
 			$(".buildBrowserSection").removeClass('loading');
+			$(".mainGrid").hide();
+			$(".buildBrowserSection").show();
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
