@@ -945,3 +945,7 @@ input[type="submit"] {
     cursor: pointer !important;
 	display: none;
 }
+
+.flex {
+	display: flex;
+}
