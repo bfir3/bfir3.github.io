@@ -133,7 +133,7 @@ function updateBuild() {
 }
 
 function isViewCookieExpired(buildCookie) {
-	return (new Date() - new Date(buildCookie)) > 60; //(60 * 60 * 1000);
+	return (new Date() - new Date(buildCookie)) > (60 * 60 * 1000);
 }
 
 function updatePageViews(buildSetId, buildId) {
