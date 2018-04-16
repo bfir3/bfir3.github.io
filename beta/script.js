@@ -699,9 +699,21 @@ function initData() {
 	loadTraits();
 	
 	if (window.location.hash) {
+		let hash = window.location.hash.substring(1);
+		
+		if (hash == "buildBrowser") {
+			loadBuildBrowser();
+			return;
+		}
+		
 		loadBuild();
 	}
 	
+}
+
+function loadBuildBrowser() {
+	$(".mainGrid").hide();
+	$(".buildBrowserSection").show();
 }
 
 function loadVideoPlayer(videoAddress) {	
