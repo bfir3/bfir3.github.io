@@ -142,6 +142,9 @@ function updatePageViews(buildSetId, buildId) {
 	
 	if (!buildCookie || isViewCookieExpired(buildCookie)) {
 		db.collection("buildTable").doc(buildId).get().then((doc) => {
+			if (!doc.data()) {
+				return;
+			}
 			let views = doc.data().pageViews ? doc.data().pageViews++ : 1;
 				
 			doc.set({
@@ -176,6 +179,11 @@ function loadBuild() {
 		let buildRef = db.collection("buildTable").doc(buildChildId);
 		
 		buildRef.get().then((doc) => {
+			if (!doc.data()) {
+				console.log("Unable to load build");
+				return;
+			}
+			
 			let author = doc.data().author;
 			
 			if (getCurrentUser() && getCurrentUser().email == author) {

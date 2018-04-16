@@ -1803,7 +1803,7 @@
 			"heat":"yes"
 		},
 		{
-			"name":"Conflaguration Staff",
+			"name":"Conflagration Staff",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"],
 			"heat":"yes"
 		},
