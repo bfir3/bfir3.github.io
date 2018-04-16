@@ -576,20 +576,16 @@ function getCareerIndex() {
 
 function initData() {
 	initFirestore();
-	
-	if (window.location.hash) {
-		let hash = window.location.hash.substring(1);
-		
-		if (hash == "buildBrowser") {
-			loadBuildBrowser();
-			return;
-		}
-		
-		loadBuild();
-		return;
+	let i = 0;
+	/*
+	for (let meleeWeapon of _data.melee_weapons) {
+		$(".meleeSelection").append(new Option(meleeWeapon.name, i++));
 	}
 	
-	let i = 0;
+	i = 0;
+	for (let rangeWeapon of _data.range_weapons) {
+		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
+	*/
 	
 	i = 0;
 	for (let meleeTrait of _data.melee_traits) {
@@ -701,6 +697,18 @@ function initData() {
 	$(".trinketQualitySelection").append(new Option("Green", 3));
 	$(".trinketQualitySelection").append(new Option("White", 4));
 	
+	if (window.location.hash) {
+		let hash = window.location.hash.substring(1);
+		
+		if (hash == "buildBrowser") {
+			loadBuildBrowser();
+			return;
+		}
+		
+		loadBuild();
+		return;
+	}
+	
 	loadHero(0,0);
 	loadHeroSummary(0, 0);
 		
@@ -710,7 +718,8 @@ function initData() {
 	loadProperties("charm", _data.charm_properties);
 	loadProperties("trinket", _data.trinket_properties);	
 	
-	loadTraits();	
+	loadTraits();
+	
 }
 
 function loadBuildBrowser() {
