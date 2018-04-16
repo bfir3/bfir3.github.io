@@ -1160,3 +1160,15 @@ body {
 	display: none;
 	cursor: pointer;
 }
+.myBuildsSection.page.grid {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+table#myBuildsTable {
+    width: 100% !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0 !important;
+}
