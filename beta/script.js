@@ -221,6 +221,7 @@ function loadBuild() {
 			loadSerializedUrl(doc.data().hash);
 			$(".spinner").hide();
 			$(".mainGrid").removeClass('loading');
+			$(".buildBrowserSection").hide();
 		});
 		return;
 	}
@@ -722,6 +723,7 @@ function initData() {
 	loadTraits();
 	$(".spinner").hide();	
 	$(".mainGrid").removeClass('loading');
+	$(".buildBrowserSection").hide();
 }
 
 function loadVideoPlayer(videoAddress) {	
@@ -790,6 +792,7 @@ function initFirestore() {
 			});
 			
 			$(".spinner").hide();
+			$(".mainGrid").hide();
 			$(".buildBrowserSection").removeClass('loading');
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
