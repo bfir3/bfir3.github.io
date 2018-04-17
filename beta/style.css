@@ -1177,3 +1177,7 @@ table#myBuildsTable {
 .hide {
 	display: none;
 }
+
+.buildBrowserSection, .myBuildsSection {
+    margin-top: 10px !important;
+}
