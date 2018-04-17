@@ -217,7 +217,7 @@ function updatePageViews(buildSetId, buildId) {
 			if (!doc.data()) {
 				return;
 			}
-			let views = !doc.data().pageViews ? 1 : doc.data().pageViews++;
+			let views = !doc.data().pageViews || doc.data().pageViews.length == 0 || doc.data().pageViews == 0 ? 1 : doc.data().pageViews++;
 				
 			docRef.set({
 				pageViews: views
