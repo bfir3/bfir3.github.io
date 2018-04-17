@@ -70,7 +70,7 @@ function clearSelections() {
 }
 
 function getBuildId() {	
-	let buildId = window.location.hash.substring(1).split('-')[1];
+	let buildId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[1] : "";
 	if (buildId.length > 0) {
 		return buildId;
 	}
@@ -92,7 +92,7 @@ function getBuildId() {
 }
 
 function getBuildSetId() {
-	let buildSetId = window.location.hash.substring(1).split('-')[0];
+	let buildSetId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[0] : "";
 	if (buildSetId.length > 0) {
 		return buildSetId;
 	}
