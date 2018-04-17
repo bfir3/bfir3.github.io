@@ -30,7 +30,7 @@ function createNewLoadout() {
 function updateLoadoutSelection() {
 	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
 	
-	if ($(".loadoutSelection")[0].selectedIndex == -1) {
+	if ($(".loadoutSelection")[0].selectedIndex == -1) {	
 		return;
 	}
 	$(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].text = buildName;
@@ -80,6 +80,10 @@ function getBuildId() {
 	}
 	buildId =  getUniqueIdentifier()
 	window.location.hash = getBuildSetId() + '-' + buildId;
+	
+	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
+	$(".loadoutSelection").append(new Option(buildName, buildId));
+	
 	return buildId;
 
 	if ($(".loadoutSelection")[0].options.length > 0) {
@@ -89,9 +93,6 @@ function getBuildId() {
 	buildId = getUniqueIdentifier();
 	window.location.hash = getBuildSetId() + '-' + buildId;
 	
-	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
-	
-	$(".loadoutSelection").append(new Option(buildName, buildId));
 	return buildId;
 }
 
