@@ -14,7 +14,7 @@
 			"modifiers": [
 				{
 				  "name":"Attack Speed",
-				  "value":"10%",
+				  "value":"0.10",
 				  "duration":"6",
 				  "condition":"Hit 3 enemies in one swing"
 				}
@@ -36,7 +36,7 @@
 			"modifiers": [
 				{
 				  "name":"Critical Chance",
-				  "value":"5%"
+				  "value":"0.05"
 				}
 			]
           }
@@ -44,7 +44,8 @@
         "skill":{
           "name":"Morale Boost",
           "description":"Markus grants nearby party members a boost of temporary health and staggers nearby enemies.",
-		  "cooldown":"180"
+		  "cooldown":"180",
+		  "radius": ""
         },
         "talents":[
           [
@@ -614,7 +615,7 @@
         "skill":{
           "name":"Leap",
           "description":"Bardin leaps forward to stun a target, and gains a burst of attack speed.",
-		  "cooldown":"30"
+		  "cooldown":"40"
         },
         "talents":[
           [
@@ -714,7 +715,7 @@
         "skill":{
           "name":"Trueshot Volley",
           "description":"Kerillian shoots a volley of arrows that seek out enemies in her path.",
-		  "cooldown":"90"
+		  "cooldown":"70"
         },
         "talents":[
           [
@@ -809,7 +810,7 @@
         "skill":{
           "name":"Dash",
           "description":"Kerillian dashes forward through enemies. Hitting enemies with this ability causes them to bleed.",
-		  "cooldown":"30"
+		  "cooldown":"20"
         },
         "talents":[
           [
@@ -1190,7 +1191,7 @@
         "skill":{
           "name":"Holy Fervor",
           "description":"Victor charges forward and gains 25% increased attack speed for 5 seconds.",
-		  "cooldown":"40"
+		  "cooldown":"60"
         },
         "talents":[
           [
@@ -1480,7 +1481,7 @@
         "skill":{
           "name":"Living Bomb",
           "description":"Sienna explodes, dealing damage to surrounding enemies and clearing her Overcharge.",
-		  "cooldown":"180"
+		  "cooldown":"120"
         },
         "talents":[
           [
@@ -1803,7 +1804,7 @@
 			"heat":"yes"
 		},
 		{
-			"name":"Conflaguration Staff",
+			"name":"Conflagration Staff",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"],
 			"heat":"yes"
 		},

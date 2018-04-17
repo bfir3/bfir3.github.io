@@ -5,6 +5,7 @@ let buildId;
 let db;
 let builds;
 let buildSetId;
+let currentUser;
 
 const DB_NAME = "verminBuildSets";
 
@@ -31,13 +32,19 @@ function updateLoadoutSelection() {
 	$(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].text = buildName;
 }
 
-function loadLoadouts() {
-	if ($(".loadoutSelection")[0].options.length > 0) {
+function loadLoadouts(force) {
+	if ($(".loadoutSelection")[0].options.length > 0 && !force) {
 		return;
 	}
-	db.collection(DB_NAME).doc(getBuildSetId()).collection("builds").get().then((queryRef) => {
+	
+	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
+		$(".loadoutSelection").empty()
+		if (queryRef.size > 1) {
+			$(".mainGrid").addClass('buildCollection');
+		}
+		
 		queryRef.forEach((doc) => {
-			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));	
+			$(".loadoutSelection").append(new Option(doc.data().name, doc.id));
 		});
 		if (window.location.hash.split('-')[1] && window.location.hash.split('-')[1].length > 0) {
 			$(".loadoutSelection")[0].value = window.location.hash.split('-')[1];	
@@ -62,40 +69,108 @@ function clearSelections() {
 	loadProperties("trinket", _data.trinket_properties);
 }
 
-function getBuildId() {
+function getBuildId() {	
+	let buildId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[1] : "";
+	if (buildId.length > 0) {
+		return buildId;
+	}
+	buildId =  getUniqueIdentifier()
+	window.location.hash = getBuildSetId() + '-' + buildId;
+	return buildId;
+
 	if ($(".loadoutSelection")[0].options.length > 0) {
 		return $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 	}
 	
 	buildId = getUniqueIdentifier();
 	window.location.hash = getBuildSetId() + '-' + buildId;
-	$(".footer>input").val('http://verminbuilds.com/#' + getBuildSetId() + "-" + buildId);
 	
 	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
 	
 	$(".loadoutSelection").append(new Option(buildName, buildId));
 	return buildId;
-	
-	/*
-	if (!buildId || buildId.length == 0) {
-		buildId = getUniqueIdentifier();
-		window.location.hash = buildId;
-		$(".footer>input").val('http://verminbuilds.com/#' + buildId);
-	}
-	return buildId;*/
 }
 
-function getBuildSetId() {	
+function getBuildSetId() {
+	let buildSetId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[0] : "";
+	if (buildSetId.length > 0) {
+		return buildSetId;
+	}
+	buildSetId = getUniqueIdentifier()
+	window.location.hash = buildSetId;
+	return buildSetId;
+	
+	return window.location.hash.substring(1).split('-')[0];
+	
 	if (!buildSetId || buildSetId.length == 0) {
 		buildSetId = getUniqueIdentifier();
 		window.location.hash = buildSetId;
-		$(".footer>input").val('http://verminbuilds.com/#' + buildSetId);
 	}
 	return buildSetId;
 }
 
-function updatePageViews() {
-	// Update view counter for current build based on cookie data/ip address
+function cloneBuild() {
+	let buildName = $(".buildName").val();	
+	let buildDescription = $(".buildDescription").val();	
+	let clonedBuildSetId = getUniqueIdentifier();
+	let clonedBuildId = getUniqueIdentifier();
+	
+	let docRef = db.collection("buildTable").doc(clonedBuildId);
+	
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+	
+	docRef.set({
+		buildSetId:clonedBuildSetId,
+		author: author,
+		authorEmail: authorEmail,
+		name: buildName,
+		description: buildDescription,
+		hash: getSerializedUrl(),
+		videoLink: $(".relatedVideo").val()
+	}, { merge: true }).then(function (ref) {
+		console.log("build cloned successfully");
+		window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+		loadLoadouts(true);
+		$(".mainGrid").removeClass('locked');
+		$(".buildDescription")[0].disabled = false;
+	});
+}
+
+function cloneBuildSet() {
+	let promises = [];
+	let clonedBuildSetId = getUniqueIdentifier();
+	db.collection("buildTable").where("buildSetId", "==", getBuildSetId()).get().then((queryRef) => {
+		queryRef.forEach((build) => {
+			let clonedBuildId = getUniqueIdentifier();		
+			
+			let docRef = db.collection("buildTable").doc(clonedBuildId);
+			
+			let buildName = build.data().name;	
+			let buildDescription = build.data().description;		
+			let author = getCurrentUser() ? getCurrentUser().displayName : "";
+			let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+			
+			promises.push(docRef.set({
+				buildSetId:clonedBuildSetId,
+				author: author,
+				authorEmail: authorEmail,
+				name: buildName,
+				description: buildDescription,
+				hash: build.data().hash,
+				videoLink: build.data().videoLink
+			}, { merge: true }).then(function (ref) {
+				console.log("build set cloned successfully");
+				window.location.hash = `${clonedBuildSetId}-${clonedBuildId}`;
+				$(".mainGrid").removeClass('locked');
+				$(".buildDescription")[0].disabled = false;
+			}));
+		});
+		
+		Promise.all(promises).then(() => {
+			loadLoadouts(true);
+		});
+	});
 }
 
 function updateBuild() {	
@@ -105,29 +180,55 @@ function updateBuild() {
 	let buildName = $(".buildName").val();	
 	let buildDescription = $(".buildDescription").val();	
 	
-	let docRef = db.collection(DB_NAME).doc(getBuildSetId());
+	let docRef = db.collection("buildTable").doc(getBuildId());
+	
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
 	
 	docRef.set({
-		buildSetName: "",
-		buildSetDescription:""		
-	});
-	
-	docRef.collection("builds").doc(getBuildId()).set({
+		buildSetId:getBuildSetId(),
+		author: author,
+		authorEmail: authorEmail,
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
-		videoLink: $(".relatedVideo").val(),
-		pageViews: "",
-		likes: ""
-	}).then(function (ref) {
+		videoLink: $(".relatedVideo").val()
+	}, { merge: true }).then(function (ref) {
 		// successfully added data
 	});
+}
+
+function isViewCookieExpired(buildCookie) {
+	return (new Date() - new Date(buildCookie)) > (60 * 60 * 1000);
+}
+
+function updatePageViews(buildSetId, buildId) {
+		
+	let buildCookie = localStorage.getItem(`${buildSetId}-${buildId}`);
+	
+	if (!buildCookie || isViewCookieExpired(buildCookie)) {
+		let docRef = db.collection("buildTable").doc(buildId);
+		docRef.get().then((doc) => {
+			if (!doc.data()) {
+				return;
+			}
+			let views = !doc.data().pageViews ? 1 : doc.data().pageViews++;
+				
+			docRef.set({
+				pageViews: views
+			}, { merge: true }).then(function (ref) {
+				// successfully added data
+				console.log("page view data added");
+			});
+				
+		});
+		localStorage.setItem(`${buildSetId}-${buildId}`, new Date());
+	}
 }
 
 function loadBuild() {
 	let hash = window.location.hash.substring(1);
 	if (!hash || hash.length == 0) {	
-		$(".footer>input").val(getShareableUrl());
 		return;
 	}
 	
@@ -138,7 +239,31 @@ function loadBuild() {
 	
 	if (hash.split('-').length == 2) {		
 		buildSetId = hash.split('-')[0];
-		db.collection(DB_NAME).doc(hash.split('-')[0]).collection("builds").doc(hash.split('-')[1]).get().then((doc) => {
+		let buildChildId = hash.split('-')[1];
+		
+		updatePageViews(buildSetId, buildChildId);
+		let buildRef = db.collection("buildTable").doc(buildChildId);
+		
+		buildRef.get().then((doc) => {
+			if (!doc.data()) {
+				console.log("Unable to load build");
+				return;
+			}
+			
+			let authorEmail = doc.data().authorEmail;
+			
+			if (getCurrentUser() && getCurrentUser().email == authorEmail) {
+				$(".mainGrid").addClass("editable");
+			}
+			
+			if (doc.data().author && doc.data().author.length > 0) {
+				$(".authorLabel").html(`Created By: ${doc.data().author}`);
+				$(".buildSummaryBar").removeClass('hide');
+			}
+			else {
+				$(".authorLabel").html('');
+				$(".buildSummaryBar").addClass('hide');
+			}
 			$(".buildName").val(doc.data().name);
 			$(".buildDescription").val(doc.data().description);
 			$(".relatedVideo").val(doc.data().videoLink);
@@ -146,20 +271,35 @@ function loadBuild() {
 				loadVideoPlayer(doc.data().videoLink);
 			}
 			loadSerializedUrl(doc.data().hash);
+			$(".spinner").hide();
+			$(".mainGrid").removeClass('loading');
+			$(".mainGrid").show();
+			$(".buildBrowserSection").hide();
 		});
 		return;
 	}
 		
 	buildSetId = hash;
-	db.collection(DB_NAME).doc(hash).collection("builds").get().then((queryRef) => {
+	db.collection("buildTable").where("buildSetId", "==", buildSetId).get().then((queryRef) => {
 		let buildList = [];
 		queryRef.forEach((doc) => {
 			buildList.push(doc);
 		});
 		
-		$(".buildName").val(buildList[0].data().name);
-		$(".buildDescription").val(buildList[0].data().description);
-		loadSerializedUrl(buildList[0].data().hash);
+		let doc = buildList[0];
+		let author = doc.data().author;
+		
+		if (getCurrentUser() && getCurrentUser().email == author) {
+			$(".mainGrid").addClass("editable");
+		}
+		
+		$(".buildName").val(doc.data().name);
+		$(".buildDescription").val(doc.data().description);
+		$(".relatedVideo").val(doc.data().videoLink);
+		if (doc.data().videoLink.length > 0) {
+			loadVideoPlayer(doc.data().videoLink);
+		}
+		loadSerializedUrl(doc.data().hash);
 	});
 }
 
@@ -234,14 +374,6 @@ function loadSerializedUrl(hash) {
 	loadTraits();
 	loadLoadouts();
 	loadHeroSummary();
-		
-	/*
-	loadProperties("melee", _data.melee_properties);	
-	heroIndex == 1 && careerIndex == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
-	loadProperties("necklace", _data.necklace_properties);
-	loadProperties("charm", _data.charm_properties);
-	loadProperties("trinket", _data.trinket_properties);	
-	*/
 }
 
 function loadHeroSummary() {
@@ -352,11 +484,11 @@ function loadCareers(heroIndex, careerIndex) {
 		careerIndex = 0;
 	}
 	for (let career of _data.heroes[heroIndex].careers) {
-		if(careerIndex == i && !heroCareers[i].classList.contains("selected")) {
-			heroCareers[i].classList.value += " selected";
+		if(careerIndex == i) {
+			heroCareers[i].classList.add("selected");
 		}
 		else {
-			heroCareers[i].classList.value.replace(" selected","");
+			heroCareers[i].classList.remove("selected");
 		}
 		
 		heroCareers[i].innerHTML = '';
@@ -620,6 +752,24 @@ function initData() {
 	$(".trinketQualitySelection").append(new Option("Green", 3));
 	$(".trinketQualitySelection").append(new Option("White", 4));
 	
+	if (window.location.hash) {
+		let hash = window.location.hash.substring(1);
+		
+		if (hash == "myBuilds") {
+			$(".page").hide();
+			loadMyBuilds();
+			return;
+		}
+		
+		if (hash == "buildBrowser") {
+			$(".mainGrid").hide();
+			return;
+		}
+		
+		loadBuild();
+		return;
+	}
+	
 	loadHero(0,0);
 	loadHeroSummary(0, 0);
 		
@@ -630,11 +780,10 @@ function initData() {
 	loadProperties("trinket", _data.trinket_properties);	
 	
 	loadTraits();
-	
-	if (window.location.hash) {
-		loadBuild();
-	}
-	
+	$(".spinner").hide();	
+	$(".mainGrid").removeClass('loading');
+	$(".mainGrid").show();
+	$(".buildBrowserSection").hide();
 }
 
 function loadVideoPlayer(videoAddress) {	
@@ -652,6 +801,72 @@ function loadVideoPlayer(videoAddress) {
 	}
 }
 
+function loadMyBuilds() {
+	$(".mainGrid").hide();
+	$(".myBuildsSection").hide();
+	$(".buildBrowserSection").hide();
+	
+	if ($.fn.DataTable.isDataTable('#myBuildsTable')) {
+		$(".myBuildsSection").show();
+		return;
+	}
+	
+	$(".spinner").show();
+	let author = getCurrentUser() ? getCurrentUser().displayName : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+	let buildList = [];
+	let promises = [];
+	
+	if (!authorEmail || authorEmail.length == 0) {
+		return;
+	}
+	
+	db.collection("buildTable").where("authorEmail", "==", authorEmail).get().then((queryRef) => {
+		let i = 0;
+		queryRef.docs.some((doc) => {
+			let build = doc.data();
+			if (build.name && build.name.length > 0) {					
+				build.id = doc.id;
+				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+				build.heroName = getHero(doc.data().hash).name.split(' ')[0];
+				build.careerName = getCareer(doc.data().hash).name;
+				promises.push(buildList.push(build));
+			}
+		});
+	
+		Promise.all(promises).then((x) => { 	
+			var table = $("#myBuildsTable").DataTable({
+				data: buildList,
+				columns: [
+					{ "data": "name" , "title": "Name" },
+					{ "data": "heroName" , "title": "Hero", "width": "60px" },
+					{ "data": "careerName" , "title": "Career", "width": "100px" },
+					{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
+				],			
+				columnDefs: [ {
+					targets: [ 1 ],
+					orderData: [ 1, 2 ]
+				}, {
+					targets: [ 2 ],
+					orderData: [ 2, 1 ]
+				} ],
+				"order": [[ 1, "asc" ]]
+			});
+			
+			$(".spinner").hide();
+			$(".myBuildsSection").removeClass('loading');
+			$(".myBuildsSection").show();
+			
+			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
+				var data = table.row($(this)).data();
+				window.location.href = `/#${data.buildSetId}-${data.id}`;
+				window.location.reload();
+			} );
+			$('#myBuildsTable').DataTable().columns.adjust().draw();
+		});
+	});
+}
+
 function initFirestore() {
 	firebase.initializeApp({
 	  apiKey: "AIzaSyDtUozP43e9ygkqV0HpKYRFznePouI2zg0",
@@ -661,6 +876,85 @@ function initFirestore() {
 
 	// Initialize Cloud Firestore through Firebase
 	db = firebase.firestore();
+	
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+		let username = user.displayName ? user.displayName + " " : "";
+		$(".mainGrid").addClass("loggedIn");
+		$(".userButton").html(`${username}logout`);
+		$(".myBuildsButton").css('visibility', 'visible');
+		
+		if (window.location.hash.length > 0 && window.location.hash.substring(1) == "myBuilds") {
+			loadMyBuilds();
+		}
+		
+		currentUser = user;
+	  } else {
+		$(".mainGrid").removeClass("loggedIn");
+		$(".userButton").html("login/register");
+		$(".myBuildsButton").css('visibility', 'hidden');
+		// No user is signed in.
+	  }
+	});
+	
+	let buildList = [];
+	let promises = [];
+	
+	db.collection("buildTable").get().then((queryRef) => {
+		$(".buildCountLabel").html(`${queryRef.size} Builds Created`);
+		let i = 0;
+		queryRef.docs.some((doc) => {
+			let build = doc.data();
+			if (build.name && build.name.length > 0) {					
+				build.id = doc.id;
+				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+				build.heroName = !getHero(doc.data().hash) ? "" : getHero(doc.data().hash).name.split(' ')[0];
+				build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
+				promises.push(buildList.push(build));
+			}
+		});
+	
+		Promise.all(promises).then((x) => { 	
+			var table = $("#buildBrowserTable").DataTable({
+				data: buildList,
+				columns: [
+					{ "data": "name" , "title": "Name" },
+					{ "data": "heroName" , "title": "Hero", "width": "60px" },
+					{ "data": "careerName" , "title": "Career", "width": "100px" },
+					{ "data": "author", "title": "Author", "width": "100px" },
+					{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
+				],			
+				columnDefs: [ {
+					targets: [ 1 ],
+					orderData: [ 1, 2 ]
+				}, {
+					targets: [ 2 ],
+					orderData: [ 2, 1 ]
+				} ],
+				"order": [[ 1, "asc" ]]
+			});
+			
+			$(".spinner").hide();
+			$(".buildBrowserSection").removeClass('loading');
+			
+			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
+				var data = table.row($(this)).data();
+				window.location.href = `/#${data.buildSetId}-${data.id}`;
+				window.location.reload();
+			} );
+			$('#buildBrowserTable').DataTable().columns.adjust().draw();
+		});
+	});
+}
+
+function getHero(hash) {
+	let heroHashValue = getHashValue(hash, "hero");	
+	return _data.heroes[heroHashValue[0]];
+}
+
+function getCareer(hash) {
+	let heroHashValue = getHashValue(hash, "hero");	
+	return _data.heroes[heroHashValue[0]].careers[heroHashValue[1]];
 }
 
 $(function() {	
@@ -771,10 +1065,140 @@ $(function() {
 		window.location.hash = window.location.hash.substring(1).split('-')[0] + '-' + $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
 		loadBuild();
 	});
+	
+	$(".userButton").click((e) => {
+		if ($(".mainGrid").hasClass('loggedIn')) {
+			firebase.auth().signOut().then(function() {
+			  alert("You have been logged out");
+			}).catch(function(error) {
+			  alert("An error occurred when logging you out");
+			});
+			$(".mainGrid").removeClass('loggedIn');
+			$(".userButton").html('login/register');
+			return;
+		}
+		
+		$(".userWindow").css('display','grid');
+	});
+	
+	$(".userWindowCloseButton").click((e) => {
+		$(".userWindow").hide();
+	});
+	
+	$(".userWindow .loginTabButton").click((e) => {
+		$(".userWindow").addClass('loginWindow');
+		$(".userWindow").removeClass('registerWindow');
+	});
+	
+	$(".userWindow .registerTabButton").click((e) => {
+		$(".userWindow").addClass('registerWindow');
+		$(".userWindow").removeClass('loginWindow');
+	});
+	
+	$(".registerButton").click((e) => {
+		let username = $('input[name="username"]').val();
+		let email = $('input[name="email"]').val();
+		let pwd = $('input[name="password"]').val();
+		let pwd2 = $('input[name="password2"]').val();
+		
+		if (pwd != pwd2) {
+			alert("Passwords don't match");
+			return;
+		}
+		
+		if (!username || username.length < 3) {
+			alert("Username must be at least 3 characters");
+			return;
+		}
+		
+		firebase.auth().createUserWithEmailAndPassword(email, pwd).then(function() {
+			let user = getCurrentUser();
+			
+			if (!user) {
+				console.log("could not update user information");
+				return;
+			}
+			
+			user.updateProfile({
+			  displayName: username,
+			}).then(function() {
+				console.log("User information updated");
+				$(".userButton").html(`${username} logout`);				
+			}).catch(function(error) {
+				console.log("Could not update user information");
+			});
+					
+			$(".mainGrid").addClass("loggedIn");
+			$(".userWindow").hide();
+		}).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+		  // ...
+		  alert(`${errorCode} - ${errorMessage}`);
+		  return;
+		});
+	});
+	
+	$(".loginButton").click((e) => {
+		let email = $('input[name="email"]').val();
+		let pwd = $('input[name="password"]').val();
+		
+		firebase.auth().signInWithEmailAndPassword(email, pwd).then(function() {
+			$(".mainGrid").addClass("loggedIn");		
+			$(".userWindow").hide();
+		}).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+		  // ...
+		  alert(`${errorCode} - ${errorMessage}`);
+		  return;
+		});
+	});
+
+	$(".editBuildButton").click((e) => {
+		$(".mainGrid").removeClass("locked");
+		$(".buildDescription")[0].disabled = false;
+	});
+	
+	
+	$(".cloneBuildButton").click((e) => {
+		cloneBuild();
+	});
+	
+	$(".cloneBuildSetButton").click((e) => {
+		cloneBuildSet();
+	});
+
+	$(".createButton").click((e) => {
+		window.location.href = "/";
+	});	
+	
+	$(".browseButton").click((e) => {
+		$(".mainGrid").hide();
+		$(".myBuildsSection").hide();
+		$(".buildBrowserSection").show();
+		window.location.hash = "buildBrowser";
+	});
+	
+	$(".sectionTitle").click((e) => { 
+		$(e.currentTarget).next().toggle(); 
+	});
+	
+	$(".myBuildsButton").click((e) => { 
+		loadMyBuilds();
+		window.location.hash = "myBuilds";
+	});
 });
+
+function getCurrentUser() {
+	return firebase.auth().currentUser;
+}
 
 $(document).ready(() => {
 	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
+		$(".buildDescription")[0].disabled = true;
 	}
 });
