@@ -1119,6 +1119,7 @@ span.label {
 @media (max-width: 800px) {
     #buildBrowserTable td:nth-child(2), #buildBrowserTable td:nth-child(5),    
     #buildBrowserTable th:nth-child(2), #buildBrowserTable th:nth-child(5),
+	#myBuildsTable td:nth-child(4), #myBuildsTable th:nth-child(4),
     .dataTables_length {
         display: none;
     }
