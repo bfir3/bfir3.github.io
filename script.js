@@ -864,7 +864,7 @@ function loadMyBuilds() {
 			
 			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
-				window.location.href = `/beta/#${data.buildSetId}-${data.id}`;
+				window.location.href = `/#${data.buildSetId}-${data.id}`;
 				window.location.reload();
 			} );
 			$('#myBuildsTable').DataTable().columns.adjust().draw();
@@ -944,7 +944,7 @@ function initFirestore() {
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
-				window.location.href = `/beta/#${data.buildSetId}-${data.id}`;
+				window.location.href = `/#${data.buildSetId}-${data.id}`;
 				window.location.reload();
 			} );
 			$('#buildBrowserTable').DataTable().columns.adjust().draw();
