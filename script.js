@@ -305,6 +305,10 @@ function loadBuild() {
 			loadVideoPlayer(doc.data().videoLink);
 		}
 		loadSerializedUrl(doc.data().hash);
+		$(".spinner").hide();
+		$(".mainGrid").removeClass('loading');
+		$(".mainGrid").show();
+		$(".buildBrowserSection").hide();
 	});
 }
 
