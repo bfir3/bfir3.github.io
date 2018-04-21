@@ -1182,3 +1182,6 @@ table#myBuildsTable {
 .buildBrowserSection, .myBuildsSection {
     margin-top: 10px !important;
 }
+.mainGrid:not(.loggedIn) .buildButtonBar>.navButton {
+    display: none;
+}
