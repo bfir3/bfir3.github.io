@@ -1,0 +1,49 @@
+Name,Codename,Type,Race,Armor category,Weakspots,Killing blowable,Recruit hp,Veteran hp,Champion hp,Legend hp,Recruit hitmass,Veteran hitmass,Champion hitmass,Legend hitmass
+Skavenslaves,skaven_slave,Regular,skaven,1,head,+,2.5,3.5,5,7.5,1,1,1.5,2
+Clanrat with shield,skaven_clan_rat_with_shield,Regular,skaven,1,head,+,5,7.5,10,15,1.5 (3),1.5 (3),2.25 (4.5),3 (6)
+Clanrat,skaven_clan_rat,Regular,skaven,1,head,+,5,7.5,10,15,1.5,1.5,2.25,3
+Sack Rat,skaven_loot_rat,Regular,skaven,1,head,+,25,37.5,50,75,1,1,1,1
+<chaos_zombie>,chaos_zombie,Regular,chaos,1,head,+,5,7.5,10,15,3,3,4.5,6
+Fanatic,chaos_fanatic,Regular,chaos,1,head,+,6,9,12,18,1.25,1.25,2,2.5
+Bulwark,chaos_marauder_with_shield,Regular,chaos,1,head,+,13,19.5,26,39,3 (5),3 (5),4.5 (7.5),6 (10)
+Raider,chaos_marauder,Regular,chaos,1,head,+,13,19.5,26,39,3,3,4.5,6
+Stormvermin with shield,skaven_storm_vermin_with_shield,Elite,skaven,2,head,+,13,20,26,39,5 (10),5 (10),7.5 (15),10 (20)
+Stormvermin Commander,skaven_storm_vermin_commander,Elite,skaven,2,head,+,13,20,26,39,5,5,7.5,10
+Stormvermin,skaven_storm_vermin,Elite,skaven,2,head,+,13,20,26,39,5,5,7.5,10
+Plague Monk,skaven_plague_monk,Elite,skaven,5,head,+,18,27,36,52,2.5,2.5,3.75,5
+Savage,chaos_berzerker,Elite,chaos,5,head,+,18,27,36,54,4,4,6,8
+Mauler,chaos_raider,Elite,chaos,1,head,+,30,45,60,90,8,8,12,16
+Chaos Warrior,chaos_warrior,Elite,chaos,6,"head, neck",-,40,60,80,120,20,20,20,20
+Gutter Runner,skaven_gutter_runner,Special,skaven,1,head,+,12,18,24,36,1,1,1,1
+Ratling Gunner,skaven_ratling_gunner,Special,skaven,2,head,+,12,18,24,36,1,1,1,1
+Warpfire Thrower,skaven_warpfire_thrower,Special,skaven,2,head,+,12,18,24,36,1,1,1,1
+Poison Wind Globadier,skaven_poison_wind_globadier,Special,skaven,1,head,+,20,30,40,60,1,1,1,1
+Packmaster,skaven_pack_master,Special,skaven,3,head,+,25,37.5,50,75,1,1,1,1
+<chaos_tentacle_sorcerer>,chaos_tentacle_sorcerer,Special,chaos,5,head,+,16,20,24,35,8,8,12,16
+Lifeleech Sorcerer,chaos_corruptor_sorcerer,Special,chaos,1,head,+,20,30,40,60,8,8,12,16
+Nurgle Sorcerer,chaos_vortex_sorcerer,Special,chaos,1,head,+,20,30,40,60,8,8,12,16
+<chaos_plague_sorcerer>,chaos_plague_sorcerer,Special,chaos,1,head,+,25,37.5,50,75,8,8,12,16
+<chaos_tentacle>,chaos_tentacle,Special,chaos,3,N/A,+,70,120,140,205,1,1,1,1
+Rat Ogre,skaven_rat_ogre,Boss,skaven,3,head,-,700,1050,1400,2100,50,50,50,50
+Stormfiend,skaven_stormfiend,Boss,skaven,3,"back, head",-,700,1050,1400,2100,50,50,50,50
+Bile Troll,chaos_troll,Boss,chaos,3,head,-,475,750,1000,1500,50,50,50,50
+Blessed Gatekeeper Naglfahr,chaos_spawn_exalted_champion_norsca,Boss,chaos,3,head,-,700,1050,1400,2100,50,50,50,50
+Spawn of Chaos,chaos_spawn,Boss,chaos,3,head,-,700,1050,1400,2100,50,50,50,50
+Skarrik Spinemanglr,skaven_storm_vermin_warlord,Armored Boss,skaven,6,head,-,500,750,1000,1500,1,1,1,1
+Gatekeeper Naglfahr,chaos_exalted_champion_norsca,Armored Boss,chaos,6,head,-,400,600,800,1200,20,20,20,20
+Bödvarr Ribspreader,chaos_exalted_champion_warcamp,Armored Boss,chaos,6,head,-,600,900,1200,1800,20,20,20,20
+Rasknitt,skaven_grey_seer,Lord,skaven,1,head,-,400,600,800,1200,1,1,1,1
+Deathrattler,skaven_stormfiend_boss,Lord,skaven,3,"back, head",-,500,750,1000,1500,20,20,20,20
+Burblespue Halescourge,chaos_exalted_sorcerer,Lord,chaos,3,head,-,720,1080,1440,2160,1,1,1,1
+<critter_rat>,critter_rat,Critter,critter,1,N/A,+,1,1,1,1,1,1,1,1
+<critter_pig>,critter_pig,Critter,critter,1,N/A,+,3,3,3,3,1,1,1,1
+,,,,,,,,,,,,,,
+unused enemies,,,,,,,,,,,Numbers in brackets are for hitting a shield,,,
+,,,,,,,,,,,"Armored, Armored Boss and Resistant as well as shielded targets stop attacks unless the weapon is flail",,,
+Armor categories,,,,,,,,,,,,,,
+1 - Infantry (Unarmored),,,,,,,,,,,,,,
+2 - Armored,,,,,,,,,,,,,,
+3 - Monsters (Resistant),,,,,,,,,,,,,,
+4 - Players,,,,,,,,,,,,,,
+5 - Berserkers,,,,,,,,,,,,,,
+6 - Super Armor,,,,,,,,,,,,,,

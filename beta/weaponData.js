@@ -10,8 +10,6 @@ let db;
 let builds;
 let buildSetId;
 let currentUser;
-let MAX_SCALED_POWER_LEVEL = 565.625;
-let weaponPageInitialized = false;
 
 const DB_NAME = "verminBuildSets";
 
@@ -311,10 +309,6 @@ function loadBuild() {
 			loadVideoPlayer(doc.data().videoLink);
 		}
 		loadSerializedUrl(doc.data().hash);
-		$(".spinner").hide();
-		$(".mainGrid").removeClass('loading');
-		$(".mainGrid").show();
-		$(".buildBrowserSection").hide();
 	});
 }
 
@@ -375,11 +369,9 @@ function loadSerializedUrl(hash) {
 	let careerIndex = heroHashValue[1];
 	
 	$(".heroSection>div").removeClass('selected');
-	$(".heroSection>div").removeClass('redBorder');
-	$($(".heroSection").children()[heroIndex]).addClass('selected redBorder');
+	$($(".heroSection").children()[heroIndex]).addClass('selected');
 	$(".classSection>div").removeClass('selected');
-	$(".classSection>div").removeClass('redBorder');
-	$($(".classSection").children()[careerIndex]).addClass('selected redBorder');
+	$($(".classSection").children()[careerIndex]).addClass('selected');
 	
 	loadHero(heroIndex, careerIndex);	
 	loadSerializedWeapon("melee", meleeHashValue);
@@ -396,9 +388,9 @@ function loadSerializedUrl(hash) {
 function loadHeroSummary() {
 	let heroIndex = getHeroIndex();
 	let careerIndex = getCareerIndex();
-	$(".heroClass1").css('background-image',  `url('images/icons/heroes/${heroIndex}/0/icon.png')`);
-	$(".heroClass2").css('background-image',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
-	$(".heroClass3").css('background-image',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
+	$(".heroClass1").css('background',  `url('images/icons/heroes/${heroIndex}/0/icon.png')`);
+	$(".heroClass2").css('background',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
+	$(".heroClass3").css('background',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
 	
 	$(".heroSummaryTitle>span")[0].innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
 	
@@ -470,7 +462,7 @@ function loadTalents(serializedString) {
 		if (serializedString[i] > 2) {
 			continue;
 		}
-		$($($(".talentSection>div")[i]).children()[serializedString[i]]).addClass('selected redBorder');
+		$($($(".talentSection>div")[i]).children()[serializedString[i]]).addClass('selected');
 	}
 }
 
@@ -503,12 +495,13 @@ function loadCareers(heroIndex, careerIndex) {
 	for (let career of _data.heroes[heroIndex].careers) {
 		if(careerIndex == i) {
 			heroCareers[i].classList.add("selected");
-			heroCareers[i].classList.add("redBorder");
 		}
 		else {
 			heroCareers[i].classList.remove("selected");
-			heroCareers[i].classList.remove("redBorder");
 		}
+		
+		heroCareers[i].innerHTML = '';
+		heroCareers[i++].innerHTML = '<span>' + career.name + '</span>';
 	}
 	loadMeleeWeapons(heroIndex,careerIndex);
 	loadRangeWeapons(heroIndex,careerIndex);
@@ -782,12 +775,6 @@ function initData() {
 			return;
 		}
 		
-		if (hash == "weapons") {
-			$(".page").hide();
-			$(".spinner").show();
-			return;
-		}
-		
 		loadBuild();
 		return;
 	}
@@ -979,34 +966,6 @@ function getCareer(hash) {
 	return _data.heroes[heroHashValue[0]].careers[heroHashValue[1]];
 }
 
-function getWeaponsForHero(heroIndex) {
-	let careers = _data.heroes[heroIndex].careers;
-	let weapons = []
-	
-	return _data.melee_weapons.filter((weapon) => {
-			for (let career of careers) {
-				if (weapon.class.includes(career.name)) {
-					return true;
-				}
-			}
-			return false;
-		});
-}
-
-function initWeaponsPage() {
-	let heroIndex = Array.prototype.indexOf.call($(".weaponsDataPage .heroSection").children(),$(".weaponsDataPage .heroSection>div.selected")[0]);
-	
-	$(".weaponDataMeleeSelection").html('');
-	for (let weapon of getWeaponsForHero(heroIndex)) {
-		$(".weaponDataMeleeSelection").append(new Option(weapon.name, weapon.templateName));
-	}
-	
-	$(".weaponDataMeleeSelection")[0].selectedIndex = 0;
-	renderWeaponDataTable($(".weaponDataMeleeSelection").val());
-	$(".spinner").hide();
-	$(".weaponsDataPage").show();
-}
-
 $(function() {	
 	$.ajax({
 		url: 'data.json',
@@ -1016,10 +975,6 @@ $(function() {
 			_data = data[0];
 			_properties = _data.melee_properties.concat(_data.range_properties).concat(_data.necklace_properties).concat(_data.charm_properties).concat(_data.trinket_properties);
 			initData();
-			if (!_weaponData || !_breedData) {
-				return;
-			}
-			initWeaponsPage();
 		}
 	});
 	
@@ -1029,10 +984,6 @@ $(function() {
 		dataType: 'json',
 		success: function(data) {
 			_breedData = data;
-			if (!_weaponData || !_data) {
-				return;
-			}
-			initWeaponsPage();
 		}
 	});
 	
@@ -1042,10 +993,6 @@ $(function() {
 		dataType: 'json',
 		success: function(data) {
 			_weaponData = data;
-			if (!_breedData || !_data) {
-				return;
-			}
-			initWeaponsPage();
 		}
 	});
 	
@@ -1060,19 +1007,16 @@ $(function() {
 	
 	$(".mainGrid:not(.locked) .talentSection>div>div").click((e) => { 
 		$(e.currentTarget.parentElement).children().removeClass('selected'); 
-		$(e.currentTarget.parentElement).children().removeClass('redBorder'); 
-		$(e.currentTarget).addClass('selected redBorder'); 
+		$(e.currentTarget).addClass('selected'); 
 		//$(".footer>input")[0].value = getShareableUrl();
 		updateBuild();
 	});
 	
 	$(".mainGrid:not(.locked) .heroSection>div").click((e) => { 
         $(e.currentTarget.parentElement).children().removeClass('selected'); 
-        $(e.currentTarget.parentElement).children().removeClass('redBorder'); 
         $(".classSection").children().removeClass('selected'); 
-        $(".classSection").children().removeClass('redBorder'); 
-        $(e.currentTarget).addClass('selected redBorder'); 
-        $($(".classSection").children()[0]).addClass('selected redBorder'); 
+        $(e.currentTarget).addClass('selected'); 
+        $($(".classSection").children()[0]).addClass('selected'); 
         let index = Array.prototype.indexOf.call($(e.currentTarget.parentElement).children(),e.currentTarget);
         loadHero(index, 0);
 		//$(".footer>input")[0].value = getShareableUrl();
@@ -1080,14 +1024,6 @@ $(function() {
 		$(".talentSection>div>div").removeClass("selected")
 		
 		loadHeroSummary();
-    });
-	
-	$(".weaponsDataPage:not(.locked) .heroSection>div").click((e) => { 
-        $(e.currentTarget.parentElement).children().removeClass('selected'); 
-        $(e.currentTarget.parentElement).children().removeClass('redBorder');
-        $(e.currentTarget).addClass('selected redBorder');
-		
-		initWeaponsPage();
     });
 	
 	$(".mainGrid:not(.locked) .classSection>div").click((e) => { 
@@ -1282,646 +1218,19 @@ $(function() {
 		window.location.hash = "buildBrowser";
 	});
 	
-	$(".weaponsButton").click((e) => {
-		$(".page").hide();
-		$(".weaponsDataPage").show();
-		window.location.hash = "weapons";
-		
-		initWeaponsPage();
-	});
-	
-	$(".enemiesButton").click((e) => {
-		$(".page").hide();
-		$(".enemiesPage").show();
-		window.location.hash = "enemies";
-	});
-	
-	$(".page").on("click", ".sectionTitle", ((e) => { 
+	$(".sectionTitle").click((e) => { 
 		$(e.currentTarget).next().toggle(); 
-	}));
+	});
 	
 	$(".myBuildsButton").click((e) => { 
 		loadMyBuilds();
 		window.location.hash = "myBuilds";
 	});
-	
-	$(".damageCleaveStaggerButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showDamage')) {
-			$(".weaponAttackStatsContainer").removeClass('showDamage');
-			$(".weaponAttackStatsContainer").addClass('showCleave');
-			$($(e.currentTarget).find("span")[0]).html('Show Cleave');
-			
-		} 
-		else if ($(".weaponAttackStatsContainer").hasClass('showCleave')) {
-			$(".weaponAttackStatsContainer").removeClass('showCleave');
-			$(".weaponAttackStatsContainer").addClass('showStagger');
-			$($(e.currentTarget).find("span")[0]).html('Show Stagger');			
-		}
-		else if ($(".weaponAttackStatsContainer").hasClass('showStagger')) {
-			$(".weaponAttackStatsContainer").removeClass('showStagger');
-			$(".weaponAttackStatsContainer").addClass('showDamage');
-			$($(e.currentTarget).find("span")[0]).html('Show Damage');			
-		}
-	});
-	
-	$(".strengthButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showStrength')) {
-			$(".weaponAttackStatsContainer").removeClass('showStrength');
-			$($(e.currentTarget).find("span")[0]).html('Show Strength');			
-			return;
-		}
-		$(".weaponAttackStatsContainer").addClass('showStrength');
-		$($(e.currentTarget).find("span")[0]).html('Hide Strength');
-	});
-	
-	$(".showEnemiesButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-			$(".weaponAttackStatsContainer").removeClass('showEnemies');
-			$(".weaponAttackStatsContainer").removeClass('showRegulars');
-			$(".weaponAttackStatsContainer").removeClass('showElites');
-			$(".weaponAttackStatsContainer").removeClass('showSpecials');
-			$(".weaponAttackStatsContainer").removeClass('showLords');
-			
-			$($(e.currentTarget).find("span")[0]).html('Show Enemies');	
-			$(".showRegularsButton>span:first-child").html('Show Regular');
-			$(".showElitesButton>span:first-child").html('Show Elites');
-			$(".showSpecialsButton>span:first-child").html('Show Specials');
-			$(".showLordsButton>span:first-child").html('Show Lords');
-			return;
-		}
-		
-		$(".weaponAttackStatsContainer").addClass('showEnemies');
-		$(".weaponAttackStatsContainer").addClass('showRegulars');
-		$(".weaponAttackStatsContainer").addClass('showElites');
-		$(".weaponAttackStatsContainer").addClass('showSpecials');
-		$(".weaponAttackStatsContainer").addClass('showLords');
-		
-		$($(e.currentTarget).find("span")[0]).html('Hide Enemies');	
-		$(".showRegularsButton>span:first-child").html('Hide Regular')
-		$(".showElitesButton>span:first-child").html('Hide Elites')
-		$(".showSpecialsButton>span:first-child").html('Hide Specials')
-		$(".showLordsButton>span:first-child").html('Hide Lords')
-	});
-	
-	$(".showRegularsButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showRegulars')) {
-			$(".weaponAttackStatsContainer").removeClass('showRegulars');
-			$($(e.currentTarget).find("span")[0]).html('Show Regular');			
-			return;
-		}
-		$(".weaponAttackStatsContainer").addClass('showRegulars');
-		$($(e.currentTarget).find("span")[0]).html('Hide Regular');
-	});
-	
-	$(".showElitesButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showElites')) {
-			$(".weaponAttackStatsContainer").removeClass('showElites');
-			$($(e.currentTarget).find("span")[0]).html('Show Elites');			
-			return;
-		}
-		$(".weaponAttackStatsContainer").addClass('showElites');
-		$($(e.currentTarget).find("span")[0]).html('Hide Elites');
-	});
-	
-	$(".showSpecialsButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showSpecials')) {
-			$(".weaponAttackStatsContainer").removeClass('showSpecials');
-			$($(e.currentTarget).find("span")[0]).html('Show Specials');			
-			return;
-		}
-		$(".weaponAttackStatsContainer").addClass('showSpecials');
-		$($(e.currentTarget).find("span")[0]).html('Hide Specials');
-	});
-	
-	$(".showLordsButton").click((e) => {
-		if ($(".weaponAttackStatsContainer").hasClass('showLords')) {
-			$(".weaponAttackStatsContainer").removeClass('showLords');
-			$($(e.currentTarget).find("span")[0]).html('Show Lords');			
-			return;
-		}
-		$(".weaponAttackStatsContainer").addClass('showLords');
-		$($(e.currentTarget).find("span")[0]).html('Hide Lords');
-	});
-	
-	$(".weaponDataMeleeSelection").change((e) => {
-		renderWeaponDataTable($(".weaponDataMeleeSelection").val());
-	});
-	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.infantry", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showInfantry');
-	}));
-	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.armored", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showArmored');
-	}));
-	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.monsters", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showMonsters');
-	}));
-	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.berserkers", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
-	}));
-	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.super.armor", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
-	}));
 });
 
 function getCurrentUser() {
 	return firebase.auth().currentUser;
 }
-
-
-/******************
-Weapons Data Table
-******************/
-
-function getWeaponTemplate(weaponTemplateName) {
-	if (!_weaponData) {
-		return;
-	}
-	return _weaponData.find((x) => x.template_name == weaponTemplateName);
-}
-
-function isAttackEquivalent(attack1, attack2) {
-	if (!attack1.damage_profile && attack2.damage_profile) {
-		return false;
-	}
-	if (!attack1.damage_profile && !attack2.damage_profile) {
-		if (attack1.damage_profile_left.armor_modifier) {		
-			for (let i = 0; i < attack1.damage_profile_left.armor_modifier.attack.length; i++) {
-				if (attack1.damage_profile_left.armor_modifier.attack[i] != attack2.damage_profile_left.armor_modifier.attack[i] ||
-					attack1.damage_profile_right.armor_modifier.impact[i] != attack2.damage_profile_right.armor_modifier.impact[i]) {
-					return false;
-				}
-			}
-		}
-		
-		if (attack1.damage_profile_left.critical_strike) {
-			for (let i = 0; i < attack1.damage_profile_left.critical_strike.attack_armor_power_modifer.length; i++) {
-				if (attack1.damage_profile_left.critical_strike.attack_armor_power_modifer[i] != attack2.damage_profile_left.critical_strike.attack_armor_power_modifer[i] ||
-					attack1.damage_profile_right.critical_strike.attack_armor_power_modifer[i] != attack2.damage_profile_right.critical_strike.attack_armor_power_modifer[i]) {
-					return false;
-				}
-			}
-		}
-		
-		
-		if (attack1.damage_profile_left.targets.length > 1) {
-			for (let i = 0; i < attack1.damage_profile_left.targets.length; i++) {
-				if (attack1.damage_profile_left.targets[i].boost_curve_coefficient_headshot != attack2.damage_profile_left.targets[i].boost_curve_coefficient_headshot ||
-					attack1.damage_profile_left.targets[i].power_distribution.attack != attack2.damage_profile_left.targets[i].power_distribution.attack ||
-					attack1.damage_profile_left.targets[i].power_distribution.impact != attack2.damage_profile_left.targets[i].power_distribution.impact ||
-					attack1.damage_profile_right.targets[i].boost_curve_coefficient_headshot != attack2.damage_profile_right.targets[i].boost_curve_coefficient_headshot ||
-					attack1.damage_profile_right.targets[i].power_distribution.attack != attack2.damage_profile_right.targets[i].power_distribution.attack ||
-					attack1.damage_profile_right.targets[i].power_distribution.impact != attack2.damage_profile_right.targets[i].power_distribution.impact ) {
-					return false;
-				}
-		
-				for (let j = 0; j < attack1.damage_profile_left.targets[i].boost_curve.length; j++) {
-					if (attack1.damage_profile_left.targets[i].boost_curve[j] != attack2.damage_profile_left.targets[i].boost_curve[j] ||
-						attack1.damage_profile_right.targets[i].boost_curve[j] != attack2.damage_profile_right.targets[i].boost_curve[j]) {
-						return false;
-					}
-				}			
-			}
-		}
-		
-		for (let i = 0; i < attack1.damage_profile_left.default_target.boost_curve.length; i++) {
-			if (attack1.damage_profile_left.default_target.boost_curve[i] != attack2.damage_profile_left.default_target.boost_curve[i] ||
-				attack1.damage_profile_right.default_target.boost_curve[i] != attack2.damage_profile_right.default_target.boost_curve[i]) {
-				return false;
-			}
-		}
-		
-		return  attack1.additional_critical_strike_chance == attack2.additional_critical_strike_chance &&
-				attack1.damage_profile_left.cleave_distribution.attack == attack2.damage_profile_left.cleave_distribution.attack &&
-				attack1.damage_profile_left.cleave_distribution.impact == attack2.damage_profile_left.cleave_distribution.impact &&
-				attack1.damage_profile_left.default_target.power_distribution.attack == attack2.damage_profile_left.default_target.power_distribution.attack &&
-				attack1.damage_profile_left.default_target.power_distribution.impact == attack2.damage_profile_left.default_target.power_distribution.impact &&
-				attack1.damage_profile_right.cleave_distribution.attack == attack2.damage_profile_right.cleave_distribution.attack &&
-				attack1.damage_profile_right.cleave_distribution.impact == attack2.damage_profile_right.cleave_distribution.impact &&
-				attack1.damage_profile_right.default_target.power_distribution.attack == attack2.damage_profile_right.default_target.power_distribution.attack &&
-				attack1.damage_profile_right.default_target.power_distribution.impact == attack2.damage_profile_right.default_target.power_distribution.impact;
-	}
-		
-	if (attack1.damage_profile.armor_modifier) {		
-		for (let i = 0; i < attack1.damage_profile.armor_modifier.attack.length; i++) {
-			if (attack1.damage_profile.armor_modifier.attack[i] != attack2.damage_profile.armor_modifier.attack[i]) {
-				return false;
-			}
-		}
-	}
-	
-	if (attack1.damage_profile.critical_strike) {
-		for (let i = 0; i < attack1.damage_profile.critical_strike.attack_armor_power_modifer.length; i++) {
-			if (attack1.damage_profile.critical_strike.attack_armor_power_modifer[i] != attack2.damage_profile.critical_strike.attack_armor_power_modifer[i]) {
-				return false;
-			}
-		}
-	}
-	
-	
-	if (attack1.damage_profile.targets.length > 1) {
-		for (let i = 0; i < attack1.damage_profile.targets.length; i++) {
-			if (attack1.damage_profile.targets[i].boost_curve_coefficient_headshot != attack2.damage_profile.targets[i].boost_curve_coefficient_headshot ||
-				attack1.damage_profile.targets[i].power_distribution.attack != attack2.damage_profile.targets[i].power_distribution.attack ||
-				attack1.damage_profile.targets[i].power_distribution.impact != attack2.damage_profile.targets[i].power_distribution.impact) {
-				return false;
-			}
-	
-			for (let j = 0; j < attack1.damage_profile.targets[i].boost_curve.length; j++) {
-				if (attack1.damage_profile.targets[i].boost_curve[j] != attack2.damage_profile.targets[i].boost_curve[j]) {
-					return false;
-				}
-			}			
-		}
-	}
-	
-	for (let i = 0; i < attack1.damage_profile.default_target.boost_curve.length; i++) {
-		if (attack1.damage_profile.default_target.boost_curve[i] != attack2.damage_profile.default_target.boost_curve[i]) {
-			return false;
-		}
-	}
-	
-	return  attack1.additional_critical_strike_chance == attack2.additional_critical_strike_chance &&
-			attack1.damage_profile.cleave_distribution.attack == attack2.damage_profile.cleave_distribution.attack &&
-			attack1.damage_profile.cleave_distribution.impact == attack2.damage_profile.cleave_distribution.impact &&
-			attack1.damage_profile.default_target.power_distribution.attack == attack2.damage_profile.default_target.power_distribution.attack &&
-			attack1.damage_profile.default_target.power_distribution.impact == attack2.damage_profile.default_target.power_distribution.impact;
-}
-
-function getGroupedAttacks(attackList) {
-	if (attackList.length == 1) {
-		return [ attackList ];
-	}
-	
-	let attackGroupList = [];
-	let attackGroup = [];
-	
-	let i = 0;
-	for (let attack of attackList) {
-		if (attackGroup.length == 0) {
-			attackGroup.push(attack);
-			continue;
-		}
-		
-		if (isAttackEquivalent(attackGroup[0], attack)) {
-			attackGroup.push(attack);
-			continue;
-		}
-		
-		attackGroupList.push(attackGroup);
-		attackGroup = [];
-		attackGroup.push(attack);
-	}
-	attackGroupList.push(attackGroup);
-	return attackGroupList;
-}
-
-function getAttackIcon(attackTemplate) {
-	return '';
-}
-
-function isMultiTargetAttack(attackTemplate) {
-	return !attackTemplate.damage_profile ? attackTemplate.damage_profile_left.targets.length > 1 : attackTemplate.damage_profile.targets.length > 1;
-}
-
-function getAttackSwingDirectionClass(attackTemplate) {
-	// TODO: Add template keys to melee data.json that map to attack swing icons
-	return attackTemplate.attack_name.indexOf("left_diagonal") >= 0 ? "swingDownLeft" :
-			attackTemplate.attack_name.indexOf("right_diagonal") >= 0 ? "swingDownRight" :
-			attackTemplate.attack_name.indexOf("down") >= 0 ? "swingDown" :
-			attackTemplate.attack_name.indexOf("right") >= 0 ? "swingRight" :
-			attackTemplate.attack_name.indexOf("left") >= 0 ? "swingLeft" :
-			attackTemplate.attack_name.indexOf("up") >= 0 ? "swingUp" :
-			attackTemplate.attack_name.indexOf("bopp") >= 0 ? "swingDown" :
-			attackTemplate.attack_name.indexOf("stab") >= 0 ? "swingStab" :
-			!attackTemplate.damage_profile ? "swingDoubleDown" : "swingDefault";
-}
-
-function getAttackIconHtml(attackTemplate) {	
-	let attackName = attackTemplate.attack_name == "light_attack_bopp" ? "Push Stab" : attackTemplate.attack_name.replace("light_attack_","").replace("heavy_attack_","").replace("_"," ").trim(' ');
-	let attackModifierName = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left.default_target.boost_curve_type.replace("curve","").replace("_"," ").trim(' ') : attackTemplate.damage_profile.default_target.boost_curve_type.replace("curve","").replace("_"," ").trim(' ');
-	let attackSwingDirectionClass = getAttackSwingDirectionClass(attackTemplate);
-	
-	return `<div class="weaponAttackSwingIcon ${attackSwingDirectionClass} grid redBorder"><span class="attackIcon"></span><span class="attackText attackModifierText">${attackModifierName}</span><span class="attackText">${attackName}</span></div>`
-}
-
-function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLevel) {	
-	let weaponDataTable = $(".weaponAttackDataTable");
-	weaponDataTable.html('');
-	
-	let weaponTemplate = getWeaponTemplate(weaponTemplateName);
-	
-	let lightAttacks = getGroupedAttacks(weaponTemplate.attacks.light_attack);
-	let heavyAttacks = getGroupedAttacks(weaponTemplate.attacks.heavy_attack);
-	let pushStab = [ weaponTemplate.attacks.push_stab ];
-	
-	let attackGroups = [lightAttacks, heavyAttacks, pushStab];
-	let attackSections = ["Light Attacks", "Heavy Attacks", "Push Stab"];
-	
-	for (let i = 0; i < attackSections.length; i++) {
-		let sectionNameHtml = `<div class="sectionTitle center"><span>${attackSections[i]}</span></div>`;
-		weaponDataTable.append(sectionNameHtml);
-		weaponDataTable.append(`<div class="weaponAttackSwingsContainer"></div>`);
-		
-		for (let j = 0; j < attackGroups[i].length; j++) {
-			let attackGroup = attackGroups[i][j];
-			let weaponAttackSwingsContainer = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child");
-			let attackTemplate = attackGroup[0];
-			
-			// Attack Swing Icons
-			weaponAttackSwingsContainer.append(`<div class="weaponAttackSwingTable grid"><div class="weaponAttackSwings flex"></div></div>`);
-			let weaponAttackSwingTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child");
-			let weaponAttackSwingGroup = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponAttackSwings");
-			
-			for (let attack of attackGroup) {
-				let attackIconHtml = getAttackIconHtml(attack);
-				weaponAttackSwingGroup.append(attackIconHtml);
-			}
-			
-			weaponAttackSwingTable.append('<div class="attackTemplateDataTable weaponDamageTable grid damageTable"></div>');
-			let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable");
-			
-			// Attack Swing Table Header
-			
-			let headerRow = `<div class="attackTableTitle flex center">
-								<span class="tableTitle">Damage</span>
-							</div>
-							<div class="weaponDamageHeader grid">
-								<div class="enemyNameHeader grid">
-									<span class="center">Enemy</span>
-								</div>
-								<div class="enemyRaceHeader grid">
-									<span class="center">Race</span>
-								</div>
-								<div class="enemyHealthHeader grid">
-									<div class="heart"></div>
-								</div>
-								<div class="normalDamage grid"><span class="center">Normal</span></div>
-								<div class="headshotDamage grid"><span class="center">Headshot</span></div>
-								<div class="critDamage grid"><span class="center">Crit</span></div>
-								<div class="critHeadshotDamage grid"><span class="center">Crit Headshot</span></div>
-							</div>`;
-			attackSwingDataTable.append(headerRow);
-			
-			
-			if (isMultiTargetAttack(attackTemplate)) {
-				//renderMultiTargetAttackData();
-				renderAttackData(attackTemplate);
-				continue;
-			}
-				
-			renderAttackData(attackTemplate);
-		}		
-	}	
-}
-
-function renderMultiTargetAttackData() {
-	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
-}
-	
-function renderAttackData(attackTemplate) {
-	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
-		
-	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
-	let rawDamage = damageProfile.default_target.power_distribution.attack / 10;
-	let scaledDamage = rawDamage * getScaledPowerLevel();
-	
-	let i = 0;
-	for (let armor of _armorData) {
-		if (armor.value == "4") {
-			i++;
-			continue;
-		}
-		
-		// set super armor index to armor if no super armor value present
-		let armorIndex = armor.value == "6" && !damageProfile.armor_modifier.attack[i] ? 1 : i;		
-		let armorClassBaseNormalDamage = scaledDamage * damageProfile.armor_modifier.attack[armorIndex];
-		
-		let critModifier = !damageProfile.critical_strike ? attackTemplate.additional_critical_strike_chance + 1 : damageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
-		let armorClassBaseCritDamage = scaledDamage * critModifier;
-		
-		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
-		let armorClassCritDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritMultiplier() * 4) / 4).toFixed(2);
-		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier() - 1) * 4) / 4).toFixed(2) : (Math.round(armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier() * 4) / 4).toFixed(2);
-		let armorClassCritHeadshotDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier() * 4) / 4).toFixed(2);
-		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
-		
-		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
-								<div class="damageType grid"><span class="center">${armor.name}</span></div>
-								<div class="normalDamage grid"><span class="center">${armorClassNormalDamage}</span></div>
-								<div class="headshotDamage grid"><span class="center">${armorClassHeadshotDamage}</span></div>
-								<div class="critDamage grid"><span class="center">${armorClassCritDamage}</span></div>
-								<div class="critHeadshotDamage grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>
-							</div>`;
-		attackSwingDataTable.append(armorHeaderRow);
-		
-		for (let breed of getBreedsForArmorClass(armor)) {			
-			let hitsToKillNormal = getHitsToKill(breed, armorClassNormalDamage);
-			let hitsToKillCrit = getHitsToKill(breed, armorClassCritDamage);;
-			let hitsToKillHeadshot = getHitsToKill(breed, armorClassHeadshotDamage);;
-			let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassCritHeadshotDamage);;
-			
-			let hitsToKillNormalHtml = `<span class="center">${hitsToKillNormal}</span>`;
-			let hitsToKillCritHtml = `<span class="center">${hitsToKillCrit}</span>`;
-			let hitsToKillHeadshotHtml = `<span class="center">${hitsToKillHeadshot}</span>`;
-			let hitsToKillCritHeadshotHtml = `<span class="center">${hitsToKillCritHeadshot}</span>`;
-			
-			if (hitsToKillNormal < 7) {
-				hitsToKillNormalHtml = "";
-				for (let i = 0; i < hitsToKillNormal; i++) {
-					hitsToKillNormalHtml += '<div class="filled"></div>';
-				}
-			}
-			
-			if (hitsToKillCrit < 7) {
-				hitsToKillCritHtml = "";
-				for (let i = 0; i < hitsToKillCrit; i++) {
-					hitsToKillCritHtml += '<div class="filled"></div>';
-				}
-			}
-			
-			if (hitsToKillHeadshot < 7) {
-				hitsToKillHeadshotHtml = "";
-				for (let i = 0; i < hitsToKillHeadshot; i++) {
-					hitsToKillHeadshotHtml += '<div class="filled"></div>';
-				}
-			}
-			
-			if (hitsToKillCritHeadshot < 7) {
-				hitsToKillCritHeadshotHtml = "";
-				for (let i = 0; i < hitsToKillCritHeadshot; i++) {
-					hitsToKillCritHeadshotHtml += '<div class="filled"></div>';
-				}
-			}
-			
-			let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
-			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-							   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
-							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
-							   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
-							   <div class="normalDamage grid">
-								  <div class="enemyBreakpointBar flex center damageIndicator">
-									 ${hitsToKillNormalHtml}
-								  </div>
-								  <div class="flex center cleaveIndicator">
-									 <span class="center">8</span>
-								  </div>
-								  <div class="flex center staggerIndicator">
-									 <span class="center">8</span>
-								  </div>
-							   </div>
-							   <div class="critDamage grid">
-								  <div class="enemyBreakpointBar flex center damageIndicator">
-									 ${hitsToKillCritHtml}
-								  </div>							  
-								  <div class="flex center cleaveIndicator">
-									 <span class="center">8</span>
-								  </div>
-								  <div class="flex center staggerIndicator">
-									 <span class="center">8</span>
-								  </div>
-							   </div>
-							   <div class="headshotDamage grid">
-								  <div class="enemyBreakpointBar flex center damageIndicator">
-									 ${hitsToKillHeadshotHtml}
-								  </div>							  
-								  <div class="flex center cleaveIndicator">
-									 <span class="center">8</span>
-								  </div>
-								  <div class="flex center staggerIndicator">
-									 <span class="center">8</span>
-								  </div>
-							   </div>
-							   <div class="critHeadshotDamage grid">
-								  <div class="enemyBreakpointBar flex center damageIndicator">
-									 ${hitsToKillCritHeadshotHtml}
-								  </div>							  
-								  <div class="flex center cleaveIndicator">
-									 <span class="center">8</span>
-								  </div>
-								  <div class="flex center staggerIndicator">
-									 <span class="center">8</span>
-								  </div>
-							   </div>
-							</div>`
-			attackSwingDataTable.append(breedRow);
-		}
-		i++;
-	}
-}
-
-function getHitsToKill(breed, damage, difficultyLevel) {
-	if (damage == 0) {
-		return "-";
-	}		
-	return Math.ceil(breed.legendHp / damage);
-}
-
-function getBreedsForArmorClass(armor) {
-	if (!_breedData) {
-		return;
-	}
-	return _breedData.filter((x) => { return x.armorCategory == armor.value && !x.name.startsWith('<') && x.type != "Critter"; })
-}
-
-function renderArmorClassEnemies(armor, attackTemplate) {
-	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingTable:last-child .weaponDamageTable");
-	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
-	
-	for (let breed of getBreedsForArmorClass(armor)) {
-		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
-		let breedRow = `<div class="weaponDamageEnemy grid ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-						   <div class="enemyName grid ${breed.race.toLowerCase()}"><span class="center">${breed.name}</span></div>
-						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
-						   <div class="normalDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
-								 <div class="filled"></div>
-							  </div>
-							  <div class="flex center cleaveIndicator">
-								 <span class="center">8</span>
-							  </div>
-							  <div class="flex center staggerIndicator">
-								 <span class="center">8</span>
-							  </div>
-						   </div>
-						   <div class="critDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
-								 <div class="filled"></div>
-							  </div>							  
-							  <div class="flex center cleaveIndicator">
-								 <span class="center">8</span>
-							  </div>
-							  <div class="flex center staggerIndicator">
-								 <span class="center">8</span>
-							  </div>
-						   </div>
-						   <div class="headshotDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
-								 <div class="filled"></div>
-							  </div>							  
-							  <div class="flex center cleaveIndicator">
-								 <span class="center">8</span>
-							  </div>
-							  <div class="flex center staggerIndicator">
-								 <span class="center">8</span>
-							  </div>
-						   </div>
-						   <div class="critHeadshotDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
-								 <div class="filled"></div>
-							  </div>							  
-							  <div class="flex center cleaveIndicator">
-								 <span class="center">8</span>
-							  </div>
-							  <div class="flex center staggerIndicator">
-								 <span class="center">8</span>
-							  </div>
-						   </div>
-						</div>`
-		attackSwingDataTable.append(breedRow);
-	}
-}
-
-function getAdditionalCritMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 1.5;
-	
-}
-
-function getAdditionalHeadshotMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 1.5;
-}
-
-function getAdditionalCritHeadshotMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 2;
-	
-}
-
-function getBoostCurveMultiplier(value1, value2) {
-	return 1.5;
-	//head_shot_boost = 0.5
-	//crit_boost = 0.5 modified by buffs
-	//crit_and_or_headshot_multiplier = get_boost_curve_multiplier(boost_curve * boost_curve_coefficient_headshot, Math.min(Math.max(this, 0), 1));
-}
-
-function getScaledPowerLevel(powerLevel, difficultyLevel) {
-	 return MAX_SCALED_POWER_LEVEL;
-}
-
-function renderAttackSwingIcons(attackGroup) {
-}
-
-
-
-
-
-
-
-
-
 
 $(document).ready(() => {
 	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		

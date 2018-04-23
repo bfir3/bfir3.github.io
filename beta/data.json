@@ -6,6 +6,7 @@
     "careers":[
       {
         "name":"Mercenary",
+		"codename": "es_mercenary",
 		"health":"125",
         "passives":[
           {
@@ -211,7 +212,8 @@
         ]
       },
       {
-        "name":"Huntsman",
+        "name":"Huntsman",		
+		"codename": "es_huntsman",
 		"health":"100",
         "passives":[
           {
@@ -307,6 +309,7 @@
       },
       {
         "name":"Foot Knight",
+		"codename": "es_knight",
 		"health":"150",
           "passives":[
           {
@@ -407,6 +410,7 @@
     "careers":[
       {
         "name":"Ranger Veteran",
+		"codename": "dr_ranger",
 		"health":"100",
          "passives":[
           {
@@ -502,6 +506,7 @@
       },
       {
         "name":"Iron Breaker",
+		"codename": "dr_ironbreaker",
 		"health":"150",
           "passives":[
           {
@@ -601,6 +606,7 @@
       },
       {
         "name":"Slayer",
+		"codename": "dr_slayer",
 		"health":"100",
         "passives":[
           {
@@ -697,6 +703,7 @@
     "careers":[
       {
         "name":"Waystalker",
+		"codename": "we_waywatcher",
 		"health":"100",
 		"passives":[
           {
@@ -792,6 +799,7 @@
       },
       {
         "name":"Handmaiden",
+		"codename": "we_maidenguard",
 		"health":"125",
           "passives":[
           {
@@ -887,6 +895,7 @@
       },
       {
         "name":"Shade",
+		"codename": "we_shade",
 		"health":"100",
         "passives":[
           {
@@ -983,6 +992,7 @@
     "careers":[
       {
         "name":"Witch Hunter Captain",
+		"codename": "wh_captain",
 		"health":"100",
          "passives":[
           {
@@ -1078,6 +1088,7 @@
       },
       {
         "name":"Bounty Hunter",
+		"codename": "wh_bountyhunter",
 		"health":"100",
         "passives":[
           {
@@ -1173,6 +1184,7 @@
       },
       {
         "name":"Zealot",
+		"codename": "wh_zealot",
 		"health":"150",
 		"passives":[
           {
@@ -1273,6 +1285,7 @@
     "careers":[
       {
         "name":"Battle Wizard",
+		"codename": "bw_adept",
 		"health":"100",
         "passives":[
           {
@@ -1368,6 +1381,7 @@
       },
       {
         "name":"Pyromancer",
+		"codename": "bw_scholar",
 		"health":"100",
         "passives":[
           {
@@ -1459,6 +1473,7 @@
       },
       {
         "name":"Unchained",
+		"codename": "bw_unchained",
 		"health":"150",
         "passives":[
           {
@@ -1562,130 +1577,174 @@
 	"melee_weapons": [
 		{
 			"name":"Dual Axes",
+			"templateName": "dual_wield_axes_template_1",
+			"icon": "dual_axes.png",
+			"stamina": "",
+			"dodgeCount": "",
+			"blockSpeed": "",
+			"blockRadius": "",
+			"attackSwingIcons": [
+				{
+					"name": "light_attack_left_upward",
+					"icon": "diag-up-left"
+				}
+			],
+			"attackPatterns": [],
 			"class": ["Slayer"]
 		},
 		{
 			"name":"One Hand Hammer",
+			"templateName": "one_handed_hammer_template_2",
 			"class": ["Ranger Veteran", "Iron Breaker", "Slayer"]
 		},
 		{
 			"name":"One Hand Axe",
+			"templateName": "one_hand_axe_template_2",
 			"class": ["Ranger Veteran", "Iron Breaker", "Slayer"]
 		},
 		{
 			"name":"Hammer and Shield",
+			"templateName": "one_handed_hammer_shield_template_2",
 			"class": ["Ranger Veteran", "Iron Breaker"]
 		},
 		{
 			"name":"Axe and Shield",
+			"templateName": "one_hand_axe_shield_template_1",
 			"class": ["Ranger Veteran", "Iron Breaker"]
 		},
 		{
 			"name":"Two Hand Axe",
+			"templateName": "two_handed_axes_template_1",
 			"class": ["Ranger Veteran", "Iron Breaker", "Slayer"]
 		},
 		{
 			"name":"Two Hand Hammer",
+			"templateName": "two_handed_hammers_template_1",
 			"class": ["Ranger Veteran", "Iron Breaker", "Slayer"]
 		},
 		{
 			"name":"Pickaxe",
+			"templateName": "two_handed_picks_template_1",
 			"class": ["Ranger Veteran", "Iron Breaker", "Slayer"]
 		},
 		{
 			"name":"Dual Daggers",
+			"templateName": "dual_wield_daggers_template_1",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"Sword and Dagger",
+			"templateName": "dual_wield_sword_dagger_template_1",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"Dual Swords",
+			"templateName": "dual_wield_swords_template_1",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"Glaive",
+			"templateName": "two_handed_axes_template_2",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"Spear",
+			"templateName": "two_handed_spears_elf_template_1",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"Two Hand Sword",
+			"templateName": "two_handed_swords_wood_elf_template",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"One Hand Sword",
+			"templateName": "we_one_hand_sword_template_1",
 			"class": ["Waystalker", "Shade", "Handmaiden"]
 		},
 		{
 			"name":"One Hand Hammer",
+			"templateName": "one_handed_hammer_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"One Hand Sword",
+			"templateName": "one_handed_swords_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Hammer and Shield",
+			"templateName": "one_handed_hammer_shield_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Sword and Shield",
+			"templateName": "one_handed_sword_shield_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Halberd",
+			"templateName": "two_handed_halberds_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Two Hand Hammer",
+			"templateName": "two_handed_hammers_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Two Hand Sword",
+			"templateName": "two_handed_swords_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Executioner Sword",
+			"templateName": "two_handed_swords_executioner_template_1",
 			"class": ["Mercenary", "Foot Knight", "Huntsman"]
 		},
 		{
 			"name":"Rapier",
+			"templateName": "fencing_sword_template_1",
 			"class": ["Witch Hunter Captain", "Bounty Hunter", "Zealot"]
 		},
 		{
 			"name":"One Hand Axe",
+			"templateName": "one_hand_axe_template_1",
 			"class": ["Witch Hunter Captain", "Bounty Hunter", "Zealot"]
 		},
 		{
 			"name":"Falchion",
+			"templateName": "one_hand_falchion_template_1",
 			"class": ["Witch Hunter Captain", "Bounty Hunter", "Zealot"]
 		},
 		{
 			"name":"Flail",
+			"templateName": "one_handed_flail_template_1",
 			"class": ["Witch Hunter Captain", "Bounty Hunter", "Zealot"]
 		},
 		{
 			"name":"Two Hand Sword",
+			"templateName": "two_handed_swords_template_1",
 			"class": ["Witch Hunter Captain", "Bounty Hunter", "Zealot"]
 		},
 		{
 			"name":"Flaming Sword",
+			"templateName": "flaming_sword_template_1",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"]
 		},
 		{
 			"name":"Ceremonial Dagger",
+			"templateName": "one_handed_daggers_template_1",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"]
 		},
 		{
 			"name":"One Hand Sword",
+			"templateName": "one_handed_swords_template_1",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"]
 		},
 		{
 			"name":"One Hand Mace",
+			"templateName": "one_handed_hammer_wizard_template_1",
 			"class": ["Battle Wizard", "Pyromancer", "Unchained"]
 		}
 	],

@@ -1,0 +1,26 @@
+[
+	{
+        "name": "Infantry (Unarmored)",
+		"value": "1"
+    },
+    {
+        "name": "Armored",
+		"value": "2"
+    },
+    {
+        "name": "Monsters (Resistant)",
+		"value": "3"
+    },
+    {
+        "name": "Friendly Fire",
+		"value": "4"
+    },
+    {
+        "name": "Berserkers",
+		"value": "5"
+    },
+    {
+        "name": "Super Armor",
+		"value": "6"
+    }
+]

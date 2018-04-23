@@ -311,6 +311,12 @@ input {
 .talentSection>div>div>span:nth-child(2) {
     line-height: 18px;
 }
+.textCenter {
+	text-align: center;
+}
+.sectionTitle>* {
+    margin-top: 10px;
+}
 
 .heroSection {
     height: 80px;
@@ -333,6 +339,8 @@ input {
 .heroSection>div.selected {
     box-shadow: none;
     cursor: default;
+    margin-top: -2px;
+     background: #030c15;
 }
 
 .heroSection .markusHero {
@@ -368,12 +376,12 @@ input {
     grid-template-columns: repeat(3, 33.33%);
 }
 
+.classSection>div.selected {
+	background: #030c15;
+}
 .classSection>div {
     outline: 1px solid #a66f42;
-    /* margin-left: 1px; */
-    /* margin-right: -1px; */
     margin-top: 1px;
-    background: #030c15;
     box-shadow: inset 0 0 0 1000px #ffffff15;
     display: flex;
     align-items: center;
@@ -866,8 +874,9 @@ span.navButton:hover {
 
 .redBorder {
     border-width: 4px;
-    border-image: url('images/border.png') 4 4 stretch!important;
-    border: 4px solid;
+    border: 4px solid !important;
+    border-image: url(images/border.png) 4 4 stretch!important;
+    position: relative;
 }
 
 .userWindow {
@@ -998,10 +1007,9 @@ tbody>tr:hover {
 
 .redBorder {
     border-width: 4px;
-    border-image: url('images/border.png') 4 4 stretch!important;
-    border: 4px solid;
-    border-bottom: 4px solid !important;
-	position: relative;
+    border: 4px solid !important;
+    border-image: url(images/border.png) 4 4 stretch!important;
+    position: relative;
 }
 .redBorder::before, .redBorder::after,
 .redBorder>*:last-child::before, .redBorder>*:last-child::after {
@@ -1181,4 +1189,35 @@ table#myBuildsTable {
 
 .buildBrowserSection, .myBuildsSection {
     margin-top: 10px !important;
+}
+
+.showDamage .cleaveIndicator, .showDamage .staggerIndicator {
+    display: none;
+}
+
+.showCleave .damageIndicator, .showCleave .staggerIndicator {
+    display: none;
+}
+
+.showStagger .cleaveIndicator, .showStagger .damageIndicator {
+    display: none;
+}
+.weaponDamageTable.damageTable .cleaveIndicator, .weaponDamageTable.damageTable .staggerIndicator {
+    display: none;
+}
+.weaponDamageTable.damageTable .cleaveIndicator, .weaponDamageTable.damageTable .staggerIndicator {
+    display: none;
+}
+
+.center {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+}
+.mainGrid:not(.loggedIn) .buildButtonBar>.navButton {
+    display: none;
+}
+.talentSection>div>div.selected .talentDescription {
+    font-weight: bold;
+    color: #330e0b;
 }
