@@ -1648,7 +1648,7 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 			// Attack Swing Table Header
 			
 			let headerRow = `<div class="attackTableTitle flex center">
-								<span class="tableTitle">Damage</span>
+								<span class="tableTitle">Damage - Hits to Kill</span>
 							</div>
 							<div class="weaponDamageHeader grid">
 								<div class="enemyNameHeader grid">
