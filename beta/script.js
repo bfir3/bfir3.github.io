@@ -1998,19 +1998,15 @@ function getBoostCurveMultiplier(curve, percent) {
 	return value;
 }
 
-function getClampedCurveValue(curve, index)
+function getClampedCurveValue(curve, index) {
 	if (index < 1) {
 		return curve[1]
 	}
 	else if (curve.length <= index) {
 		return curve[curve.length];
 	}
-	else {
-		return curve[index];
-	}
-
-	return 
-end
+	return curve[index];
+}
 
 
 function getScaledPowerLevel(powerLevel, difficultyLevel) {
