@@ -1987,7 +1987,7 @@ function getAdditionalCritHeadshotMultiplier(damageProfileTarget) {
 }
 
 function getBoostCurveMultiplier(curve, percent) {
-	let x = (curve.length) * percent;
+	let x = (curve.length - 1) * percent;
 	let index = Math.floor(x);
 	let t = x - Math.floor(x);
 	let p0 = getClampedCurveValue(curve, index - 1);
