@@ -2005,9 +2005,9 @@ function getBoostCurveMultiplier(curve, percent) {
 
 function getClampedCurveValue(curve, index) {
 	if (index < 0) {
-		return curve[0]
+		return curve[0];
 	}
-	else if (curve.length <= index) {
+	else if (curve.length - 1 <= index) {
 		return curve[curve.length - 1];
 	}
 	return curve[index];
