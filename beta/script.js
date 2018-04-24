@@ -11,6 +11,9 @@ let builds;
 let buildSetId;
 let currentUser;
 let MAX_SCALED_POWER_LEVEL = 565.625;
+let DEFAULT_BOOST_CURVE_COEFFICIENT = 1;
+let DEFAULT_CRIT_BOOST = 0.5;
+let DEFAULT_HEADSHOT_BOOST = 0.5;
 let weaponPageInitialized = false;
 
 const DB_NAME = "verminBuildSets";
@@ -1408,23 +1411,62 @@ $(function() {
 	});
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.infantry", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showInfantry');
+		if ($(".weaponAttackStatsContainer").hasClass('showInfantry')) {
+			$(".weaponAttackStatsContainer").toggleClass('showInfantry');
+			$(".weaponAttackStatsContainer").toggleClass('hideInfantry');
+		}
+		else {
+			$(".weaponAttackStatsContainer").toggleClass('showInfantry');
+			$(".weaponAttackStatsContainer").toggleClass('hideInfantry');			
+		}
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.armored", ((e) => {
 		$(".weaponAttackStatsContainer").toggleClass('showArmored');
+		if ($(".weaponAttackStatsContainer").hasClass('showArmored')) {
+			$(".weaponAttackStatsContainer").toggleClass('showArmored');
+			$(".weaponAttackStatsContainer").toggleClass('hideArmored');
+		}
+		else {
+			$(".weaponAttackStatsContainer").toggleClass('showArmored');
+			$(".weaponAttackStatsContainer").toggleClass('hideArmored');			
+		}
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.monsters", ((e) => {
 		$(".weaponAttackStatsContainer").toggleClass('showMonsters');
+		if ($(".weaponAttackStatsContainer").hasClass('showMonsters')) {
+			$(".weaponAttackStatsContainer").toggleClass('showMonsters');
+			$(".weaponAttackStatsContainer").toggleClass('hideMonsters');
+		}
+		else {
+			$(".weaponAttackStatsContainer").toggleClass('showMonsters');
+			$(".weaponAttackStatsContainer").toggleClass('hideMonsters');			
+		}
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.berserkers", ((e) => {
 		$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
+		if ($(".weaponAttackStatsContainer").hasClass('showBerserkers')) {
+			$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
+			$(".weaponAttackStatsContainer").toggleClass('hideBerserkers');
+		}
+		else {
+			$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
+			$(".weaponAttackStatsContainer").toggleClass('hideBerserkers');			
+		}
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.super.armor", ((e) => {
 		$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
+		if ($(".weaponAttackStatsContainer").hasClass('showSuperArmor')) {
+			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
+			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');
+		}
+		else {
+			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
+			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');			
+		}
 	}));
 });
 
@@ -1597,6 +1639,7 @@ function getAttackSwingDirectionClass(attackTemplate) {
 			attackTemplate.attack_name.indexOf("left") >= 0 ? "swingLeft" :
 			attackTemplate.attack_name.indexOf("up") >= 0 ? "swingUp" :
 			attackTemplate.attack_name.indexOf("bopp") >= 0 ? "swingDown" :
+			attackTemplate.attack_name.indexOf("last") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("stab") >= 0 ? "swingStab" :
 			!attackTemplate.damage_profile ? "swingDoubleDown" : "swingDefault";
 }
@@ -1705,9 +1748,9 @@ function renderAttackData(attackTemplate) {
 		let armorClassBaseCritDamage = scaledDamage * critModifier;
 		
 		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
-		let armorClassCritDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritMultiplier() * 4) / 4).toFixed(2);
-		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier() - 1) * 4) / 4).toFixed(2) : (Math.round(armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier() * 4) / 4).toFixed(2);
-		let armorClassCritHeadshotDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier() * 4) / 4).toFixed(2);
+		let armorClassCritDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile) * 4) / 4).toFixed(2);
+		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile) * 1) * 4) / 4).toFixed(2) : (Math.round(armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile) * 4) / 4).toFixed(2);
+		let armorClassCritHeadshotDamage = (Math.round(armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile) * 4) / 4).toFixed(2);
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
@@ -1886,26 +1929,89 @@ function renderArmorClassEnemies(armor, attackTemplate) {
 	}
 }
 
-function getAdditionalCritMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 1.5;
+function getModifiedBoostCurve(curve, modifier) {
+	let modifiedCurve = [];
+	for (let curveValue of curve) {
+		modifiedCurve.push(curveValue * modifier);
+	}
+	return modifiedCurve;
+}
+
+function hasHeadshotBuff() {
+	//TODO - Add Career headshot buff values
+	return false;
+}
+
+function getHeadshotBoost(damageProfileTarget) {
+	if (hasHeadshotBuff()) {
+		return 0.5;
+	}	
+	return 0.5;
+}
+
+function getMultiplier(damageProfileTarget, damageType) {
+	let coefficient = !damageProfileTarget.boost_curve_coefficient_headshot ? DEFAULT_BOOST_CURVE_COEFFICIENT : damageProfileTarget.boost_curve_coefficient_headshot;
+	let curve = getModifiedBoostCurve(damageProfileTarget.boost_curve, coefficient);
+	let boost_amount = 0;
+	switch(damageType) {
+		case "crit":
+			boost_amount = 0.5;
+			break;
+		case "headshot":
+			boost_amount = getHeadshotBoost(damageProfileTarget);
+			break;
+		case "crit+headshot":
+			boost_amount = 0.5 + getHeadshotBoost(damageProfileTarget);
+			break;			
+	}
+	return getBoostCurveMultiplier(curve, Math.max(boost_amount, 1));
+}
+
+function getAdditionalCritMultiplier(damageProfileTarget) {
+	return getMultiplier(damageProfileTarget, "crit");
 	
 }
 
-function getAdditionalHeadshotMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 1.5;
+function getAdditionalHeadshotMultiplier(damageProfileTarget) {
+	return getMultiplier(damageProfileTarget, "headshot");
 }
 
-function getAdditionalCritHeadshotMultiplier(attackTemplate, armorClassBaseDamage, armorIndex) {
-	return 2;
+function getAdditionalCritHeadshotMultiplier(damageProfileTarget) {
+	return getMultiplier(damageProfileTarget, "crit+headshot");
 	
 }
 
-function getBoostCurveMultiplier(value1, value2) {
-	return 1.5;
-	//head_shot_boost = 0.5
-	//crit_boost = 0.5 modified by buffs
-	//crit_and_or_headshot_multiplier = get_boost_curve_multiplier(boost_curve * boost_curve_coefficient_headshot, Math.min(Math.max(this, 0), 1));
+function getBoostCurveMultiplier(curve, percent) {
+	let x = (curve.length - 1) * percent;
+	let index = Math.floor(x) + 1;
+	let t = x - Math.floor(x);
+	let p0 = getClampedCurveValue(curve, index - 1);
+	let p1 = getClampedCurveValue(curve, index + 0);
+	let p2 = getClampedCurveValue(curve, index + 1);
+	let p3 = getClampedCurveValue(curve, index + 2);
+	let a = (-p0 / 2 + (3 * p1) / 2) - (3 * p2) / 2 + p3 / 2;
+	let b = (p0 - (5 * p1) / 2 + 2 * p2) - p3 / 2;
+	let c = -p0 / 2 + p2 / 2;
+	let d = p1;
+	let value = a * t * t * t + b * t * t + c * t + d;
+
+	return value;
 }
+
+function getClampedCurveValue(curve, index)
+	if (index < 1) {
+		return curve[1]
+	}
+	else if (curve.length <= index) {
+		return curve[curve.length];
+	}
+	else {
+		return curve[index];
+	}
+
+	return 
+end
+
 
 function getScaledPowerLevel(powerLevel, difficultyLevel) {
 	 return MAX_SCALED_POWER_LEVEL;
