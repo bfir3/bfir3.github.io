@@ -1964,7 +1964,7 @@ function getMultiplier(damageProfileTarget, damageType) {
 			boost_amount = 0.5 + getHeadshotBoost(damageProfileTarget);
 			break;			
 	}
-	return getBoostCurveMultiplier(curve, Math.max(boost_amount, 1));
+	return getBoostCurveMultiplier(curve, Math.min(boost_amount, 1));
 }
 
 function getAdditionalCritMultiplier(damageProfileTarget) {
