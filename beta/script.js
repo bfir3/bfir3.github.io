@@ -2003,7 +2003,7 @@ function getClampedCurveValue(curve, index) {
 		return curve[1]
 	}
 	else if (curve.length <= index) {
-		return curve[curve.length];
+		return curve[curve.length - 1];
 	}
 	return curve[index];
 }
