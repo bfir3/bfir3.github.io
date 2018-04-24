@@ -1753,9 +1753,9 @@ function renderAttackData(attackTemplate) {
 		let armorClassBaseCritDamage = scaledDamage * critModifier;
 		
 		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
-		let armorClassCritDamage = (Math.round(armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile.default_target)) * 4) / 4).toFixed(2);
-		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile.default_target) * 1) * 4) / 4).toFixed(2) : (Math.round(armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target)) * 4) / 4).toFixed(2);
-		let armorClassCritHeadshotDamage = (Math.round(armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target)) * 4) / 4).toFixed(2);
+		let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
+		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile.default_target) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
+		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
