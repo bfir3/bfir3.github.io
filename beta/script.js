@@ -1819,12 +1819,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 						
 	attackSwingDataTable.append(armorHeaderRow);
 	
-	for (let breed of getBreedsForArmorClass(armor)) {
-		let breedName = breed.name.toString();
-		let breedNameCssClass = breedName.split(" ");
-		breedNameCssClass = breedNameCssClass.join('').toLowerCase();
-		
-		
+	for (let breed of getBreedsForArmorClass(armor)) {		
 		let hitsToKillNormalHtml = '';
 		let hitsToKillCritHtml = '';
 		let hitsToKillHeadshotHtml = ''; 
@@ -1844,6 +1839,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			
 		}
 
+		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
@@ -1913,7 +1909,7 @@ function renderAttackData(attackTemplate) {
 		
 		if (damageProfile.targets && damageProfile.targets.length > 0) {
 			renderMultiTargetAttackData(attackTemplate, armor);
-			return;
+			continue;
 		}
 		
 		// set super armor index to armor if no super armor value present
