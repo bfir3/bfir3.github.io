@@ -1827,10 +1827,10 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		
 		for (let i =0; i < targetDamageProfiles.length; i++) {
 	
-			let hitsToKillNormal = getHitsToKill(breed, damageTypeValues[i][0]);
-			let hitsToKillCrit = getHitsToKill(breed, damageTypeValues[i][1]);
-			let hitsToKillHeadshot = getHitsToKill(breed, damageTypeValues[i][2]);
-			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[i][3]);
+			let hitsToKillNormal = getHitsToKill(breed, damageTypeValues[0][i]);
+			let hitsToKillCrit = getHitsToKill(breed, damageTypeValues[1][i]);
+			let hitsToKillHeadshot = getHitsToKill(breed, damageTypeValues[2][i]);
+			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[3][i]);
 			
 			hitsToKillNormalHtml += `<div class="targetValue grid"><span class="center">${hitsToKillNormal}</span></div>`;
 			hitsToKillCritHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCrit}</span></div>`;
