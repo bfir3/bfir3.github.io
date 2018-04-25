@@ -757,7 +757,7 @@ span.attackIcon {
     position: relative;
 }
 
-.weaponDataTableButton.damageCleaveStaggerButton.grid {
+.weaponDataTableButton.damageCleaveStaggerButton, .weaponDataTableButton.showStrengthButton {
     background: gray;
     cursor: initial;
 }
