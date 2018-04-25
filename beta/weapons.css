@@ -53,10 +53,6 @@
     grid-column: 1;
 }
 
-.weaponDamageEnemy.grid>div>div {
-    grid-column: 2;
-}
-
 .enemyBreakpointBar>div.filled {
     border: 1px solid #c5c59e;
     background: #4CAF50;
@@ -673,6 +669,7 @@ span.attackIcon {
 }
 .multiTargetAttack .targetValue {
     border-right: 1px solid black;
+	margin-right: -2px;
 }
 
 .multiTargetAttack .targetValue:last-child {

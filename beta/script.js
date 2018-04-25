@@ -1832,10 +1832,10 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			let hitsToKillHeadshot = getHitsToKill(breed, damageTypeValues[2][i]);
 			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[3][i]);
 			
-			hitsToKillNormalHtml += `<div class="targetValue grid"><span class="center">${hitsToKillNormal}</span></div>`;
-			hitsToKillCritHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCrit}</span></div>`;
-			hitsToKillHeadshotHtml += `<div class="targetValue grid"><span class="center">${hitsToKillHeadshot}</span></div>`;
-			hitsToKillCritHeadshotHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
+			hitsToKillNormalHtml += `<div class="targetValue damageIndicator grid"><span class="center">${hitsToKillNormal}</span></div>`;
+			hitsToKillCritHtml += `<div class="targetValue damageIndicator grid"><span class="center">${hitsToKillCrit}</span></div>`;
+			hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid"><span class="center">${hitsToKillHeadshot}</span></div>`;
+			hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 			
 		}
 
@@ -1845,9 +1845,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 						   <div class="normalDamage damageCell grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
 								 ${hitsToKillNormalHtml}
-							  </div>
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>
