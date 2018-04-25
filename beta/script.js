@@ -1696,9 +1696,9 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 			// Attack Swing Table Header	
 			
 			let targetIconContainersHtml = '';
-			if (attackTemplate.targets && attackTemplate.targets.length > 0) {
+			if (attackTemplate.damage_profile.targets && attackTemplate.damage_profile.targets.length > 0) {
 				let targetsHeaderHtml = '';
-				let targetCount = attackTemplate.targets.length + 1;
+				let targetCount = attackTemplate.damage_profile.targets.length + 1;
 				
 				let iconsHtml = '';
 				
@@ -1746,34 +1746,6 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 	}	
 }
 
-function getAttackDamageHtml(attackTemplate, armor) {
-	
-	let targetDamageProfiles = [];
-	
-	for (let i = 0; i < attackTemplate.targets.length; i++) {
-		targetDamageProfiles.push(attackTemplate.targets[i]);
-	}
-	targetDamageProfiles.push(attackTemplate.default_target);
-	
-	for (let targetDamageProfile of targetDamageProfiles) {
-				
-	}
-}
-
-function getAttackDamageHtml(attackTemplate, armor) {
-	
-	let targetDamageProfiles = [];
-	
-	for (let i = 0; i < attackTemplate.targets.length; i++) {
-		targetDamageProfiles.push(attackTemplate.targets[i]);
-	}
-	targetDamageProfiles.push(attackTemplate.default_target);
-	
-	for (let targetDamageProfile of targetDamageProfiles) {
-				
-	}
-}
-
 function renderMultiTargetAttackData(attackTemplate, armor) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
 	
@@ -1781,8 +1753,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	
 	let targetDamageProfiles = [];
 	
-	for (let i = 0; i < attackTemplate.targets.length; i++) {
-		targetDamageProfiles.push(attackTemplate.targets[i]);
+	for (let i = 0; i < attackTemplate.damage_profile.targets.length; i++) {
+		targetDamageProfiles.push(attackTemplate.damage_profile.targets[i]);
 	}
 	targetDamageProfiles.push(attackTemplate.default_target);
 	
