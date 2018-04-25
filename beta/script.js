@@ -1978,11 +1978,11 @@ function getAdditionalCritMultiplier(damageProfileTarget, armorCategory) {
 	
 }
 
-function getAdditionalHeadshotMultiplier(damageProfileTarget) {
+function getAdditionalHeadshotMultiplier(damageProfileTarge, armorCategoryt) {
 	return getMultiplier(damageProfileTarget, "headshot", armorCategory);
 }
 
-function getAdditionalCritHeadshotMultiplier(damageProfileTarget) {
+function getAdditionalCritHeadshotMultiplier(damageProfileTarget, armorCategory) {
 	return getMultiplier(damageProfileTarget, "crit+headshot", armorCategory);
 	
 }
