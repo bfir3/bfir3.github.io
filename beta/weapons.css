@@ -761,8 +761,3 @@ span.attackIcon {
     background: gray;
     cursor: initial;
 }
-
-.multiTargetAttack .heart {
-    top: calc(50% - 5px);
-    left: 8px;
-}

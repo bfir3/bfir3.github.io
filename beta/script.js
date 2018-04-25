@@ -1423,7 +1423,6 @@ $(function() {
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.armored:not(.super.armor)", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showArmored');
 		if ($(".weaponAttackStatsContainer").hasClass('showArmored')) {
 			$(".weaponAttackStatsContainer").removeClass('showArmored');
 			$(".weaponAttackStatsContainer").addClass('hideArmored');
@@ -1435,7 +1434,6 @@ $(function() {
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.monsters", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showMonsters');
 		if ($(".weaponAttackStatsContainer").hasClass('showMonsters')) {
 			$(".weaponAttackStatsContainer").removeClass('showMonsters');
 			$(".weaponAttackStatsContainer").addClass('hideMonsters');
@@ -1447,7 +1445,6 @@ $(function() {
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.berserkers", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
 		if ($(".weaponAttackStatsContainer").hasClass('showBerserkers')) {
 			$(".weaponAttackStatsContainer").removeClass('showBerserkers');
 			$(".weaponAttackStatsContainer").addClass('hideBerserkers');
@@ -1459,7 +1456,6 @@ $(function() {
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.super.armor", ((e) => {
-		$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
 		if ($(".weaponAttackStatsContainer").hasClass('showSuperArmor')) {
 			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
 			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');
