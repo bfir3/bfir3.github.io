@@ -679,7 +679,6 @@ span.attackIcon {
 }
 .multiTargetAttack.targets4 .damageCell {
     grid-template-columns: repeat(4, 25%);
-    font-size: 18px;
 }
 .multiTargetAttack.targets5 .damageCell {
     grid-template-columns: repeat(5, 20%);
@@ -705,9 +704,12 @@ span.attackIcon {
     border-right: none;
 }
 
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
+    grid-template-rows: 30px auto;
+}
+
 .multiTargetAttack.targets4 .weaponDamageHeader>div:not(.damageType) {
     grid-template-columns: repeat(4, 25%);
-    grid-template-rows: 30px auto;
     padding: 0;
 }
 

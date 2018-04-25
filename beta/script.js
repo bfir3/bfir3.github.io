@@ -1418,7 +1418,13 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideInfantry');	
-			$(".weaponAttackStatsContainer").addClass('showInfantry');		
+			$(".weaponAttackStatsContainer").addClass('showInfantry');
+			
+			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
+				$(".showEnemiesButton").html('Hide Enemies');	
+				$(".weaponAttackStatsContainer").addClass('showEnemies');
+				$(".weaponAttackStatsContainer").removeClass('hideEnemies');
+			}
 		}
 	}));
 	
@@ -1429,7 +1435,11 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideArmored');	
-			$(".weaponAttackStatsContainer").addClass('showArmored');		
+			$(".weaponAttackStatsContainer").addClass('showArmored');	
+			
+			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
+				$(".showEnemiesButton").click();
+			}	
 		}
 	}));
 	
@@ -1440,7 +1450,11 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideMonsters');	
-			$(".weaponAttackStatsContainer").addClass('showMonsters');		
+			$(".weaponAttackStatsContainer").addClass('showMonsters');
+			
+			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
+				$(".showEnemiesButton").click();
+			}		
 		}
 	}));
 	
@@ -1451,7 +1465,11 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideBerserkers');	
-			$(".weaponAttackStatsContainer").addClass('showBerserkers');		
+			$(".weaponAttackStatsContainer").addClass('showBerserkers');
+			
+			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
+				$(".showEnemiesButton").click();
+			}		
 		}
 	}));
 	
@@ -1462,7 +1480,11 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');	
-			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');		
+			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');	
+			
+			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
+				$(".showEnemiesButton").click();
+			}	
 		}
 	}));
 });
