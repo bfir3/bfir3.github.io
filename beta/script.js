@@ -1693,7 +1693,24 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 			weaponAttackSwingTable.append('<div class="attackTemplateDataTable weaponDamageTable grid damageTable"></div>');
 			let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable");
 			
-			// Attack Swing Table Header
+			// Attack Swing Table Header	
+			
+			let targetIconContainersHtml = '';
+			if (attackTemplate.targets && attackTemplate.targets.length > 0) {
+				let targetsHeaderHtml = '';
+				let targetCount = attackTemplate.targets.length + 1;
+				
+				let iconsHtml = '';
+				
+				for (let i = 0; i < targetCount; i++) {
+					iconsHtml += `<i class="fa fa-male center"></i>`;
+				}
+				iconsHtml = `<div class="center">${iconsHtml}</div>`;
+				
+				for (let i = 0; i < targetCount; i++) {
+					targetIconContainersHtml += iconsHtml;
+				}
+			}
 			
 			let headerRow = `<div class="attackTableTitle flex center">
 								<span class="tableTitle">Damage - Hits to Kill</span>
@@ -1708,11 +1725,13 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 								<div class="enemyHealthHeader grid">
 									<div class="heart"></div>
 								</div>
-								<div class="normalDamage grid"><span class="center">Normal</span></div>
-								<div class="headshotDamage grid"><span class="center">Headshot</span></div>
-								<div class="critDamage grid"><span class="center">Crit</span></div>
-								<div class="critHeadshotDamage grid"><span class="center">Crit Headshot</span></div>
+								<div class="normalDamage grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
+								<div class="headshotDamage grid"><span class="center">Headshot</span>${targetIconContainersHtml}</div>
+								<div class="critDamage grid"><span class="center">Crit</span>${targetIconContainersHtml}</div>
+								<div class="critHeadshotDamage grid"><span class="center">Crit Headshot</span>${targetIconContainersHtml}</div>
 							</div>`;
+						
+							
 			attackSwingDataTable.append(headerRow);
 			
 			
@@ -1727,8 +1746,179 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 	}	
 }
 
-function renderMultiTargetAttackData() {
+function getAttackDamageHtml(attackTemplate, armor) {
+	
+	let targetDamageProfiles = [];
+	
+	for (let i = 0; i < attackTemplate.targets.length; i++) {
+		targetDamageProfiles.push(attackTemplate.targets[i]);
+	}
+	targetDamageProfiles.push(attackTemplate.default_target);
+	
+	for (let targetDamageProfile of targetDamageProfiles) {
+				
+	}
+}
+
+function getAttackDamageHtml(attackTemplate, armor) {
+	
+	let targetDamageProfiles = [];
+	
+	for (let i = 0; i < attackTemplate.targets.length; i++) {
+		targetDamageProfiles.push(attackTemplate.targets[i]);
+	}
+	targetDamageProfiles.push(attackTemplate.default_target);
+	
+	for (let targetDamageProfile of targetDamageProfiles) {
+				
+	}
+}
+
+function renderMultiTargetAttackData(attackTemplate, armor) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
+	
+	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
+	
+	let targetDamageProfiles = [];
+	
+	for (let i = 0; i < attackTemplate.targets.length; i++) {
+		targetDamageProfiles.push(attackTemplate.targets[i]);
+	}
+	targetDamageProfiles.push(attackTemplate.default_target);
+	
+	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
+	
+	
+	let normalDamageHtml = '';
+	let headshotDamageHtml = '';
+	let critDamageHtml = '';
+	let critHeadshotDamageHtml = '';
+	
+	let normalHitsToKillHtml = '';
+	let headshotHitsToKillHtml = '';
+	let critHitsToKillHtml = '';
+	let critHeadshotHitsToKillHtml = '';
+	
+	let damageTypeValues = [[],[],[],[]];
+	
+	for (let targetDamageProfile of targetDamageProfiles) {
+		let rawDamage = targetDamageProfile.power_distribution.attack / 10;
+		let scaledDamage = rawDamage * getScaledPowerLevel();
+		
+		// set super armor index to armor if no super armor value present
+		let armorIndex = armor.value == "6" && !damageProfile.armor_modifier.attack[i] ? 1 : i;		
+		let armorClassBaseNormalDamage = scaledDamage * damageProfile.armor_modifier.attack[armorIndex];
+		
+		let critModifier = !damageProfile.critical_strike ? attackTemplate.additional_critical_strike_chance + 1 : damageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
+		let armorClassBaseCritDamage = scaledDamage * critModifier;
+	
+		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
+		let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile.default_target, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		
+		damageTypeValues[0].push(armorClassNormalDamage); 
+		damageTypeValues[1].push(armorClassCritDamage);
+		damageTypeValues[2].push(armorClassHeadshotDamage);
+		damageTypeValues[3].push(armorClassCritHeadshotDamage);
+		
+		normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage}</span></div>`;
+		headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
+		critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
+		critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;		
+	}
+	
+	let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
+						<div class="damageType grid"><span class="center">${armor.name}</span></div>
+						<div class="normalDamage damageCell grid">${normalDamageHtml}</span></div>
+						<div class="headshotDamage damageCell grid">${headshotDamageHtml}</div>
+						<div class="critDamage damageCell grid">${critDamageHtml}</div>
+						<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
+					</div>`;
+	
+	
+	// let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
+							// <div class="damageType grid"><span class="center">${armor.name}</span></div>
+							// <div class="normalDamage damageCell grid"><span class="center">${armorClassNormalDamage}</span></div>
+							// <div class="headshotDamage damageCell grid"><span class="center">${armorClassHeadshotDamage}</span></div>
+							// <div class="critDamage damageCell grid"><span class="center">${armorClassCritDamage}</span></div>
+							// <div class="critHeadshotDamage damageCell grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>
+						// </div>`;
+						
+	attackSwingDataTable.append(armorHeaderRow);
+	
+	for (let breed of getBreedsForArmorClass(armor)) {
+		let hitsToKillNormalHtml = '';
+		let hitsToKillCritHtml = '';
+		let hitsToKillHeadshotHtml = ''; 
+		let hitsToKillCritHeadshotHtml = '';
+		
+		for (let i =0; i < targetDamageProfiles.length; i++) {
+	
+			let hitsToKillNormal = getHitsToKill(breed, damageTypeValues[i][0]);
+			let hitsToKillCrit = getHitsToKill(breed, damageTypeValues[i][1]);;
+			let hitsToKillHeadshot = getHitsToKill(breed, damageTypeValues[i][2]);;
+			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[i][3]);;
+			
+			let hitsToKillNormalHtml += `<div class="targetValue grid"><span class="center">${hitsToKillNormal}</span></div>`;
+			let hitsToKillCritHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCrit}</span></div>`;
+			let hitsToKillHeadshotHtml += `<div class="targetValue grid"><span class="center">${hitsToKillHeadshot}</span></div>`;
+			let hitsToKillCritHeadshotHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
+			
+		}
+		
+		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
+		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
+						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
+						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
+						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
+						   <div class="normalDamage damageCell grid">
+							  <div class="enemyBreakpointBar flex center damageIndicator">
+								 ${hitsToKillNormalHtml}
+							  </div>
+							  <div class="flex center cleaveIndicator">
+								 <span class="center">8</span>
+							  </div>
+							  <div class="flex center staggerIndicator">
+								 <span class="center">8</span>
+							  </div>
+						   </div>
+						   <div class="critDamage damageCell grid">
+							  <div class="enemyBreakpointBar flex center damageIndicator">
+								 ${hitsToKillCritHtml}
+							  </div>							  
+							  <div class="flex center cleaveIndicator">
+								 <span class="center">8</span>
+							  </div>
+							  <div class="flex center staggerIndicator">
+								 <span class="center">8</span>
+							  </div>
+						   </div>
+						   <div class="headshotDamage grid">
+							  <div class="enemyBreakpointBar flex center damageIndicator">
+								 ${hitsToKillHeadshotHtml}
+							  </div>							  
+							  <div class="flex center cleaveIndicator">
+								 <span class="center">8</span>
+							  </div>
+							  <div class="flex center staggerIndicator">
+								 <span class="center">8</span>
+							  </div>
+						   </div>
+						   <div class="critHeadshotDamage grid">
+							  <div class="enemyBreakpointBar flex center damageIndicator">
+								 ${hitsToKillCritHeadshotHtml}
+							  </div>							  
+							  <div class="flex center cleaveIndicator">
+								 <span class="center">8</span>
+							  </div>
+							  <div class="flex center staggerIndicator">
+								 <span class="center">8</span>
+							  </div>
+						   </div>
+						</div>`
+		attackSwingDataTable.append(breedRow);
+	}
 }
 	
 function renderAttackData(attackTemplate) {
@@ -1743,6 +1933,11 @@ function renderAttackData(attackTemplate) {
 		if (armor.value == "4") {
 			i++;
 			continue;
+		}
+		
+		if (damageProfile.targets) {
+			renderMultiTargetAttackData(attackTemplate, armor);
+			return;
 		}
 		
 		// set super armor index to armor if no super armor value present
@@ -1760,10 +1955,10 @@ function renderAttackData(attackTemplate) {
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
 								<div class="damageType grid"><span class="center">${armor.name}</span></div>
-								<div class="normalDamage grid"><span class="center">${armorClassNormalDamage}</span></div>
-								<div class="headshotDamage grid"><span class="center">${armorClassHeadshotDamage}</span></div>
-								<div class="critDamage grid"><span class="center">${armorClassCritDamage}</span></div>
-								<div class="critHeadshotDamage grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>
+								<div class="normalDamage damageCell grid"><span class="center">${armorClassNormalDamage}</span></div>
+								<div class="headshotDamage damageCell grid"><span class="center">${armorClassHeadshotDamage}</span></div>
+								<div class="critDamage damageCell grid"><span class="center">${armorClassCritDamage}</span></div>
+								<div class="critHeadshotDamage damageCell grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>
 							</div>`;
 		attackSwingDataTable.append(armorHeaderRow);
 		
@@ -1811,7 +2006,7 @@ function renderAttackData(attackTemplate) {
 							   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 							   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
-							   <div class="normalDamage grid">
+							   <div class="normalDamage damageCell grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillNormalHtml}
 								  </div>
@@ -1822,7 +2017,7 @@ function renderAttackData(attackTemplate) {
 									 <span class="center">8</span>
 								  </div>
 							   </div>
-							   <div class="critDamage grid">
+							   <div class="critDamage damageCell grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillCritHtml}
 								  </div>							  

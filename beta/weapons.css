@@ -1,5 +1,5 @@
 .weaponAttackDataTable.grid {
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
     color: white;
 }
@@ -103,6 +103,7 @@ span.arrow-down {
 
 .weaponDamageType>.damageType {
     grid-column: 1 / span 3;
+    padding: 7px !important;
 }
 
 .heart {
@@ -402,7 +403,7 @@ span.weaponStatValue {
 
 .weaponsDataPage .sectionTitle {
     margin-bottom: 10px !important;
-    max-width: 800px;
+    max-width: 1200px;
     width: 100%;
 }
 
@@ -483,7 +484,7 @@ i.statsIcon {
 span.statsButton.center {font-size: 16px;letter-spacing: 2px;color: #c7c7c7;}
 
 .weaponAttackStatsContainer {
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -645,4 +646,97 @@ span.attackIcon {
 }
 .showSuperArmor .weaponDamageEnemy.super.armor {
     display: grid;
+}
+
+
+.multiTargetAttack.targets3 .damageCell {
+    grid-template-columns: repeat(3, 33.33%);
+}
+.multiTargetAttack.targets4 .damageCell {
+    grid-template-columns: repeat(4, 25%);
+    font-size: 18px;
+}
+.multiTargetAttack.targets5 .damageCell {
+    grid-template-columns: repeat(5, 20%);
+    font-size: 12px;
+}
+
+.multiTargetAttack .weaponDamageHeader .damageCell {
+    padding-bottom: 3px !important;
+}
+
+.multiTargetAttack .damageCell {
+    padding: 0px !important;
+    grid-template-rows: 100%;
+    justify-content: center;
+    align-content: center;
+}
+.multiTargetAttack .targetValue {
+    border-right: 1px solid black;
+}
+
+.multiTargetAttack .targetValue:last-child {
+    border-right: none;
+}
+
+.multiTargetAttack.targets4 .weaponDamageHeader>div:not(.damageType) {
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: 30px auto;
+    padding: 0;
+}
+
+.multiTargetAttack .enemyNameHeader>*, .multiTargetAttack .enemyRaceHeader>*, .multiTargetAttack .enemyHealthHeader>* {
+    grid-row: 1 / span 2;
+}
+
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType)>span:first-child {
+    grid-column: 1 / span 5;
+}
+
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType) i {
+    font-size: 95%;
+}
+
+.multiTargetAttack .weaponDamageHeader>div>div:nth-of-type(1)>i:first-child {
+    color: white;
+}
+
+.multiTargetAttack .weaponDamageHeader>.normalDamage i {
+    color: #9E9E9E;
+}
+
+.multiTargetAttack.targets5 .damageCell>i {
+    font-size: 100%;    
+}
+
+.multiTargetAttack .damageCell>div:nth-of-type(1)>i:first-child,
+.multiTargetAttack .damageCell>div:nth-of-type(2)>i:nth-child(2),
+.multiTargetAttack .damageCell>div:nth-of-type(3)>i:nth-child(3),
+.multiTargetAttack .damageCell>div:nth-of-type(4)>i:nth-child(4),
+.multiTargetAttack .damageCell>div:nth-of-type(5)>i:nth-child(5) {
+    color: white;
+    font-size: 120%;    
+}
+
+.multiTargetAttack .damageCell>div:last-child {
+    margin-right: 5px;
+}
+
+.multiTargetAttack .weaponDamageHeader .damageCell>div:last-child::after {
+    content: '+';
+    position: absolute;
+}
+
+.multiTargetAttack .damageCell>div {
+    position: relative;
+}
+
+.weaponDataTableButton.damageCleaveStaggerButton.grid {
+    background: gray;
+    cursor: initial;
+}
+
+.multiTargetAttack .heart {
+    top: calc(50% - 5px);
+    left: 8px;
 }
