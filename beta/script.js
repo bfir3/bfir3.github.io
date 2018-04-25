@@ -1820,9 +1820,6 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	attackSwingDataTable.append(armorHeaderRow);
 	
 	for (let breed of getBreedsForArmorClass(armor)) {
-		let breedName = breed.name.toString();
-		let breedNameCssClass = breedName.split(' ').join('').toString().toLowerCase();
-		
 		let hitsToKillNormalHtml = '';
 		let hitsToKillCritHtml = '';
 		let hitsToKillHeadshotHtml = ''; 
@@ -1842,6 +1839,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			
 		}
 		
+		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
+
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
@@ -1890,7 +1889,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								 <span class="center">8</span>
 							  </div>
 						   </div>
-						</div>`
+						</div>`;
 		attackSwingDataTable.append(breedRow);
 	}
 }
@@ -1975,7 +1974,7 @@ function renderAttackData(attackTemplate) {
 				}
 			}
 			
-			let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
+			let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 							   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
@@ -2050,7 +2049,7 @@ function renderArmorClassEnemies(armor, attackTemplate) {
 	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 	
 	for (let breed of getBreedsForArmorClass(armor)) {
-		let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
+		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
 		let breedRow = `<div class="weaponDamageEnemy grid ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid ${breed.race.toLowerCase()}"><span class="center">${breed.name}</span></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
