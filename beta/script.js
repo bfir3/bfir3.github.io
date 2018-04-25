@@ -1854,9 +1854,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 							  </div>
 						   </div>
 						   <div class="critDamage damageCell grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
-								 ${hitsToKillCritHtml}
-							  </div>							  
+								 ${hitsToKillCritHtml}							  
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>
@@ -1865,9 +1863,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 							  </div>
 						   </div>
 						   <div class="headshotDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
 								 ${hitsToKillHeadshotHtml}
-							  </div>							  
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>
@@ -1876,9 +1872,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 							  </div>
 						   </div>
 						   <div class="critHeadshotDamage grid">
-							  <div class="enemyBreakpointBar flex center damageIndicator">
 								 ${hitsToKillCritHeadshotHtml}
-							  </div>							  
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>
