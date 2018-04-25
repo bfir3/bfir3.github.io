@@ -1416,20 +1416,18 @@ $(function() {
 			$(".weaponAttackStatsContainer").toggleClass('hideInfantry');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('showInfantry');
 			$(".weaponAttackStatsContainer").toggleClass('hideInfantry');	
 			$(".weaponAttackStatsContainer").toggleClass('showInfantry');		
 		}
 	}));
 	
-	$(".weaponsDataPage").on("click", ".weaponDamageType.armored", ((e) => {
+	$(".weaponsDataPage").on("click", ".weaponDamageType.armored:not(.super.armor)", ((e) => {
 		$(".weaponAttackStatsContainer").toggleClass('showArmored');
 		if ($(".weaponAttackStatsContainer").hasClass('showArmored')) {
 			$(".weaponAttackStatsContainer").toggleClass('showArmored');
 			$(".weaponAttackStatsContainer").toggleClass('hideArmored');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('showArmored');
 			$(".weaponAttackStatsContainer").toggleClass('hideArmored');	
 			$(".weaponAttackStatsContainer").toggleClass('showArmored');		
 		}
@@ -1442,7 +1440,6 @@ $(function() {
 			$(".weaponAttackStatsContainer").toggleClass('hideMonsters');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('showMonsters');
 			$(".weaponAttackStatsContainer").toggleClass('hideMonsters');	
 			$(".weaponAttackStatsContainer").toggleClass('showMonsters');		
 		}
@@ -1455,7 +1452,6 @@ $(function() {
 			$(".weaponAttackStatsContainer").toggleClass('hideBerserkers');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('showBerserkers');
 			$(".weaponAttackStatsContainer").toggleClass('hideBerserkers');	
 			$(".weaponAttackStatsContainer").toggleClass('showBerserkers');		
 		}
@@ -1468,7 +1464,6 @@ $(function() {
 			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
 			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');	
 			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');		
 		}
