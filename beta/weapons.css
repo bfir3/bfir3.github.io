@@ -701,7 +701,7 @@ span.attackIcon {
     color: white;
 }
 
-.multiTargetAttack .weaponDamageHeader>.normalDamage i {
+.multiTargetAttack .weaponDamageHeader>.damageCell i {
     color: #9E9E9E;
 }
 
