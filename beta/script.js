@@ -1753,9 +1753,9 @@ function renderAttackData(attackTemplate) {
 		let armorClassBaseCritDamage = scaledDamage * critModifier;
 		
 		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
-		let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
-		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile.default_target) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
-		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target))) * 4) / 4).toFixed(2);
+		let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(damageProfile.default_target, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
@@ -1947,14 +1947,14 @@ function hasHeadshotBuff() {
 	return false;
 }
 
-function getHeadshotBoost(damageProfileTarget) {
-	if (hasHeadshotBuff()) {
-		return 0.5;
+function getHeadshotBoost(damageProfileTarget, armorCategory) {
+	if (armorCategory == 3) {
+		return 0.25;
 	}	
 	return 0.5;
 }
 
-function getMultiplier(damageProfileTarget, damageType) {
+function getMultiplier(damageProfileTarget, damageType, armorCategory) {
 	let coefficient = !damageProfileTarget.boost_curve_coefficient_headshot ? DEFAULT_BOOST_CURVE_COEFFICIENT : damageProfileTarget.boost_curve_coefficient_headshot;
 	let curve = getModifiedBoostCurve(damageProfileTarget.boost_curve, coefficient);
 	let boost_amount = 0;
@@ -1969,20 +1969,21 @@ function getMultiplier(damageProfileTarget, damageType) {
 			boost_amount = 0.5 + getHeadshotBoost(damageProfileTarget);
 			break;			
 	}
+	
 	return getBoostCurveMultiplier(curve, Math.min(boost_amount, 1));
 }
 
-function getAdditionalCritMultiplier(damageProfileTarget) {
-	return getMultiplier(damageProfileTarget, "crit");
+function getAdditionalCritMultiplier(damageProfileTarget, armorCategory) {
+	return getMultiplier(damageProfileTarget, "crit", armorCategory);
 	
 }
 
 function getAdditionalHeadshotMultiplier(damageProfileTarget) {
-	return getMultiplier(damageProfileTarget, "headshot");
+	return getMultiplier(damageProfileTarget, "headshot", armorCategory);
 }
 
 function getAdditionalCritHeadshotMultiplier(damageProfileTarget) {
-	return getMultiplier(damageProfileTarget, "crit+headshot");
+	return getMultiplier(damageProfileTarget, "crit+headshot", armorCategory);
 	
 }
 
@@ -1992,7 +1993,7 @@ function getBoostCurveMultiplier(curve, percent) {
 	let t = x - Math.floor(x);
 	let p0 = getClampedCurveValue(curve, index - 2);
 	let p1 = getClampedCurveValue(curve, index - 1);
-	let p2 = getClampedCurveValue(curve, index + 0);
+	let p2 = getClampedCurveValue(curve, index);
 	let p3 = getClampedCurveValue(curve, index + 1);
 	let a = (-p0 / 2 + (3 * p1) / 2) - (3 * p2) / 2 + p3 / 2;
 	let b = (p0 - (5 * p1) / 2 + 2 * p2) - p3 / 2;
