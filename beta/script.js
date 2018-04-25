@@ -1839,7 +1839,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			
 		}
 		
-		let breedNameCssClass = breed.name.split(' ').join('').toString().toLowerCase();
+		let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
 		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
@@ -1974,7 +1974,7 @@ function renderAttackData(attackTemplate) {
 				}
 			}
 			
-			let breedNameCssClass = breed.name.split(' ').join('').toString().toLowerCase();
+			let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 							   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
@@ -2049,7 +2049,7 @@ function renderArmorClassEnemies(armor, attackTemplate) {
 	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 	
 	for (let breed of getBreedsForArmorClass(armor)) {
-		let breedNameCssClass = breed.name.split(' ').join('').toString().toLowerCase();
+		let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
 		let breedRow = `<div class="weaponDamageEnemy grid ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid ${breed.race.toLowerCase()}"><span class="center">${breed.name}</span></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
