@@ -658,6 +658,9 @@ span.attackIcon {
 .hideSuperArmor .weaponDamageEnemy.super.armor {
     display: none !important;
 }
+.hideEnemies .weaponDamageEnemy {
+    display: none !important;	
+}
 
 .hideRegulars .weaponDamageEnemy.regular {
 	display: none !important;

@@ -1340,30 +1340,23 @@ $(function() {
 	$(".showEnemiesButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showEnemies')) {
 			$(".weaponAttackStatsContainer").removeClass('showEnemies');
-			$(".weaponAttackStatsContainer").removeClass('showRegulars');
-			$(".weaponAttackStatsContainer").removeClass('showElites');
-			$(".weaponAttackStatsContainer").removeClass('showSpecials');
-			$(".weaponAttackStatsContainer").removeClass('showLords');
+			$(".weaponAttackStatsContainer").addClass('hideEnemies');
 			
 			$($(e.currentTarget).find("span")[0]).html('Show Enemies');	
-			$(".showRegularsButton>span:first-child").html('Show Regular');
-			$(".showElitesButton>span:first-child").html('Show Elites');
-			$(".showSpecialsButton>span:first-child").html('Show Specials');
-			$(".showLordsButton>span:first-child").html('Show Lords');
 			return;
 		}
+		else if (!$(".weaponAttackStatsContainer").hasClass('hideEnemies')) {			
+			$(".weaponAttackStatsContainer").addClass('showEnemies');
+			$(".weaponAttackStatsContainer").addClass('showRegulars');
+			$(".weaponAttackStatsContainer").addClass('showElites');
+			$(".weaponAttackStatsContainer").addClass('showSpecials');
+			$(".weaponAttackStatsContainer").addClass('showLords');
+		}		
 		
+		$(".weaponAttackStatsContainer").removeClass('hideEnemies');		
 		$(".weaponAttackStatsContainer").addClass('showEnemies');
-		$(".weaponAttackStatsContainer").addClass('showRegulars');
-		$(".weaponAttackStatsContainer").addClass('showElites');
-		$(".weaponAttackStatsContainer").addClass('showSpecials');
-		$(".weaponAttackStatsContainer").addClass('showLords');
 		
 		$($(e.currentTarget).find("span")[0]).html('Hide Enemies');	
-		$(".showRegularsButton>span:first-child").html('Hide Regular')
-		$(".showElitesButton>span:first-child").html('Hide Elites')
-		$(".showSpecialsButton>span:first-child").html('Hide Specials')
-		$(".showLordsButton>span:first-child").html('Hide Lords')
 	});
 	
 	$(".showRegularsButton").click((e) => {
