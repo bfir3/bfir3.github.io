@@ -1935,7 +1935,7 @@ function renderAttackData(attackTemplate) {
 			continue;
 		}
 		
-		if (damageProfile.targets) {
+		if (damageProfile.targets && damageProfile.targets.length > 0) {
 			renderMultiTargetAttackData(attackTemplate, armor);
 			return;
 		}
