@@ -1725,10 +1725,10 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 								<div class="enemyHealthHeader grid">
 									<div class="heart"></div>
 								</div>
-								<div class="normalDamage grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
-								<div class="headshotDamage grid"><span class="center">Headshot</span>${targetIconContainersHtml}</div>
-								<div class="critDamage grid"><span class="center">Crit</span>${targetIconContainersHtml}</div>
-								<div class="critHeadshotDamage grid"><span class="center">Crit Headshot</span>${targetIconContainersHtml}</div>
+								<div class="normalDamage damageCell grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
+								<div class="headshotDamage damageCell grid"><span class="center">Headshot</span>${targetIconContainersHtml}</div>
+								<div class="critDamage damageCell grid"><span class="center">Crit</span>${targetIconContainersHtml}</div>
+								<div class="critHeadshotDamage damageCell grid"><span class="center">Crit Headshot</span>${targetIconContainersHtml}</div>
 							</div>`;
 						
 							
@@ -1891,6 +1891,9 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 						</div>`;
 		attackSwingDataTable.append(breedRow);
 	}
+	
+	attackSwingDataTable.addClass('multiTargetAttack'); 
+	attackSwingDataTable.addClass('targets' + targetDamageProfiles.length); 
 }
 	
 function renderAttackData(attackTemplate) {
