@@ -674,6 +674,9 @@ span.attackIcon {
 	display: none !important;
 }
 
+.multiTargetAttack.targets2 .damageCell {
+    grid-template-columns: repeat(2, 50%);
+}
 .multiTargetAttack.targets3 .damageCell {
     grid-template-columns: repeat(3, 33.33%);
 }
