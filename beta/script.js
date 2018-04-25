@@ -1362,40 +1362,48 @@ $(function() {
 	$(".showRegularsButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showRegulars')) {
 			$(".weaponAttackStatsContainer").removeClass('showRegulars');
+			$(".weaponAttackStatsContainer").addClass('hideRegulars');
 			$($(e.currentTarget).find("span")[0]).html('Show Regular');			
 			return;
 		}
 		$(".weaponAttackStatsContainer").addClass('showRegulars');
+		$(".weaponAttackStatsContainer").removeClass('hideRegulars');
 		$($(e.currentTarget).find("span")[0]).html('Hide Regular');
 	});
 	
 	$(".showElitesButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showElites')) {
 			$(".weaponAttackStatsContainer").removeClass('showElites');
+			$(".weaponAttackStatsContainer").addClass('hideElites');
 			$($(e.currentTarget).find("span")[0]).html('Show Elites');			
 			return;
 		}
 		$(".weaponAttackStatsContainer").addClass('showElites');
+		$(".weaponAttackStatsContainer").removeClass('hideElites');
 		$($(e.currentTarget).find("span")[0]).html('Hide Elites');
 	});
 	
 	$(".showSpecialsButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showSpecials')) {
 			$(".weaponAttackStatsContainer").removeClass('showSpecials');
+			$(".weaponAttackStatsContainer").addClass('hideSpecials');
 			$($(e.currentTarget).find("span")[0]).html('Show Specials');			
 			return;
 		}
 		$(".weaponAttackStatsContainer").addClass('showSpecials');
+		$(".weaponAttackStatsContainer").removeClass('hideSpecials');
 		$($(e.currentTarget).find("span")[0]).html('Hide Specials');
 	});
 	
 	$(".showLordsButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showLords')) {
 			$(".weaponAttackStatsContainer").removeClass('showLords');
+			$(".weaponAttackStatsContainer").addClass('hideLords');
 			$($(e.currentTarget).find("span")[0]).html('Show Lords');			
 			return;
 		}
 		$(".weaponAttackStatsContainer").addClass('showLords');
+		$(".weaponAttackStatsContainer").removeClass('hideLords');
 		$($(e.currentTarget).find("span")[0]).html('Hide Lords');
 	});
 	

@@ -406,7 +406,6 @@ span.weaponStatValue {
 .weaponDataTableButtonsContainer.grid {
     grid-template-columns: repeat(4, calc(25% - 6px));
     grid-column-gap: 8px;
-    width: 800px;
     margin-bottom: 10px;
     grid-row-gap: 5px;
 }
