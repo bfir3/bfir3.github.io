@@ -631,19 +631,46 @@ span.attackIcon {
 .showInfantry .weaponDamageEnemy.infantry {
     display: grid;
 }
-.showArmored .weaponDamageEnemy.armored {
+.hideInfantry .weaponDamageEnemy.infantry {
+    display: none !important;
+}
+.showArmored .weaponDamageEnemy.armored:not(.super) {
     display: grid;
+}
+.hideArmored .weaponDamageEnemy.armored:not(.super) {
+    display: none !important;
 }
 .showMonsters .weaponDamageEnemy.monsters {
     display: grid;
 }
+.hideMonsters .weaponDamageEnemy.monsters {
+    display: none !important;
+}
 .showBerserkers .weaponDamageEnemy.berserkers {
     display: grid;
+}
+.hideBerserkers .weaponDamageEnemy.berserkers {
+    display: none !important;
 }
 .showSuperArmor .weaponDamageEnemy.super.armor {
     display: grid;
 }
+.hideSuperArmor .weaponDamageEnemy.super.armor {
+    display: none !important;
+}
 
+.hideRegulars .weaponDamageEnemy.regular {
+	display: none !important;
+}
+.hideSpecials .weaponDamageEnemy.special {
+	display: none !important;
+}
+.hideElites .weaponDamageEnemy.elite {
+	display: none !important;
+}
+.hideLords .weaponDamageEnemy.lord {
+	display: none !important;
+}
 
 .multiTargetAttack.targets3 .damageCell {
     grid-template-columns: repeat(3, 33.33%);
