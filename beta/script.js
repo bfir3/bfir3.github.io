@@ -1820,6 +1820,9 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	attackSwingDataTable.append(armorHeaderRow);
 	
 	for (let breed of getBreedsForArmorClass(armor)) {
+		let breedName = breed.name.toString();
+		let breedNameCssClass = breedName.split(' ').join('').toString().toLowerCase();
+		
 		let hitsToKillNormalHtml = '';
 		let hitsToKillCritHtml = '';
 		let hitsToKillHeadshotHtml = ''; 
@@ -1838,8 +1841,6 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			hitsToKillCritHeadshotHtml += `<div class="targetValue grid"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 			
 		}
-		
-		let breedNameCssClass = breed.name.toString().split(' ').join('').toString().toLowerCase();
 		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
