@@ -1963,10 +1963,10 @@ function getMultiplier(damageProfileTarget, damageType, armorCategory) {
 			boost_amount = 0.5;
 			break;
 		case "headshot":
-			boost_amount = getHeadshotBoost(damageProfileTarget);
+			boost_amount = getHeadshotBoost(damageProfileTarget, armorCategory);
 			break;
 		case "crit+headshot":
-			boost_amount = 0.5 + getHeadshotBoost(damageProfileTarget);
+			boost_amount = 0.5 + getHeadshotBoost(damageProfileTarget, armorCategory);
 			break;			
 	}
 	
