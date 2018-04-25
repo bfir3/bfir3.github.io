@@ -1857,7 +1857,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								 <span class="center">8</span>
 							  </div>
 						   </div>
-						   <div class="headshotDamage grid">
+						   <div class="headshotDamage damageCell grid">
 								 ${hitsToKillHeadshotHtml}
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
@@ -1866,7 +1866,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								 <span class="center">8</span>
 							  </div>
 						   </div>
-						   <div class="critHeadshotDamage grid">
+						   <div class="critHeadshotDamage damageCell grid">
 								 ${hitsToKillCritHeadshotHtml}
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
