@@ -1768,8 +1768,10 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	
 	let targetDamageProfiles = [];
 	
-	for (let i = 0; i < attackTemplate.damage_profile.targets.length; i++) {
-		targetDamageProfiles.push(attackTemplate.damage_profile.targets[i]);
+	for (let i = 0; i < damageProfile.targets.length; i++) {
+		let targetDamageProfile = damageProfile.targets[i];
+		targetDamageProfile
+		targetDamageProfiles.push(damageProfile.targets[i]);
 	}
 	targetDamageProfiles.push(attackTemplate.damage_profile.default_target);
 	
