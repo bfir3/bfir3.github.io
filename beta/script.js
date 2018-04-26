@@ -1773,7 +1773,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		targetDamageProfile
 		targetDamageProfiles.push(damageProfile.targets[i]);
 	}
-	if (atackTemplate.damage_profile.default_target) {
+	if (attackTemplate.damage_profile.default_target) {
 		targetDamageProfiles.push(attackTemplate.damage_profile.default_target);
 	}
 	
