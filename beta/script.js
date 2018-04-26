@@ -1421,7 +1421,7 @@ $(function() {
 			$(".weaponAttackStatsContainer").addClass('showInfantry');
 			
 			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton").html('Hide Enemies');	
+				$(".showEnemiesButton span:first-child").html('Hide Enemies');	
 				$(".weaponAttackStatsContainer").addClass('showEnemies');
 				$(".weaponAttackStatsContainer").removeClass('hideEnemies');
 			}
@@ -1867,8 +1867,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								 <span class="center">8</span>
 							  </div>
 						   </div>
-						   <div class="critDamage damageCell grid">
-								 ${hitsToKillCritHtml}							  
+						   <div class="headshotDamage damageCell grid">
+								 ${hitsToKillHeadshotHtml}
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>
@@ -1876,8 +1876,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								 <span class="center">8</span>
 							  </div>
 						   </div>
-						   <div class="headshotDamage damageCell grid">
-								 ${hitsToKillHeadshotHtml}
+						   <div class="critDamage damageCell grid">
+								 ${hitsToKillCritHtml}							  
 							  <div class="flex center cleaveIndicator">
 								 <span class="center">8</span>
 							  </div>

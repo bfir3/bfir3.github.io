@@ -670,7 +670,7 @@ span.attackIcon {
 .hideElites .weaponDamageEnemy.elite {
 	display: none !important;
 }
-.hideLords .weaponDamageEnemy.lord {
+.hideLords .weaponDamageEnemy.lord, .hideLords .weaponDamageEnemy.boss {
 	display: none !important;
 }
 
