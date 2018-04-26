@@ -1818,8 +1818,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		damageTypeValues[3].push(armorClassCritHeadshotDamage);
 		
 		normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage}</span></div>`;
-		headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
-		critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
+		headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
+		critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
 		critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;		
 	}
 	
