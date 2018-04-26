@@ -1809,7 +1809,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	
 		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
 		let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
-		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
+		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		
 		damageTypeValues[0].push(armorClassNormalDamage); 
