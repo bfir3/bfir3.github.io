@@ -1773,7 +1773,9 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		targetDamageProfile
 		targetDamageProfiles.push(damageProfile.targets[i]);
 	}
-	targetDamageProfiles.push(attackTemplate.damage_profile.default_target);
+	if (atackTemplate.damage_profile.default_target) {
+		targetDamageProfiles.push(attackTemplate.damage_profile.default_target);
+	}
 	
 	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 	
