@@ -1708,11 +1708,12 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 			let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable");
 			
 			// Attack Swing Table Header	
+			let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
 			
 			let targetIconContainersHtml = '';
-			if (attackTemplate.damage_profile.targets && attackTemplate.damage_profile.targets.length > 0) {
+			if (damageProfile.targets && damageProfile.targets.length > 0) {
 				let targetsHeaderHtml = '';
-				let targetCount = attackTemplate.damage_profile.targets.length + 1;
+				let targetCount = damageProfile.targets.length + 1;
 				
 				let iconsHtml = '';
 				
