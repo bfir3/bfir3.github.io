@@ -1791,9 +1791,11 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		let rawDamage = targetDamageProfile.power_distribution.attack / 10;
 		let scaledDamage = rawDamage * getScaledPowerLevel();
 		
+		let armorModifier = !targetDamageProfile.armor_modifier ? damageProfile.armor_modifier : targetDamageProfile.armor_modifier;
+		
 		// set super armor index to armor if no super armor value present
-		let armorIndex = armor.value == "6" && !targetDamageProfile.armor_modifier.attack[armor.value] ? 1 : armor.value - 1;		
-		let armorClassBaseNormalDamage = scaledDamage * targetDamageProfile.armor_modifier.attack[armorIndex];
+		let armorIndex = armor.value == "6" && !armorModifier.attack[armor.value] ? 1 : armor.value - 1;		
+		let armorClassBaseNormalDamage = scaledDamage * armorModifier.attack[armorIndex];
 		
 		let critModifier = !targetDamageProfile.critical_strike ? attackTemplate.additional_critical_strike_chance + 1 : targetDamageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
 		let armorClassBaseCritDamage = scaledDamage * critModifier;
