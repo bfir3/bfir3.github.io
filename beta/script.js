@@ -1797,7 +1797,14 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		let armorIndex = armor.value == "6" && !armorModifier.attack[armor.value] ? 1 : armor.value - 1;		
 		let armorClassBaseNormalDamage = scaledDamage * armorModifier.attack[armorIndex];
 		
-		let critModifier = !targetDamageProfile.critical_strike ? attackTemplate.additional_critical_strike_chance + 1 : targetDamageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
+		let critModifier = attackTemplate.additional_critical_strike_chance + 1;
+		if (targetDamageProfile.critical_strike) {
+			critModifier = targetDamageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
+		}
+		else if (damageProfile.critical_strike) {
+			critModifier = damageProfile.critical_strike.attack_armor_power_modifer[armorIndex];			
+		}
+		
 		let armorClassBaseCritDamage = scaledDamage * critModifier;
 	
 		let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
