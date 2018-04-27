@@ -1877,7 +1877,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			hitsToKillNormalHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillNormal}"><span class="center">${hitsToKillNormal}</span></div>`;
 			hitsToKillCritHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCrit}"><span class="center">${hitsToKillCrit}</span></div>`;
 			hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillHeadshot}"><span class="center">${hitsToKillHeadshot}</span></div>`;
-			hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}><span class="center">${hitsToKillCritHeadshot}</span></div>`;
+			hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 			
 		}
 
