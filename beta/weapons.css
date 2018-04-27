@@ -703,10 +703,6 @@ span.attackIcon {
 	margin-right: -2px;
 }
 
-.multiTargetAttack .targetValue:last-child {
-    border-right: none;
-}
-
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
     grid-template-rows: 30px auto;
 }
