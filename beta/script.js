@@ -1419,12 +1419,7 @@ $(function() {
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideInfantry');	
 			$(".weaponAttackStatsContainer").addClass('showInfantry');
-			
-			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton span:first-child").html('Hide Enemies');	
-				$(".weaponAttackStatsContainer").addClass('showEnemies');
-				$(".weaponAttackStatsContainer").removeClass('hideEnemies');
-			}
+			$(".weaponAttackStatsContainer").addClass('showLegend');
 		}
 	}));
 	
@@ -1435,11 +1430,8 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideArmored');	
-			$(".weaponAttackStatsContainer").addClass('showArmored');	
-			
-			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton").click();
-			}	
+			$(".weaponAttackStatsContainer").addClass('showArmored');
+			$(".weaponAttackStatsContainer").addClass('showLegend');
 		}
 	}));
 	
@@ -1451,10 +1443,7 @@ $(function() {
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideMonsters');	
 			$(".weaponAttackStatsContainer").addClass('showMonsters');
-			
-			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton").click();
-			}		
+			$(".weaponAttackStatsContainer").addClass('showLegend');
 		}
 	}));
 	
@@ -1465,26 +1454,20 @@ $(function() {
 		}
 		else {
 			$(".weaponAttackStatsContainer").removeClass('hideBerserkers');	
-			$(".weaponAttackStatsContainer").addClass('showBerserkers');
-			
-			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton").click();
-			}		
+			$(".weaponAttackStatsContainer").addClass('showBerserkers');			
+			$(".weaponAttackStatsContainer").addClass('showLegend');
 		}
 	}));
 	
 	$(".weaponsDataPage").on("click", ".weaponDamageType.super.armor", ((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showSuperArmor')) {
-			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');
-			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');
+			$(".weaponAttackStatsContainer").removeClass('showSuperArmor');
+			$(".weaponAttackStatsContainer").addClass('hideSuperArmor');
 		}
 		else {
-			$(".weaponAttackStatsContainer").toggleClass('hideSuperArmor');	
-			$(".weaponAttackStatsContainer").toggleClass('showSuperArmor');	
-			
-			if (!$(".weaponAttackStatsContainer").hasClass('showEnemies')) {
-				$(".showEnemiesButton").click();
-			}	
+			$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');	
+			$(".weaponAttackStatsContainer").addClass('showSuperArmor');	
+			$(".weaponAttackStatsContainer").addClass('showLegend');
 		}
 	}));
 });
