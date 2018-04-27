@@ -1969,10 +1969,10 @@ function renderAttackData(attackTemplate) {
 			armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
 		}
 		
-		let	normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}+${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
-		let	headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)}+${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
-		let	critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)}+${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
-		let	critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}+${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
+		let	normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}+${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
+		let	headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)}+${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
+		let	critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)}+${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
+		let	critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}+${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
 								<div class="damageType grid"><span class="center">${armor.name}</span></div>
