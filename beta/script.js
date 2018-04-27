@@ -2078,7 +2078,7 @@ function getBreedsForArmorClass(armor) {
 		return;
 	}
 	
-	let breedsForArmor = _breedData.filter((x) => { return armor.armorCategory == x.value && !x.name.startsWith('<') && x.type != "Critter"; }).map((x) => {
+	let breedsForArmor = _breedData.filter((x) => { return armor.value == x.armorCategory && !x.name.startsWith('<') && x.type != "Critter"; }).map((x) => {
 		if (x.name.indexOf("Poison Wind Globadier") > 0) {
 			x.name = "Globadier";
 		}
