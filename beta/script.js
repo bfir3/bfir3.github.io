@@ -2077,7 +2077,50 @@ function getBreedsForArmorClass(armor) {
 	if (!_breedData) {
 		return;
 	}
-	return _breedData.filter((x) => { return x.armorCategory == armor.value && !x.name.startsWith('<') && x.type != "Critter"; })
+	
+	let breedsForArmor = _breedData.filter((x) => { return armor.armorCategory == x.value && !x.name.startsWith('<') && x.type != "Critter"; }).map((x) => {
+		if (x.name.indexOf("Poison Wind Globadier") > 0) {
+			x.name = "Globadier";
+		}
+		else if (x.name.indexOf("Lifeleech Sorcerer")) {
+			x.name = "Leech";
+		}
+		else if (x.name.indexOf("Nurgle Sorcerer") ) {
+			x.name = "Blight"
+		}
+		else if (x.name.indexOf("Stormvermin") ) {
+			x.name = "Stormvermin (all)"
+		}
+		else if (x.name.indexOf("Ratling Gunner") ) {
+			x.name = "Gunner"
+		}
+		else if (x.name.indexOf("Warpfire Thrower") ) {
+			x.name = "Warpfire"
+		}
+		else if (x.type == "Boss") {
+			x.name = "Mini-Boss";
+		}
+	});
+	
+	let groupedBreeds = [];
+
+	for (let i = 0; i < breedsForArmor.length; i++) {
+		if (groupedBreeds.length > 0 && groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp).length == 0) {
+			groupedBreeds.push(breedsForArmor[i]);
+		}
+		else if (groupedBreeds.length > 0) {
+			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
+			breed.name += `, ${breedsForArmor[i].name}`;
+		} else {
+			groupedBreeds.push(breedsForArmor[i]);
+		}
+	}
+	
+	for (let breed of groupedBreeds) {
+		
+	}
+	
+	return groupedBreeds;
 }
 
 function renderArmorClassEnemies(armor, attackTemplate) {
