@@ -1819,8 +1819,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		}
 		else {
 			normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage).toFixed(2)}</span></div>`;
-			headshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotDamage}).toFixed(2)}</span></div>`;
-			critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage}).toFixed(2)}</span></div>`;
+			headshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotDamage).toFixed(2)}</span></div>`;
+			critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage).toFixed(2)}</span></div>`;
 			critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotDamage).toFixed(2)}</span></div>`;	
 		}	
 	}
