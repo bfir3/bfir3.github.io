@@ -1829,10 +1829,10 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		
 		
 		if (!attackTemplate.damage_profile) {
-			normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}+${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
-			headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)}+${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
-			critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)}+${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
-			critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}+${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
+			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}})</span></div>`;
+			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)})})</span></div>`;
+			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
+			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}})</span></div>`;
 		}
 		else {
 			normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage}</span></div>`;
@@ -1973,10 +1973,10 @@ function renderAttackData(attackTemplate) {
 			armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
 			armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
 				
-			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}+${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
-			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)}+${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
-			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)}+${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
-			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}+${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
+			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}})</span></div>`;
+			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)})})</span></div>`;
+			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
+			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}})</span></div>`;
 		}
 		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
