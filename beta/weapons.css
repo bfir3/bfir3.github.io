@@ -763,6 +763,22 @@ span.attackIcon {
     background: gray;
     cursor: initial;
 }
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(1) {
+    background: #9a3b3b;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(2) {
+    background: #8c2222;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(3) {
+    background: #6b0a0a;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(4) {
+    background: #5d0707;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(5) {
+    background: #4c0303;
+}
+
 .multiTargetAttack .damageCell .targetValue:nth-child(1) {
     background: #6b0a0a;
 }
