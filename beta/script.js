@@ -1962,12 +1962,24 @@ function renderAttackData(attackTemplate) {
 		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
+		if (!attackTemplate.damage_profile) {
+			armorClassNormalDamage = armorClassNormalDamage * 2;
+			armorClassCritDamage = armorClassCritDamage * 2;
+			armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
+			armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
+		}
+		
+		let	normalDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)}+${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
+		let	headshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)}+${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
+		let	critDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)}+${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
+		let	critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)}+${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
+		
 		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
 								<div class="damageType grid"><span class="center">${armor.name}</span></div>
-								<div class="normalDamage damageCell grid"><span class="center">${armorClassNormalDamage}</span></div>
-								<div class="headshotDamage damageCell grid"><span class="center">${armorClassHeadshotDamage}</span></div>
-								<div class="critDamage damageCell grid"><span class="center">${armorClassCritDamage}</span></div>
-								<div class="critHeadshotDamage damageCell grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>
+								<div class="normalDamage damageCell grid">${normalDamageHtml}</div>
+								<div class="headshotDamage damageCell grid">${headshotDamageHtml}</span></div>
+								<div class="critDamage damageCell grid">${critDamageHtml}</div>
+								<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
 							</div>`;
 		attackSwingDataTable.append(armorHeaderRow);
 		
