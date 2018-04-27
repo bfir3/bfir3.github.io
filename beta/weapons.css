@@ -767,18 +767,18 @@ span.attackIcon {
     background: gray;
     cursor: initial;
 }
-.damageCell .targetValue:nth-child(1) {
+.multiTargetAttack .damageCell .targetValue:nth-child(1) {
     background: #9a3b3b;
 }
-.damageCell .targetValue:nth-child(2) {
+.multiTargetAttack .damageCell .targetValue:nth-child(2) {
     background: #8c2222;
 }
-.damageCell .targetValue:nth-child(3) {
+.multiTargetAttack .damageCell .targetValue:nth-child(3) {
     background: #6b0a0a;
 }
-.damageCell .targetValue:nth-child(4) {
+.multiTargetAttack .damageCell .targetValue:nth-child(4) {
     background: #5d0707;
 }
-.damageCell .targetValue:nth-child(5) {
+.multiTargetAttack .damageCell .targetValue:nth-child(5) {
     background: #4c0303;
 }
