@@ -764,17 +764,35 @@ span.attackIcon {
     cursor: initial;
 }
 .multiTargetAttack .damageCell .targetValue:nth-child(1) {
-    background: #9a3b3b;
+    background: #6b0a0a;
 }
 .multiTargetAttack .damageCell .targetValue:nth-child(2) {
-    background: #8c2222;
+    background: #6b0a0a;
 }
 .multiTargetAttack .damageCell .targetValue:nth-child(3) {
     background: #6b0a0a;
 }
 .multiTargetAttack .damageCell .targetValue:nth-child(4) {
-    background: #5d0707;
+    background: #6b0a0a;
 }
 .multiTargetAttack .damageCell .targetValue:nth-child(5) {
-    background: #4c0303;
+    background: #6b0a0a;
+}
+.targetValue.hits1 {
+    background: #8BC34A !important;
+}
+.targetValue.hits2 {
+    background: #92893c !important;
+}
+.targetValue.hits3 {
+    background: #6c8822 !important;
+}
+.targetValue.hits4 {
+    background: #508415 !important;
+}
+.targetValue.hits5 {
+    background: #75570b !important;
+}
+.targetValue.hits6 {
+    background: #3e690c !important;
 }
