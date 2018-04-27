@@ -68,7 +68,6 @@
 }
 
 .weaponDamageTable.grid>div>* {
-    border-right: 1px solid black;
     padding: 7px;
 }
 
@@ -697,11 +696,10 @@ span.attackIcon {
     grid-template-rows: 100%;
     justify-content: center;
     align-content: center;
-    margin-left: 1px;
 }
 .multiTargetAttack .targetValue {
     border: 1px solid black;
-    margin: -2px;
+    margin: -1px;
 }
 
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
