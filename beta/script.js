@@ -2082,19 +2082,19 @@ function getBreedsForArmorClass(armor) {
 		if (x.name.indexOf("Poison Wind Globadier") > 0) {
 			x.name = "Globadier";
 		}
-		else if (x.name.indexOf("Lifeleech Sorcerer")) {
+		else if (x.name.indexOf("Lifeleech Sorcerer") > 0) {
 			x.name = "Leech";
 		}
-		else if (x.name.indexOf("Nurgle Sorcerer") ) {
+		else if (x.name.indexOf("Nurgle Sorcerer") > 0) {
 			x.name = "Blight";
 		}
-		else if (x.name.indexOf("Stormvermin") ) {
+		else if (x.name.indexOf("Stormvermin") > 0) {
 			x.name = "Stormvermin (all)"
 		}
-		else if (x.name.indexOf("Ratling Gunner") ) {
+		else if (x.name.indexOf("Ratling Gunner") > 0) {
 			x.name = "Gunner"
 		}
-		else if (x.name.indexOf("Warpfire Thrower") ) {
+		else if (x.name.indexOf("Warpfire Thrower") > 0) {
 			x.name = "Warpfire"
 		}
 		else if (x.type == "Boss") {
