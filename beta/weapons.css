@@ -812,3 +812,16 @@ span.attackIcon {
 .targetValue.hits6 {
     background: #3e690c !important;
 }
+.sectionTitle::after {
+    content: '-';
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 21px);
+    font-size: 200%;
+}
+
+.sectionTitle.collapsed::after {
+    content: '+';
+    right: 6px;
+    top: calc(50% - 18px);
+}
