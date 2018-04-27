@@ -2086,7 +2086,7 @@ function getBreedsForArmorClass(armor) {
 			x.name = "Leech";
 		}
 		else if (x.name.indexOf("Nurgle Sorcerer") ) {
-			x.name = "Blight"
+			x.name = "Blight";
 		}
 		else if (x.name.indexOf("Stormvermin") ) {
 			x.name = "Stormvermin (all)"
@@ -2100,6 +2100,7 @@ function getBreedsForArmorClass(armor) {
 		else if (x.type == "Boss") {
 			x.name = "Mini-Boss";
 		}
+		return x;
 	});
 	
 	let groupedBreeds = [];
