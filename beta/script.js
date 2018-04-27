@@ -2088,12 +2088,6 @@ function getBreedsForArmorClass(armor) {
 		}
 		else if (groupedBreeds.length > 0) {
 			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
-			
-			if (!breed) { 
-				
-			}
-			else {
-			}
 			breed.name += `, ${breedsForArmor[i].name}`;
 		} else {
 			groupedBreeds.push(breedsForArmor[i]);
