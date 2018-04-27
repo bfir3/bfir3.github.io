@@ -700,7 +700,7 @@ span.attackIcon {
 }
 .multiTargetAttack .targetValue {
     border-right: 1px solid black;
-	margin-right: -2px;
+	margin-right: -1px;
 }
 
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
