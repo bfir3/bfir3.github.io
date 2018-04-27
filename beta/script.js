@@ -2084,13 +2084,13 @@ function getBreedsForArmorClass(armor) {
 
 	for (let i = 0; i < breedsForArmor.length; i++) {
 		if (groupedBreeds.length > 0 && groupedBreeds.filter((x) => { return x.legendHp == breedsForArmor[i].legendHp }).length == 0) {
-			groupedBreeds.push(breedsForArmor[i]);
+			groupedBreeds.push(Object.assign({}, breedsForArmor[i]));
 		}
 		else if (groupedBreeds.length > 0) {
-			let breed = Object.assign({}, groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0]);
+			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
 			breed.name += `, ${breedsForArmor[i].name}`;
 		} else {
-			groupedBreeds.push(breedsForArmor[i]);
+			groupedBreeds.push(Object.assign({}, breedsForArmor[i]));
 		}
 	}
 	
