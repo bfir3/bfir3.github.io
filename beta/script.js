@@ -2087,15 +2087,11 @@ function getBreedsForArmorClass(armor) {
 			groupedBreeds.push(breedsForArmor[i]);
 		}
 		else if (groupedBreeds.length > 0) {
-			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
+			let breed = Object.assign({}, groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0]);
 			breed.name += `, ${breedsForArmor[i].name}`;
 		} else {
 			groupedBreeds.push(breedsForArmor[i]);
 		}
-	}
-	
-	for (let breed of groupedBreeds) {
-		
 	}
 	
 	return groupedBreeds;
