@@ -697,14 +697,11 @@ span.attackIcon {
     grid-template-rows: 100%;
     justify-content: center;
     align-content: center;
+    margin-left: 1px;
 }
 .multiTargetAttack .targetValue {
-    border-right: 1px solid black;
-	margin-right: -2px;
-}
-
-.multiTargetAttack .targetValue:last-child {
-    border-right: none;
+    border: 1px solid black;
+    margin: -2px;
 }
 
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
