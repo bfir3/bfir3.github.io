@@ -770,7 +770,7 @@ span.attackIcon {
     background: #8c2222;
 }
 .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(3) {
-    background: #6b0a0a;
+    background: #790303;
 }
 .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(4) {
     background: #5d0707;
