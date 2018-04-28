@@ -2143,15 +2143,15 @@ function renderAttackData(attackTemplate) {
 		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(damageProfile.default_target, armor.value))) * 4) / 4).toFixed(2);
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
-		let armorClassNormalCleave = getNormalCleave(attackTemplate, targetDamageProfile, armor);
-		let armorClassCritCleave = getCritCleave(attackTemplate, targetDamageProfile, armor);
-		let armorClassHeadshotCleave = getHeadshotCleave(attackTemplate, targetDamageProfile, armor);
-		let armorClassCritHeadshotCleave = getCritHeadshotCleave(attackTemplate, targetDamageProfile, armor);
+		let armorClassNormalCleave = getNormalCleave(attackTemplate, damageProfile, armor);
+		let armorClassCritCleave = getCritCleave(attackTemplate, damageProfile, armor);
+		let armorClassHeadshotCleave = getHeadshotCleave(attackTemplate, damageProfile, armor);
+		let armorClassCritHeadshotCleave = getCritHeadshotCleave(attackTemplate, damageProfile, armor);
 		
-		let armorClassNormalStagger = getNormalStagger(attackTemplate, targetDamageProfile, armor);
-		let armorClassCritStagger = getCritStagger(attackTemplate, targetDamageProfile, armor);
-		let armorClassHeadshotStagger = getHeadshotStagger(attackTemplate, targetDamageProfile, armor);
-		let armorClassCritHeadshotStagger = getCritHeadshotStagger(attackTemplate, targetDamageProfile, armor);
+		let armorClassNormalStagger = getNormalStagger(attackTemplate, damageProfile, armor);
+		let armorClassCritStagger = getCritStagger(attackTemplate, damageProfile, armor);
+		let armorClassHeadshotStagger = getHeadshotStagger(attackTemplate, damageProfile, armor);
+		let armorClassCritHeadshotStagger = getCritHeadshotStagger(attackTemplate, damageProfile, armor);
 		
 		let	normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage}</span></div>`;
 		let	headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
