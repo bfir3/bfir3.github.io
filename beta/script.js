@@ -2116,17 +2116,17 @@ function renderAttackData(attackTemplate) {
 		
 	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
 	let rawDamage = damageProfile.default_target.power_distribution.attack / 10;
-	let scaledDamage = rawDamage * getScaledPowerLevel();
-		
-	if (damageProfile.targets && damageProfile.targets.length > 0) {
-		renderMultiTargetAttackData(attackTemplate, armor);
-		return;
-	}
+	let scaledDamage = rawDamage * getScaledPowerLevel();		
 	
 	let i = 0;
 	for (let armor of _armorData) {
 		if (armor.value == "4") {
 			i++;
+			continue;
+		}
+		
+		if (damageProfile.targets && damageProfile.targets.length > 0) {
+			renderMultiTargetAttackData(attackTemplate, armor);
 			continue;
 		}
 		
