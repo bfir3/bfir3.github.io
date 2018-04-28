@@ -1865,8 +1865,11 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		}
 
 		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
+		let cloneBreed = Object.assign({}, breed);
+		cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
+		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-						   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
+						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 						   <div class="normalDamage damageCell grid">
@@ -2011,8 +2014,11 @@ function renderAttackData(attackTemplate) {
 			}
 			
 			let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
+			let cloneBreed = Object.assign({}, breed);
+			cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
+			
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-							   <div class="enemyName grid"><span class="center">${breed.name}</span></div>
+							   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 							   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 							   <div class="normalDamage damageCell grid">
