@@ -1858,12 +1858,12 @@ function getHeadshotStagger(attackTemplate, targetDamageProfile, armor) {
 	return modifiedImpact;	
 }
 
-function getCritHeadshotStagger(attackTemplate, targetDamageProfile) {
+function getCritHeadshotStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
 		return;
 	}
 	
-	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile, armor);
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
 	let scaledImpact = baseImpact * getScaledPowerLevel();
 	let modifiedImpact = scaledImpact * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value);
 	return modifiedImpact;	
