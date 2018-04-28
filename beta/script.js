@@ -1891,6 +1891,16 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	let critDamageHtml = '';
 	let critHeadshotDamageHtml = '';
 	
+	let normalCleaveHtml = '';
+	let headshotCleaveHtml = '';
+	let critCleaveHtml = '';
+	let critHeadshotCleaveHtml = '';
+	
+	let normalStaggerHtml = '';
+	let headshotStaggerHtml = '';
+	let critStaggerHtml = '';
+	let critHeadshotStaggerHtml = '';
+	
 	let normalHitsToKillHtml = '';
 	let headshotHitsToKillHtml = '';
 	let critHitsToKillHtml = '';
