@@ -2083,8 +2083,10 @@ function getBreedsForArmorClass(armor) {
 	let groupedBreeds = [];
 
 	for (let i = 0; i < breedsForArmor.length; i++) {
-		if (groupedBreeds.length > 0 && groupedBreeds.filter((x) => { return x.legendHp == breedsForArmor[i].legendHp }).length == 0) {
-			groupedBreeds.push(Object.assign({}, breedsForArmor[i]));
+		let cloneBreed = Object.assign({}, breedsForArmor[i]);
+		cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
+		if (groupedBreeds.length > 0 && groupedBreeds.filter((x) => { return x.legendHp == cloneBreed.legendHp }).length == 0) {
+			groupedBreeds.push(cloneBreed);
 		}
 		else if (groupedBreeds.length > 0) {
 			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
@@ -2093,11 +2095,11 @@ function getBreedsForArmorClass(armor) {
 				breed.displayName = "Shield/Stormvermin";
 			}
 			else {
-				breed.displayName += `, ${breedsForArmor[i].displayName}`;
+				breed.displayName += `, ${cloneBreed.displayName}`;
 			}
 			
 		} else {
-			groupedBreeds.push(Object.assign({}, breedsForArmor[i]));
+			groupedBreeds.push(cloneBreed));
 		}
 	}
 	
