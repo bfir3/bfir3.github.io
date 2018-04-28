@@ -2095,13 +2095,11 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 								${hitsToKillCritHtml}				
 								${targetsCleavedCritHtml}
 								${targetsStaggeredCritHtml}
-							  </div>
 						   </div>
 						   <div class="critHeadshotDamage damageCell grid">
 								${hitsToKillCritHeadshotHtml}
 								${targetsCleavedCritHeadshotHtml}
 								${targetsStaggeredCritHeadshotHtml}
-							  </div>
 						   </div>
 						</div>`;
 		attackSwingDataTable.append(breedRow);
