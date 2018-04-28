@@ -15,6 +15,8 @@
 .weaponDamageTable.grid {
 	grid-row-gap: 1px;
 	margin-bottom: 20px;
+	grid-template-rows: 40px;
+	grid-auto-rows: minmax(30px, auto);
 }
 
 .weaponAttackSwingIcon.grid {
@@ -68,8 +70,8 @@
 }
 
 .weaponDamageTable.grid>div>* {
-    border-right: 1px solid black;
-    padding: 7px;
+    /* border-right: 1px solid black; */
+    /* padding: 7px; */
 }
 
 .weaponAttackSwings.flex {
@@ -99,7 +101,7 @@ span.arrow-down {
 
 .weaponDamageType>.damageType {
     grid-column: 1 / span 3;
-    padding: 7px !important;
+    /* padding: 7px !important; */
 }
 
 .heart {
@@ -178,8 +180,9 @@ span.enemyLegendName {
 }
 
 .enemyLegendRow, .attackTableTitle {
-    padding: 5px 0;
+    /* padding: 5px 0; */
     width: calc(100% - 1px);
+    height: 100%;
 }
 
 .enemyLegendIcon.skaven {
@@ -622,7 +625,6 @@ span.attackIcon {
 }
 .weaponDamageType{
 	cursor: pointer;
-	/* margin-right: 0.5px; */
 }
 .showInfantry .weaponDamageEnemy.infantry {
     display: grid;
@@ -671,16 +673,28 @@ span.attackIcon {
 	display: none !important;
 }
 
-.multiTargetAttack.targets2 .targetValueCell {
+.multiTargetAttack .weaponDamageEnemy>div {
+   /* padding: 0 !important; */
+}
+
+.multiTargetAttack.targets2 .targetValueCell, 
+.multiTargetAttack.targets2 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets2 .weaponDamageHeader>div:nth-child(n+3) {
     grid-template-columns: repeat(2, 50%);
 }
-.multiTargetAttack.targets3 .targetValueCell {
+.multiTargetAttack.targets3 .targetValueCell, 
+.multiTargetAttack.targets3 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets3 .weaponDamageHeader>div:nth-child(n+3)  {
     grid-template-columns: repeat(3, 33.33%);
 }
-.multiTargetAttack.targets4 .targetValueCell {
+.multiTargetAttack.targets4 .targetValueCell, 
+.multiTargetAttack.targets4 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets4 .weaponDamageHeader>div:nth-child(n+3)  {
     grid-template-columns: repeat(4, 25%);
 }
-.multiTargetAttack.targets5 .targetValueCell {
+.multiTargetAttack.targets5 .targetValueCell, 
+.multiTargetAttack.targets5 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets5 .weaponDamageHeader>div:nth-child(n+3)  {
     grid-template-columns: repeat(5, 20%);
     font-size: 12px;
 }
@@ -697,7 +711,6 @@ span.attackIcon {
 }
 .multiTargetAttack .targetValue {
     outline: 1px solid black;
-    margin-left: 1px;
 }
 
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
@@ -791,11 +804,7 @@ span.attackIcon {
     /* background: #441a1a; */
 /* } */
 
-.multiTargetAttack .weaponDamageEnemy .damageCell .targetValue:nth-child(1),
-.multiTargetAttack .weaponDamageEnemy .damageCell .targetValue:nth-child(2),
-.multiTargetAttack .weaponDamageEnemy .damageCell .targetValue:nth-child(3),
-.multiTargetAttack .weaponDamageEnemy .damageCell .targetValue:nth-child(4),
-.multiTargetAttack .weaponDamageEnemy .damageCell .targetValue:nth-child(5) {
+.multiTargetAttack .weaponDamageEnemy .targetValue {
     background: #4e4e4e;
     color: grey
 }
@@ -851,7 +860,7 @@ span.attackIcon {
 
 .cleaveCell, .damageCell, .staggerCell {
     border-right: none !important;
-    margin-left: -1px;
+    /* margin-left: -1px; */
 }
 .tableTypeButton.selected {
     outline: 1px solid #fff;
@@ -860,9 +869,10 @@ span.attackIcon {
     border-right: 1px solid black !important;
     border: blue;
 }
-.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div,
-.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
-    border-right: 1px solid black !important;
+.attackTemplateDataTable .weaponDamageEnemy>div,
+.attackTemplateDataTable .weaponDamageType>div {
+    outline: 1px solid black !important;
+    margin-right: 1px;
 }
 .attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div .targetValue {
     /* margin-left: 1px; */
