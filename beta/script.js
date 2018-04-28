@@ -1333,6 +1333,33 @@ $(function() {
 		}
 	});
 	
+	$(".showDamageButton").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showDamage')) {
+			return;
+		} 
+		$(".weaponAttackStatsContainer").addClass('showDamage');
+		$(".tableTypeButton").removeClass('selected');
+		$(e.currentTarget).addClass('selected');		
+	});
+	
+	$(".showCleaveButton").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showCleave')) {
+			return;
+		} 
+		$(".weaponAttackStatsContainer").addClass('showCleave');
+		$(".tableTypeButton").removeClass('selected');
+		$(e.currentTarget).addClass('selected');		
+	});
+	
+	$(".showStaggerButton").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showStagger')) {
+			return;
+		} 
+		$(".weaponAttackStatsContainer").addClass('showStagger');
+		$(".tableTypeButton").removeClass('selected');
+		$(e.currentTarget).addClass('selected');		
+	});
+	
 	$(".strengthButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showStrength')) {
 			$(".weaponAttackStatsContainer").removeClass('showStrength');

@@ -584,10 +584,6 @@ span.tableTitle {
     display: none;
 }
 
-.showEnemyButton {
-	display: none;
-}
-
 .showEnemies .showEnemyButton {
 	display: grid;
 }
@@ -757,11 +753,6 @@ span.attackIcon {
 
 .multiTargetAttack .damageCell>div {
     position: relative;
-}
-
-.weaponDataTableButton.damageCleaveStaggerButton, .weaponDataTableButton.showStrengthButton {
-    background: gray;
-    cursor: initial;
 }
 
 .weaponDamageType .damageCell {
