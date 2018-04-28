@@ -1925,15 +1925,15 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		
-		let armorClassNormalCleave = getNormalCleave(attackTemplate, targetDamageProfile);
-		let armorClassCritCleave = getCritCleave(attackTemplate, targetDamageProfile);
-		let armorClassHeadshotCleave = getHeadshotCleave(attackTemplate, targetDamageProfile);
-		let armorClassCritHeadshotCleave = getCritHeadshotCleave(attackTemplate, targetDamageProfile);
+		let armorClassNormalCleave = getNormalCleave(attackTemplate, targetDamageProfile, armor);
+		let armorClassCritCleave = getCritCleave(attackTemplate, targetDamageProfile, armor);
+		let armorClassHeadshotCleave = getHeadshotCleave(attackTemplate, targetDamageProfile, armor);
+		let armorClassCritHeadshotCleave = getCritHeadshotCleave(attackTemplate, targetDamageProfile, armor);
 		
-		let armorClassNormalStagger = getNormalStagger(attackTemplate, targetDamageProfile);
-		let armorClassCritStagger = getCritStagger(attackTemplate, targetDamageProfile);
-		let armorClassHeadshotStagger = getHeadshotStagger(attackTemplate, targetDamageProfile);
-		let armorClassCritHeadshotStagger = getCritHeadshotStagger(attackTemplate, targetDamageProfile);
+		let armorClassNormalStagger = getNormalStagger(attackTemplate, targetDamageProfile, armor);
+		let armorClassCritStagger = getCritStagger(attackTemplate, targetDamageProfile, armor);
+		let armorClassHeadshotStagger = getHeadshotStagger(attackTemplate, targetDamageProfile, armor);
+		let armorClassCritHeadshotStagger = getCritHeadshotStagger(attackTemplate, targetDamageProfile, armor);
 		
 		if (!attackTemplate.damage_profile) {
 			armorClassNormalDamage = armorClassNormalDamage * 2;
