@@ -1300,6 +1300,12 @@ $(function() {
 	});
 	
 	$(".page").on("click", ".sectionTitle", ((e) => { 
+		if($(e.currentTarget).hasClass('collapsed')) {
+			$(e.currentTarget).removeClass('collapsed');
+		}
+		else {
+			$(e.currentTarget).addClass('collapsed')
+		}
 		$(e.currentTarget).next().toggle(); 
 	}));
 	
