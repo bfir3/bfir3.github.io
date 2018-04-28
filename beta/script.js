@@ -1639,7 +1639,7 @@ function getAttackSwingDirectionClass(attackTemplate) {
 			attackTemplate.attack_name.indexOf("down") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("right") >= 0 ? "swingRight" :
 			attackTemplate.attack_name.indexOf("left") >= 0 ? "swingLeft" :
-			attackTemplate.attack_name.indexOf("up") >= 0 ? "swingUp" :
+			attackTemplate.attack_name.indexOf("up") >= 0 || attackTemplate.attack_name.indexOf("heavy_attack") >= 0 ? "swingUp" :
 			attackTemplate.attack_name.indexOf("bopp") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("last") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("stab") >= 0 ? "swingStab" :
