@@ -2052,20 +2052,20 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillHeadshot}"><span class="center">${hitsToKillHeadshot}</span></div>`;
 			hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 			
-			let targetsCleavedNormal = getTargetsCleaved(breed, armorClassNormalCleave);
-			let targetsCleavedCrit = getTargetsCleaved(breed, armorClassCritCleave);
-			let targetsCleavedHeadshot = getTargetsCleaved(breed, armorClassHeadshotCleave);
-			let targetsCleavedCritHeadshot = getTargetsCleaved(breed, armorClassCritHeadshotCleave);
+			let targetsCleavedNormal = getTargetsCleaved(breed, cleaveTypeValues[0][i]);
+			let targetsCleavedCrit = getTargetsCleaved(breed, cleaveTypeValues[1][i]);
+			let targetsCleavedHeadshot = getTargetsCleaved(breed, cleaveTypeValues[2][i]);
+			let targetsCleavedCritHeadshot = getTargetsCleaved(breed, cleaveTypeValues[3][i]);
 			
 			targetsCleavedNormalHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedNormal}"><span class="center">${targetsCleavedNormal}</span></div>`;
 			targetsCleavedCritHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedCrit}"><span class="center">${targetsCleavedCrit}</span></div>`;
 			targetsCleavedHeadshotHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedHeadshot}"><span class="center">${targetsCleavedHeadshot}</span></div>`;
 			targetsCleavedCritHeadshotHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedCritHeadshot}"><span class="center">${targetsCleavedCritHeadshot}</span></div>`;		
 			
-			let targetsStaggeredNormal = getTargetsStaggered(breed, armorClassNormalCleave);
-			let targetsStaggeredCrit = getTargetsStaggered(breed, armorClassCritCleave);
-			let targetsStaggeredHeadshot = getTargetsStaggered(breed, armorClassHeadshotCleave);
-			let targetsStaggeredCritHeadshot = getTargetsStaggered(breed, armorClassCritHeadshotCleave);	
+			let targetsStaggeredNormal = getTargetsStaggered(breed, staggerTypeValues[0][i]);
+			let targetsStaggeredCrit = getTargetsStaggered(breed, staggerTypeValues[1][i]);
+			let targetsStaggeredHeadshot = getTargetsStaggered(breed, staggerTypeValues[2][i]);
+			let targetsStaggeredCritHeadshot = getTargetsStaggered(breed, staggerTypeValues[3][i]);	
 			
 			targetsStaggeredNormalHtml += `<div class="targetValue staggerIndicator grid cleaves${targetsStaggeredNormal}"><span class="center">${targetsStaggeredNormal}</span></div>`;
 			targetsStaggeredCritHtml += `<div class="targetValue staggerIndicator grid cleaves${targetsStaggeredCrit}"><span class="center">${targetsStaggeredCrit}</span></div>`;
