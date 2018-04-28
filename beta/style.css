@@ -1203,12 +1203,6 @@ table#myBuildsTable {
 .showStagger .cleaveIndicator, .showStagger .damageIndicator {
     display: none;
 }
-.weaponDamageTable.damageTable .cleaveIndicator, .weaponDamageTable.damageTable .staggerIndicator {
-    display: none;
-}
-.weaponDamageTable.damageTable .cleaveIndicator, .weaponDamageTable.damageTable .staggerIndicator {
-    display: none;
-}
 
 .center {
     justify-self: center;
