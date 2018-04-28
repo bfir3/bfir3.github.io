@@ -355,7 +355,7 @@ span.weaponStatValue {
     top: -5px;
 }
 
-.swingUp span.attackIcon::after {
+.swingUp span.attackIcon::after, .swingStab span.attackIcon::after  {
     content: '\2191';
     position: relative;
     top: 0px;
