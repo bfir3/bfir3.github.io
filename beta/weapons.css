@@ -869,8 +869,9 @@ span.attackIcon {
     border-right: 1px solid black !important;
     border: blue;
 }
-.attackTemplateDataTable .weaponDamageEnemy>div,
-.attackTemplateDataTable .weaponDamageType>div {
+.enemyName, .enemyRace, .enemyHealth,
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div,
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
     outline: 1px solid black !important;
     margin-right: 1px;
 }
