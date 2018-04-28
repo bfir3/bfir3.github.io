@@ -1980,15 +1980,15 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotDamage)}</span></div>`;	
 		}	
 		
-		let normalCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalCleave)}</span></div>`;
-		let headshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotCleave)}</span></div>`;
-		let critCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritCleave)}</span></div>`;
-		let critHeadshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotCleave)}</span></div>`;	
+		normalCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalCleave)}</span></div>`;
+		headshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotCleave)}</span></div>`;
+		critCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritCleave)}</span></div>`;
+		critHeadshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotCleave)}</span></div>`;	
 		
-		let normalStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalStagger)}</span></div>`;
-		let headshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritStagger)}</span></div>`;
-		let critStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotStagger)}</span></div>`;
-		let critHeadshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotStagger)}</span></div>`;	
+		normalStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalStagger)}</span></div>`;
+		headshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritStagger)}</span></div>`;
+		critStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotStagger)}</span></div>`;
+		critHeadshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotStagger)}</span></div>`;	
 	}
 	
 	let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
