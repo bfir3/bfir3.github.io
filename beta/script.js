@@ -651,17 +651,7 @@ function getCareerIndex() {
 function initData() {
 	initFirestore();
 	let i = 0;
-	/*
-	for (let meleeWeapon of _data.melee_weapons) {
-		$(".meleeSelection").append(new Option(meleeWeapon.name, i++));
-	}
 	
-	i = 0;
-	for (let rangeWeapon of _data.range_weapons) {
-		$(".rangeSelection").append(new Option(rangeWeapon.name, i++));
-	*/
-	
-	i = 0;
 	for (let meleeTrait of _data.melee_traits) {
 		$(".meleeTraitSelection").append(new Option(meleeTrait.name, i++));
 	}
@@ -1777,6 +1767,108 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 	}	
 }
 
+function getBaseCleave(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	return attackTemplate.damage_profile.cleave_distribution.attack * 0.05;
+}
+
+function getNormalCleave(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseCleave = getBaseCleave(attackTemplate, targetDamageProfile);
+	let scaledCleave = baseCleave * getScaledPowerLevel();
+	return scaledCleave;
+}
+
+function getCritCleave(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseCleave = getBaseCleave(attackTemplate, targetDamageProfile);
+	let scaledCleave = baseCleave * getScaledPowerLevel();
+	let modifiedCleave = scaledCleave * getAdditionalCritMultiplier(targetDamageProfile, armor.value);
+	return scaledCleave;	
+}
+
+function getHeadshotCleave(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseCleave = getBaseCleave(attackTemplate, targetDamageProfile);
+	let scaledCleave = baseCleave * getScaledPowerLevel();
+	let modifiedCleave = scaledCleave * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value);
+	return scaledCleave;
+}
+
+function getCritHeadshotCleave(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseCleave = getBaseCleave(attackTemplate, targetDamageProfile);
+	let scaledCleave = baseCleave * getScaledPowerLevel();
+	let modifiedCleave = scaledCleave * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value);
+	return scaledCleave;
+}
+
+function getBaseStagger(attackTemplate, targetDamageProfile, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	return attackTemplate.damage_profile.cleave_distribution.impact * 0.05;
+}
+
+function getNormalStagger(attackTemplate, targetDamageProfile) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
+	let scaledImpact = baseImpact * getScaledPowerLevel();
+	return scaledImpact;
+}
+
+function getCritStagger(attackTemplate, targetDamageProfile) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
+	let scaledImpact = baseImpact * getScaledPowerLevel();
+	let modifiedImpact = scaledImpact * getAdditionalCritMultiplier(targetDamageProfile, armor.value);
+	return modifiedImpact;	
+}
+
+function getHeadshotStagger(attackTemplate, targetDamageProfile) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
+	let scaledImpact = baseImpact * getScaledPowerLevel();
+	let modifiedImpact = scaledImpact * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value);
+	return modifiedImpact;	
+}
+
+function getCritHeadshotStagger(attackTemplate, targetDamageProfile) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
+	let scaledImpact = baseImpact * getScaledPowerLevel();
+	let modifiedImpact = scaledImpact * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value);
+	return modifiedImpact;	
+}
+
 function renderMultiTargetAttackData(attackTemplate, armor) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
 	
@@ -1805,6 +1897,8 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	let critHeadshotHitsToKillHtml = '';
 	
 	let damageTypeValues = [[],[],[],[]];
+	let staggerTypeValues = [[],[],[],[]];
+	let cleaveTypeValues = [[],[],[],[]];
 	
 	for (let targetDamageProfile of targetDamageProfiles) {
 		let rawDamage = targetDamageProfile.power_distribution.attack / 10;
@@ -1831,6 +1925,16 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
 		
+		let armorClassNormalCleave = getNormalCleave(attackTemplate, targetDamageProfile);
+		let armorClassCritCleave = getCritCleave(attackTemplate, targetDamageProfile);
+		let armorClassHeadshotCleave = getHeadshotCleave(attackTemplate, targetDamageProfile);
+		let armorClassCritHeadshotCleave = getCritHeadshotCleave(attackTemplate, targetDamageProfile);
+		
+		let armorClassNormalStagger = getNormalStagger(attackTemplate, targetDamageProfile);
+		let armorClassCritStagger = getCritStagger(attackTemplate, targetDamageProfile);
+		let armorClassHeadshotStagger = getHeadshotStagger(attackTemplate, targetDamageProfile);
+		let armorClassCritHeadshotStagger = getCritHeadshotStagger(attackTemplate, targetDamageProfile);
+		
 		if (!attackTemplate.damage_profile) {
 			armorClassNormalDamage = armorClassNormalDamage * 2;
 			armorClassCritDamage = armorClassCritDamage * 2;
@@ -1843,6 +1947,15 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		damageTypeValues[2].push(armorClassHeadshotDamage);
 		damageTypeValues[3].push(armorClassCritHeadshotDamage);
 		
+		cleaveTypeValues[0].push(armorClassNormalCleave); 
+		cleaveTypeValues[1].push(armorClassCritCleave);
+		cleaveTypeValues[2].push(armorClassHeadshotCleave);
+		cleaveTypeValues[3].push(armorClassCritHeadshotCleave);
+		
+		staggerTypeValues[0].push(armorClassNormalStagger); 
+		staggerTypeValues[1].push(armorClassCritStagger);
+		staggerTypeValues[2].push(armorClassHeadshotStagger);
+		staggerTypeValues[3].push(armorClassCritHeadshotStagger);
 		
 		if (!attackTemplate.damage_profile) {
 			normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage).toFixed(2)} (${(armorClassNormalDamage/2)})</span></div>`;
@@ -1856,6 +1969,16 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage)}</span></div>`;
 			critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotDamage)}</span></div>`;	
 		}	
+		
+		normalCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalCleave)}</span></div>`;
+		headshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotCleave)}</span></div>`;
+		critCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritCleave)}</span></div>`;
+		critHeadshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotCleave)}</span></div>`;	
+		
+		normalStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalStagger)}</span></div>`;
+		headshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritStagger)}</span></div>`;
+		critStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotStagger)}</span></div>`;
+		critHeadshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotStagger)}</span></div>`;	
 	}
 	
 	let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
@@ -1864,6 +1987,14 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 						<div class="headshotDamage damageCell grid">${headshotDamageHtml}</div>
 						<div class="critDamage damageCell grid">${critDamageHtml}</div>
 						<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
+						<div class="normalDamage cleaveCell grid">${normalCleaveHtml}</span></div>
+						<div class="headshotDamage cleaveCell grid">${headshotCleaveHtml}</div>
+						<div class="critDamage cleaveCell grid">${critCleaveHtml}</div>
+						<div class="critHeadshotDamage cleaveCell grid">${critHeadshotCleaveHtml}</div>
+						<div class="normalDamage staggerCell grid">${normalStaggerHtml}</span></div>
+						<div class="headshotDamage staggerCell grid">${headshotStaggerHtml}</div>
+						<div class="critDamage staggerCell grid">${critStaggerHtml}</div>
+						<div class="critHeadshotDamage staggerCell grid">${critHeadshotStaggerHtml}</div>
 					</div>`;
 	
 	
