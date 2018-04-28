@@ -2262,7 +2262,7 @@ function renderAttackData(attackTemplate) {
 							   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 							   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
-							   <div class="normalDamage damageCell grid">
+							   <div class="normalDamage grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillNormalHtml}
 								  </div>
@@ -2284,7 +2284,7 @@ function renderAttackData(attackTemplate) {
 									 ${targetsStaggeredHeadshotHtml}
 								  </div>
 							   </div>
-							   <div class="critDamage damageCell grid">
+							   <div class="critDamage grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillCritHtml}
 								  </div>							  
@@ -2329,19 +2329,15 @@ function getTargetsCleaved(breed, damage, difficultyLevel) {
 		return 1;
 	}
 	
-	return Math.floor(breed.legendHitmass / damage);
+	return Math.ceil(breed.legendHitmass / damage);
 }
 
 function getTargetsStaggered(breed, damage, difficultyLevel) {
 	if (damage == 0) {
 		return "-";
-	}	
-	
-	if (breed.armorCategory == 2 || breed.armorCategory == 6 || breed.codename == 'chaos_raider') {
-		return 1;
 	}
 	
-	return Math.floor(breed.legendHitmass / damage);
+	return Math.ceil(breed.legendHitmass / damage);
 }
 function getBreedsForArmorClass(armor) {
 	if (!_breedData) {

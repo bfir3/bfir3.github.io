@@ -772,19 +772,19 @@ span.attackIcon {
 .weaponDamageType .damageCell {
     /* background: #242592; */
 }
-.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(1) {
+.multiTargetAttack .weaponDamageType .targetValue:nth-child(1) {
     background: #242592;
 }
-.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(2) {
+.multiTargetAttack .weaponDamageType .targetValue:nth-child(2) {
     background: #1c1886;
 }
-.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(3) {
+.multiTargetAttack .weaponDamageType .targetValue:nth-child(3) {
     background: #120e6d;
 }
-.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(4) {
+.multiTargetAttack .weaponDamageType .targetValue:nth-child(4) {
     background: #0a075d;
 }
-.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(5) {
+.multiTargetAttack .weaponDamageType .targetValue:nth-child(5) {
     background: #06034c;
 }
 
