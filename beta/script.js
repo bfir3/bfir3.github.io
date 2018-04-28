@@ -2099,7 +2099,7 @@ function getBreedsForArmorClass(armor) {
 			}
 			
 		} else {
-			groupedBreeds.push(cloneBreed));
+			groupedBreeds.push(cloneBreed);
 		}
 	}
 	
