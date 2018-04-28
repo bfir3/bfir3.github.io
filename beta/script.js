@@ -1826,7 +1826,7 @@ function getBaseStagger(attackTemplate, targetDamageProfile, armor) {
 	return attackTemplate.damage_profile.cleave_distribution.impact * 0.05;
 }
 
-function getNormalStagger(attackTemplate, targetDamageProfile) {
+function getNormalStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
 		return;
 	}
@@ -1836,7 +1836,7 @@ function getNormalStagger(attackTemplate, targetDamageProfile) {
 	return scaledImpact;
 }
 
-function getCritStagger(attackTemplate, targetDamageProfile) {
+function getCritStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
 		return;
 	}
@@ -1847,7 +1847,7 @@ function getCritStagger(attackTemplate, targetDamageProfile) {
 	return modifiedImpact;	
 }
 
-function getHeadshotStagger(attackTemplate, targetDamageProfile) {
+function getHeadshotStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
 		return;
 	}
@@ -1863,7 +1863,7 @@ function getCritHeadshotStagger(attackTemplate, targetDamageProfile) {
 		return;
 	}
 	
-	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile);
+	let baseImpact = getBaseStagger(attackTemplate, targetDamageProfile, armor);
 	let scaledImpact = baseImpact * getScaledPowerLevel();
 	let modifiedImpact = scaledImpact * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value);
 	return modifiedImpact;	
