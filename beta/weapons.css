@@ -858,3 +858,12 @@ span.attackIcon {
 .weaponDamageHeader>div:nth-child(n+3) {
     border-right: 1px solid black !important;
 }
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div,
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
+    border-right: 1px solid black !important;
+}
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
+    margin-left: 0px;
+    outline: 1px solid black !important;
+    border-right: none !important;
+}
