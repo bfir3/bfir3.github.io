@@ -2329,7 +2329,9 @@ function getTargetsCleaved(breed, damage, difficultyLevel) {
 		return 1;
 	}
 	
-	return Math.ceil(breed.legendHitmass / damage);
+	let hitmass = breed.legendHitmass.indexOf(' ') >= 0 ? breed.legendHitmass.split(' ')[0] : breed.legendHitmass;
+	
+	return Math.ceil(hitmass / damage);
 }
 
 function getTargetsStaggered(breed, damage, difficultyLevel) {
@@ -2337,7 +2339,9 @@ function getTargetsStaggered(breed, damage, difficultyLevel) {
 		return "-";
 	}
 	
-	return Math.ceil(breed.legendHitmass / damage);
+	let hitmass = breed.legendHitmass.indexOf(' ') >= 0 ? breed.legendHitmass.split(' ')[0] : breed.legendHitmass;
+	
+	return Math.ceil(hitmass / damage);
 }
 function getBreedsForArmorClass(armor) {
 	if (!_breedData) {
