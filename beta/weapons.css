@@ -670,16 +670,16 @@ span.attackIcon {
 	display: none !important;
 }
 
-.multiTargetAttack.targets2 .damageCell {
+.multiTargetAttack.targets2 .damageCell, .multiTargetAttack.targets2 .cleaveCell, .multiTargetAttack.targets2 .staggerCell {
     grid-template-columns: repeat(2, 50%);
 }
-.multiTargetAttack.targets3 .damageCell, .multiTargetAttack.targets3 .cleaveCell {
+.multiTargetAttack.targets3 .damageCell, .multiTargetAttack.targets3 .cleaveCell, .multiTargetAttack.targets3 .staggerCell {
     grid-template-columns: repeat(3, 33.33%);
 }
-.multiTargetAttack.targets4 .damageCell {
+.multiTargetAttack.targets4 .damageCell, .multiTargetAttack.targets4 .cleaveCell, .multiTargetAttack.targets4 .staggerCell {
     grid-template-columns: repeat(4, 25%);
 }
-.multiTargetAttack.targets5 .damageCell {
+.multiTargetAttack.targets5 .damageCell, .multiTargetAttack.targets5 .cleaveCell, .multiTargetAttack.targets5 .staggerCell {
     grid-template-columns: repeat(5, 20%);
     font-size: 12px;
 }
