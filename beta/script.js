@@ -2088,7 +2088,14 @@ function getBreedsForArmorClass(armor) {
 		}
 		else if (groupedBreeds.length > 0) {
 			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
-			breed.name += `, ${breedsForArmor[i].name}`;
+			
+			if (breed.name.indexOf("Stormvermin") >= 0) {
+				breed.displayName = "Shield/Stormvermin";
+			}
+			else {
+				breed.displayName += `, ${breedsForArmor[i].displayName}`;
+			}
+			
 		} else {
 			groupedBreeds.push(Object.assign({}, breedsForArmor[i]));
 		}
@@ -2102,9 +2109,10 @@ function renderArmorClassEnemies(armor, attackTemplate) {
 	let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 	
 	for (let breed of getBreedsForArmorClass(armor)) {
+		let breedName = !breed.displayName || breed.displayName.length == 0 ? breed.name : breed.displayName;
 		let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
 		let breedRow = `<div class="weaponDamageEnemy grid ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-						   <div class="enemyName grid ${breed.race.toLowerCase()}"><span class="center">${breed.name}</span></div>
+						   <div class="enemyName grid ${breed.race.toLowerCase()}"><span class="center">${breedName}</span></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 						   <div class="normalDamage grid">
 							  <div class="enemyBreakpointBar flex center damageIndicator">

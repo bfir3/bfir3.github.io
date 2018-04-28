@@ -14,7 +14,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1.5,
-        "legendHitmass": 2
+        "legendHitmass": 2,
+		"displayName": ""
     },
     {
         "name": "Clanrat with shield",
@@ -31,7 +32,8 @@
         "recruitHitmass": "1.5 (3)",
         "veteranHitmass": "1.5 (3)",
         "championHitmass": "2.25 (4.5)",
-        "legendHitmass": "3 (6)"
+        "legendHitmass": "3 (6)",
+		"displayName": " Shieldrat"
     },
     {
         "name": "Clanrat",
@@ -48,7 +50,8 @@
         "recruitHitmass": 1.5,
         "veteranHitmass": 1.5,
         "championHitmass": 2.25,
-        "legendHitmass": 3
+        "legendHitmass": 3,
+		"displayName": ""
     },
     {
         "name": "Sack Rat",
@@ -65,7 +68,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "<chaos_zombie>",
@@ -82,7 +86,8 @@
         "recruitHitmass": 3,
         "veteranHitmass": 3,
         "championHitmass": 4.5,
-        "legendHitmass": 6
+        "legendHitmass": 6,
+		"displayName": ""
     },
     {
         "name": "Fanatic",
@@ -99,7 +104,8 @@
         "recruitHitmass": 1.25,
         "veteranHitmass": 1.25,
         "championHitmass": 2,
-        "legendHitmass": 2.5
+        "legendHitmass": 2.5,
+		"displayName": ""
     },
     {
         "name": "Bulwark",
@@ -116,7 +122,8 @@
         "recruitHitmass": "3 (5)",
         "veteranHitmass": "3 (5)",
         "championHitmass": "4.5 (7.5)",
-        "legendHitmass": "6 (10)"
+        "legendHitmass": "6 (10)",
+		"displayName": ""
     },
     {
         "name": "Raider",
@@ -133,7 +140,8 @@
         "recruitHitmass": 3,
         "veteranHitmass": 3,
         "championHitmass": 4.5,
-        "legendHitmass": 6
+        "legendHitmass": 6,
+		"displayName": ""
     },
     {
         "name": "Stormvermin with shield",
@@ -150,7 +158,8 @@
         "recruitHitmass": "5 (10)",
         "veteranHitmass": "5 (10)",
         "championHitmass": "7.5 (15)",
-        "legendHitmass": "10 (20)"
+        "legendHitmass": "10 (20)",
+		"displayName": ""
     },
     {
         "name": "Stormvermin Commander",
@@ -167,7 +176,8 @@
         "recruitHitmass": 5,
         "veteranHitmass": 5,
         "championHitmass": 7.5,
-        "legendHitmass": 10
+        "legendHitmass": 10,
+		"displayName": ""
     },
     {
         "name": "Stormvermin",
@@ -184,7 +194,8 @@
         "recruitHitmass": 5,
         "veteranHitmass": 5,
         "championHitmass": 7.5,
-        "legendHitmass": 10
+        "legendHitmass": 10,
+		"displayName": ""
     },
     {
         "name": "Plague Monk",
@@ -201,7 +212,8 @@
         "recruitHitmass": 2.5,
         "veteranHitmass": 2.5,
         "championHitmass": 3.75,
-        "legendHitmass": 5
+        "legendHitmass": 5,
+		"displayName": ""
     },
     {
         "name": "Savage",
@@ -218,7 +230,8 @@
         "recruitHitmass": 4,
         "veteranHitmass": 4,
         "championHitmass": 6,
-        "legendHitmass": 8
+        "legendHitmass": 8,
+		"displayName": ""
     },
     {
         "name": "Mauler",
@@ -235,7 +248,8 @@
         "recruitHitmass": 8,
         "veteranHitmass": 8,
         "championHitmass": 12,
-        "legendHitmass": 16
+        "legendHitmass": 16,
+		"displayName": ""
     },
     {
         "name": "Chaos Warrior",
@@ -252,7 +266,8 @@
         "recruitHitmass": 20,
         "veteranHitmass": 20,
         "championHitmass": 20,
-        "legendHitmass": 20
+        "legendHitmass": 20,
+		"displayName": ""
     },
     {
         "name": "Gutter Runner",
@@ -269,7 +284,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "Ratling Gunner",
@@ -286,7 +302,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": "Gunner"
     },
     {
         "name": "Warpfire Thrower",
@@ -303,7 +320,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": "Warpfire"
     },
     {
         "name": "Poison Wind Globadier",
@@ -320,7 +338,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": "Globadier"
     },
     {
         "name": "Packmaster",
@@ -337,7 +356,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "<chaos_tentacle_sorcerer>",
@@ -354,7 +374,8 @@
         "recruitHitmass": 8,
         "veteranHitmass": 8,
         "championHitmass": 12,
-        "legendHitmass": 16
+        "legendHitmass": 16,
+		"displayName": ""
     },
     {
         "name": "Lifeleech Sorcerer",
@@ -371,7 +392,8 @@
         "recruitHitmass": 8,
         "veteranHitmass": 8,
         "championHitmass": 12,
-        "legendHitmass": 16
+        "legendHitmass": 16,
+		"displayName": "Leech"
     },
     {
         "name": "Nurgle Sorcerer",
@@ -388,7 +410,8 @@
         "recruitHitmass": 8,
         "veteranHitmass": 8,
         "championHitmass": 12,
-        "legendHitmass": 16
+        "legendHitmass": 16,
+		"displayName": "Blight"
     },
     {
         "name": "<chaos_plague_sorcerer>",
@@ -405,7 +428,8 @@
         "recruitHitmass": 8,
         "veteranHitmass": 8,
         "championHitmass": 12,
-        "legendHitmass": 16
+        "legendHitmass": 16,
+		"displayName": ""
     },
     {
         "name": "<chaos_tentacle>",
@@ -422,7 +446,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "Rat Ogre",
@@ -439,7 +464,8 @@
         "recruitHitmass": 50,
         "veteranHitmass": 50,
         "championHitmass": 50,
-        "legendHitmass": 50
+        "legendHitmass": 50,
+		"displayName": ""
     },
     {
         "name": "Stormfiend",
@@ -456,7 +482,8 @@
         "recruitHitmass": 50,
         "veteranHitmass": 50,
         "championHitmass": 50,
-        "legendHitmass": 50
+        "legendHitmass": 50,
+		"displayName": ""
     },
     {
         "name": "Bile Troll",
@@ -473,7 +500,8 @@
         "recruitHitmass": 50,
         "veteranHitmass": 50,
         "championHitmass": 50,
-        "legendHitmass": 50
+        "legendHitmass": 50,
+		"displayName": ""
     },
     {
         "name": "Blessed Gatekeeper Naglfahr",
@@ -490,7 +518,8 @@
         "recruitHitmass": 50,
         "veteranHitmass": 50,
         "championHitmass": 50,
-        "legendHitmass": 50
+        "legendHitmass": 50,
+		"displayName": "Blessed Naglfahr"
     },
     {
         "name": "Spawn of Chaos",
@@ -507,7 +536,8 @@
         "recruitHitmass": 50,
         "veteranHitmass": 50,
         "championHitmass": 50,
-        "legendHitmass": 50
+        "legendHitmass": 50,
+		"displayName": ""
     },
     {
         "name": "Skarrik Spinemanglr",
@@ -524,7 +554,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": "Skarrik"
     },
     {
         "name": "Gatekeeper Naglfahr",
@@ -541,7 +572,8 @@
         "recruitHitmass": 20,
         "veteranHitmass": 20,
         "championHitmass": 20,
-        "legendHitmass": 20
+        "legendHitmass": 20,
+		"displayName": "Naglfahr"
     },
     {
         "name": "Bödvarr Ribspreader",
@@ -558,7 +590,8 @@
         "recruitHitmass": 20,
         "veteranHitmass": 20,
         "championHitmass": 20,
-        "legendHitmass": 20
+        "legendHitmass": 20,
+		"displayName": "Bödvarr"
     },
     {
         "name": "Rasknitt",
@@ -575,7 +608,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "Deathrattler",
@@ -592,7 +626,8 @@
         "recruitHitmass": 20,
         "veteranHitmass": 20,
         "championHitmass": 20,
-        "legendHitmass": 20
+        "legendHitmass": 20,
+		"displayName": ""
     },
     {
         "name": "Burblespue Halescourge",
@@ -609,7 +644,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": "Burblespue"
     },
     {
         "name": "<critter_rat>",
@@ -626,7 +662,8 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     },
     {
         "name": "<critter_pig>",
@@ -643,6 +680,7 @@
         "recruitHitmass": 1,
         "veteranHitmass": 1,
         "championHitmass": 1,
-        "legendHitmass": 1
+        "legendHitmass": 1,
+		"displayName": ""
     }
 ]
