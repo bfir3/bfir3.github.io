@@ -90,7 +90,7 @@ span.arrow-down {
     background: #751818 !important;
 }
 
-.weaponDamageType {
+.weaponDamageType>div:first-child {
     background: #3e0c0c !important;
 }
 .emptyCell {
@@ -622,6 +622,7 @@ span.attackIcon {
 }
 .weaponDamageType{
 	cursor: pointer;
+	/* margin-right: 0.5px; */
 }
 .showInfantry .weaponDamageEnemy.infantry {
     display: grid;
@@ -756,7 +757,7 @@ span.attackIcon {
 }
 
 .weaponDamageType .damageCell {
-    background: #242592;
+    /* background: #242592; */
 }
 .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(1) {
     background: #242592;
@@ -857,13 +858,23 @@ span.attackIcon {
 }
 .weaponDamageHeader>div:nth-child(n+3) {
     border-right: 1px solid black !important;
+    border: blue;
 }
 .attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div,
 .attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
     border-right: 1px solid black !important;
 }
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div .targetValue {
+    /* margin-left: 1px; */
+    /* outline: 1px solid black !important; */
+    /* border-right: none !important; */
+}
 .attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
-    margin-left: 0px;
-    outline: 1px solid black !important;
-    border-right: none !important;
+    padding: 0;
+}
+.weaponDamageType>div:first-child {
+    background: #3e0c0c !important;
+}
+.weaponDamageType {
+    background: #242592 !important;
 }
