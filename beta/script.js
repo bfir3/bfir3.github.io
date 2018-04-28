@@ -2158,15 +2158,15 @@ function renderAttackData(attackTemplate) {
 		let	critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
 		let	critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;
 		
-		let normalCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalCleave)}</span></div>`;
-		let headshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotCleave)}</span></div>`;
-		let critCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritCleave)}</span></div>`;
-		let critHeadshotCleaveHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotCleave)}</span></div>`;	
+		let normalCleaveHtml = `<div class="targetValue grid"><span class="center">${(armorClassNormalCleave)}</span></div>`;
+		let headshotCleaveHtml = `<div class="targetValue grid"><span class="center">${(armorClassHeadshotCleave)}</span></div>`;
+		let critCleaveHtml = `<div class="targetValue grid"><span class="center">${(armorClassCritCleave)}</span></div>`;
+		let critHeadshotCleaveHtml = `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotCleave)}</span></div>`;	
 		 
-		let normalStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalStagger)}</span></div>`;
-		let headshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritStagger)}</span></div>`;
-		let critStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotStagger)}</span></div>`;
-		let critHeadshotStaggerHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotStagger)}</span></div>`;	
+		let normalStaggerHtml = `<div class="targetValue grid"><span class="center">${(armorClassNormalStagger)}</span></div>`;
+		let headshotStaggerHtml = `<div class="targetValue grid"><span class="center">${(armorClassCritStagger)}</span></div>`;
+		let critStaggerHtml = `<div class="targetValue grid"><span class="center">${(armorClassHeadshotStagger)}</span></div>`;
+		let critHeadshotStaggerHtml = `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotStagger)}</span></div>`;	
 		
 		if (!attackTemplate.damage_profile) {
 			armorClassNormalDamage = armorClassNormalDamage * 2;
