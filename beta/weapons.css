@@ -673,7 +673,7 @@ span.attackIcon {
 .multiTargetAttack.targets2 .damageCell {
     grid-template-columns: repeat(2, 50%);
 }
-.multiTargetAttack.targets3 .damageCell {
+.multiTargetAttack.targets3 .damageCell, .multiTargetAttack.targets3 .cleaveCell {
     grid-template-columns: repeat(3, 33.33%);
 }
 .multiTargetAttack.targets4 .damageCell {
@@ -688,7 +688,7 @@ span.attackIcon {
     padding-bottom: 3px !important;
 }
 
-.multiTargetAttack .damageCell {
+.multiTargetAttack .damageCell, .multiTargetAttack .cleaveCell,.multiTargetAttack .staggerCell {
     padding: 0px !important;
     grid-template-rows: 100%;
     justify-content: center;
@@ -696,7 +696,7 @@ span.attackIcon {
 }
 .multiTargetAttack .targetValue {
     outline: 1px solid black;
-	margin-right: -1px;
+    margin-left: 1px;
 }
 
 .multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
@@ -835,4 +835,24 @@ span.attackIcon {
     content: '+';
     right: 6px;
     top: calc(50% - 18px);
+}
+.showDamage div:not(.weaponDamageHeader)>.staggerCell, 
+.showDamage div:not(.weaponDamageHeader)>.cleaveCell {
+    display: none;
+}
+.showCleave div:not(.weaponDamageHeader)>.staggerCell,
+.showCleave div:not(.weaponDamageHeader)>.damageCell {
+    display: none;
+}
+.showStagger div:not(.weaponDamageHeader)>.damageCell, 
+.showStagger div:not(.weaponDamageHeader)>.cleaveCell {
+    display: none;
+}
+
+.cleaveCell, .damageCell, .staggerCell {
+    border-right: none !important;
+    margin-left: -1px;
+}
+.tableTypeButton.selected {
+    outline: 1px solid #fff;
 }

@@ -1328,6 +1328,8 @@ $(function() {
 			return;
 		} 
 		$(".weaponAttackStatsContainer").addClass('showDamage');
+		$(".weaponAttackStatsContainer").removeClass('showCleave');
+		$(".weaponAttackStatsContainer").removeClass('showStagger');
 		$(".tableTypeButton").removeClass('selected');
 		$(e.currentTarget).addClass('selected');		
 	});
@@ -1337,6 +1339,8 @@ $(function() {
 			return;
 		} 
 		$(".weaponAttackStatsContainer").addClass('showCleave');
+		$(".weaponAttackStatsContainer").removeClass('showDamage');
+		$(".weaponAttackStatsContainer").removeClass('showStagger');
 		$(".tableTypeButton").removeClass('selected');
 		$(e.currentTarget).addClass('selected');		
 	});
@@ -1346,6 +1350,8 @@ $(function() {
 			return;
 		} 
 		$(".weaponAttackStatsContainer").addClass('showStagger');
+		$(".weaponAttackStatsContainer").removeClass('showCleave');
+		$(".weaponAttackStatsContainer").removeClass('showDamage');
 		$(".tableTypeButton").removeClass('selected');
 		$(e.currentTarget).addClass('selected');		
 	});
