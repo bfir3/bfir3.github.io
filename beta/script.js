@@ -2081,22 +2081,22 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
-						   <div class="normalDamage damageCell grid">
+						   <div class="normalDamage targetValueCell grid">
 								${hitsToKillNormalHtml}
 								${targetsCleavedNormalHtml}
 								${targetsStaggeredNormalHtml}
 						   </div>
-						   <div class="headshotDamage damageCell grid">
+						   <div class="headshotDamage targetValueCell grid">
 								${hitsToKillHeadshotHtml}
 								${targetsCleavedHeadshotHtml}
 								${targetsStaggeredHeadshotHtml}
 						   </div>
-						   <div class="critDamage damageCell grid">
+						   <div class="critDamage targetValueCell grid">
 								${hitsToKillCritHtml}				
 								${targetsCleavedCritHtml}
 								${targetsStaggeredCritHtml}
 						   </div>
-						   <div class="critHeadshotDamage damageCell grid">
+						   <div class="critHeadshotDamage targetValueCell grid">
 								${hitsToKillCritHeadshotHtml}
 								${targetsCleavedCritHeadshotHtml}
 								${targetsStaggeredCritHeadshotHtml}
