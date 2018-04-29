@@ -1397,6 +1397,11 @@ $(function() {
 		}
 		$(".weaponAttackStatsContainer").addClass('showRegulars showInfantry showArmored showMonsters showBerserkers showSuperArmor');
 		$(".weaponAttackStatsContainer").removeClass('hideRegulars');
+		$(".weaponAttackStatsContainer").removeClass('hideInfantry');
+		$(".weaponAttackStatsContainer").removeClass('hideArmored');
+		$(".weaponAttackStatsContainer").removeClass('hideMonsters');
+		$(".weaponAttackStatsContainer").removeClass('hideBerserkers');
+		$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');
 		$($(e.currentTarget).find("span")[0]).html('Hide Regular');
 	});
 	
@@ -1409,6 +1414,11 @@ $(function() {
 		}
 		$(".weaponAttackStatsContainer").addClass('showElites showInfantry showArmored showMonsters showBerserkers showSuperArmor');
 		$(".weaponAttackStatsContainer").removeClass('hideElites');
+		$(".weaponAttackStatsContainer").removeClass('hideInfantry');
+		$(".weaponAttackStatsContainer").removeClass('hideArmored');
+		$(".weaponAttackStatsContainer").removeClass('hideMonsters');
+		$(".weaponAttackStatsContainer").removeClass('hideBerserkers');
+		$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');
 		$($(e.currentTarget).find("span")[0]).html('Hide Elites');
 	});
 	
@@ -1421,6 +1431,11 @@ $(function() {
 		}
 		$(".weaponAttackStatsContainer").addClass('showSpecials showInfantry showArmored showMonsters showBerserkers showSuperArmor');
 		$(".weaponAttackStatsContainer").removeClass('hideSpecials');
+		$(".weaponAttackStatsContainer").removeClass('hideInfantry');
+		$(".weaponAttackStatsContainer").removeClass('hideArmored');
+		$(".weaponAttackStatsContainer").removeClass('hideMonsters');
+		$(".weaponAttackStatsContainer").removeClass('hideBerserkers');
+		$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');
 		$($(e.currentTarget).find("span")[0]).html('Hide Specials');
 	});
 	
@@ -1433,6 +1448,11 @@ $(function() {
 		}
 		$(".weaponAttackStatsContainer").addClass('showLords showInfantry showArmored showMonsters showBerserkers showSuperArmor');
 		$(".weaponAttackStatsContainer").removeClass('hideLords');
+		$(".weaponAttackStatsContainer").removeClass('hideInfantry');
+		$(".weaponAttackStatsContainer").removeClass('hideArmored');
+		$(".weaponAttackStatsContainer").removeClass('hideMonsters');
+		$(".weaponAttackStatsContainer").removeClass('hideBerserkers');
+		$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');
 		$($(e.currentTarget).find("span")[0]).html('Hide Lords');
 	});
 	
