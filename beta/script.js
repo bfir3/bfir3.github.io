@@ -841,11 +841,19 @@ function loadMyBuilds() {
 			$("body").addClass('myBuildsPage');
 			$(".myBuildsPage").removeClass('loading');
 			
-			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
+			 $('#myBuildsTable tbody').on('click', 'tr', function () {
 				var data = table.row($(this)).data();
 				window.location.hash = `${data.buildSetId}-${data.id}`
 				loadBuild();
-			} );
+			});
+			
+			$('#myBuildsTable tbody').on('mousedown', 'tr', function(e) {
+				if (e.which === 2) {
+					var data = table.row($(this)).data();
+					window.open(`http://verminbuilds.com/#${data.buildSetId}-${data.id}`, '_blank');
+				}
+			});
+			
 			$('#myBuildsTable').DataTable().columns.adjust().draw();
 		});
 	});
@@ -925,7 +933,15 @@ function initFirestore() {
 				var data = table.row($(this)).data();
 				window.location.hash = `${data.buildSetId}-${data.id}`
 				loadBuild();
-			} );
+			} );			
+			
+			$('#buildBrowserTable tbody').on('mousedown', 'tr', function(e) {
+				if (e.which === 2) {
+					var data = table.row($(this)).data();
+					window.open(`http://verminbuilds.com/#${data.buildSetId}-${data.id}`, '_blank');
+				}
+			});
+			
 			$('#buildBrowserTable').DataTable().columns.adjust().draw();
 		});
 	});
