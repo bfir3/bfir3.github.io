@@ -962,3 +962,6 @@ span.attackIcon {
     background: #4e4e4e;
     color: grey;
 }
+.enemyLegendRow .enemyName, .enemyLegendRow .enemyRace {
+    outline: none !important;
+}
