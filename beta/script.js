@@ -986,6 +986,33 @@ const CRIT_INDEX = 1;
 const HEADSHOT_INDEX = 2;
 const CRIT_HEADSHOT_INDEX = 3;
 
+function getArmorIndex(armorCategory) {
+	return armorCategory > 4 ? armorCategory - 2 : armorCategory - 1;
+}
+
+function getAttackBreedData(attackTemplate) {
+	let attackDamageProfile = getAttackDamageProfile(attackTemplate);
+	
+	for (let breed of _breedData) {	
+		let armorIndex = getArmorIndex(breed.armorCategory);
+	
+			let hitsToKillNormal = getHitsToKill(breed, attackDamageProfile[armorIndex].normal[i]);
+			let hitsToKillCrit = getHitsToKill(breed, damageTypeValues[1][i]);
+			let hitsToKillHeadshot = getHitsToKill(breed, damageTypeValues[2][i]);
+			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[3][i]);
+			
+		let cleaveValue = getCleave(attackTemplate, armor);
+		let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+		
+		let staggerValue = getStagger(attackTemplate, armor);
+		let targetsStaggered = getTargetsStaggered(breed, staggerValue);
+		
+		for (let i =0; i < targetDamageProfiles.length; i++) {
+			
+		}
+	}	
+}
+
 function getAttackDamageProfile(attackTemplate) {
 	let attackDamageProfile = [];
 	
@@ -1000,7 +1027,8 @@ function getAttackDamageProfile(attackTemplate) {
 				"headshot": [],
 				"critHeadshot": [],			
 				"cleave": "",
-				"stagger": ""
+				"stagger": "",
+				"breeds": []
 		};
 		
 		let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
@@ -1055,12 +1083,37 @@ function getAttackDamageProfile(attackTemplate) {
 			armorClassDamageProfile.critHeadshot.push(armorClassCritHeadshotDamage);
 		}
 		
+		for (let breed of getBreedsForArmorClass(armor)) {
+		
+			for (let i = 0; i < armorClassDamageProfile.normal.length; i++) {
+
+				let hitsToKillNormal = getHitsToKill(breed, armorClassDamageProfile.normal[i]);
+				let hitsToKillCrit = getHitsToKill(breed, armorClassDamageProfile.crit[i]);
+				let hitsToKillHeadshot = getHitsToKill(breed, armorClassDamageProfile.headshot[i]);
+				let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]);
+				
+				let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
+				let targetsStaggered = getTargetsStaggered(breed, staggerTypeValues.stagger);
+			}
+		
+			let breedJson  = {
+					"name": breed.name,
+					"codeName": breed.codename,
+					"hitsToKillNormal": hitsToKillNormal,
+					"hitsToKillHeadshot": hitsToKillHeadshot,
+					"hitsToKillCrit": hitsToKillCrit,
+					"hitsToKillCritHeadshot": hitsToKillCritHeadshot,
+					"targetsCleaved": targetsCleaved,
+					"targetsStaggered": targetsStaggered
+				}
+			attackDamageProfile.breeds.push(breedJson);
+		}
 		attackDamageProfile.push(armorClassDamageProfile);
 	}
 	return attackDamageProfile;
 }
 
-function getMeleeWeaponBreakpoints(weaponAttackTemplate) {
+function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	
 	let breakpoints =
 	{
