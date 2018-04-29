@@ -1084,29 +1084,28 @@ function getAttackDamageProfile(attackTemplate) {
 		}
 		
 		for (let breed of getBreedsForArmorClass(armor)) {
-		
-			for (let i = 0; i < armorClassDamageProfile.normal.length; i++) {
-
-				let hitsToKillNormal = getHitsToKill(breed, armorClassDamageProfile.normal[i]);
-				let hitsToKillCrit = getHitsToKill(breed, armorClassDamageProfile.crit[i]);
-				let hitsToKillHeadshot = getHitsToKill(breed, armorClassDamageProfile.headshot[i]);
-				let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]);
 				
-				let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
-				let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
+			let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
+			let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
+				
+			let breedJson  = {
+				"name": breed.name,
+				"codeName": breed.codename,
+				"hitsToKillNormal": [],
+				"hitsToKillHeadshot": [],
+				"hitsToKillCrit": [],
+				"hitsToKillCritHeadshot": [],
+				"targetsCleaved": targetsCleaved,
+				"targetsStaggered": targetsStaggered
 			}
 		
-			let breedJson  = {
-					"name": breed.name,
-					"codeName": breed.codename,
-					"hitsToKillNormal": hitsToKillNormal,
-					"hitsToKillHeadshot": hitsToKillHeadshot,
-					"hitsToKillCrit": hitsToKillCrit,
-					"hitsToKillCritHeadshot": hitsToKillCritHeadshot,
-					"targetsCleaved": targetsCleaved,
-					"targetsStaggered": targetsStaggered
-				}
-			attackDamageProfile.breeds.push(breedJson);
+			for (let i = 0; i < armorClassDamageProfile.normal.length; i++) {
+				breedJson.hitsToKillNormal.push(getHitsToKill(breed, armorClassDamageProfile.normal[i]));
+				breedJson.hitsToKillCrit.push(getHitsToKill(breed, armorClassDamageProfile.crit[i]));
+				breedJson.hitsToKillHeadshot.push(getHitsToKill(breed, armorClassDamageProfile.headshot[i]));
+				breedJson.hitsToKillCritHeadshot.push(getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]));				
+			}
+			attackDamageProfile.breeds.push(breedJson);			
 		}
 		attackDamageProfile.push(armorClassDamageProfile);
 	}
