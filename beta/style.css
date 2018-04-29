@@ -753,7 +753,6 @@ input.buildName {
 
 textarea.buildDescription {
     border: 1px solid black;
-    /* border-top: 3px solid #4b5fc3; */
     color: #c7c7c7;
     background: #313131;
     font-family: 'Arial';
@@ -761,7 +760,6 @@ textarea.buildDescription {
     resize: vertical;
     text-align: center;
     -moz-appearance: none;
-    padding: 0;
     margin: 0;
     display: grid;
 }
@@ -1241,4 +1239,8 @@ table#myBuildsTable {
 .talentSection>div>div.selected .talentDescription {
     font-weight: bold;
     color: #330e0b;
+}
+
+.buildInfoContainer {
+    margin-bottom: 5px;
 }

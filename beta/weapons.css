@@ -965,3 +965,18 @@ span.attackIcon {
 .enemyLegendRow .enemyName, .enemyLegendRow .enemyRace {
     outline: none !important;
 }
+
+.weaponSelectionContainer .heroSection {
+    margin-bottom: 5px !important;
+}
+
+.weaponSelectionSection {
+    margin-bottom: 5px;
+}
+
+select, input, textarea {
+    margin-bottom: 1px;
+}
+.buildInfoContainer {
+    margin-bottom: 5px;
+}
