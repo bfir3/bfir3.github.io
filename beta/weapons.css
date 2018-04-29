@@ -899,3 +899,40 @@ span.attackIcon {
 .weaponDamageType {
     background: #242592 !important;
 }
+
+.cleaves2 {
+    background: #7d1c1c !important;
+    color: white !important;
+}
+.cleaves3 {
+    background: #9a2626 !important;
+    color: white !important;
+}
+.cleaves4 {
+    background: #a93636 !important;
+    color: white !important;
+}
+.cleaves5 {
+    background: #c74242 !important;
+    color: white !important;
+}
+.cleaves6 {
+    background: #673131 !important;
+    color: white !important;
+}
+.cleaves7 {
+    background: #a55858 !important;
+    color: white !important;
+}
+.cleaves8 {
+    background: #1b9427 !important;
+    color: white !important;
+}
+.cleaves9 {
+    background: #27ab34 !important;
+    color: white !important;
+}
+.cleaves10 {
+    background: #39d248 !important;
+    color: white !important;
+}
