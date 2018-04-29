@@ -1093,7 +1093,7 @@ function getAttackDamageProfile(attackTemplate) {
 				let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]);
 				
 				let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
-				let targetsStaggered = getTargetsStaggered(breed, staggerTypeValues.stagger);
+				let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
 			}
 		
 			let breedJson  = {
