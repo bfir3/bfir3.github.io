@@ -1750,7 +1750,13 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 									<span class="center">Race</span>
 								</div>
 								<div class="enemyHealthHeader grid">
-									<div class="heart"></div>
+									<div class="heart center"></div>
+								</div>
+								<div class="enemyTargetsHeader grid">
+									<i class="fa fa-bullseye center"></i>
+								</div>
+								<div class="enemyTargetsHeader grid">
+									<i class="fa fa-bolt center"></i>
 								</div>
 								<div class="normalDamage damageCell grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
 								<div class="headshotDamage damageCell grid"><span class="center">Headshot</span>${targetIconContainersHtml}</div>
@@ -1779,6 +1785,18 @@ function getBaseCleave(attackTemplate, targetDamageProfile, armor) {
 	}
 	
 	return attackTemplate.damage_profile.cleave_distribution.attack * 0.05;
+}
+
+function getCleave(attackTemplate, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
+	
+	let baseCleave = getBaseCleave(attackTemplate, damageProfile);
+	let scaledCleave = baseCleave * getScaledPowerLevel();
+	return (scaledCleave).toFixed(3);
 }
 
 function getNormalCleave(attackTemplate, targetDamageProfile, armor) {
@@ -1832,6 +1850,18 @@ function getBaseStagger(attackTemplate, targetDamageProfile, armor) {
 	return attackTemplate.damage_profile.cleave_distribution.impact * 0.05;
 }
 
+function getStagger(attackTemplate, armor) {
+	if (!attackTemplate.damage_profile) {
+		return;
+	}
+	
+	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
+	
+	let baseStagger = getBaseStagger(attackTemplate, damageProfile);
+	let scaledStagger = baseStagger * getScaledPowerLevel();
+	return (scaledStagger).toFixed(3);
+}
+
 function getNormalStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
 		return;
@@ -1883,8 +1913,6 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	let targetDamageProfiles = [];
 	
 	for (let i = 0; i < damageProfile.targets.length; i++) {
-		let targetDamageProfile = damageProfile.targets[i];
-		targetDamageProfile
 		targetDamageProfiles.push(damageProfile.targets[i]);
 	}
 	targetDamageProfiles.push(damageProfile.default_target);
@@ -2077,10 +2105,27 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		let cloneBreed = Object.assign({}, breed);
 		cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
 		
+		let cleaveValue = getCleave(attackTemplate, armor);
+		let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+		
+		let staggerValue = getStagger(attackTemplate, armor);
+		let targetsStaggered = getTargetsStaggered(breed, staggerValue);
+		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
+						   <div class="enemyTargets grid">
+								<div class="targetsCleaved grid">
+									<span class="center">${targetsCleaved}</span>
+								</div>
+						   </div>
+						   <div class="enemyTargets grid">
+								<div class="targetsStaggered grid">
+									<span class="center">${targetsStaggered}</span>
+								</div>
+						   </div>
+						   <div class="enemyTargets grid"><div class="targetsDamage grid"><span class="center">2</span></div></div>
 						   <div class="normalDamage targetValueCell grid">
 								${hitsToKillNormalHtml}
 								${targetsCleavedNormalHtml}
@@ -2257,11 +2302,27 @@ function renderAttackData(attackTemplate) {
 			let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
 			let cloneBreed = Object.assign({}, breed);
 			cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
+		
+			let cleaveValue = getCleave(attackTemplate, armor);
+			let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+			
+			let staggerValue = getStagger(attackTemplate, armor);
+			let targetsStaggered = getTargetsStaggered(breed, staggerValue);
 			
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 							   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 							   <div class="enemyRace grid"><i class="raceIcon"></i></div>
 							   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
+							   <div class="enemyTargets grid">
+									<div class="targetsCleaved grid">
+										<span class="center">${targetsCleaved}</span>
+									</div>
+							   </div>
+							   <div class="enemyTargets grid">
+									<div class="targetsStaggered grid">
+										<span class="center">${targetsStaggered}</span>
+									</div>
+							   </div>
 							   <div class="normalDamage grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillNormalHtml}

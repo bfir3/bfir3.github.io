@@ -9,7 +9,7 @@
 }
 
 .weaponDamageTable>div {
-    grid-template-columns: calc(20% - 40px) 50px 50px repeat(4, calc(20% - 15px));
+    grid-template-columns: calc(20% - 100px) 40px 40px 40px 40px repeat(4, calc(20% - 15px));
 }
 
 .weaponDamageTable.grid {
@@ -100,7 +100,7 @@ span.arrow-down {
 }
 
 .weaponDamageType>.damageType {
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 5;
     /* padding: 7px !important; */
 }
 
@@ -108,9 +108,9 @@ span.arrow-down {
   background-color: red;
   display: inline-block;
   height: 14px;
-  margin: 0 10px;
+  /* margin: 0 10px; */
   position: relative;
-  top: calc(50% - 13px);
+  /* top: calc(50% - 13px); */
   transform: rotate(-45deg);
   width: 14px;
 }
@@ -682,9 +682,7 @@ span.attackIcon {
 .multiTargetAttack.targets2 .weaponDamageHeader>div:nth-child(n+3) {
     grid-template-columns: repeat(2, 50%);
 }
-.multiTargetAttack.targets3 .targetValueCell, 
-.multiTargetAttack.targets3 .weaponDamageType>div:not(.damageType),
-.multiTargetAttack.targets3 .weaponDamageHeader>div:nth-child(n+3)  {
+.multiTargetAttack.targets3 .targetValueCell, .multiTargetAttack.targets3 .weaponDamageType>div:not(.damageType), .multiTargetAttack.targets3 .weaponDamageHeader>div:nth-child(n+6)  {
     grid-template-columns: repeat(3, 33.33%);
 }
 .multiTargetAttack.targets4 .targetValueCell, 
@@ -819,27 +817,27 @@ span.attackIcon {
     color: grey
 }
 .targetValue.hits1 {
-    background: #8BC34A !important;
+    background: #32500f !important;
     color: #fff !important;
 }
 .targetValue.hits2 {
-    background: #92893c !important;
+    background: #3d6113 !important;
     color: #fff !important;
 }
 .targetValue.hits3 {
-    background: #6c8822 !important;
+    background: #507920 !important;
     color: #fff !important;
 }
 .targetValue.hits4 {
-    background: #508415 !important;
+    background: #65962c !important;
     color: #fff !important;
 }
 .targetValue.hits5 {
-    background: #75570b !important;
+    background: #75b52a !important;
     color: #fff !important;
 }
 .targetValue.hits6 {
-    background: #3e690c !important;
+    background: #77c31e !important;
     color: #fff !important;
 }
 .sectionTitle::after {
@@ -875,7 +873,7 @@ span.attackIcon {
 .tableTypeButton.selected {
     outline: 1px solid #fff;
 }
-.weaponDamageHeader>div:nth-child(n+3) {
+.weaponDamageHeader>div:nth-child(n+1) {
     border-right: 1px solid black !important;
     border: blue;
 }
@@ -898,6 +896,8 @@ span.attackIcon {
 }
 .weaponDamageType {
     background: #242592 !important;
+    /* outline: 1px solid black; */
+    /* margin-right: 1px; */
 }
 
 .cleaves2 {
@@ -935,4 +935,26 @@ span.attackIcon {
 .cleaves10 {
     background: #39d248 !important;
     color: white !important;
+}
+.enemyTargets {
+    grid-template-columns: 100%;
+    outline: 1px solid black;
+    margin-right: 1px;
+}
+
+.enemyTargets>span {
+    width: 100%;
+    height: 100%;
+}
+
+.enemyHealthHeader>* .enemyTargetsHeader>* {
+    grid-row: 1 / span 2;
+}
+
+.enemyTargetsHeader {
+    align-content: center;
+}
+
+.weaponDamageType>div {
+    margin-right: 0px;
 }
