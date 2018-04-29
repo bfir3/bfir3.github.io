@@ -776,7 +776,13 @@ function loadVideoPlayer(videoAddress) {
 		$(".ytPlayer")[0].src = `https://www.youtube.com/embed/${videoId}`;
 		$(".ytPlayer").show();
 		$(".twitchPlayer").hide();
+	} else if (videoAddress.indexOf("youtu.be") >= 0) {
+		let videoId = videoAddress.split('/')[videoAddress.split('/').length - 1];
+		$(".ytPlayer")[0].src = `https://www.youtube.com/embed/${videoId}`;
+		$(".ytPlayer").show();
+		$(".twitchPlayer").hide();		
 	}
+	https://youtu.be/YnILTDIckRA
 }
 
 function loadMyBuilds() {
