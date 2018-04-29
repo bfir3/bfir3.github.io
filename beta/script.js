@@ -1796,7 +1796,7 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 
 function getBaseCleave(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
-		return;
+		return attackTemplate.damage_profile_left.cleave_distribution.attack * 0.05;
 	}
 	
 	return attackTemplate.damage_profile.cleave_distribution.attack * 0.05;
@@ -1859,7 +1859,7 @@ function getCritHeadshotCleave(attackTemplate, targetDamageProfile, armor) {
 
 function getBaseStagger(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
-		return;
+		return attackTemplate.damage_profile_left.cleave_distribution.impact * 0.05;
 	}
 	
 	return attackTemplate.damage_profile.cleave_distribution.impact * 0.05;
