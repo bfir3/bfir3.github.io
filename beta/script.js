@@ -995,10 +995,10 @@ function getAttackDamageProfile(attackTemplate) {
 		}
 		
 		let armorClassDamageProfile = {
-				"normal" = [],
-				"crit" = [],
-				"headshot" = [],
-				"critHeadshot" = [],			
+				"normal": [],
+				"crit": [],
+				"headshot": [],
+				"critHeadshot": [],			
 				"cleave": "",
 				"stagger": ""
 		};
