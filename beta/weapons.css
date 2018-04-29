@@ -56,7 +56,7 @@
 }
 
 .enemyBreakpointBar>div.filled {
-    border: 1px solid #c5c59e;
+    border: 1px solid #000000;
     background: #4CAF50;
     background-image: linear-gradient(#4CAF50, #27982b);
     margin: 2px;
@@ -815,27 +815,27 @@ span.attackIcon {
     background: #4e4e4e;
     color: grey
 }
-.targetValue.hits1 {
+.hits1 {
     background: #32500f !important;
     color: #fff !important;
 }
-.targetValue.hits2 {
+.hits2 {
     background: #3d6113 !important;
     color: #fff !important;
 }
-.targetValue.hits3 {
+.hits3 {
     background: #507920 !important;
     color: #fff !important;
 }
-.targetValue.hits4 {
+.hits4 {
     background: #65962c !important;
     color: #fff !important;
 }
-.targetValue.hits5 {
+.hits5 {
     background: #75b52a !important;
     color: #fff !important;
 }
-.targetValue.hits6 {
+.hits6 {
     background: #77c31e !important;
     color: #fff !important;
 }
@@ -956,4 +956,9 @@ span.attackIcon {
 
 .weaponDamageType>div {
     margin-right: 0px;
+}
+
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div:nth-child(n+6) {
+    background: #4e4e4e;
+    color: grey;
 }

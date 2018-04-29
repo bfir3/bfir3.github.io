@@ -2265,6 +2265,7 @@ function renderAttackData(attackTemplate) {
 			let hitsToKillHeadshotHtml = `<span class="center">${hitsToKillHeadshot}</span>`;
 			let hitsToKillCritHeadshotHtml = `<span class="center">${hitsToKillCritHeadshot}</span>`;
 			
+			/*
 			if (hitsToKillNormal < 7) {
 				hitsToKillNormalHtml = "";
 				for (let i = 0; i < hitsToKillNormal; i++) {
@@ -2292,6 +2293,7 @@ function renderAttackData(attackTemplate) {
 					hitsToKillCritHeadshotHtml += '<div class="filled"></div>';
 				}
 			}
+			*/
 			
 			let targetsCleavedNormal = getTargetsCleaved(breed, armorClassNormalCleave);
 			let targetsCleavedCrit = getTargetsCleaved(breed, armorClassCritCleave);
@@ -2337,7 +2339,7 @@ function renderAttackData(attackTemplate) {
 										<span class="center">${targetsStaggered}</span>
 									</div>
 							   </div>
-							   <div class="normalDamage grid">
+							   <div class="normalDamage hits${hitsToKillNormal} grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillNormalHtml}
 								  </div>
@@ -2348,7 +2350,7 @@ function renderAttackData(attackTemplate) {
 									 ${targetsStaggeredNormalHtml}
 								  </div>
 							   </div>
-							   <div class="headshotDamage grid">
+							   <div class="headshotDamage hits${hitsToKillHeadshot} grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillHeadshotHtml}
 								  </div>							  
@@ -2359,7 +2361,7 @@ function renderAttackData(attackTemplate) {
 									 ${targetsStaggeredHeadshotHtml}
 								  </div>
 							   </div>
-							   <div class="critDamage grid">
+							   <div class="critDamage hits${hitsToKillCrit} grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillCritHtml}
 								  </div>							  
@@ -2370,7 +2372,7 @@ function renderAttackData(attackTemplate) {
 									 ${targetsStaggeredCritHtml}
 								  </div>
 							   </div>
-							   <div class="critHeadshotDamage grid">
+							   <div class="critHeadshotDamage hits${hitsToKillCritHeadshot} grid">
 								  <div class="enemyBreakpointBar flex center damageIndicator">
 									 ${hitsToKillCritHeadshotHtml}
 								  </div>							  
