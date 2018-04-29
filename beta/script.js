@@ -1105,7 +1105,7 @@ function getAttackDamageProfile(attackTemplate) {
 				breedJson.hitsToKillHeadshot.push(getHitsToKill(breed, armorClassDamageProfile.headshot[i]));
 				breedJson.hitsToKillCritHeadshot.push(getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]));				
 			}
-			attackDamageProfile.breeds.push(breedJson);			
+			armorClassDamageProfile.breeds.push(breedJson);			
 		}
 		attackDamageProfile.push(armorClassDamageProfile);
 	}
