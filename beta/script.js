@@ -2437,7 +2437,7 @@ function getBreedsForArmorClass(armor) {
 			let breed = groupedBreeds.filter((x) => x.legendHp == breedsForArmor[i].legendHp)[0];
 			
 			if (breed.name.indexOf("Stormvermin") >= 0) {
-				breed.displayName = "Shield/Stormvermin";
+				breed.displayName = "Shieldvermin, Stormvermin";
 			}
 			else {
 				breed.displayName += `, ${cloneBreed.displayName}`;
