@@ -1754,7 +1754,7 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 				}
 			}
 			
-			let headerRowheaderRow = `<div class="attackTableTitle flex center">
+			let headerRow = `<div class="attackTableTitle flex center">
 								<span class="tableTitle">Damage - Hits to Kill</span>
 							</div>
 							<div class="weaponDamageHeader grid">
@@ -1767,10 +1767,10 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 								<div class="enemyHealthHeader grid">
 									<div class="heart center"></div>
 								</div>
-								<div class="enemyTargetsHeader grid" title="Targets Cleaved">
+								<div class="enemyTargetsHeader grid">
 									<i class="fa fa-bullseye center"></i>
 								</div>
-								<div class="enemyTargetsHeader grid" title="Targets Staggered">
+								<div class="enemyTargetsHeader grid">
 									<i class="fa fa-bolt center"></i>
 								</div>
 								<div class="normalDamage damageCell grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
