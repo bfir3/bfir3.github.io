@@ -9,7 +9,7 @@
 }
 
 .weaponDamageTable>div {
-    grid-template-columns: calc(20% - 100px) 40px 40px 40px 40px repeat(4, calc(20% - 15px));
+    grid-template-columns: calc(20% - 110px) 50px 40px 40px 40px repeat(4, calc(20% - 15px));
 }
 
 .weaponDamageTable.grid {
@@ -177,6 +177,7 @@ span.enemyLegendName {
     width: 11px;
     margin-right: 5px;
     padding: 7px;
+    align-self: center;
 }
 
 .enemyLegendRow, .attackTableTitle {
@@ -408,9 +409,10 @@ span.weaponStatValue {
 
 .weaponDataTableButtonsContainer.grid {
     grid-template-columns: repeat(4, calc(25% - 6px));
-    grid-column-gap: 8px;
+    grid-column-gap: 5px;
     margin-bottom: 10px;
     grid-row-gap: 5px;
+    grid-auto-rows: minmax(40px, auto);
 }
 
 .weaponDataTableButton {
