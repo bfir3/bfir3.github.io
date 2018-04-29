@@ -782,7 +782,6 @@ function loadVideoPlayer(videoAddress) {
 		$(".ytPlayer").show();
 		$(".twitchPlayer").hide();		
 	}
-	https://youtu.be/YnILTDIckRA
 }
 
 function loadMyBuilds() {
