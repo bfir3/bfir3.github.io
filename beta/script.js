@@ -1077,7 +1077,7 @@ function getMeleeWeaponBreakpoints(weaponAttackTemplate) {
 					}
 				]
 			}
-		]
+		],
 		"targetsCleaved": [
 			{
 				"boost": "",
@@ -1091,7 +1091,7 @@ function getMeleeWeaponBreakpoints(weaponAttackTemplate) {
 					}
 				]
 			}
-		]
+		],
 		"targetsStaggered": [
 			{
 				"boost": "",
