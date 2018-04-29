@@ -715,30 +715,35 @@ function initData(isNewBuild) {
 		}
 	}
 	
+	$(".meleeQualitySelection").html('');
 	$(".meleeQualitySelection").append(new Option("Red", 0));
 	$(".meleeQualitySelection").append(new Option("Orange", 1, true, true));
 	$(".meleeQualitySelection").append(new Option("Blue", 2));
 	$(".meleeQualitySelection").append(new Option("Green", 3));
 	$(".meleeQualitySelection").append(new Option("White", 4));
 	
+	$(".rangeQualitySelection").html('');
 	$(".rangeQualitySelection").append(new Option("Red", 0));
 	$(".rangeQualitySelection").append(new Option("Orange", 1, true, true));
 	$(".rangeQualitySelection").append(new Option("Blue", 2));
 	$(".rangeQualitySelection").append(new Option("Green", 3));
 	$(".rangeQualitySelection").append(new Option("White", 4));
 	
+	$(".necklaceQualitySelection").html('');
 	$(".necklaceQualitySelection").append(new Option("Red", 0));
 	$(".necklaceQualitySelection").append(new Option("Orange", 1, true, true));
 	$(".necklaceQualitySelection").append(new Option("Blue", 2));
 	$(".necklaceQualitySelection").append(new Option("Green", 3));
 	$(".necklaceQualitySelection").append(new Option("White", 4));
 	
+	$(".charmQualitySelection").html('');
 	$(".charmQualitySelection").append(new Option("Red", 0));
 	$(".charmQualitySelection").append(new Option("Orange", 1, true, true));
 	$(".charmQualitySelection").append(new Option("Blue", 2));
 	$(".charmQualitySelection").append(new Option("Green", 3));
 	$(".charmQualitySelection").append(new Option("White", 4));
 	
+	$(".trinketQualitySelection").html('');
 	$(".trinketQualitySelection").append(new Option("Red", 0));
 	$(".trinketQualitySelection").append(new Option("Orange", 1, true, true));
 	$(".trinketQualitySelection").append(new Option("Blue", 2));
@@ -989,6 +994,31 @@ function initWeaponsPage() {
 	$(".spinner").hide();
 }
 
+function resetCreateBuildPage() {
+	$(".createPage").removeClass('locked');
+	$(".heroClassContent input").val('');
+	$(".heroClassContent textarea").val('');
+	$(".ytPlayer").hide();
+	$(".twitchPlayer").hide();
+	$(".talentSection>div>div").removeClass('selected');
+	$(".talentSection>div>div").removeClass('redBorder');
+	$(".heroSection>div").removeClass('selected');
+	$(".heroSection>div").removeClass('redBorder');
+	$(".classSection>div").removeClass('selected');
+	$(".classSection>div").removeClass('redBorder');
+		
+	loadHero(0,0);
+	loadHeroSummary(0, 0);
+		
+	loadProperties("melee", _data.melee_properties);	
+	loadProperties("range", _data.range_properties);	
+	loadProperties("necklace", _data.necklace_properties);
+	loadProperties("charm", _data.charm_properties);
+	loadProperties("trinket", _data.trinket_properties);	
+	
+	loadTraits();
+}
+
 function loadPageFromHash() {
 	let hash = window.location.hash;
 	$("body").removeClass();
@@ -996,6 +1026,8 @@ function loadPageFromHash() {
 	if (!hash || hash.length < 2 || hash == "#create") {
 		$("body").addClass("createPage");
 		$(".createPage").removeClass('loading');
+		$(".createPage").removeClass('locked');
+		resetCreateBuildPage();
 		return;
 	}
 	
@@ -1023,6 +1055,7 @@ function loadPageFromHash() {
 		return;
 	}
 	
+	$(".createPage").addClass('locked');
 	loadBuild();
 }
 
