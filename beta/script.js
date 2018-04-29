@@ -1006,6 +1006,8 @@ function resetCreateBuildPage() {
 	$(".heroSection>div").removeClass('redBorder');
 	$(".classSection>div").removeClass('selected');
 	$(".classSection>div").removeClass('redBorder');
+	$(".heroSection>div:first-child").addClass('selected');
+	$(".classSection>div:first-child").addClass('selected');
 		
 	loadHero(0,0);
 	loadHeroSummary(0, 0);
