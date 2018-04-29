@@ -2125,7 +2125,6 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 									<span class="center">${targetsStaggered}</span>
 								</div>
 						   </div>
-						   <div class="enemyTargets grid"><div class="targetsDamage grid"><span class="center">2</span></div></div>
 						   <div class="normalDamage targetValueCell grid">
 								${hitsToKillNormalHtml}
 								${targetsCleavedNormalHtml}
