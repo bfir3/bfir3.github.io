@@ -1064,7 +1064,6 @@ $(function() {
 	promises.push(initFirestore());
 	
 	Promise.all(promises).then((x) => {
-		loadPageFromHash();
 		
 		let innerPromises = [];
 		
@@ -1122,6 +1121,7 @@ $(function() {
 		
 		
 		Promise.all(innerPromises).then(() => {
+			loadPageFromHash();
 			initWeaponsPage();
 		});
 	});
