@@ -981,6 +981,134 @@ function getWeaponsForHero(heroIndex) {
 		});
 }
 
+const NORMAL_INDEX = 0;
+const CRIT_INDEX = 1;
+const HEADSHOT_INDEX = 2;
+const CRIT_HEADSHOT_INDEX = 3;
+
+function getAttackDamageProfile(attackTemplate) {
+	let attackDamageProfile = [];
+	
+	for (let armor of _armorData) {
+		if (armor.value == "4") {
+			continue;
+		}
+		
+		let armorClassDamageProfile = {
+				"normal" = [],
+				"crit" = [],
+				"headshot" = [],
+				"critHeadshot" = [],			
+				"cleave": "",
+				"stagger": ""
+		};
+		
+		let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
+		
+		let targetDamageProfiles = [];
+		
+		if (damageProfile.targets && damageProfile.targets.length > 0) {
+			for (let i = 0; i < damageProfile.targets.length; i++) {
+				targetDamageProfiles.push(damageProfile.targets[i]);
+			}
+		}
+		targetDamageProfiles.push(damageProfile.default_target);
+		
+		armorClassDamageProfile.cleave = getCleave(attackTemplate, armor);
+		armorClassDamageProfile.stagger = getStagger(attackTemplate, armor);
+	
+		for (let targetDamageProfile of targetDamageProfiles) {
+			let rawDamage = targetDamageProfile.power_distribution.attack / 10;
+			let scaledDamage = rawDamage * getScaledPowerLevel();
+			
+			let armorModifier = !targetDamageProfile.armor_modifier ? damageProfile.armor_modifier : targetDamageProfile.armor_modifier;
+			
+			// set super armor index to armor if no super armor value present
+			let armorIndex = armor.value == "6" && !armorModifier.attack[armor.value] ? 1 : armor.value - 1;		
+			let armorClassBaseNormalDamage = scaledDamage * armorModifier.attack[armorIndex];
+			
+			let critModifier = attackTemplate.additional_critical_strike_chance + 1;
+			if (targetDamageProfile.critical_strike) {
+				critModifier = targetDamageProfile.critical_strike.attack_armor_power_modifer[armorIndex];
+			}
+			else if (damageProfile.critical_strike) {
+				critModifier = damageProfile.critical_strike.attack_armor_power_modifer[armorIndex];			
+			}
+			
+			let armorClassBaseCritDamage = scaledDamage * critModifier;
+		
+			let armorClassNormalDamage = (Math.round(armorClassBaseNormalDamage * 4) / 4).toFixed(2);
+			let armorClassCritDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
+			let armorClassHeadshotDamage = armorClassBaseNormalDamage == 0 ? (Math.round((getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value) * 1) * 4) / 4).toFixed(2) : (Math.round((armorClassBaseNormalDamage + (armorClassBaseNormalDamage * getAdditionalHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
+			let armorClassCritHeadshotDamage = (Math.round((armorClassBaseCritDamage + (armorClassBaseCritDamage * getAdditionalCritHeadshotMultiplier(targetDamageProfile, armor.value))) * 4) / 4).toFixed(2);
+			
+			if (!attackTemplate.damage_profile) {
+				armorClassNormalDamage = armorClassNormalDamage * 2;
+				armorClassCritDamage = armorClassCritDamage * 2;
+				armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
+				armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
+			}
+			
+			armorClassDamageProfile.normal.push(armorClassNormalDamage);
+			armorClassDamageProfile.crit.push(armorClassCritDamage);
+			armorClassDamageProfile.headshot.push(armorClassHeadshotDamage);
+			armorClassDamageProfile.critHeadshot.push(armorClassCritHeadshotDamage);
+		}
+		
+		attackDamageProfile.push(armorClassDamageProfile);
+	}
+	return attackDamageProfile;
+}
+
+function getMeleeWeaponBreakpoints(weaponAttackTemplate) {
+	
+	let breakpoints =
+	{
+		"hitsToKill": [
+			{
+				"boost": "",
+				"value": "",
+				"breed": "breed_name",
+				"attackSequence": [ 
+					{
+						"name": "attack_name",
+						"attackType": "heavy",
+						"damageType": "normal" 
+					}
+				]
+			}
+		]
+		"targetsCleaved": [
+			{
+				"boost": "",
+				"value": "",
+				"breed": "breed_name",
+				"attackSequence": [ 
+					{
+						"name": "attack_name",
+						"attackType": "heavy",
+						"damageType": "normal" 
+					}
+				]
+			}
+		]
+		"targetsStaggered": [
+			{
+				"boost": "",
+				"value": "",
+				"breed": "breed_name",
+				"attackSequence": [ 
+					{
+						"name": "attack_name",
+						"attackType": "heavy",
+						"damageType": "normal" 
+					}
+				]
+			}
+		]
+	};
+}
+
 function initWeaponsPage() {
 	let heroIndex = Array.prototype.indexOf.call($(".weaponsDataPage .heroSection").children(),$(".weaponsDataPage .heroSection>div.selected")[0]);
 	
