@@ -1802,11 +1802,7 @@ function getBaseCleave(attackTemplate, targetDamageProfile, armor) {
 	return attackTemplate.damage_profile.cleave_distribution.attack * 0.05;
 }
 
-function getCleave(attackTemplate, armor) {
-	if (!attackTemplate.damage_profile) {
-		return;
-	}
-	
+function getCleave(attackTemplate, armor) {	
 	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
 	
 	let baseCleave = getBaseCleave(attackTemplate, damageProfile);
@@ -1865,11 +1861,7 @@ function getBaseStagger(attackTemplate, targetDamageProfile, armor) {
 	return attackTemplate.damage_profile.cleave_distribution.impact * 0.05;
 }
 
-function getStagger(attackTemplate, armor) {
-	if (!attackTemplate.damage_profile) {
-		return;
-	}
-	
+function getStagger(attackTemplate, armor) {	
 	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
 	
 	let baseStagger = getBaseStagger(attackTemplate, damageProfile);
