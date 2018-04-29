@@ -1000,14 +1000,14 @@ function resetCreateBuildPage() {
 	$(".heroClassContent textarea").val('');
 	$(".ytPlayer").hide();
 	$(".twitchPlayer").hide();
-	$(".talentSection>div>div").removeClass('selected');
-	$(".talentSection>div>div").removeClass('redBorder');
-	$(".heroSection>div").removeClass('selected');
-	$(".heroSection>div").removeClass('redBorder');
-	$(".classSection>div").removeClass('selected');
-	$(".classSection>div").removeClass('redBorder');
-	$(".heroSection>div:first-child").addClass('selected redBorder');
-	$(".classSection>div:first-child").addClass('selected redBorder');
+	$(".createPage .talentSection>div>div").removeClass('selected');
+	$(".createPage .talentSection>div>div").removeClass('redBorder');
+	$(".createPage .heroSection>div").removeClass('selected');
+	$(".createPage .heroSection>div").removeClass('redBorder');
+	$(".createPage .classSection>div").removeClass('selected');
+	$(".createPage .classSection>div").removeClass('redBorder');
+	$(".createPage .heroSection>div:first-child").addClass('selected redBorder');
+	$(".createPage .classSection>div:first-child").addClass('selected redBorder');
 		
 	loadHero(0,0);
 	loadHeroSummary(0, 0);
