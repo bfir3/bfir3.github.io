@@ -84,40 +84,22 @@ function clearSelections() {
 
 function getBuildId() {	
 	let buildId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[1] : "";
-	if (buildId.length > 0) {
-		return buildId;
+	
+	if (!buildId || buildId.length == 0) {
+		buildId =  getUniqueIdentifier()
+		window.location.hash = getBuildSetId() + '-' + buildId;
+		
+		let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
+		$(".loadoutSelection").append(new Option(buildName, buildId));
 	}
-	buildId =  getUniqueIdentifier()
-	window.location.hash = getBuildSetId() + '-' + buildId;
-	
-	let buildName = !$(".buildName").val() || $(".buildName").val().length == 0 ? "Untitled Build" : $(".buildName").val();	
-	$(".loadoutSelection").append(new Option(buildName, buildId));
-	
-	return buildId;
-
-	if ($(".loadoutSelection")[0].options.length > 0) {
-		return $(".loadoutSelection")[0].options[$(".loadoutSelection")[0].selectedIndex].value;
-	}
-	
-	buildId = getUniqueIdentifier();
-	window.location.hash = getBuildSetId() + '-' + buildId;
-	
 	return buildId;
 }
 
 function getBuildSetId() {
-	let buildSetId = window.location.hash.length > 0 ? window.location.hash.substring(1).split('-')[0] : "";
-	if (buildSetId.length > 0) {
-		return buildSetId;
-	}
-	buildSetId = getUniqueIdentifier()
-	window.location.hash = buildSetId;
-	return buildSetId;
-	
-	return window.location.hash.substring(1).split('-')[0];
+	let buildSetId = window.location.hash.length > 0 && window.location.hash.substring(1).split('-').length > 1 ? window.location.hash.substring(1).split('-')[0] : "";
 	
 	if (!buildSetId || buildSetId.length == 0) {
-		buildSetId = getUniqueIdentifier();
+		buildSetId = getUniqueIdentifier()
 		window.location.hash = buildSetId;
 	}
 	return buildSetId;
@@ -246,8 +228,11 @@ function loadBuild() {
 		return;
 	}
 	
+	$(".spinner").show();
+	
 	if (hash.indexOf("hero=") >= 0) {
 		loadSerializedUrl(hash);
+		$(".spinner").hide();
 		return;
 	}
 	
@@ -287,8 +272,8 @@ function loadBuild() {
 			loadSerializedUrl(doc.data().hash);
 			$(".spinner").hide();
 			$(".mainGrid").removeClass('loading');
-			$(".mainGrid").show();
-			$(".buildBrowserSection").hide();
+			$("body").removeClass();
+			$("body").addClass('customBuildPage');
 		});
 		return;
 	}
@@ -316,8 +301,8 @@ function loadBuild() {
 		loadSerializedUrl(doc.data().hash);
 		$(".spinner").hide();
 		$(".mainGrid").removeClass('loading');
-		$(".mainGrid").show();
-		$(".buildBrowserSection").hide();
+		$("body").removeClass();
+		$("body").addClass('customBuildPage');
 	});
 }
 
@@ -648,8 +633,7 @@ function getCareerIndex() {
 	return Array.prototype.indexOf.call($(".classSection").children(),$(".classSection>div.selected")[0]);
 }
 
-function initData() {
-	initFirestore();
+function initData(isNewBuild) {
 	let i = 0;
 	
 	for (let meleeTrait of _data.melee_traits) {
@@ -761,44 +745,23 @@ function initData() {
 	$(".trinketQualitySelection").append(new Option("Green", 3));
 	$(".trinketQualitySelection").append(new Option("White", 4));
 	
-	if (window.location.hash) {
-		let hash = window.location.hash.substring(1);
+	if (isNewBuild) {
+		loadHero(0,0);
+		loadHeroSummary(0, 0);
+			
+		loadProperties("melee", _data.melee_properties);	
+		getHeroIndex() == 1 && getCareerIndex() == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
+		loadProperties("necklace", _data.necklace_properties);
+		loadProperties("charm", _data.charm_properties);
+		loadProperties("trinket", _data.trinket_properties);	
 		
-		if (hash == "myBuilds") {
-			$(".page").hide();
-			loadMyBuilds();
-			return;
-		}
-		
-		if (hash == "buildBrowser") {
-			$(".mainGrid").hide();
-			return;
-		}
-		
-		if (hash == "weapons") {
-			$(".page").hide();
-			$(".spinner").show();
-			return;
-		}
-		
-		loadBuild();
-		return;
+		loadTraits();
+		$(".spinner").hide();
+		$("body").removeClass();
+		$("body").addClass('createPage');		
+		$(".createPage").removeClass('loading');
+		window.location.hash = "create";		
 	}
-	
-	loadHero(0,0);
-	loadHeroSummary(0, 0);
-		
-	loadProperties("melee", _data.melee_properties);	
-	getHeroIndex() == 1 && getCareerIndex() == 2 ? loadProperties("range", _data.melee_properties) : loadProperties("range", _data.range_properties);	
-	loadProperties("necklace", _data.necklace_properties);
-	loadProperties("charm", _data.charm_properties);
-	loadProperties("trinket", _data.trinket_properties);	
-	
-	loadTraits();
-	$(".spinner").hide();	
-	$(".mainGrid").removeClass('loading');
-	$(".mainGrid").show();
-	$(".buildBrowserSection").hide();
 }
 
 function loadVideoPlayer(videoAddress) {	
@@ -817,12 +780,16 @@ function loadVideoPlayer(videoAddress) {
 }
 
 function loadMyBuilds() {
-	$(".mainGrid").hide();
-	$(".myBuildsSection").hide();
-	$(".buildBrowserSection").hide();
+
+	$("body").removeClass();
+	$("body").addClass('myBuildsPage');
+	$(".myBuildsPage").removeClass('loading');
+	window.location.hash = "myBuilds";
 	
 	if ($.fn.DataTable.isDataTable('#myBuildsTable')) {
-		$(".myBuildsSection").show();
+		$("body").removeClass();
+		$("body").addClass('myBuildsPage');
+		$(".myBuildsPage").removeClass('loading');
 		return;
 	}
 	
@@ -870,12 +837,14 @@ function loadMyBuilds() {
 			
 			$(".spinner").hide();
 			$(".myBuildsSection").removeClass('loading');
-			$(".myBuildsSection").show();
+			$("body").removeClass();
+			$("body").addClass('myBuildsPage');
+			$(".myBuildsPage").removeClass('loading');
 			
 			 $('#myBuildsTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
-				window.location.href = `/#${data.buildSetId}-${data.id}`;
-				window.location.reload();
+				window.location.hash = `${data.buildSetId}-${data.id}`
+				loadBuild();
 			} );
 			$('#myBuildsTable').DataTable().columns.adjust().draw();
 		});
@@ -954,8 +923,8 @@ function initFirestore() {
 			
 			 $('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 				var data = table.row($(this)).data();
-				window.location.href = `/#${data.buildSetId}-${data.id}`;
-				window.location.reload();
+				window.location.hash = `${data.buildSetId}-${data.id}`
+				loadBuild();
 			} );
 			$('#buildBrowserTable').DataTable().columns.adjust().draw();
 		});
@@ -997,59 +966,114 @@ function initWeaponsPage() {
 	$(".weaponDataMeleeSelection")[0].selectedIndex = 0;
 	renderWeaponDataTable($(".weaponDataMeleeSelection").val());
 	$(".spinner").hide();
-	$(".weaponsDataPage").show();
+}
+
+function loadPageFromHash() {
+	let hash = window.location.hash;
+	$("body").removeClass();
+	
+	if (!hash || hash.length < 2 || hash == "#create") {
+		$("body").addClass("createPage");
+		$(".createPage").removeClass('loading');
+		return;
+	}
+	
+	if (hash == "#builds") {
+		$("body").addClass("buildsPage");
+		if (!$('#buildBrowserTable').children() || $('#buildBrowserTable').children().length == 0) {
+			$(".buildBrowserSection").addClass('loading');
+			$(".spinner").show();
+		}
+		return;
+	}
+	
+	if (hash == "#weapons") {
+		$("body").addClass("weaponsPage");
+		return;
+	}
+	
+	if (hash == "#enemies") {
+		$("body").addClass("enemiesPage");
+		return;
+	}
+		
+	if (hash == "#myBuilds") {
+		$("body").addClass("myBuildsPage");
+		return;
+	}
+	
+	loadBuild();
 }
 
 $(function() {	
-	$.ajax({
-		url: 'data.json',
-		cache: false,
-		dataType: 'json',
-		success: function(data) {
-			_data = data[0];
-			_properties = _data.melee_properties.concat(_data.range_properties).concat(_data.necklace_properties).concat(_data.charm_properties).concat(_data.trinket_properties);
-			initData();
-			if (!_weaponData || !_breedData) {
-				return;
+	let promises = [];
+	promises.push(initFirestore());
+	
+	Promise.all(promises).then((x) => {
+		loadPageFromHash();
+		
+		let innerPromises = [];
+		
+		innerPromises.push(
+		$.ajax({
+			url: 'data.json',
+			cache: false,
+			dataType: 'json',
+			success: function(data) {
+				_data = data[0];
+				_properties = _data.melee_properties.concat(_data.range_properties).concat(_data.necklace_properties).concat(_data.charm_properties).concat(_data.trinket_properties);
+				
+				
+				let hash = window.location.hash;
+				
+				// check if its a fresh new build or not
+				if (!hash || hash.length < 2 || hash == "#create") {
+					initData(true);
+				}
+				else {
+					initData(false);
+				}
 			}
+		}));
+		
+		innerPromises.push(
+		$.ajax({
+			url: 'data/breeds.json',
+			cache: false,
+			dataType: 'json',
+			success: function(data) {
+				_breedData = data;
+			}
+		}));
+		
+		innerPromises.push(
+		$.ajax({
+			url: 'data/weapons.json',
+			cache: false,
+			dataType: 'json',
+			success: function(data) {
+				_weaponData = data;
+			}
+		}));
+		
+		innerPromises.push(
+		$.ajax({
+			url: 'data/armor.json',
+			cache: false,
+			dataType: 'json',
+			success: function(data) {
+				_armorData = data;
+			}
+		}));
+		
+		
+		Promise.all(innerPromises).then(() => {
 			initWeaponsPage();
-		}
+		});
 	});
 	
-	$.ajax({
-		url: 'data/breeds.json',
-		cache: false,
-		dataType: 'json',
-		success: function(data) {
-			_breedData = data;
-			if (!_weaponData || !_data) {
-				return;
-			}
-			initWeaponsPage();
-		}
-	});
+
 	
-	$.ajax({
-		url: 'data/weapons.json',
-		cache: false,
-		dataType: 'json',
-		success: function(data) {
-			_weaponData = data;
-			if (!_breedData || !_data) {
-				return;
-			}
-			initWeaponsPage();
-		}
-	});
-	
-	$.ajax({
-		url: 'data/armor.json',
-		cache: false,
-		dataType: 'json',
-		success: function(data) {
-			_armorData = data;
-		}
-	});
 	
 	$(".mainGrid:not(.locked) .talentSection>div>div").click((e) => { 
 		$(e.currentTarget.parentElement).children().removeClass('selected'); 
@@ -1265,27 +1289,39 @@ $(function() {
 	});
 
 	$(".createButton").click((e) => {
-		window.location.href = "/";
+		let promises = [];
+		promises.push(initData(true));
+		$(".spinner").show();
+		
+		Promise.all(promises).then((x) => {
+			$(".spinner").hide();
+			$("body").removeClass();
+			$("body").addClass('createPage');
+			window.location.hash = "create";
+		});
 	});	
 	
 	$(".browseButton").click((e) => {
-		$(".mainGrid").hide();
-		$(".myBuildsSection").hide();
-		$(".buildBrowserSection").show();
-		window.location.hash = "buildBrowser";
+		if (!$('#buildBrowserTable').children() || $('#buildBrowserTable').children().length == 0) {
+			$(".buildBrowserSection").addClass('loading');
+			$(".spinner").show();
+		}
+		$("body").removeClass();
+		$("body").addClass('buildsPage');
+		window.location.hash = "builds";
 	});
 	
 	$(".weaponsButton").click((e) => {
-		$(".page").hide();
-		$(".weaponsDataPage").show();
+		$("body").removeClass();
+		$("body").addClass('weaponsPage');
 		window.location.hash = "weapons";
 		
 		initWeaponsPage();
 	});
 	
 	$(".enemiesButton").click((e) => {
-		$(".page").hide();
-		$(".enemiesPage").show();
+		$("body").removeClass();
+		$("body").addClass('enemiesPage');
 		window.location.hash = "enemies";
 	});
 	
@@ -1300,8 +1336,10 @@ $(function() {
 	}));
 	
 	$(".myBuildsButton").click((e) => { 
-		loadMyBuilds();
+		$("body").removeClass();
+		$("body").addClass('myBuildsPage');
 		window.location.hash = "myBuilds";
+		loadMyBuilds();
 	});
 	
 	$(".damageCleaveStaggerButton").click((e) => {
@@ -1764,7 +1802,7 @@ function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLev
 								<div class="enemyRaceHeader grid">
 									<span class="center">Race</span>
 								</div>
-								<div class="enemyHealthHeader grid">
+								<div class="enemyHealthHeader grid" title="Enemy Health">
 									<div class="heart center"></div>
 								</div>
 								<div class="enemyTargetsHeader grid" title="Targets Cleaved">
@@ -2120,7 +2158,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
-						   <div class="enemyRace grid"><i class="raceIcon"></i></div>
+						   <div class="enemyRace grid" title="${breed.race}"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 						   <div class="enemyTargets grid">
 								<div class="targetsCleaved grid">

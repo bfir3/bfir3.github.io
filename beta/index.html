@@ -27,7 +27,7 @@
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
 </head>
 
-<body>
+<body class="createPage">
 	<div class="statusBar grid">
 		<span class="statusLabel buildCountLabel"></span>
 		<span class="statusLabel myBuildsButton" style="visibility: hidden;">My Builds</span>
@@ -39,7 +39,7 @@
 		<span class="navButton weaponsButton">Weapons</span>
 		<span class="navButton enemiesButton">Enemies</span>
 	</div>
-	<div class="mainGrid page iconLayout loading">
+	<div class="mainGrid createPage page iconLayout loading">
 		<div class="heroSection">
 			<div class="markusHero selected redBorder"><div class="emptyCell"></div></div>
 			<div class="bardinHero"><div class="emptyCell"></div></div>
@@ -306,13 +306,13 @@
 			<input  onClick="this.select();" type="text"></input>
 		</div>
 	</div>
-	<div class="buildBrowserSection page grid loading">
+	<div class="buildBrowserSection buildsPage page grid loading">
 		<table id="buildBrowserTable" class="redBorder"></table>
 	</div>
-	<div class="myBuildsSection page grid loading">
+	<div class="myBuildsSection myBuildsPage page grid loading">
 		<table id="myBuildsTable" class="redBorder"></table>
 	</div>
-	<div class="weaponsDataPage page grid iconLayout" style="">
+	<div class="weaponsDataPage weaponsPage page grid iconLayout" style="">
 		<div class="weaponSelectionContainer">
 			<div class="heroSection">
 				<div class="markusHero selected redBorder"><div class="emptyCell"></div></div>

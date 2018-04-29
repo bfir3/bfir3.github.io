@@ -1171,6 +1171,29 @@ body {
     margin: 0 auto;
 }
 
+.page {
+	display: none;
+}
+
+body.createPage .page.createPage:not(.loading) {
+	display: grid;
+}
+
+body.buildsPage .page.buildsPage:not(.loading) {
+	display: grid;
+}
+
+body.myBuildsPage .page.myBuildsPage:not(.loading) {
+	display: grid;
+}
+body.customBuildPage .page.createPage:not(.loading) {
+	display: grid;
+}
+
+body.weaponsPage .page.weaponsPage:not(.loading) {
+	display: grid;
+}
+
 table#myBuildsTable {
     width: 100% !important;
 }
