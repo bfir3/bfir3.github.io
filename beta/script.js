@@ -1204,7 +1204,7 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 								"name": name, //light 1/light 2/heavy 1/etc
 								"attackType": attackType,
 								"damageType": damageType,
-								"targetNumber": breed.hits[i].length - j + 1;
+								"targetNumber": breed.hits[i].length - j + 1
 							}
 							/*"attackSequence": [ 
 								{
