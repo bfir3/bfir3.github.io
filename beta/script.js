@@ -1141,7 +1141,7 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	
 	let breakpoints =
 	{
-		"hitsToKill": []
+		"hitsToKill": [ [],[],[],[] ]
 	};
 	
 	let lightAttacks = getGroupedAttacks(weaponAttackTemplate.attacks.light_attack);
@@ -1196,8 +1196,8 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 								break;
 						}
 						
-						breakpoints.hitsToKill.push({
-							"boost": breed.boostHits[i][j] - 1,
+						breakpoints.hitsToKill[i].push({
+							"boost": (breed.boostHits[i][j] - 1).toFixed(2),
 							"value": breed.hits[i][j] - 1,
 							"breed": "breed_name",
 							"attackSequence": [ 
