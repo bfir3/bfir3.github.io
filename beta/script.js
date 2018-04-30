@@ -1153,10 +1153,10 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	let y = 0;
 	
 	for (let attackTypeGroup of attackGroups) {
-		let breeds = [];
 		let attackType = y == 0 ? "Light" : y == 1 ? "Heavy" : "Push Stab";
 		
 		for (let attackGroup of attackTypeGroup) {
+			let breeds = [];
 			let name = attackGroup[0].attack_name;			
 			let attackDamageProfile = getAttackDamageProfile(attackGroup[0]);			
 		
