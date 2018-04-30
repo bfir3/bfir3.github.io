@@ -1216,6 +1216,10 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	}
 }
 
+function getMaxHeroPowerBuff() {
+	return 1.32;
+}
+
 function initWeaponsPage() {
 	let heroIndex = Array.prototype.indexOf.call($(".weaponsDataPage .heroSection").children(),$(".weaponsDataPage .heroSection>div.selected")[0]);
 	
