@@ -1094,20 +1094,12 @@ function getAttackDamageProfile(attackTemplate) {
 			let breedJson  = {
 				"name": breed.name,
 				"codeName": breed.codename,
-				"hitsToKillNormal": [],
-				"hitsToKillHeadshot": [],
-				"hitsToKillCrit": [],
-				"hitsToKillCritHeadshot": [],
+				"hits": [ [],[],[],[] ],
+				"boostHits": [ [],[],[],[] ],
 				"targetsCleaved": targetsCleaved,
 				"targetsStaggered": targetsStaggered,
-				"boost": {
-					"hitsToKillNormal": [],
-					"hitsToKillHeadshot": [],
-					"hitsToKillCrit": [],
-					"hitsToKillCritHeadshot": [],
-					"targetsCleaved": targetsCleavedBoost,
-					"targetsStaggered": targetsStaggeredBoost
-				}
+				"boostTargetsCleaved": targetsCleavedBoost,
+				"boostTargetsStaggered": targetsStaggeredBoost
 			}
 		
 			for (let i = 0; i < armorClassDamageProfile.normal.length; i++) {
@@ -1116,15 +1108,15 @@ function getAttackDamageProfile(attackTemplate) {
 				let hitsToKillHeadshot = getHitsToKill(breed, armorClassDamageProfile.headshot[i]);
 				let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]);			
 				
-				breedJson.hitsToKillNormal.push(hitsToKillNormal);
-				breedJson.hitsToKillCrit.push(hitsToKillCrit);
-				breedJson.hitsToKillHeadshot.push(hitsToKillHeadshot);
-				breedJson.hitsToKillCritHeadshot.push(hitsToKillCritHeadshot);		
+				breedJson.hits[0].push(hitsToKillNormal);
+				breedJson.hits[1].push(hitsToKillCrit);
+				breedJson.hits[2].push(hitsToKillHeadshot);
+				breedJson.hits[3].push(hitsToKillCritHeadshot);		
 
-				breedJson.boost.hitsToKillNormal.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 100) / 100);
-				breedJson.boost.hitsToKillCrit.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 100) / 100);
-				breedJson.boost.hitsToKillHeadshot.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
-				breedJson.boost.hitsToKillCritHeadshot.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
+				breedJson.boost.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 100) / 100);
+				breedJson.boost.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 100) / 100);
+				breedJson.boost.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
+				breedJson.boost.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
 			}
 			armorClassDamageProfile.breeds.push(breedJson);			
 		}
@@ -1149,49 +1141,79 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	
 	let breakpoints =
 	{
-		"hitsToKill": [
-			{
-				"boost": "",
-				"value": "",
-				"breed": "breed_name",
-				"attackSequence": [ 
-					{
-						"name": "attack_name",
-						"attackType": "heavy",
-						"damageType": "normal" 
-					}
-				]
-			}
-		],
-		"targetsCleaved": [
-			{
-				"boost": "",
-				"value": "",
-				"breed": "breed_name",
-				"attackSequence": [ 
-					{
-						"name": "attack_name",
-						"attackType": "heavy",
-						"damageType": "normal" 
-					}
-				]
-			}
-		],
-		"targetsStaggered": [
-			{
-				"boost": "",
-				"value": "",
-				"breed": "breed_name",
-				"attackSequence": [ 
-					{
-						"name": "attack_name",
-						"attackType": "heavy",
-						"damageType": "normal" 
-					}
-				]
-			}
-		]
+		"hitsToKill": []
 	};
+	
+	let lightAttacks = getGroupedAttacks(weaponAttackTemplate.attacks.light_attack);
+	let heavyAttacks = getGroupedAttacks(weaponAttackTemplate.attacks.heavy_attack);
+	let pushStab = [ weaponAttackTemplate.attacks.push_stab ];
+	
+	let attackGroups = [lightAttacks, heavyAttacks, pushStab];
+	
+	let y = 0;
+	
+	for (let attackTypeGroup of attackGroups) {
+		let breeds = [];
+		let attackType = y == 0 ? "Light" : y == 1 ? "Heavy" : "Push Stab";
+		
+		for (let attackGroup of attackTypeGroup) {
+			let name = attackGroup[0].attack_name;			
+			let attackDamageProfile = getAttackDamageProfile(attackGroup[0]);			
+		
+			if (attackGroup.length > 1) {
+				let z = 0;
+				attackGroup.forEach((x) => {
+					if (z == 0) {
+						z++;
+						continue;
+					}
+					name += ', ' + x.name;
+					z++;
+				});			
+			}
+		
+			attackDamageProfile.forEach((x) => {
+				breeds = breeds.concat(x.breeds); 
+			});
+			
+			breeds.forEach((breed) => {
+				for (let i = 0; i < breed.hits.length; i++) {
+					for (let j = 0; j < breed.hits[i].length; j++) {
+						if (breed.boostHits[i][j] <= 1 || breed.boostHits[i][j] > getMaxHeroPowerBuff() || breed.hits[i][j] <= 1) {
+							continue;
+						}
+						let damageType = "Normal";
+						
+						switch (i) {
+							case 1:
+								damageType = "Crit";
+								break;
+							case 2:
+								damageType = "Headshot";
+								break;
+							case 3:
+								damageType = "Crit Headshot";
+								break;
+						}
+						
+						breakpoints.hitsToKill.push({
+							"boost": breed.boostHits[i][j] - 1,
+							"value": breed.hits[i][j] - 1,
+							"breed": "breed_name",
+							"attackSequence": [ 
+								{
+									"name": name, //light 1/light 2/heavy 1/etc
+									"attackType": attackType,
+									"damageType": damageType 
+								}
+							]
+						});
+					}
+				}
+			});
+		}
+		y++;
+	}
 }
 
 function initWeaponsPage() {
