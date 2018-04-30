@@ -1014,7 +1014,10 @@ function getAttackBreedData(attackTemplate) {
 }
 
 function getAttackDamageProfile(attackTemplate) {
-	let attackDamageProfile = [];
+	let attackDamageProfile = {
+		"armorClasses": [],
+		"breeds": []
+	};
 	
 	for (let armor of _armorData) {
 		if (armor.value == "4") {
@@ -1126,9 +1129,9 @@ function getAttackDamageProfile(attackTemplate) {
 				breedJson.boost.hitsToKillHeadshot.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
 				breedJson.boost.hitsToKillCritHeadshot.push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
 			}
-			armorClassDamageProfile.breeds.push(breedJson);			
+			attackDamageProfile.breeds.push(breedJson);			
 		}
-		attackDamageProfile.push(armorClassDamageProfile);
+		attackDamageProfile.armorClasses(armorClassDamageProfile);
 	}
 	return attackDamageProfile;
 }
