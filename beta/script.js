@@ -1113,10 +1113,10 @@ function getAttackDamageProfile(attackTemplate) {
 				breedJson.hits[2].push(hitsToKillHeadshot);
 				breedJson.hits[3].push(hitsToKillCritHeadshot);		
 
-				breedJson.boost.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 100) / 100);
-				breedJson.boost.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 100) / 100);
-				breedJson.boost.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
-				breedJson.boost.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
+				breedJson.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 100) / 100);
+				breedJson.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 100) / 100);
+				breedJson.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
+				breedJson.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
 			}
 			armorClassDamageProfile.breeds.push(breedJson);			
 		}
