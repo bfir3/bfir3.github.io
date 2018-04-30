@@ -1165,7 +1165,7 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 				attackGroup.forEach((x) => {
 					if (z == 0) {
 						z++;
-						continue;
+						return;
 					}
 					name += ', ' + x.name;
 					z++;
