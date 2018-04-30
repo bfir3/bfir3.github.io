@@ -1088,8 +1088,8 @@ function getAttackDamageProfile(attackTemplate) {
 			let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
 			let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
 			
-			let targetsCleavedBoost = armorClassDamageProfile.cleave / getCleaveNeeded(breed, targetsCleaved);
-			let targetsStaggeredBoost = armorClassDamageProfile.stagger / getCleaveNeeded(breed, targetsStaggered);
+			let targetsCleavedBoost = armorClassDamageProfile.cleave / getCleaveBreakpoint(breed, targetsCleaved + 1);
+			let targetsStaggeredBoost = armorClassDamageProfile.stagger / getStaggerBreakpoint(breed, targetsStaggered + 1);
 				
 			let breedJson  = {
 				"name": breed.name,
