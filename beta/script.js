@@ -15,6 +15,10 @@ let DEFAULT_BOOST_CURVE_COEFFICIENT = 1;
 let DEFAULT_CRIT_BOOST = 0.5;
 let DEFAULT_HEADSHOT_BOOST = 0.5;
 let weaponPageInitialized = false;
+let breakpoints =
+	{
+		"hitsToKill": [ [],[],[],[] ]
+	};
 
 const DB_NAME = "verminBuildSets";
 
@@ -1139,7 +1143,7 @@ function getStaggerBreakpoint(breed, targets, difficultyLevel) {
 
 function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 	
-	let breakpoints =
+	breakpoints =
 	{
 		"hitsToKill": [ [],[],[],[] ]
 	};
@@ -1221,6 +1225,7 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 		}
 		y++;
 	}
+	console.log(breakpoints);
 }
 
 function getMaxHeroPowerBuff() {
