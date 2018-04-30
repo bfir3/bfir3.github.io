@@ -1179,7 +1179,7 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 			breeds.forEach((breed) => {
 				for (let i = 0; i < breed.hits.length; i++) {
 					for (let j = 0; j < breed.hits[i].length; j++) {
-						if (breed.boostHits[i][j] <= 1 || breed.boostHits[i][j] > getMaxHeroPowerBuff() || breed.hits[i][j] <= 1 || || breed.hits[i][j] > 7) {
+						if (breed.boostHits[i][j] <= 1 || breed.boostHits[i][j] > getMaxHeroPowerBuff() || breed.hits[i][j] <= 1 || breed.hits[i][j] > 7) {
 							continue;
 						}
 						let damageType = "Normal";
