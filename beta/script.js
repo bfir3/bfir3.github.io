@@ -1909,7 +1909,7 @@ function getWeaponTemplate(weaponCodename) {
 	if (!_weaponData) {
 		return;
 	}
-	let templateName = _data.melee_weapons.filter((x) => { return x.codename == weapon.codename; })[0].templateName;
+	let templateName = _data.melee_weapons.filter((x) => { return x.codename == weaponCodename; })[0].templateName;
 	return _weaponData.find((x) => x.template_name == templateName);
 }
 
