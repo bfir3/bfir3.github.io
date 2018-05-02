@@ -362,7 +362,7 @@ span.weaponStatValue {
 .swingUp span.attackIcon::after, .swingStab span.attackIcon::after  {
     content: '\2191';
     position: relative;
-    top: 0px;
+    top: -5px;
 }
 
 .swingUpLeft span.attackIcon::after {
