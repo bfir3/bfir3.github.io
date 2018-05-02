@@ -16,7 +16,7 @@
 	grid-row-gap: 1px;
 	margin-bottom: 20px;
 	grid-template-rows: 40px;
-	grid-auto-rows: minmax(30px, auto);
+	grid-auto-rows: minmax(35px, auto);
 }
 
 .weaponAttackSwingIcon.grid {
@@ -816,27 +816,27 @@ span.attackIcon {
     color: grey
 }
 .hits1 {
-    background: #32500f !important;
+    background: #11210d !important;
     color: #fff !important;
 }
 .hits2 {
-    background: #3d6113 !important;
+    background: #334618 !important;
     color: #fff !important;
 }
 .hits3 {
-    background: #507920 !important;
+    background: #445E20 !important;
     color: #fff !important;
 }
 .hits4 {
-    background: #65962c !important;
+    background: #567627 !important;
     color: #fff !important;
 }
 .hits5 {
-    background: #75b52a !important;
+    background: #678F2F !important;
     color: #fff !important;
 }
 .hits6 {
-    background: #77c31e !important;
+    background: #78A836 !important;
     color: #fff !important;
 }
 .sectionTitle::after {

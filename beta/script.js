@@ -1117,10 +1117,10 @@ function getAttackDamageProfile(attackTemplate) {
 				breedJson.hits[2].push(hitsToKillHeadshot);
 				breedJson.hits[3].push(hitsToKillCritHeadshot);		
 
-				breedJson.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 100) / 100);
-				breedJson.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 100) / 100);
-				breedJson.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 100) / 100);
-				breedJson.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 100) / 100);						
+				breedJson.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 1000) / 1000);
+				breedJson.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 1000) / 1000);
+				breedJson.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 1000) / 1000);
+				breedJson.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 1000) / 1000);						
 			}
 			armorClassDamageProfile.breeds.push(breedJson);			
 		}
@@ -1141,11 +1141,12 @@ function getStaggerBreakpoint(breed, targets, difficultyLevel) {
 	return getHitmass(breed) * targets;	
 }
 
-function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
+function getMeleeWeaponBreakpoints(weapon) {
+	let weaponAttackTemplate = _data.melee_weapons.filter((x) => { return x.codename == weapon.codename; })[0];
 	
 	breakpoints =
 	{
-		"hitsToKill": [ [],[],[],[] ]
+		"hitsToKill": []
 	};
 	
 	let lightAttacks = getGroupedAttacks(weaponAttackTemplate.attacks.light_attack);
@@ -1200,16 +1201,17 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 								break;
 						}
 						
-						breakpoints.hitsToKill[i].push({
-							"boost": (breed.boostHits[i][j] - 1).toFixed(2),
-							"value": breed.hits[i][j] - 1,
+						breakpoints.hitsToKill.push({
+							"boost": ((breed.boostHits[i][j] - 1) * 100).toFixed(1),
+							"hitsToKill": breed.hits[i][j] - 1,
 							"breed": breed.name,
-							"attack": {
+							"attackSequence": [{
 								"name": name, //light 1/light 2/heavy 1/etc
+								"attackTemplate": attackGroup[0], //light 1/light 2/heavy 1/etc
 								"attackType": attackType,
 								"damageType": damageType,
-								"targetNumber": breed.hits[i].length - j + 1
-							}
+								"targetNumber": breed.hits[i].length - j
+							}]
 							/*"attackSequence": [ 
 								{
 									"name": name, //light 1/light 2/heavy 1/etc
@@ -1225,7 +1227,40 @@ function getMeleeWeaponBoostBreakpoints(weaponAttackTemplate) {
 		}
 		y++;
 	}
-	console.log(breakpoints);
+	return breakpoints;
+}
+
+function getGroupedMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType) {
+	let breakpoints = getMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType);
+	
+	let map = new Map();
+    breakpoints.forEach((item) => {
+        const collection = map.get(item.boost);
+        if (!collection) {
+            map.set(item.boost, [item]);
+        } else {
+            collection.push(item);
+        }
+    });
+
+	return Array.from(map.keys()).sort(function(a,b) { return +a - +b }).map(function(k) { return { key: k, value: map.get(k) }});
+}
+
+function getMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType) {
+	let breakpoints = getMeleeWeaponBreakpoints(weapon);
+	hitBreakpoints = breakpoints.hitsToKill;
+	
+	if ((!targetNumber || targetNumber == 0) && (!hitsToKill || hitsToKill == 0)) {
+		return hitBreakpoints;
+	}
+	else if ((!targetNumber || targetNumber == 0)) {
+		return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill });
+	}
+	else if () {
+		return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill && x.attackSequence[0].targetNumber == targetNumber; });
+	}
+
+	return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill && x.attackSequence[0].targetNumber == targetNumber; });
 }
 
 function getMaxHeroPowerBuff() {
