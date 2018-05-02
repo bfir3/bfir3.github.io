@@ -1248,7 +1248,7 @@ function getGroupedMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType
 
 function getMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType) {
 	let breakpoints = getMeleeWeaponBreakpoints(weapon);
-	hitBreakpoints = breakpoints.hitsToKill;
+	let hitBreakpoints = breakpoints.hitsToKill;
 	
 	if ((!targetNumber || targetNumber == 0) && (!hitsToKill || hitsToKill == 0)) {
 		return hitBreakpoints;
