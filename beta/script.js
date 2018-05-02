@@ -1143,7 +1143,7 @@ function getAttackDamageProfile(attackTemplate) {
 }
 
 function getDamageBreakpoint(breed, hits, difficultyLevel) {
-	return hits == 0 ? 0 : breed.legendHp / hits;	
+	return hits == 0 || isNaN(hits) ? 0 : breed.legendHp / hits;	
 }
 
 function getCleaveBreakpoint(breed, targets, difficultyLevel) {
