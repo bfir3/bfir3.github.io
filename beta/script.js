@@ -1096,7 +1096,7 @@ function getAttackDamageProfile(attackTemplate) {
 			let targetsStaggeredBoost = 0;
 			
 			let targetsCleavedBreakpoint = armorClassDamageProfile.cleave / getCleaveBreakpoint(breed, targetsCleaved + 1);
-			let targetsStaggeredBreapoint = armorClassDamageProfile.stagger / getStaggerBreakpoint(breed, targetsStaggered + 1);
+			let targetsStaggeredBreakpoint = armorClassDamageProfile.stagger / getStaggerBreakpoint(breed, targetsStaggered + 1);
 				
 			let breedJson  = {
 				"breed": breed,
