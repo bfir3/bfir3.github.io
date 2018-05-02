@@ -1104,13 +1104,13 @@ function getAttackDamageProfile(attackTemplate) {
 					"base": [ [],[],[],[] ],
 					"boost": [ [],[],[],[] ],
 					"breakpoints": [ [],[],[],[] ]
-				}
+				},
 				"cleave": {
 					"base": targetsCleaved,
 					"boost": targetsCleavedBoost,
 					"breakpoints": targetsCleavedBreakpoint
 					
-				}
+				},
 				"stagger": {
 					"base": targetsStaggered,
 					"boost": targetsStaggeredBoost,
