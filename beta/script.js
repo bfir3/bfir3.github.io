@@ -1200,8 +1200,8 @@ function getMeleeWeaponBreakpoints(weapon) {
 			});
 			
 			breeds.forEach((breedProfile) => {
-				for (let i = 0; i < breedProfile.hits.length; i++) {
-					for (let j = 0; j < breedProfile.hits[i].length; j++) {
+				for (let i = 0; i < breedProfile.hits.base.length; i++) {
+					for (let j = 0; j < breedProfile.hits.base.length; j++) {
 						if (breedProfile.hits.breakpoints[i][j] <= 1 || breedProfile.hits.breakpoints[i][j] > getMaxHeroPowerBuff() || breedProfile.hits.breakpoints[i][j] <= 1 || breedProfile.hits.breakpoints[i][j] > 7) {
 							continue;
 						}
