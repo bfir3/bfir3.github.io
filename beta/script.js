@@ -1253,11 +1253,11 @@ function getMeleeBreakpoints(weapon, hitsToKill, targetNumber, damageType) {
 	if ((!targetNumber || targetNumber == 0) && (!hitsToKill || hitsToKill == 0)) {
 		return hitBreakpoints;
 	}
-	else if ((!targetNumber || targetNumber == 0)) {
+	else if (!targetNumber || targetNumber == 0) {
 		return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill });
 	}
-	else if () {
-		return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill && x.attackSequence[0].targetNumber == targetNumber; });
+	else if (!hitsToKill || hitsToKill == 0) {
+		return hitBreakpoints.filter((x) => { return x.attackSequence[0].targetNumber == targetNumber; });
 	}
 
 	return hitBreakpoints.filter((x) => { return x.hitsToKill == hitsToKill && x.attackSequence[0].targetNumber == targetNumber; });
