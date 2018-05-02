@@ -1272,7 +1272,7 @@ function initWeaponsPage() {
 	
 	$(".weaponDataMeleeSelection").html('');
 	for (let weapon of getWeaponsForHero(heroIndex)) {
-		$(".weaponDataMeleeSelection").append(new Option(weapon.name, weapon.templateName));
+		$(".weaponDataMeleeSelection").append(new Option(weapon.name, weapon.codename));
 	}
 	
 	$(".weaponDataMeleeSelection")[0].selectedIndex = 0;
