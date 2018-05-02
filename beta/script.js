@@ -1092,17 +1092,31 @@ function getAttackDamageProfile(attackTemplate) {
 			let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
 			let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
 			
-			let targetsCleavedBoost = armorClassDamageProfile.cleave / getCleaveBreakpoint(breed, targetsCleaved + 1);
-			let targetsStaggeredBoost = armorClassDamageProfile.stagger / getStaggerBreakpoint(breed, targetsStaggered + 1);
+			let targetsCleavedBoost = 0;
+			let targetsStaggeredBoost = 0;
+			
+			let targetsCleavedBreakpoint = armorClassDamageProfile.cleave / getCleaveBreakpoint(breed, targetsCleaved + 1);
+			let targetsStaggeredBreapoint = armorClassDamageProfile.stagger / getStaggerBreakpoint(breed, targetsStaggered + 1);
 				
 			let breedJson  = {
 				"breed": breed,
-				"hits": [ [],[],[],[] ],
-				"boostHits": [ [],[],[],[] ],
-				"targetsCleaved": targetsCleaved,
-				"targetsStaggered": targetsStaggered,
-				"boostTargetsCleaved": targetsCleavedBoost,
-				"boostTargetsStaggered": targetsStaggeredBoost
+				"hits": {
+					"base": [ [],[],[],[] ],
+					"boost": [ [],[],[],[] ],
+					"breakpoints": [ [],[],[],[] ]
+				}
+				"cleave": {
+					"base": targetsCleaved,
+					"boost": targetsCleavedBoost,
+					"breakpoints": targetsCleavedBreakpoint
+					
+				}
+				"stagger": {
+					"base": targetsStaggered,
+					"boost": targetsStaggeredBoost,
+					"breakpoints": targetsStaggeredBreakpoint
+					
+				}
 			}
 		
 			for (let i = 0; i < armorClassDamageProfile.normal.length; i++) {
@@ -1111,15 +1125,15 @@ function getAttackDamageProfile(attackTemplate) {
 				let hitsToKillHeadshot = getHitsToKill(breed, armorClassDamageProfile.headshot[i]);
 				let hitsToKillCritHeadshot = getHitsToKill(breed, armorClassDamageProfile.critHeadshot[i]);			
 				
-				breedJson.hits[0].push(hitsToKillNormal);
-				breedJson.hits[1].push(hitsToKillCrit);
-				breedJson.hits[2].push(hitsToKillHeadshot);
-				breedJson.hits[3].push(hitsToKillCritHeadshot);		
+				breedJson.hits.base[0].push(hitsToKillNormal);
+				breedJson.hits.base[1].push(hitsToKillCrit);
+				breedJson.hits.base[2].push(hitsToKillHeadshot);
+				breedJson.hits.base[3].push(hitsToKillCritHeadshot);		
 
-				breedJson.boostHits[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 1000) / 1000);
-				breedJson.boostHits[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 1000) / 1000);
-				breedJson.boostHits[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 1000) / 1000);
-				breedJson.boostHits[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 1000) / 1000);						
+				breedJson.hits.breakpoints[0].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillNormal - 1) / armorClassDamageProfile.normal[i] * 1000) / 1000);
+				breedJson.hits.breakpoints[1].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCrit - 1) / armorClassDamageProfile.crit[i] * 1000) / 1000);
+				breedJson.hits.breakpoints[2].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillHeadshot - 1) / armorClassDamageProfile.headshot[i] * 1000) / 1000);
+				breedJson.hits.breakpoints[3].push(Math.ceil(getDamageBreakpoint(breed, hitsToKillCritHeadshot - 1) / armorClassDamageProfile.critHeadshot[i] * 1000) / 1000);						
 			}
 			armorClassDamageProfile.breeds.push(breedJson);			
 		}
@@ -1183,7 +1197,7 @@ function getMeleeWeaponBreakpoints(weapon) {
 			breeds.forEach((breedProfile) => {
 				for (let i = 0; i < breedProfile.hits.length; i++) {
 					for (let j = 0; j < breedProfile.hits[i].length; j++) {
-						if (breedProfile.boostHits[i][j] <= 1 || breedProfile.boostHits[i][j] > getMaxHeroPowerBuff() || breedProfile.hits[i][j] <= 1 || breedProfile.hits[i][j] > 7) {
+						if (breedProfile.hits.breakpoints[i][j] <= 1 || breedProfile.hits.breakpoints[i][j] > getMaxHeroPowerBuff() || breedProfile.hits.breakpoints[i][j] <= 1 || breedProfile.hits.breakpoints[i][j] > 7) {
 							continue;
 						}
 						let damageType = "Normal";
@@ -1201,8 +1215,8 @@ function getMeleeWeaponBreakpoints(weapon) {
 						}
 						
 						breakpoints.hitsToKill.push({
-							"boost": ((breedProfile.boostHits[i][j] - 1) * 100).toFixed(1),
-							"hitsToKill": breedProfile.hits[i][j] - 1,
+							"boost": ((breedProfile.hits.breakpoints[i][j] - 1) * 100).toFixed(1),
+							"hitsToKill": breedProfile.hits.base[i][j] - 1,
 							"breed": breedProfile.breed.name,
 							"attackSequence": [{
 								"name": name, //light 1/light 2/heavy 1/etc
