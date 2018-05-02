@@ -1142,7 +1142,7 @@ function getStaggerBreakpoint(breed, targets, difficultyLevel) {
 }
 
 function getMeleeWeaponBreakpoints(weapon) {
-	let weaponAttackTemplate = _data.melee_weapons.filter((x) => { return x.codename == weapon.codename; })[0];
+	let weaponAttackTemplate = getWeaponTemplate(weapon.codename);
 	
 	breakpoints =
 	{
@@ -1905,11 +1905,12 @@ function getCurrentUser() {
 Weapons Data Table
 ******************/
 
-function getWeaponTemplate(weaponTemplateName) {
+function getWeaponTemplate(weaponCodename) {
 	if (!_weaponData) {
 		return;
 	}
-	return _weaponData.find((x) => x.template_name == weaponTemplateName);
+	let templateName = _data.melee_weapons.filter((x) => { return x.codename == weapon.codename; })[0].templateName;
+	return _weaponData.find((x) => x.template_name == templateName);
 }
 
 function isAttackEquivalent(attack1, attack2) {
@@ -2078,11 +2079,11 @@ function getAttackIconHtml(attackTemplate) {
 	return `<div class="weaponAttackSwingIcon ${attackSwingDirectionClass} grid redBorder"><span class="attackIcon"></span><span class="attackText attackModifierText">${attackModifierName}</span><span class="attackText">${attackName}</span></div>`
 }
 
-function renderWeaponDataTable(weaponTemplateName, heroPowerLevel, difficultyLevel) {	
+function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) {	
 	let weaponDataTable = $(".weaponAttackDataTable");
 	weaponDataTable.html('');
 	
-	let weaponTemplate = getWeaponTemplate(weaponTemplateName);
+	let weaponTemplate = getWeaponTemplate(weaponCodename);
 	
 	let lightAttacks = getGroupedAttacks(weaponTemplate.attacks.light_attack);
 	let heavyAttacks = getGroupedAttacks(weaponTemplate.attacks.heavy_attack);
