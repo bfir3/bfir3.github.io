@@ -1336,8 +1336,8 @@ function initBuildsBrowser() {
 					build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
 					buildList.push(build);
 				});
+				callback({ "data": buildList });
 			});
-		callback({ "data": buildList });
 	  },
 		"columns": [
 				{ "data": "name" , "title": "Name" },
