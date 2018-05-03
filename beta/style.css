@@ -1224,10 +1224,6 @@ table#myBuildsTable {
     display: none;
 }
 
-.showDamage .damageIndicator:hover + .breakpointIndicator {
-    display: grid;
-}
-
 .showCleave .damageIndicator, .showCleave .staggerIndicator {
     display: none;
 }

@@ -1776,6 +1776,18 @@ $(function() {
 		$($(e.currentTarget).find("span")[0]).html('Hide Strength');
 	});
 	
+	$(".showBreakpointsButton").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showBreakpoints')) {
+			$(".weaponAttackStatsContainer").removeClass('showBreakpoints');
+			$(".weaponAttackStatsContainer").addClass('showDamage');
+			$($(e.currentTarget).find("span")[0]).html('Show Breakpoints');			
+			return;
+		}
+		$(".weaponAttackStatsContainer").removeClass('showDamage');
+		$(".weaponAttackStatsContainer").addClass('showBreakpoints');
+		$($(e.currentTarget).find("span")[0]).html('Hide Breakpoints');
+	});
+	
 	$(".showEnemiesButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showEnemies')) {
 			$(".weaponAttackStatsContainer").removeClass('showEnemies');
@@ -2641,7 +2653,7 @@ function renderAttackData(attackTemplate) {
 			let armorClassCritDamage = Math.round(armorClassDamage.crit[0] * 4) / 4;
 			let armorClassCritHeadshotDamage = Math.round(armorClassDamage.critHeadshot[0] * 4) / 4;
 			
-			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassDamage.normal}</span></div>`;
+			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage}</span></div>`;
 			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
 			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
 			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;

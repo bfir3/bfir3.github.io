@@ -981,3 +981,11 @@ select, input, textarea {
 .buildInfoContainer {
     margin-bottom: 5px;
 }
+
+.showStrengthButton {
+	grid-column: 1 / span 2;
+}
+
+.showBreakpointsButton {
+	grid-column: 3 / span 4;
+}
