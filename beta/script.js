@@ -1328,7 +1328,7 @@ function initBuildsBrowser() {
 				isFirstQuery = true;
 				query = db.collection("buildTable").where("name", ">", "").limit(BUILD_BROWSER_PAGE_LIMIT);
 			} 
-			else if (isPreviousQuery) {				
+			else if (!isPreviousQuery) {				
 				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 			}
 			else {
@@ -1359,7 +1359,7 @@ function initBuildsBrowser() {
 				{ "data": "author", "title": "Author", "width": "100px" },
 				{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
 			],
-	
+		"bFilter": false,
 		"paging":   false,
 		"ordering": false,
 		"info":     false

@@ -1248,3 +1248,17 @@ table#myBuildsTable {
 .buildInfoContainer {
     margin-bottom: 5px;
 }
+.buildBrowserButtons.flex div {
+    flex-grow: 1;
+    color: white;
+    margin-bottom: 5px;
+	cursor: pointer;
+}
+
+.buildBrowserButtons.flex div:last-child {
+    text-align: right;
+}
+
+#buildBrowserTable_filter {
+    display: none !important;
+}
