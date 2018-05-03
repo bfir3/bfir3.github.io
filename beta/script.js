@@ -2587,21 +2587,22 @@ function renderAttackData(attackTemplate) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
 	let attackDamageProfile = getAttackDamageProfile(attackTemplate);
 	
-	let	normalDamageHtml = '';
-	let	headshotDamageHtml = '';
-	let	critDamageHtml = '';
-	let	critHeadshotDamageHtml = '';
-	
-	let normalBreakpointHtml = '';
-	let headshotBreakpointHtml = '';
-	let critBreakpointHtml = '';
-	let critHeadshotBreakpointHtml = '';	
 	
 	let z = 0;
 	for (let armor of _armorData) {
 		if (armor.value == "4") {
 			continue;
 		}
+		let	normalDamageHtml = '';
+		let	headshotDamageHtml = '';
+		let	critDamageHtml = '';
+		let	critHeadshotDamageHtml = '';
+		
+		let normalBreakpointHtml = '';
+		let headshotBreakpointHtml = '';
+		let critBreakpointHtml = '';
+		let critHeadshotBreakpointHtml = '';	
+		
 		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
 		
 		let armorClassDamage = attackDamageProfile[z];
@@ -2635,10 +2636,10 @@ function renderAttackData(attackTemplate) {
 			}
 		}
 		else {			
-			let armorClassNormalDamage = armorClassDamage.normal[0];
-			let armorClassHeadshotDamage = armorClassDamage.headshot[0];
-			let armorClassCritDamage = armorClassDamage.crit[0];
-			let armorClassCritHeadshotDamage = armorClassDamage.critHeadshot[0];
+			let armorClassNormalDamage = Math.round(armorClassDamage.normal[0] * 4) / 4;
+			let armorClassHeadshotDamage = Math.round(armorClassDamage.headshot[0] * 4) / 4;
+			let armorClassCritDamage = Math.round(armorClassDamage.crit[0] * 4) / 4;
+			let armorClassCritHeadshotDamage = Math.round(armorClassDamage.critHeadshot[0] * 4) / 4;
 			
 			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassDamage.normal}</span></div>`;
 			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
