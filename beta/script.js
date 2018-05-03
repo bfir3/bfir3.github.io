@@ -2663,14 +2663,6 @@ function renderAttackData(attackTemplate) {
 								<div class="headshotDamage damageCell grid">${headshotDamageHtml}</span></div>
 								<div class="critDamage damageCell grid">${critDamageHtml}</div>
 								<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
-								<div class="normalDamage cleaveCell grid">${normalCleaveHtml}</span></div>
-								<div class="headshotDamage cleaveCell grid">${headshotCleaveHtml}</div>
-								<div class="critDamage cleaveCell grid">${critCleaveHtml}</div>
-								<div class="critHeadshotDamage cleaveCell grid">${critHeadshotCleaveHtml}</div>
-								<div class="normalDamage staggerCell grid">${normalStaggerHtml}</span></div>
-								<div class="headshotDamage staggerCell grid">${headshotStaggerHtml}</div>
-								<div class="critDamage staggerCell grid">${critStaggerHtml}</div>
-								<div class="critHeadshotDamage staggerCell grid">${critHeadshotStaggerHtml}</div>
 							</div>`;
 		attackSwingDataTable.append(armorHeaderRow);
 		
