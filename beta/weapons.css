@@ -990,3 +990,7 @@ select, input, textarea {
 .showBreakpointsButton {
 	grid-column: 3 / span 2;
 }
+
+.attackTemplateDataTable:not(.multiTargetAttack) .targetValueCell {
+    grid-template-columns: 100%;
+}
