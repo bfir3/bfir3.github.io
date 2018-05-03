@@ -987,5 +987,5 @@ select, input, textarea {
 }
 
 .showBreakpointsButton {
-	grid-column: 3 / span 4;
+	grid-column: 3 / span 2;
 }
