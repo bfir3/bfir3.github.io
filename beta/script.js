@@ -2610,10 +2610,10 @@ function renderAttackData(attackTemplate) {
 			attackSwingDataTable.addClass('multiTargetAttack'); 
 			attackSwingDataTable.addClass('targets' + armorClassDamage.normal.length); 
 			for (let j = 0; j < armorClassDamage.normal.length; j++) {				
-				let armorClassNormalDamage = armorClassDamage.normal[j];
-				let armorClassHeadshotDamage = armorClassDamage.headshot[j];
-				let armorClassCritDamage = armorClassDamage.crit[j];
-				let armorClassCritHeadshotDamage = armorClassDamage.critHeadshot[j];
+				let armorClassNormalDamage = Math.round(armorClassDamage.normal[j] * 4) / 4;
+				let armorClassHeadshotDamage = Math.round(armorClassDamage.headshot[j] * 4) / 4;
+				let armorClassCritDamage = Math.round(armorClassDamage.crit[j] * 4) / 4;
+				let armorClassCritHeadshotDamage = Math.round(armorClassDamage.critHeadshot[j] * 4) / 4;
 					
 				if (!attackTemplate.damage_profile) {
 					normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage).toFixed(2)} (${(armorClassNormalDamage/2)})</span></div>`;
