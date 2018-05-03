@@ -1316,12 +1316,9 @@ function loadPageFromHash() {
 }
 
 function initBuildsBrowser() {
-	let buildList = [];
-	
-	queryCursor = '';
-	buildList = [];
 	$('#buildBrowserTable').dataTable( {
 	  "ajax": function (data, callback, settings) {
+			let buildList = [];
 			let query;
 			if (!buildBrowserQueryCursor) {
 				query = db.collection("buildTable").where("name", ">", "").limit(BUILD_BROWSER_PAGE_LIMIT);
@@ -1330,19 +1327,17 @@ function initBuildsBrowser() {
 			}
 		  
 			query.get().then((queryRef) => {
-			let i = 0;
-			console.log(queryRef.docs);
-			queryCursor = queryRef.docs[queryRef.docs.length-1];
-			queryRef.docs.some((doc) => {
-				let build = doc.data();			
-				build.id = doc.id;
-				build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
-				build.heroName = !getHero(doc.data().hash) ? "" : getHero(doc.data().hash).name.split(' ')[0];
-				build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
-				buildList.push(build);
+				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
+				queryRef.docs.some((doc) => {
+					let build = doc.data();			
+					build.id = doc.id;
+					build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+					build.heroName = !getHero(doc.data().hash) ? "" : getHero(doc.data().hash).name.split(' ')[0];
+					build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
+					buildList.push(build);
+				});
 			});
-		});
-		callback({ "data": buildList })
+		callback({ "data": buildList });
 	  },
 		"columns": [
 				{ "data": "name" , "title": "Name" },
