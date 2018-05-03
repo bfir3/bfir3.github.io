@@ -2557,8 +2557,176 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 	attackSwingDataTable.addClass('multiTargetAttack'); 
 	attackSwingDataTable.addClass('targets' + targetDamageProfiles.length); 
 }
-	
+
 function renderAttackData(attackTemplate) {
+	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
+	let attackDamageProfile = getAttackDamageProfile(attackTemplate);
+	
+	let	normalDamageHtml = '';
+	let	headshotDamageHtml = '';
+	let	critDamageHtml = '';
+	let	critHeadshotDamageHtml = '';
+	
+	let normalBreakpointHtml = '';
+	let headshotBreakpointHtml = '';
+	let critBreakpointHtml = '';
+	let critHeadshotBreakpointHtml = '';	
+	
+	for (let z = 0; z < _armorData.length; z++) {
+		let armor = _armorData[z];
+		if (armor.value == "4") {
+			continue;
+		}
+		let armorCssClass = armor.name.split('(')[0].toLowerCase().trim(' ');
+		
+		let armorClassDamage = attackDamageProfile[z];
+		
+		if (armorClassDamage.normal.length > 1) {
+			for (let j = 0; j < armorClassDamage.normal.length; j++) {				
+				let armorClassNormalDamage = armorClassDamage.normal[j];
+				let armorClassHeadshotDamage = armorClassDamage.headshot[j];
+				let armorClassCritDamage = armorClassDamage.crit[j];
+				let armorClassCritHeadshotDamage = armorClassDamage.critHeadshot[j];
+					
+				if (!attackTemplate.damage_profile) {
+					normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage).toFixed(2)} (${(armorClassNormalDamage/2)})</span></div>`;
+					headshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotDamage).toFixed(2)} (${(armorClassHeadshotDamage/2)})</span></div>`;
+					critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage).toFixed(2)} (${(armorClassCritDamage/2)})</span></div>`;
+					critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotDamage).toFixed(2)} (${(armorClassCritHeadshotDamage/2)})</span></div>`;
+				}
+				else {
+					normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage)}</span></div>`;
+					headshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotDamage)}</span></div>`;
+					critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage)}</span></div>`;
+					critHeadshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotDamage)}</span></div>`;	
+				}	
+				
+				// normalBreakpointHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalBreakpoint)}</span></div>`;
+				// headshotBreakpointHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotBreakpoint)}</span></div>`;
+				// critBreakpointHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritBreakpoint)}</span></div>`;
+				// critHeadshotBreakpointHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritHeadshotBreakpoint)}</span></div>`;	
+			}
+		}
+		else {			
+			let armorClassNormalDamage = armorClassDamage.normal[0];
+			let armorClassHeadshotDamage = armorClassDamage.headshot[0];
+			let armorClassCritDamage = armorClassDamage.crit[0];
+			let armorClassCritHeadshotDamage = armorClassDamage.critHeadshot[0];
+			
+			normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassDamage.normal}</span></div>`;
+			headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage}</span></div>`;
+			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
+			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;
+		
+			if (!attackTemplate.damage_profile) {
+				armorClassNormalDamage = armorClassNormalDamage * 2;
+				armorClassCritDamage = armorClassCritDamage * 2;
+				armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
+				armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
+					
+				normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
+				headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
+				critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
+				critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage} (${(armorClassCritHeadshotDamage/2).toFixed(2)})</span></div>`;
+			}
+		}
+		
+		
+		let armorHeaderRow = `<div class="weaponDamageType grid ${armorCssClass}">
+								<div class="damageType grid"><span class="center">${armor.name}</span></div>
+								<div class="normalDamage damageCell grid">${normalDamageHtml}</div>
+								<div class="headshotDamage damageCell grid">${headshotDamageHtml}</span></div>
+								<div class="critDamage damageCell grid">${critDamageHtml}</div>
+								<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
+								<div class="normalDamage cleaveCell grid">${normalCleaveHtml}</span></div>
+								<div class="headshotDamage cleaveCell grid">${headshotCleaveHtml}</div>
+								<div class="critDamage cleaveCell grid">${critCleaveHtml}</div>
+								<div class="critHeadshotDamage cleaveCell grid">${critHeadshotCleaveHtml}</div>
+								<div class="normalDamage staggerCell grid">${normalStaggerHtml}</span></div>
+								<div class="headshotDamage staggerCell grid">${headshotStaggerHtml}</div>
+								<div class="critDamage staggerCell grid">${critStaggerHtml}</div>
+								<div class="critHeadshotDamage staggerCell grid">${critHeadshotStaggerHtml}</div>
+							</div>`;
+		attackSwingDataTable.append(armorHeaderRow);
+		
+		for (let k = 0; k < armorClassDamage.breeds.length; k++) {
+			
+			let hitsToKillNormalHtml = '';
+			let hitsToKillCritHtml = '';
+			let hitsToKillHeadshotHtml = ''; 
+			let hitsToKillCritHeadshotHtml = '';
+			
+			let breakpointNormalHtml = '';
+			let breakpointCritHtml = '';
+			let breakpointHeadshotHtml = '';
+			let breakpointCritHeadshotHtml = '';
+			
+			for (let i = 0; i < armorClassDamage.breeds[k].hits.base[0].length; i++) {
+		
+				let hitsToKillNormal = armorClassDamage.breeds[k].hits.base[0][i];
+				let hitsToKillCrit = armorClassDamage.breeds[k].hits.base[1][i];
+				let hitsToKillHeadshot = armorClassDamage.breeds[k].hits.base[2][i];
+				let hitsToKillCritHeadshot = armorClassDamage.breeds[k].hits.base[3][i];
+				
+				hitsToKillNormalHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillNormal}"><span class="center">${hitsToKillNormal}</span></div>`;
+				hitsToKillCritHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCrit}"><span class="center">${hitsToKillCrit}</span></div>`;
+				hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillHeadshot}"><span class="center">${hitsToKillHeadshot}</span></div>`;
+				hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
+				
+				let breakpointNormal = armorClassDamage.breeds[k].hits.breakpoints[0][i];
+				let breakpointCrit = armorClassDamage.breeds[k].hits.breakpoints[1][i];
+				let breakpointHeadshot = armorClassDamage.breeds[k].hits.breakpoints[2][i];
+				let breakpointCritHeadshot = armorClassDamage.breeds[k].hits.breakpoints[3][i];
+				
+				breakpointNormal = !breakpointNormal || breakpointNormal == 0 ? "-" : `${breakpointNormal - 1} ⟶ ${hitsToKillNormal - 1}`;
+				breakpointCrit = !breakpointCrit || breakpointCrit == 0 ? "-" : `${breakpointCrit - 1} ⟶ ${hitsToKillCrit - 1}`;
+				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 ? "-" : `${breakpointHeadshot - 1} ⟶ ${hitsToKillHeadshot - 1}`;
+				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 ? "-" : `${breakpointCritHeadshot - 1} ⟶ ${hitsToKillCritHeadshot - 1}`;
+				
+				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointNormal}</span></div>`;
+				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointCrit}</span></div>`;
+				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointHeadshot}</span></div>`;
+				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointCritHeadshot}</span></div>`;	
+			}
+			
+			let breed = armorClassDamage.breeds[k].breed;
+			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
+						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
+						   <div class="enemyRace grid" title="${breed.race}"><i class="raceIcon"></i></div>
+						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
+						   <div class="enemyTargets grid">
+								<div class="targetsCleaved grid">
+									<span class="center">${armorClassDamage.breeds[k].cleave.base}</span>
+								</div>
+						   </div>
+						   <div class="enemyTargets grid">
+								<div class="targetsStaggered grid">
+									<span class="center">${armorClassDamage.breeds[k].stagger.base}</span>
+								</div>
+						   </div>
+						   <div class="normalDamage targetValueCell grid">
+								${hitsToKillNormalHtml}
+								${breakpointNormalHtml}
+						   </div>
+						   <div class="headshotDamage targetValueCell grid">
+								${hitsToKillHeadshotHtml}
+								${breakpointHeadshot}
+						   </div>
+						   <div class="critDamage targetValueCell grid">
+								${hitsToKillCritHtml}				
+								${breakpointCrit}
+						   </div>
+						   <div class="critHeadshotDamage targetValueCell grid">
+								${hitsToKillCritHeadshotHtml}
+								${breakpointCritHeadshot}
+						   </div>
+						</div>`;
+			attackSwingDataTable.append(breedRow);
+		}
+	}	
+}
+	
+function renderAttackDataOld(attackTemplate) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
 		
 	let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
