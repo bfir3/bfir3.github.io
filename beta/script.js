@@ -12,6 +12,7 @@ let buildSetId;
 let buildBrowserList;
 let buildBrowserQueryCursor;
 let buildBrowserFirstCursor;
+let buildBrowserPreviousQueryCursor;
 let currentUser;
 let MAX_SCALED_POWER_LEVEL = 565.625;
 let DEFAULT_BOOST_CURVE_COEFFICIENT = 1;
@@ -1332,7 +1333,7 @@ function initBuildsBrowser() {
 				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 			}
 			else {
-				query = db.collection("buildTable").where("name", ">", "").endAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 				
 			}
 		  
@@ -1341,6 +1342,7 @@ function initBuildsBrowser() {
 					buildBrowserFirstCursor = queryRef.docs[0];
 				}
 				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
+				buildBrowserPreviousQueryCursor = queryRef.docs[0];
 				queryRef.docs.some((doc) => {
 					let build = doc.data();			
 					build.id = doc.id;
