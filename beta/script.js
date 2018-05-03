@@ -2705,15 +2705,15 @@ function renderAttackData(attackTemplate) {
 				hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillHeadshot}"><span class="center">${hitsToKillHeadshot}</span></div>`;
 				hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 				
-				let breakpointNormal = (armorClassDamage.breeds[k].hits.breakpoints[0][i] * 100).toFixed(1);
-				let breakpointCrit = (armorClassDamage.breeds[k].hits.breakpoints[1][i] * 100).toFixed(1);
-				let breakpointHeadshot = (armorClassDamage.breeds[k].hits.breakpoints[2][i] * 100).toFixed(1);
-				let breakpointCritHeadshot = (armorClassDamage.breeds[k].hits.breakpoints[3][i] * 100).toFixed(1);
+				let breakpointNormal = armorClassDamage.breeds[k].hits.breakpoints[0][i];
+				let breakpointCrit = armorClassDamage.breeds[k].hits.breakpoints[1][i];
+				let breakpointHeadshot = armorClassDamage.breeds[k].hits.breakpoints[2][i];
+				let breakpointCritHeadshot = armorClassDamage.breeds[k].hits.breakpoints[3][i];
 				
-				breakpointNormal = !breakpointNormal || breakpointNormal == 0 ? "-" : `${breakpointNormal - 1} ⟶ ${hitsToKillNormal - 1}`;
-				breakpointCrit = !breakpointCrit || breakpointCrit == 0 ? "-" : `${breakpointCrit - 1} ⟶ ${hitsToKillCrit - 1}`;
-				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 ? "-" : `${breakpointHeadshot - 1} ⟶ ${hitsToKillHeadshot - 1}`;
-				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 ? "-" : `${breakpointCritHeadshot - 1} ⟶ ${hitsToKillCritHeadshot - 1}`;
+				breakpointNormal = !breakpointNormal || breakpointNormal == 0 ? "-" : `${((breakpointNormal - 1) * 100).toFixed(1)} ⟶ ${hitsToKillNormal - 1}`;
+				breakpointCrit = !breakpointCrit || breakpointCrit == 0 ? "-" : `${((breakpointCrit - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCrit - 1}`;
+				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 ? "-" : `${((breakpointHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillHeadshot - 1}`;
+				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 ? "-" : `${((breakpointCritHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCritHeadshot - 1}`;
 				
 				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillNormal}"><span class="center">${breakpointNormal}</span></div>`;
 				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCrit}"><span class="center">${breakpointCrit}</span></div>`;
