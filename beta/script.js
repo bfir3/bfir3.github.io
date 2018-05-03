@@ -2715,10 +2715,15 @@ function renderAttackData(attackTemplate) {
 				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 || breakpointHeadshot > getMaxHeroPowerBuff() ? hitsToKillHeadshot : `${((breakpointHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillHeadshot - 1}`;
 				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 || breakpointCritHeadshot > getMaxHeroPowerBuff() ? hitsToKillCritHeadshot : `${((breakpointCritHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCritHeadshot - 1}`;
 				
-				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillNormal - 1}"><span class="center">${breakpointNormal}</span></div>`;
-				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCrit - 1}"><span class="center">${breakpointCrit}</span></div>`;
-				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillHeadshot - 1}"><span class="center">${breakpointHeadshot}</span></div>`;
-				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCritHeadshot - 1}"><span class="center">${breakpointCritHeadshot}</span></div>`;	
+				let hitsToKillBreakpointNormal = !breakpointNormal || breakpointNormal == 0 || breakpointNormal > getMaxHeroPowerBuff() ? hitsToKillNormal : hitsToKillNormal - 1;
+				let hitsToKillBreakpointCrit = !breakpointCrit || breakpointCrit == 0 || breakpointCrit > getMaxHeroPowerBuff() ? hitsToKillCrit : hitsToKillCrit - 1;
+				let hitsToKillBreakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 || breakpointHeadshot > getMaxHeroPowerBuff() ? hitsToKillHeadshot : hitsToKillHeadshot - 1;
+				let hitsToKillBreakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 || breakpointCritHeadshot > getMaxHeroPowerBuff() ? hitsToKillCritHeadshot : hitsToKillCritHeadshot - 1;
+				
+				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointNormal}"><span class="center">${breakpointNormal}</span></div>`;
+				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointCrit}"><span class="center">${breakpointCrit}</span></div>`;
+				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointHeadshot}"><span class="center">${breakpointHeadshot}</span></div>`;
+				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointCritHeadshot}"><span class="center">${breakpointCritHeadshot}</span></div>`;	
 			}
 			
 			let breed = armorClassDamage.breeds[k].breed;
