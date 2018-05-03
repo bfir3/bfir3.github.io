@@ -2710,10 +2710,10 @@ function renderAttackData(attackTemplate) {
 				let breakpointHeadshot = armorClassDamage.breeds[k].hits.breakpoints[2][i];
 				let breakpointCritHeadshot = armorClassDamage.breeds[k].hits.breakpoints[3][i];
 				
-				breakpointNormal = !breakpointNormal || breakpointNormal == 0 ? hitsToKillNormal : `${((breakpointNormal - 1) * 100).toFixed(1)} ⟶ ${hitsToKillNormal - 1}`;
-				breakpointCrit = !breakpointCrit || breakpointCrit == 0 ? hitsToKillCrit : `${((breakpointCrit - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCrit - 1}`;
-				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 ? hitsToKillHeadshot : `${((breakpointHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillHeadshot - 1}`;
-				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 ? hitsToKillCritHeadshot : `${((breakpointCritHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCritHeadshot - 1}`;
+				breakpointNormal = !breakpointNormal || breakpointNormal == 0 || breakpointNormal > getMaxHeroPowerBuff() ? hitsToKillNormal : `${((breakpointNormal - 1) * 100).toFixed(1)} ⟶ ${hitsToKillNormal - 1}`;
+				breakpointCrit = !breakpointCrit || breakpointCrit == 0 || breakpointCrit > getMaxHeroPowerBuff() ? hitsToKillCrit : `${((breakpointCrit - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCrit - 1}`;
+				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 || breakpointHeadshot > getMaxHeroPowerBuff() ? hitsToKillHeadshot : `${((breakpointHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillHeadshot - 1}`;
+				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 || breakpointCritHeadshot > getMaxHeroPowerBuff() ? hitsToKillCritHeadshot : `${((breakpointCritHeadshot - 1) * 100).toFixed(1)} ⟶ ${hitsToKillCritHeadshot - 1}`;
 				
 				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillNormal - 1}"><span class="center">${breakpointNormal}</span></div>`;
 				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCrit - 1}"><span class="center">${breakpointCrit}</span></div>`;
