@@ -11,6 +11,7 @@ let builds;
 let buildSetId;
 let buildBrowserList;
 let buildBrowserQueryCursor;
+let buildBrowserFirstCursor;
 let currentUser;
 let MAX_SCALED_POWER_LEVEL = 565.625;
 let DEFAULT_BOOST_CURVE_COEFFICIENT = 1;
@@ -1320,13 +1321,25 @@ function initBuildsBrowser() {
 	  "ajax": function (data, callback, settings) {
 			let buildList = [];
 			let query;
+			let isFirstQuery = false;
+			let isPreviousQuery  = $(".buildBrowserButtons .previousButton").hasClass('selected');			
+			
 			if (!buildBrowserQueryCursor) {
+				isFirstQuery = true;
 				query = db.collection("buildTable").where("name", ">", "").limit(BUILD_BROWSER_PAGE_LIMIT);
-			} else {				
+			} 
+			else if (isPreviousQuery) {				
 				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+			}
+			else {
+				query = db.collection("buildTable").where("name", ">", "").endAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				
 			}
 		  
 			query.get().then((queryRef) => {
+				if (isFirstQuery) {
+					buildBrowserFirstCursor = queryRef.docs[0];
+				}
 				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
 				queryRef.docs.some((doc) => {
 					let build = doc.data();			
@@ -1910,6 +1923,18 @@ $(function() {
 			$(".weaponAttackStatsContainer").removeClass('hideSuperArmor');	
 			$(".weaponAttackStatsContainer").addClass('showSuperArmor');
 		}
+	}));
+	
+	$(".buildBrowserButtons .previousButton").on("click", ((e) => {
+		$(".buildBrowserButtons div").removeClass('selected');
+		$(".buildBrowserButtons .previousButton").addClass('selected');
+		$('#buildBrowserTable').DataTable().ajax.reload();
+	}));
+	
+	$(".buildBrowserButtons .nextButton").on("click", ((e) => {
+		$(".buildBrowserButtons div").removeClass('selected');
+		$(".buildBrowserButtons .nextButton").addClass('selected');
+		$('#buildBrowserTable').DataTable().ajax.reload();
 	}));
 });
 
