@@ -2233,12 +2233,11 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 
 function getBaseCleave(attackTemplate, targetDamageProfile, armor) {
 	if (!attackTemplate.damage_profile) {
-		
-		if (!attackTemplate.damage_profile.cleave_distribution) {
-			return 0.25;
-		}
-		
 		return attackTemplate.damage_profile_left.cleave_distribution.attack * 0.05;
+	}
+		
+	if (!attackTemplate.damage_profile.cleave_distribution) {
+		return 0.25;
 	}
 	
 	return attackTemplate.damage_profile.cleave_distribution.attack * 0.05;
