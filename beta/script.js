@@ -2731,15 +2731,15 @@ function renderAttackData(attackTemplate) {
 						   </div>
 						   <div class="headshotDamage targetValueCell grid">
 								${hitsToKillHeadshotHtml}
-								${breakpointHeadshot}
+								${breakpointHeadshotHtml}
 						   </div>
 						   <div class="critDamage targetValueCell grid">
 								${hitsToKillCritHtml}				
-								${breakpointCrit}
+								${breakpointCritHtml}
 						   </div>
 						   <div class="critHeadshotDamage targetValueCell grid">
 								${hitsToKillCritHeadshotHtml}
-								${breakpointCritHeadshot}
+								${breakpointCritHeadshotHtml}
 						   </div>
 						</div>`;
 			attackSwingDataTable.append(breedRow);
