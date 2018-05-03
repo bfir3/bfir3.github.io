@@ -994,3 +994,7 @@ select, input, textarea {
 .attackTemplateDataTable:not(.multiTargetAttack) .targetValueCell {
     grid-template-columns: 100%;
 }
+.hits0 {
+    background: #011b0a !important;
+    color: #fff !important;
+}
