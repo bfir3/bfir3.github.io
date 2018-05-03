@@ -1333,7 +1333,7 @@ function initBuildsBrowser() {
 				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 			}
 			else {
-				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				query = db.collection("buildTable").where("name", ">", "").endAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 				
 			}
 		  
