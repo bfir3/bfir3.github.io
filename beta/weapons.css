@@ -998,3 +998,7 @@ select, input, textarea {
     background: #011b0a !important;
     color: #fff !important;
 }
+
+.breakpointIndicator {
+    font-size: 0.8em;
+}
