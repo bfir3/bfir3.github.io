@@ -2607,6 +2607,8 @@ function renderAttackData(attackTemplate) {
 		let armorClassDamage = attackDamageProfile[z];
 		
 		if (armorClassDamage.normal.length > 1) {
+			attackSwingDataTable.addClass('multiTargetAttack'); 
+			attackSwingDataTable.addClass('targets' + armorClassDamage.normal.length); 
 			for (let j = 0; j < armorClassDamage.normal.length; j++) {				
 				let armorClassNormalDamage = armorClassDamage.normal[j];
 				let armorClassHeadshotDamage = armorClassDamage.headshot[j];
