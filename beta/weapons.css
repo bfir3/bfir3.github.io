@@ -984,6 +984,7 @@ select, input, textarea {
 
 .showStrengthButton {
 	grid-column: 1 / span 2;
+    cursor: initial;
 }
 
 .showBreakpointsButton {
