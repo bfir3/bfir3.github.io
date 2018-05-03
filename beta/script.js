@@ -2715,10 +2715,10 @@ function renderAttackData(attackTemplate) {
 				breakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 ? "-" : `${breakpointHeadshot - 1} ⟶ ${hitsToKillHeadshot - 1}`;
 				breakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 ? "-" : `${breakpointCritHeadshot - 1} ⟶ ${hitsToKillCritHeadshot - 1}`;
 				
-				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointNormal}</span></div>`;
-				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointCrit}</span></div>`;
-				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointHeadshot}</span></div>`;
-				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid"><span class="center">${breakpointCritHeadshot}</span></div>`;	
+				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillNormal}"><span class="center">${breakpointNormal}</span></div>`;
+				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCrit}"><span class="center">${breakpointCrit}</span></div>`;
+				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillHeadshot}"><span class="center">${breakpointHeadshot}</span></div>`;
+				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${breakpointCritHeadshot}</span></div>`;	
 			}
 			
 			let breed = armorClassDamage.breeds[k].breed;
