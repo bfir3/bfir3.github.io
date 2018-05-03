@@ -2597,8 +2597,8 @@ function renderAttackData(attackTemplate) {
 	let critBreakpointHtml = '';
 	let critHeadshotBreakpointHtml = '';	
 	
-	for (let z = 0; z < _armorData.length; z++) {
-		let armor = _armorData[z];
+	let z = 0;
+	for (let armor of _armorData) {
 		if (armor.value == "4") {
 			continue;
 		}
@@ -2744,7 +2744,8 @@ function renderAttackData(attackTemplate) {
 						</div>`;
 			attackSwingDataTable.append(breedRow);
 		}
-	}	
+		z++;
+	}
 }
 	
 function renderAttackDataOld(attackTemplate) {
