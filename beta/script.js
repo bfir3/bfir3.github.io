@@ -2707,6 +2707,10 @@ function renderAttackData(attackTemplate) {
 			}
 			
 			let breed = armorClassDamage.breeds[k].breed;
+			let breedNameCssClass = breed.name.split(" ").join('').toLowerCase();
+			let cloneBreed = Object.assign({}, breed);
+			cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
+			
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
 						   <div class="enemyRace grid" title="${breed.race}"><i class="raceIcon"></i></div>
