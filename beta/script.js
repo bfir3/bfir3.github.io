@@ -201,7 +201,7 @@ function updateBuild() {
 	let docRef = db.collection("buildTable").doc(getBuildId());
 	
 	let author = getCurrentUser() ? getCurrentUser().displayName : "";
-	let authorEmail = getCurrentUser() ? getCurrentUser().email : "";
+	let authorEmail = getCurrentUser() ? getCurrentUser().email : getAnonymousId();
 	
 	docRef.set({
 		buildSetId:getBuildSetId(),
@@ -210,9 +210,11 @@ function updateBuild() {
 		name: buildName,
 		description: buildDescription,
 		hash: getSerializedUrl(),
-		videoLink: $(".relatedVideo").val()
+		videoLink: $(".relatedVideo").val(),
+		dateModified: new Date(),
+		patch: "1.0.7"
 	}, { merge: true }).then(function (ref) {
-		// successfully added data
+		console.log(ref);
 	});
 }
 
