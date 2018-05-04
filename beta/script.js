@@ -1355,11 +1355,10 @@ function initBuildsBrowser() {
 				if (isFirstQuery) {
 					buildBrowserFirstCursor = queryRef.docs[0];
 				}
-				if (!buildBrowserPreviousQueryCursor) {
-					if (buildBrowserQueryCursor != queryRef.docs[queryRef.docs.length-1]) {
-						buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[0] : buildBrowserQueryCursor;
-					}
+				if (buildBrowserQueryCursor != queryRef.docs[queryRef.docs.length-1]) {
+					buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[0] : buildBrowserQueryCursor;
 				}
+				
 				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
 				queryRef.docs.some((doc) => {
 					let build = doc.data();			
