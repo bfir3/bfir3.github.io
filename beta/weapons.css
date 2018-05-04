@@ -1020,10 +1020,13 @@ select, input, textarea {
 
     }
     .weaponDamageTable>div {
-        grid-template-columns: 110px 40px 40px 35px 35px auto;
+        grid-template-columns: 110px 40px 40px auto;
     }
     .enemyLegendRow {
         flex-wrap: wrap;
+    }
+    .enemyTargets, .enemyTargetsHeader {
+        display: none;
     }
     .showNormalDamage .critDamage, .showNormalDamage .headshotDamage, .showNormalDamage .critHeadshotDamage {
         display: none;
@@ -1038,8 +1041,11 @@ select, input, textarea {
         display: none;
     }	
 	.showDamageTypeButton {
-		display: grid;
+		display: grid !important;
 	}
+    .weaponDamageType>.damageType {
+        grid-column: 1 / span 3;
+    }
 }
 
 @media (max-width: 400px) {
