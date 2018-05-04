@@ -880,7 +880,6 @@ function loadMyBuilds() {
 				var data = table.row($(this)).data();
 				window.location.hash = `${data.buildSetId}-${data.id}`
 				loadBuild();
-				isEditingBuild = false;
 			});
 			
 			$('#myBuildsTable tbody').on('mousedown', 'tr', function(e) {
