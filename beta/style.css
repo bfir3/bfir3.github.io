@@ -1247,3 +1247,17 @@ table#myBuildsTable {
 #buildBrowserTable_filter {
     display: none !important;
 }
+
+
+@media (max-width: 800px) {
+.buildSelectionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buildSelectionContainer>* {
+    width: calc(100% - 2px) !important;
+    max-width: none !important;
+}   
+
+}
