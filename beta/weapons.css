@@ -989,4 +989,5 @@ select, input, textarea {
 
 .breakpointIndicator {
     font-size: 0.8em;
+	display: none;
 }
