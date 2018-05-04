@@ -2843,7 +2843,9 @@ function renderAttackData(attackTemplate) {
 						</div>`;
 						
 			let breedRowBreakpoint = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
-						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
+						   <div class="enemyName grid">
+							${enemyNameHtml}
+						   </div>
 						   <div class="enemyRace grid" title="${breed.race}"><i class="raceIcon"></i></div>
 						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
 						   <div class="enemyTargets grid">
