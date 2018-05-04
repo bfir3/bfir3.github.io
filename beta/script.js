@@ -2797,10 +2797,10 @@ function renderAttackData(attackTemplate) {
 				let hitsToKillBreakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 || breakpointHeadshot > getMaxHeroPowerBuff() ? hitsToKillHeadshot : hitsToKillHeadshot - 1;
 				let hitsToKillBreakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 || breakpointCritHeadshot > getMaxHeroPowerBuff() ? hitsToKillCritHeadshot : hitsToKillCritHeadshot - 1;
 				
-				let hitsToKillBreakpointNormalCss = hitsToKillNormal > hitsToKillBreakpointNormal ? `hits${hitsToKillBreakpointNormal} boost` : `hits${hitsToKillBreakpointNormal}`;
-				let hitsToKillBreakpointCritCss = hitsToKillCrit > hitsToKillBreakpointCrit ? `hits${hitsToKillBreakpointCrit} boost` : `hits${hitsToKillBreakpointCrit}`;
-				let hitsToKillBreakpointHeadshotCss = hitsToKillHeadshot > hitsToKillBreakpointHeadshot ? `hits${hitsToKillBreakpointHeadshot} boost` : `hits${hitsToKillBreakpointHeadshot}`;
-				let hitsToKillBreakpointCritHeadshotCss = hitsToKillCritHeadshot > hitsToKillBreakpointCritHeadshot ? `hits${hitsToKillBreakpointCritHeadshot} boost` : `hits${hitsToKillBreakpointCritHeadshot}`;
+				let hitsToKillBreakpointNormalCss = hitsToKillNormal > hitsToKillBreakpointNormal && hitsToKillBreakpointNormal == 1 ? `hits${hitsToKillBreakpointNormal} boost` : `hits${hitsToKillBreakpointNormal}`;
+				let hitsToKillBreakpointCritCss = hitsToKillCrit > hitsToKillBreakpointCrit && hitsToKillBreakpointCrit == 1 ? `hits${hitsToKillBreakpointCrit} boost` : `hits${hitsToKillBreakpointCrit}`;
+				let hitsToKillBreakpointHeadshotCss = hitsToKillHeadshot > hitsToKillBreakpointHeadshot && hitsToKillBreakpointHeadshot == 1 ? `hits${hitsToKillBreakpointHeadshot} boost` : `hits${hitsToKillBreakpointHeadshot}`;
+				let hitsToKillBreakpointCritHeadshotCss = hitsToKillCritHeadshot > hitsToKillBreakpointCritHeadshot && hitsToKillBreakpointCritHeadshot == 1 ? `hits${hitsToKillBreakpointCritHeadshot} boost` : `hits${hitsToKillBreakpointCritHeadshot}`;
 				
 				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid ${hitsToKillBreakpointNormalCss}"><span class="center">${breakpointNormal}</span></div>`;
 				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointCritCss}"><span class="center">${breakpointCrit}</span></div>`;
