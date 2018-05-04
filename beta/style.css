@@ -791,6 +791,7 @@ input.relatedVideo::after {
     color: #c7c7c7;
     grid-row: 1;
     cursor: pointer;
+     margin-bottom: 1px;
 }
 
 select.loadoutSelection {
