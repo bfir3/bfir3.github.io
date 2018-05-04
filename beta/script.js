@@ -119,7 +119,7 @@ function getBuildId() {
 }
 
 function getBuildSetId() {
-	let buildSetId = window.location.hash.length > 0 && window.location.hash.substring(1).split('-').length > 1 ? window.location.hash.substring(1).split('-')[0] : "";
+	buildSetId = window.location.hash.length > 0 && window.location.hash.substring(1).split('-').length > 1 ? window.location.hash.substring(1).split('-')[0] : "";
 	
 	if (!buildSetId || buildSetId.length == 0) {
 		buildSetId = getUniqueIdentifier()
