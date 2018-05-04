@@ -2228,7 +2228,32 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 			}
 			
 			let headerRow = `<div class="attackTableTitle flex center">
-								<span class="tableTitle">Damage / Hits to Kill / % Power ⟶ Hits to Kill</span>
+								<span class="tableTitle">Damage - Hits to Kill</span>
+							</div>
+							<div class="weaponDamageHeader grid">
+								<div class="enemyNameHeader grid">
+									<span class="center">Enemy</span>
+								</div>
+								<div class="enemyRaceHeader grid">
+									<span class="center">Race</span>
+								</div>
+								<div class="enemyHealthHeader grid" title="Enemy Health">
+									<div class="heart center"></div>
+								</div>
+								<div class="enemyTargetsHeader grid" title="Targets Cleaved">
+									<i class="fa fa-bullseye center"></i>
+								</div>
+								<div class="enemyTargetsHeader grid" title="Targets Staggered">
+									<i class="fa fa-bolt center"></i>
+								</div>
+								<div class="normalDamage damageCell grid"><span class="center">Normal</span>${targetIconContainersHtml}</div>
+								<div class="headshotDamage damageCell grid"><span class="center">Headshot</span>${targetIconContainersHtml}</div>
+								<div class="critDamage damageCell grid"><span class="center">Crit</span>${targetIconContainersHtml}</div>
+								<div class="critHeadshotDamage damageCell grid"><span class="center">Crit Headshot</span>${targetIconContainersHtml}</div>
+							</div>`;
+							
+			let breakpointHeaderRow = `<div class="attackTableTitle flex center">
+								<span class="tableTitle">Damage - % Power ⟶ Hits to Kill</span>
 							</div>
 							<div class="weaponDamageHeader grid">
 								<div class="enemyNameHeader grid">
@@ -2254,7 +2279,7 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 						
 							
 			attackSwingDataTable.append(headerRow);
-			breakpointDataTable.append(headerRow);
+			breakpointDataTable.append(breakpointHeaderRow);
 			
 			
 			if (isMultiTargetAttack(attackTemplate)) {
