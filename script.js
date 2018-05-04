@@ -810,6 +810,68 @@ function loadVideoPlayer(videoAddress) {
 	}
 }
 
+function initBuildsBrowser() {
+	$('#buildBrowserTable').dataTable( {
+	  "ajax": function (data, callback, settings) {
+			let buildList = [];
+			let query;
+			let isFirstQuery = false;
+			let isPreviousQuery  = $(".buildBrowserButtons .previousButton").hasClass('selected');			
+			
+			if (!buildBrowserQueryCursor) {
+				isFirstQuery = true;
+				query = db.collection("buildTable").where("name", ">", "").limit(BUILD_BROWSER_PAGE_LIMIT);
+			} 
+			else if (!isPreviousQuery) {				
+				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+			}
+			else {
+				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				
+			}
+		  
+			query.get().then((queryRef) => {
+				if (isFirstQuery) {
+					buildBrowserFirstCursor = queryRef.docs[0];
+				}
+				buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[0] : buildBrowserQueryCursor;
+				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
+				queryRef.docs.some((doc) => {
+					let build = doc.data();			
+					build.id = doc.id;
+					build.pageViews = !doc.data().pageViews ? 0 : doc.data().pageViews;
+					build.heroName = !getHero(doc.data().hash) ? "" : getHero(doc.data().hash).name.split(' ')[0];
+					build.careerName = !getCareer(doc.data().hash) ? "" : getCareer(doc.data().hash).name;
+					buildList.push(build);
+				});
+				callback({ "data": buildList });
+			});
+	  },
+		"columns": [
+				{ "data": "name" , "title": "Name" },
+				{ "data": "heroName" , "title": "Hero", "width": "60px" },
+				{ "data": "careerName" , "title": "Career", "width": "100px" },
+				{ "data": "author", "title": "Author", "width": "100px" },
+				{ "data": "pageViews", "title": "Views", "width": "40px", "className": "text-center" }
+			],
+		"bFilter": false,
+		"paging":   false,
+		"ordering": false,
+		"info":     false
+	} );
+			
+	$(".spinner").hide();
+	$(".buildBrowserSection").removeClass('loading');
+	
+	$('#buildBrowserTable tbody').on( 'click', 'tr', function () {
+		var data = table.row($(this)).data();
+		window.location.href = `/#${data.buildSetId}-${data.id}`;
+		window.location.reload();
+	});
+	$('#buildBrowserTable').DataTable().ajax.reload();
+	//$('#buildBrowserTable').DataTable().columns.adjust().draw();
+}
+
 function loadMyBuilds() {
 	$(".mainGrid").hide();
 	$(".myBuildsSection").hide();

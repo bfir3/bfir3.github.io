@@ -9,6 +9,7 @@ let buildId;
 let db;
 let builds;
 let buildSetId;
+let anonymousId;
 let buildBrowserList;
 let buildBrowserQueryCursor;
 let buildBrowserFirstCursor;
@@ -26,6 +27,19 @@ let breakpoints =
 	};
 
 const DB_NAME = "verminBuildSets";
+
+function getAnonymousId() {	
+	if (!anonymousId) {
+		if (localStorage.getItem("AnonymousId") != null) {
+			anonymousId = localStorage.getItem("AnonymousId");			
+		}
+		else {
+			anonymousId = getUniqueIdentifier();
+			localStorage.setItem("AnonymousId", anonymousId);
+		}		
+	}
+	return anonymousId;
+}
 
 function getUniqueIdentifier() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -864,6 +878,7 @@ function loadMyBuilds() {
 				var data = table.row($(this)).data();
 				window.location.hash = `${data.buildSetId}-${data.id}`
 				loadBuild();
+				isEditingBuild = false;
 			});
 			
 			$('#myBuildsTable tbody').on('mousedown', 'tr', function(e) {
@@ -1312,9 +1327,18 @@ function loadPageFromHash() {
 		$("body").addClass("myBuildsPage");
 		return;
 	}
+		
+	if (hash.startsWith("#edit")) {
+		$("body").addClass("createPage");
+		$(".createPage").removeClass('loading');
+		$(".createPage").removeClass('locked');
+		return;
+	}
 	
-	$(".createPage").addClass('locked');
-	loadBuild();
+	if (hash.indexOf(buildSetId) < 0) {
+		$(".createPage").addClass('locked');
+		loadBuild();
+	}
 }
 
 function initBuildsBrowser() {
@@ -1370,6 +1394,7 @@ function initBuildsBrowser() {
 	$(".spinner").hide();
 	$(".buildBrowserSection").removeClass('loading');
 	
+	let table = $('#buildBrowserTable').DataTable();
 	$('#buildBrowserTable tbody').on( 'click', 'tr', function () {
 		var data = table.row($(this)).data();
 		window.location.href = `/#${data.buildSetId}-${data.id}`;
