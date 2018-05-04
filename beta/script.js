@@ -1915,6 +1915,46 @@ $(function() {
 		$($(e.currentTarget).find("span")[0]).html('Hide Lords');
 	});
 	
+	$(".showNormalButton").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showNormalDamage')) {
+			return;
+		}
+		$(".weaponAttackStatsContainer").removeClass('showCritDamage');
+		$(".weaponAttackStatsContainer").removeClass('showCritHeadshotDamage');
+		$(".weaponAttackStatsContainer").removeClass('showHeadshotDamage');
+		$(".weaponAttackStatsContainer").addClass('showNormalDamage');
+	});
+	
+	$(".showCritDamage").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showCritDamage')) {
+			return;
+		}
+		$(".weaponAttackStatsContainer").removeClass('showNormalDamage');
+		$(".weaponAttackStatsContainer").removeClass('showCritHeadshotDamage');
+		$(".weaponAttackStatsContainer").removeClass('showHeadshotDamage');
+		$(".weaponAttackStatsContainer").addClass('showCritDamage');
+	});
+	
+	$(".showHeadshotDamage").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showHeadshotDamage')) {
+			return;
+		}
+		$(".weaponAttackStatsContainer").removeClass('showCritDamage');
+		$(".weaponAttackStatsContainer").removeClass('showCritHeadshotDamage');
+		$(".weaponAttackStatsContainer").removeClass('showNormalDamage');
+		$(".weaponAttackStatsContainer").addClass('showHeadshotDamage');
+	});
+	
+	$(".showCritHeadshotDamage").click((e) => {
+		if ($(".weaponAttackStatsContainer").hasClass('showCritHeadshotDamage')) {
+			return;
+		}
+		$(".weaponAttackStatsContainer").removeClass('showCritDamage');
+		$(".weaponAttackStatsContainer").removeClass('showNormalDamage');
+		$(".weaponAttackStatsContainer").removeClass('showHeadshotDamage');
+		$(".weaponAttackStatsContainer").addClass('showCritHeadshotDamage');
+	});
+	
 	$(".weaponDataMeleeSelection").change((e) => {
 		renderWeaponDataTable($(".weaponDataMeleeSelection").val());
 	});

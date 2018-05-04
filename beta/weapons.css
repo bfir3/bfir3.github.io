@@ -1008,3 +1008,30 @@ select, input, textarea {
 .showBreakpoints .damageTable {
 	display: none;
 }
+@media (max-width: 800px) {
+    .weaponAttackStatsContainer, .weaponAttackDataTable.grid {
+        width: 100%;
+    }
+    .weaponsDataPage, .weaponAttackDataTable, .weaponAttackSwingTable {
+        grid-template-columns: 100%;
+
+    }
+    .weaponDamageTable>div {
+        grid-template-columns: 110px 50px 40px 40px 40px auto;
+    }
+    .enemyLegendRow {
+        flex-wrap: wrap;
+    }
+    .showNormalDamage .critDamage, .showNormalDamage .headshotDamage, .showNormalDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showHeadshotDamage .critDamage, .showHeadshotDamage .headshotDamage, .showHeadshotDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showCritDamage .critDamage, .showCritDamage .headshotDamage, .showCritDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showCritHeadshotDamage .critDamage, .showCritHeadshotDamage .headshotDamage, .showCritHeadshotDamage .critHeadshotDamage {
+        display: none;
+    }
+}
