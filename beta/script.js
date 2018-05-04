@@ -2228,7 +2228,7 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 			}
 			
 			let headerRow = `<div class="attackTableTitle flex center">
-								<span class="tableTitle">Damage - Hits to Kill</span>
+								<span class="tableTitle">Damage / Hits to Kill / % Power ⟶ Hits to Kill</span>
 							</div>
 							<div class="weaponDamageHeader grid">
 								<div class="enemyNameHeader grid">
