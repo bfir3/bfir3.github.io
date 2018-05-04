@@ -1259,5 +1259,8 @@ table#myBuildsTable {
     width: calc(100% - 2px) !important;
     max-width: none !important;
 }   
+.newLoadoutButton {
+    height: 30px;
+}
 
 }
