@@ -852,18 +852,6 @@ span.attackIcon {
     right: 6px;
     top: calc(50% - 18px);
 }
-.showDamage div:not(.weaponDamageHeader)>.staggerCell, 
-.showDamage div:not(.weaponDamageHeader)>.cleaveCell {
-    display: none;
-}
-.showCleave div:not(.weaponDamageHeader)>.staggerCell,
-.showCleave div:not(.weaponDamageHeader)>.damageCell {
-    display: none;
-}
-.showStagger div:not(.weaponDamageHeader)>.damageCell, 
-.showStagger div:not(.weaponDamageHeader)>.cleaveCell {
-    display: none;
-}
 
 .cleaveCell, .damageCell, .staggerCell {
     border-right: none !important;

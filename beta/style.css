@@ -1217,22 +1217,6 @@ table#myBuildsTable {
     margin-top: 10px !important;
 }
 
-.showDamage .cleaveIndicator, .showDamage .breakpointIndicator {
-    display: none;
-}
-
-.showBreakpoints .damageIndicator {
-    display: none;
-}
-
-.showCleave .damageIndicator, .showCleave .staggerIndicator {
-    display: none;
-}
-
-.showStagger .cleaveIndicator, .showStagger .damageIndicator {
-    display: none;
-}
-
 .center {
     justify-self: center;
     align-self: center;
