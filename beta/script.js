@@ -2190,7 +2190,8 @@ function isMultiTargetAttack(attackTemplate) {
 
 function getAttackSwingDirectionClass(attackTemplate) {
 	// TODO: Add template keys to melee data.json that map to attack swing icons
-	return attackTemplate.attack_name.indexOf("left_diagonal") >= 0 ? "swingDownLeft" :
+	return !attackTemplate.damage_profile ? "swingDoubleDown" :
+			attackTemplate.attack_name.indexOf("left_diagonal") >= 0 ? "swingDownLeft" :
 			attackTemplate.attack_name.indexOf("right_diagonal") >= 0 ? "swingDownRight" :
 			attackTemplate.attack_name.indexOf("down") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("right") >= 0 ? "swingRight" :
@@ -2198,8 +2199,7 @@ function getAttackSwingDirectionClass(attackTemplate) {
 			attackTemplate.attack_name.indexOf("up") >= 0 || attackTemplate.attack_name.indexOf("heavy_attack") >= 0 ? "swingUp" :
 			attackTemplate.attack_name.indexOf("bopp") >= 0 ? "swingDown" :
 			attackTemplate.attack_name.indexOf("last") >= 0 ? "swingDown" :
-			attackTemplate.attack_name.indexOf("stab") >= 0 ? "swingStab" :
-			!attackTemplate.damage_profile ? "swingDoubleDown" : "swingDefault";
+			attackTemplate.attack_name.indexOf("stab") >= 0 ? "swingStab" : "swingDefault";
 }
 
 function getAttackIconHtml(attackTemplate) {	
