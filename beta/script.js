@@ -1326,18 +1326,13 @@ function loadPageFromHash() {
 		$("body").addClass("myBuildsPage");
 		return;
 	}
-		
-	if (hash.startsWith("#edit")) {
-		$("body").addClass("createPage");
-		$(".createPage").removeClass('loading');
-		$(".createPage").removeClass('locked');
-		return;
-	}
 	
 	if (hash.indexOf(buildSetId) < 0) {
 		$(".createPage").addClass('locked');
 		loadBuild();
+		return;
 	}
+	$("body").addClass("createPage");
 }
 
 function initBuildsBrowser() {
