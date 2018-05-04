@@ -1389,6 +1389,14 @@ function initBuildsBrowser() {
 		window.location.hash = `${data.buildSetId}-${data.id}`;
 		//window.location.reload();
 	});
+			
+	$('#buildBrowserTable tbody').on('mousedown', 'tr', function(e) {
+		if (e.which === 2) {
+			var data = table.row($(this)).data();
+			window.open(`http://verminbuilds.com/#${data.buildSetId}-${data.id}`, '_blank');
+		}
+	});
+	
 	$('#buildBrowserTable').DataTable().ajax.reload();
 	//$('#buildBrowserTable').DataTable().columns.adjust().draw();
 }
@@ -1688,6 +1696,18 @@ $(function() {
 			window.location.hash = "create";
 		});
 	});	
+			
+	$('.browseButton').on('mousedown', function(e) {
+		if (e.which === 2) {
+			window.open(`http://verminbuilds.com/#builds`, '_blank');
+		}
+	});
+	
+	$('.weaponsButton').on('mousedown', function(e) {
+		if (e.which === 2) {
+			window.open(`http://verminbuilds.com/#weapons`, '_blank');
+		}
+	});
 	
 	$(".browseButton").click((e) => {
 		if (!$('#buildBrowserTable').children() || $('#buildBrowserTable').children().length == 0) {
