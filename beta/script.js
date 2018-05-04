@@ -1183,6 +1183,7 @@ function getMeleeWeaponBreakpoints(weapon) {
 								break;
 						}
 						
+						let breed = breedProfile.breed;
 						breakpoints.hitsToKill.push({
 							"boost": ((breedProfile.hits.breakpoints[i][j] - 1) * 100).toFixed(1),
 							"hitsToKill": breedProfile.hits.base[i][j] - 1,
