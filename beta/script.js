@@ -2803,9 +2803,9 @@ function renderAttackData(attackTemplate) {
 				let hitsToKillBreakpointCritHeadshotCss = hitsToKillCritHeadshot > hitsToKillBreakpointCritHeadshot ? `hits${hitsToKillBreakpointCritHeadshot} boost` : `hits${hitsToKillBreakpointCritHeadshot}`;
 				
 				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid ${hitsToKillBreakpointNormalCss}"><span class="center">${breakpointNormal}</span></div>`;
-				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointCritCss"><span class="center">${breakpointCrit}</span></div>`;
-				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointHeadshotCss"><span class="center">${breakpointHeadshot}</span></div>`;
-				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointCritHeadshotCss"><span class="center">${breakpointCritHeadshot}</span></div>`;	
+				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointCritCss}"><span class="center">${breakpointCrit}</span></div>`;
+				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointHeadshotCss}"><span class="center">${breakpointHeadshot}</span></div>`;
+				breakpointCritHeadshotHtml += `<div class="targetValue breakpointIndicator grid  ${hitsToKillBreakpointCritHeadshotCss}"><span class="center">${breakpointCritHeadshot}</span></div>`;	
 			}
 			
 			let breed = armorClassDamage.breeds[k].breed;
