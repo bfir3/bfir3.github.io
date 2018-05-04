@@ -1816,16 +1816,12 @@ $(function() {
 		if ($(".weaponAttackStatsContainer").hasClass('showBreakpoints')) {
 			$(".weaponAttackStatsContainer").removeClass('showBreakpoints');
 			$(".weaponAttackStatsContainer").addClass('showDamage');
-			//$($(e.currentTarget).children("span")[0]).html('Show Breakpoints');		
-			$(".breakpointIndicator").hide();
-			$(".damageIndicator").show().css('display', 'grid');	
+			$($(e.currentTarget).children("span")[0]).html('Show Breakpoints');
 			return;
 		}
 		$(".weaponAttackStatsContainer").removeClass('showDamage');
 		$(".weaponAttackStatsContainer").addClass('showBreakpoints');
-		//$($(e.currentTarget).children("span")[0]).html('Hide Breakpoints');
-		$(".damageIndicator").hide();
-		$(".breakpointIndicator").show().css('display', 'grid');	
+		$($(e.currentTarget).children("span")[0]).html('Hide Breakpoints');
 	});
 	
 	$(".showEnemiesButton").click((e) => {
@@ -2207,7 +2203,9 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 			}
 			
 			weaponAttackSwingTable.append('<div class="attackTemplateDataTable weaponDamageTable grid damageTable"></div>');
-			let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable");
+			weaponAttackSwingTable.append('<div class="attackTemplateDataTable weaponDamageTable grid breakpointTable"></div>');
+			let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable.damageTable");
+			let breakpointDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable.breakpointTable");
 			
 			// Attack Swing Table Header	
 			let damageProfile = !attackTemplate.damage_profile ? attackTemplate.damage_profile_left : attackTemplate.damage_profile;
@@ -2256,6 +2254,7 @@ function renderWeaponDataTable(weaponCodename, heroPowerLevel, difficultyLevel) 
 						
 							
 			attackSwingDataTable.append(headerRow);
+			breakpointDataTable.append(headerRow);
 			
 			
 			if (isMultiTargetAttack(attackTemplate)) {
@@ -2645,6 +2644,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 
 function renderAttackData(attackTemplate) {
 	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
+	let breakpointDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable.breakpointTable");
 	let attackDamageProfile = getAttackDamageProfile(attackTemplate);
 	
 	
@@ -2728,6 +2728,7 @@ function renderAttackData(attackTemplate) {
 								<div class="critHeadshotDamage damageCell grid">${critHeadshotDamageHtml}</div>
 							</div>`;
 		attackSwingDataTable.append(armorHeaderRow);
+		breakpointDataTable.append(armorHeaderRow);
 		
 		for (let k = 0; k < armorClassDamage.breeds.length; k++) {
 			
@@ -2795,22 +2796,47 @@ function renderAttackData(attackTemplate) {
 						   </div>
 						   <div class="normalDamage targetValueCell grid">
 								${hitsToKillNormalHtml}
-								${breakpointNormalHtml}
 						   </div>
 						   <div class="headshotDamage targetValueCell grid">
 								${hitsToKillHeadshotHtml}
-								${breakpointHeadshotHtml}
 						   </div>
 						   <div class="critDamage targetValueCell grid">
-								${hitsToKillCritHtml}				
-								${breakpointCritHtml}
+								${hitsToKillCritHtml}	
 						   </div>
 						   <div class="critHeadshotDamage targetValueCell grid">
 								${hitsToKillCritHeadshotHtml}
+						   </div>
+						</div>`;
+						
+			let breedRowBreakpoint = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
+						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
+						   <div class="enemyRace grid" title="${breed.race}"><i class="raceIcon"></i></div>
+						   <div class="enemyHealth grid"><span class="center">${breed.legendHp}</span></div>
+						   <div class="enemyTargets grid">
+								<div class="targetsCleaved grid">
+									<span class="center">${armorClassDamage.breeds[k].cleave.base}</span>
+								</div>
+						   </div>
+						   <div class="enemyTargets grid">
+								<div class="targetsStaggered grid">
+									<span class="center">${armorClassDamage.breeds[k].stagger.base}</span>
+								</div>
+						   </div>
+						   <div class="normalDamage targetValueCell grid">
+								${breakpointNormalHtml}
+						   </div>
+						   <div class="headshotDamage targetValueCell grid">
+								${breakpointHeadshotHtml}
+						   </div>
+						   <div class="critDamage targetValueCell grid">
+								${breakpointCritHtml}
+						   </div>
+						   <div class="critHeadshotDamage targetValueCell grid">
 								${breakpointCritHeadshotHtml}
 						   </div>
 						</div>`;
 			attackSwingDataTable.append(breedRow);
+			breakpointDataTable.append(breedRowBreakpoint);
 		}
 		z++;
 	}
