@@ -401,7 +401,7 @@ function loadSerializedUrl(hash) {
 	loadSerializedGear("trinket", trinketHashValue);
 	loadTalents(talentsHashValue);
 	loadTraits();
-	loadLoadouts();
+	loadLoadouts(true);
 	loadHeroSummary();
 }
 
