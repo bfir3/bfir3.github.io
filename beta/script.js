@@ -1355,7 +1355,7 @@ function initBuildsBrowser() {
 				if (isFirstQuery) {
 					buildBrowserFirstCursor = queryRef.docs[0];
 				}
-				if (buildBrowserQueryCursor != queryRef.docs[queryRef.docs.length-1]) {
+				if (buildBrowserQueryCursor.id != queryRef.docs[queryRef.docs.length-1].id) {
 					buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[0] : buildBrowserQueryCursor;
 				}
 				
