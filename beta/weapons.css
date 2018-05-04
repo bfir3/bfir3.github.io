@@ -134,7 +134,9 @@ span.arrow-down {
   left: 7px;
   top: 0;
 }
-
+.enemyName {
+	padding: 7px 0;
+}
 .enemyName.skaven {
     background: #803737;
 }
