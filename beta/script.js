@@ -3169,7 +3169,7 @@ function getTargetsCleaved(attackTemplate, breed, damage, difficultyLevel) {
 	let hitmass = breed.legendHitmass.toString().indexOf(' ') >= 0 ? breed.legendHitmass.toString().split(' ')[0] : breed.legendHitmass;
 	
 	if (attackTemplate.hit_mass_modifiers && attackTemplate.hit_mass_modifiers.length > 0) {
-		hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
+		//hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
 	}
 	
 	return Math.ceil(damage / hitmass);
@@ -3183,7 +3183,7 @@ function getTargetsStaggered(attackTemplate, breed, damage, difficultyLevel) {
 	let hitmass = breed.legendHitmass.toString().indexOf(' ') >= 0 ? breed.legendHitmass.toString().split(' ')[0] : breed.legendHitmass;
 	
 	if (attackTemplate.hit_mass_modifiers && attackTemplate.hit_mass_modifiers.length > 0) {
-		hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
+		//hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
 	}
 	
 	return Math.ceil(damage / hitmass);
