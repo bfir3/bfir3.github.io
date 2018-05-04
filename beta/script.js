@@ -1925,7 +1925,7 @@ $(function() {
 		$(".weaponAttackStatsContainer").addClass('showNormalDamage');
 	});
 	
-	$(".showCritDamage").click((e) => {
+	$(".showCritButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showCritDamage')) {
 			return;
 		}
@@ -1935,7 +1935,7 @@ $(function() {
 		$(".weaponAttackStatsContainer").addClass('showCritDamage');
 	});
 	
-	$(".showHeadshotDamage").click((e) => {
+	$(".showHeadshotButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showHeadshotDamage')) {
 			return;
 		}
@@ -1945,7 +1945,7 @@ $(function() {
 		$(".weaponAttackStatsContainer").addClass('showHeadshotDamage');
 	});
 	
-	$(".showCritHeadshotDamage").click((e) => {
+	$(".showCritHeadshotButton").click((e) => {
 		if ($(".weaponAttackStatsContainer").hasClass('showCritHeadshotDamage')) {
 			return;
 		}
