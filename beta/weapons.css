@@ -1025,13 +1025,25 @@ select, input, textarea {
     .showNormalDamage .critDamage, .showNormalDamage .headshotDamage, .showNormalDamage .critHeadshotDamage {
         display: none;
     }
-    .showHeadshotDamage .critDamage, .showHeadshotDamage .headshotDamage, .showHeadshotDamage .critHeadshotDamage {
+    .showHeadshotDamage .critDamage, .showHeadshotDamage .normalDamage, .showHeadshotDamage .critHeadshotDamage {
         display: none;
     }
-    .showCritDamage .critDamage, .showCritDamage .headshotDamage, .showCritDamage .critHeadshotDamage {
+    .showCritDamage .normalDamage, .showCritDamage .headshotDamage, .showCritDamage .critHeadshotDamage {
         display: none;
     }
-    .showCritHeadshotDamage .critDamage, .showCritHeadshotDamage .headshotDamage, .showCritHeadshotDamage .critHeadshotDamage {
+    .showCritHeadshotDamage .critDamage, .showCritHeadshotDamage .headshotDamage, .showCritHeadshotDamage .normalDamage {
         display: none;
-    }
+    }	
+	.showDamageTypeButton {
+		display: grid;
+	}
+}
+
+@media (max-width: 400px) {
+.weaponDataTableButtonsContainer {
+	font-size: 0.8em;
+}
+}
+.showDamageTypeButton {
+	display: none;
 }
