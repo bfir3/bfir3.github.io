@@ -386,12 +386,12 @@ function loadSerializedUrl(hash) {
 	let heroIndex = heroHashValue[0];
 	let careerIndex = heroHashValue[1];
 	
-	$(".heroSection>div").removeClass('selected');
-	$(".heroSection>div").removeClass('redBorder');
-	$($(".heroSection").children()[heroIndex]).addClass('selected redBorder');
-	$(".classSection>div").removeClass('selected');
-	$(".classSection>div").removeClass('redBorder');
-	$($(".classSection").children()[careerIndex]).addClass('selected redBorder');
+	$(".mainGrid.createPage .heroSection>div").removeClass('selected');
+	$(".mainGrid.createPage .heroSection>div").removeClass('redBorder');
+	$($(".mainGrid.createPage .heroSection").children()[heroIndex]).addClass('selected redBorder');
+	$(".mainGrid.createPage .classSection>div").removeClass('selected');
+	$(".mainGrid.createPage .classSection>div").removeClass('redBorder');
+	$($(".mainGrid.createPage .classSection").children()[careerIndex]).addClass('selected redBorder');
 	
 	loadHero(heroIndex, careerIndex);	
 	loadSerializedWeapon("melee", meleeHashValue);
@@ -408,9 +408,9 @@ function loadSerializedUrl(hash) {
 function loadHeroSummary() {
 	let heroIndex = getHeroIndex();
 	let careerIndex = getCareerIndex();
-	$(".heroClass1").css('background-image',  `url('images/icons/heroes/${heroIndex}/0/icon.png')`);
-	$(".heroClass2").css('background-image',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
-	$(".heroClass3").css('background-image',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
+	$(".mainGrid.createPage .heroClass1").css('background-image',  `url('images/icons/heroes/${heroIndex}/0/icon.png')`);
+	$(".mainGrid.createPage .heroClass2").css('background-image',  `url('images/icons/heroes/${heroIndex}/1/icon.png')`);
+	$(".mainGrid.createPage .heroClass3").css('background-image',  `url('images/icons/heroes/${heroIndex}/2/icon.png')`);
 	
 	$(".heroSummaryTitle>span")[0].innerHTML = `<span>${_data.heroes[heroIndex].name} - ${_data.heroes[heroIndex].careers[careerIndex].name}</span>`;
 	
@@ -652,10 +652,10 @@ function getShareableUrl() {
 }
 
 function getHeroIndex() {
-	return Array.prototype.indexOf.call($(".heroSection").children(),$(".heroSection>div.selected")[0]);
+	return Array.prototype.indexOf.call($(".mainGrid.createPage .heroSection").children(),$(".mainGrid.createPage .heroSection>div.selected")[0]);
 }
 function getCareerIndex() {
-	return Array.prototype.indexOf.call($(".classSection").children(),$(".classSection>div.selected")[0]);
+	return Array.prototype.indexOf.call($(".mainGrid.createPage .classSection").children(),$(".mainGrid.createPage .classSection>div.selected")[0]);
 }
 
 function initData(isNewBuild) {
@@ -2661,6 +2661,11 @@ function renderAttackData(attackTemplate) {
 				let armorClassCritHeadshotDamage = Math.round(armorClassDamage.critHeadshot[j] * 4) / 4;
 					
 				if (!attackTemplate.damage_profile) {
+					armorClassNormalDamage = armorClassNormalDamage * 2;
+					armorClassCritDamage = armorClassCritDamage * 2;
+					armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
+					armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
+				
 					normalDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassNormalDamage).toFixed(2)} (${(armorClassNormalDamage/2)})</span></div>`;
 					headshotDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassHeadshotDamage).toFixed(2)} (${(armorClassHeadshotDamage/2)})</span></div>`;
 					critDamageHtml += `<div class="targetValue grid"><span class="center">${(armorClassCritDamage).toFixed(2)} (${(armorClassCritDamage/2)})</span></div>`;
@@ -2690,12 +2695,7 @@ function renderAttackData(attackTemplate) {
 			critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage}</span></div>`;
 			critHeadshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritHeadshotDamage}</span></div>`;
 		
-			if (!attackTemplate.damage_profile) {
-				armorClassNormalDamage = armorClassNormalDamage * 2;
-				armorClassCritDamage = armorClassCritDamage * 2;
-				armorClassHeadshotDamage = armorClassHeadshotDamage * 2;
-				armorClassCritHeadshotDamage = armorClassCritHeadshotDamage * 2;
-					
+			if (!attackTemplate.damage_profile) {					
 				normalDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassNormalDamage} (${(armorClassNormalDamage/2).toFixed(2)})</span></div>`;
 				headshotDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassHeadshotDamage} (${(armorClassHeadshotDamage/2).toFixed(2)})</span></div>`;
 				critDamageHtml = `<div class="targetValue grid"><span class="center">${armorClassCritDamage} (${(armorClassCritDamage/2).toFixed(2)})</span></div>`;
