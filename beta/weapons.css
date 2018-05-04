@@ -1017,7 +1017,7 @@ select, input, textarea {
 
     }
     .weaponDamageTable>div {
-        grid-template-columns: 110px 50px 40px 40px 40px auto;
+        grid-template-columns: 110px 40px 40px 35px 35px auto;
     }
     .enemyLegendRow {
         flex-wrap: wrap;
