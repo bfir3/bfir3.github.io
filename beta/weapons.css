@@ -990,8 +990,10 @@ select, input, textarea {
 }
 
 .breakpointIndicator.boost {
-    border-bottom: 2px solid white;
     font-size: 0.8em;
+}
+.breakpointIndicator.boost.hits1 {
+    border-bottom: 2px solid white;
 }
 
 
