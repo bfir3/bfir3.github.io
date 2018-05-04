@@ -971,10 +971,10 @@ function getAttackBreedData(attackTemplate) {
 			let hitsToKillCritHeadshot = getHitsToKill(breed, damageTypeValues[3][i]);
 			
 		let cleaveValue = getCleave(attackTemplate, armor);
-		let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+		let targetsCleaved = getTargetsCleaved(attackTemplate, breed, cleaveValue);
 		
 		let staggerValue = getStagger(attackTemplate, armor);
-		let targetsStaggered = getTargetsStaggered(breed, staggerValue);
+		let targetsStaggered = getTargetsStaggered(attackTemplate, breed, staggerValue);
 		
 		for (let i =0; i < targetDamageProfiles.length; i++) {
 			
@@ -1054,8 +1054,8 @@ function getAttackDamageProfile(attackTemplate) {
 		
 		for (let breed of getBreedsForArmorClass(armor)) {
 				
-			let targetsCleaved = getTargetsCleaved(breed, armorClassDamageProfile.cleave);				
-			let targetsStaggered = getTargetsStaggered(breed, armorClassDamageProfile.stagger);
+			let targetsCleaved = getTargetsCleaved(attackTemplate, breed, armorClassDamageProfile.cleave);				
+			let targetsStaggered = getTargetsStaggered(attackTemplate, breed, armorClassDamageProfile.stagger);
 			
 			let targetsCleavedBoost = 0;
 			let targetsStaggeredBoost = 0;
@@ -2635,20 +2635,20 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 			hitsToKillHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillHeadshot}"><span class="center">${hitsToKillHeadshot}</span></div>`;
 			hitsToKillCritHeadshotHtml += `<div class="targetValue damageIndicator grid hits${hitsToKillCritHeadshot}"><span class="center">${hitsToKillCritHeadshot}</span></div>`;
 			
-			let targetsCleavedNormal = getTargetsCleaved(breed, cleaveTypeValues[0][i]);
-			let targetsCleavedCrit = getTargetsCleaved(breed, cleaveTypeValues[1][i]);
-			let targetsCleavedHeadshot = getTargetsCleaved(breed, cleaveTypeValues[2][i]);
-			let targetsCleavedCritHeadshot = getTargetsCleaved(breed, cleaveTypeValues[3][i]);
+			let targetsCleavedNormal = getTargetsCleaved(attackTemplate, breed, cleaveTypeValues[0][i]);
+			let targetsCleavedCrit = getTargetsCleaved(attackTemplate, breed, cleaveTypeValues[1][i]);
+			let targetsCleavedHeadshot = getTargetsCleaved(attackTemplate, breed, cleaveTypeValues[2][i]);
+			let targetsCleavedCritHeadshot = getTargetsCleaved(attackTemplate, breed, cleaveTypeValues[3][i]);
 			
 			targetsCleavedNormalHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedNormal}"><span class="center">${targetsCleavedNormal}</span></div>`;
 			targetsCleavedCritHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedCrit}"><span class="center">${targetsCleavedCrit}</span></div>`;
 			targetsCleavedHeadshotHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedHeadshot}"><span class="center">${targetsCleavedHeadshot}</span></div>`;
 			targetsCleavedCritHeadshotHtml += `<div class="targetValue cleaveIndicator grid cleaves${targetsCleavedCritHeadshot}"><span class="center">${targetsCleavedCritHeadshot}</span></div>`;		
 			
-			let targetsStaggeredNormal = getTargetsStaggered(breed, staggerTypeValues[0][i]);
-			let targetsStaggeredCrit = getTargetsStaggered(breed, staggerTypeValues[1][i]);
-			let targetsStaggeredHeadshot = getTargetsStaggered(breed, staggerTypeValues[2][i]);
-			let targetsStaggeredCritHeadshot = getTargetsStaggered(breed, staggerTypeValues[3][i]);	
+			let targetsStaggeredNormal = getTargetsStaggered(attackTemplate, breed, staggerTypeValues[0][i]);
+			let targetsStaggeredCrit = getTargetsStaggered(attackTemplate, breed, staggerTypeValues[1][i]);
+			let targetsStaggeredHeadshot = getTargetsStaggered(attackTemplate, breed, staggerTypeValues[2][i]);
+			let targetsStaggeredCritHeadshot = getTargetsStaggered(attackTemplate, breed, staggerTypeValues[3][i]);	
 			
 			targetsStaggeredNormalHtml += `<div class="targetValue staggerIndicator grid cleaves${targetsStaggeredNormal}"><span class="center">${targetsStaggeredNormal}</span></div>`;
 			targetsStaggeredCritHtml += `<div class="targetValue staggerIndicator grid cleaves${targetsStaggeredCrit}"><span class="center">${targetsStaggeredCrit}</span></div>`;
@@ -2661,10 +2661,10 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 		cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
 		
 		let cleaveValue = getCleave(attackTemplate, armor);
-		let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+		let targetsCleaved = getTargetsCleaved(attackTemplate, breed, cleaveValue);
 		
 		let staggerValue = getStagger(attackTemplate, armor);
-		let targetsStaggered = getTargetsStaggered(breed, staggerValue);
+		let targetsStaggered = getTargetsStaggered(attackTemplate, breed, staggerValue);
 		
 		let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 						   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
@@ -3051,20 +3051,20 @@ function renderAttackDataOld(attackTemplate) {
 			}
 			*/
 			
-			let targetsCleavedNormal = getTargetsCleaved(breed, armorClassNormalCleave);
-			let targetsCleavedCrit = getTargetsCleaved(breed, armorClassCritCleave);
-			let targetsCleavedHeadshot = getTargetsCleaved(breed, armorClassHeadshotCleave);
-			let targetsCleavedCritHeadshot = getTargetsCleaved(breed, armorClassCritHeadshotCleave);
+			let targetsCleavedNormal = getTargetsCleaved(attackTemplate, breed, armorClassNormalCleave);
+			let targetsCleavedCrit = getTargetsCleaved(attackTemplate, breed, armorClassCritCleave);
+			let targetsCleavedHeadshot = getTargetsCleaved(attackTemplate, breed, armorClassHeadshotCleave);
+			let targetsCleavedCritHeadshot = getTargetsCleaved(attackTemplate, breed, armorClassCritHeadshotCleave);
 			
 			let targetsCleavedNormalHtml = `<span class="center">${targetsCleavedNormal}</span>`;
 			let targetsCleavedCritHtml = `<span class="center">${targetsCleavedCrit}</span>`;
 			let targetsCleavedHeadshotHtml = `<span class="center">${targetsCleavedHeadshot}</span>`;
 			let targetsCleavedCritHeadshotHtml = `<span class="center">${targetsCleavedCritHeadshot}</span>`;		
 			
-			let targetsStaggeredNormal = getTargetsStaggered(breed, armorClassNormalCleave);
-			let targetsStaggeredCrit = getTargetsStaggered(breed, armorClassCritCleave);
-			let targetsStaggeredHeadshot = getTargetsStaggered(breed, armorClassHeadshotCleave);
-			let targetsStaggeredCritHeadshot = getTargetsStaggered(breed, armorClassCritHeadshotCleave);	
+			let targetsStaggeredNormal = getTargetsStaggered(attackTemplate, breed, armorClassNormalCleave);
+			let targetsStaggeredCrit = getTargetsStaggered(attackTemplate, breed, armorClassCritCleave);
+			let targetsStaggeredHeadshot = getTargetsStaggered(attackTemplate, breed, armorClassHeadshotCleave);
+			let targetsStaggeredCritHeadshot = getTargetsStaggered(attackTemplate, breed, armorClassCritHeadshotCleave);	
 			
 			let targetsStaggeredNormalHtml = `<span class="center">${targetsStaggeredNormal}</span>`;
 			let targetsStaggeredCritHtml = `<span class="center">${targetsStaggeredCrit}</span>`;
@@ -3076,10 +3076,10 @@ function renderAttackDataOld(attackTemplate) {
 			cloneBreed.displayName = !cloneBreed.displayName || cloneBreed.displayName.length == 0 ? cloneBreed.name : cloneBreed.displayName;
 		
 			let cleaveValue = getCleave(attackTemplate, armor);
-			let targetsCleaved = getTargetsCleaved(breed, cleaveValue);
+			let targetsCleaved = getTargetsCleaved(attackTemplate, breed, cleaveValue);
 			
 			let staggerValue = getStagger(attackTemplate, armor);
-			let targetsStaggered = getTargetsStaggered(breed, staggerValue);
+			let targetsStaggered = getTargetsStaggered(attackTemplate, breed, staggerValue);
 			
 			let breedRow = `<div class="weaponDamageEnemy grid ${breed.race.toLowerCase()} ${armorCssClass} ${breed.type.toLowerCase()} ${breedNameCssClass}">
 							   <div class="enemyName grid"><span class="center">${cloneBreed.displayName}</span></div>
@@ -3157,7 +3157,7 @@ function getHitmass(breed) {
 	return breed.legendHitmass.toString().indexOf(' ') >= 0 ? breed.legendHitmass.toString().split(' ')[0] : breed.legendHitmass;
 }
 
-function getTargetsCleaved(breed, damage, difficultyLevel) {
+function getTargetsCleaved(attackTemplate, breed, damage, difficultyLevel) {
 	if (damage == 0) {
 		return "-";
 	}
@@ -3168,15 +3168,23 @@ function getTargetsCleaved(breed, damage, difficultyLevel) {
 	
 	let hitmass = breed.legendHitmass.toString().indexOf(' ') >= 0 ? breed.legendHitmass.toString().split(' ')[0] : breed.legendHitmass;
 	
+	if (attackTemplate.hit_mass_modifiers && attackTemplate.hit_mass_modifiers.length > 0) {
+		hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
+	}
+	
 	return Math.ceil(damage / hitmass);
 }
 
-function getTargetsStaggered(breed, damage, difficultyLevel) {
+function getTargetsStaggered(attackTemplate, breed, damage, difficultyLevel) {
 	if (damage == 0) {
 		return "-";
 	}
 	
 	let hitmass = breed.legendHitmass.toString().indexOf(' ') >= 0 ? breed.legendHitmass.toString().split(' ')[0] : breed.legendHitmass;
+	
+	if (attackTemplate.hit_mass_modifiers && attackTemplate.hit_mass_modifiers.length > 0) {
+		hitmass = hitmass * attackTemplate.hit_mass_modifiers[breed.armorCategory - 1];
+	}
 	
 	return Math.ceil(damage / hitmass);
 }
