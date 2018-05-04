@@ -988,7 +988,7 @@ select, input, textarea {
 }
 
 .showBreakpointsButton {
-	grid-column: 3 / span 2;
+	grid-column: 1 / span 4;
 }
 
 .attackTemplateDataTable:not(.multiTargetAttack) .targetValueCell {
