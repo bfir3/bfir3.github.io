@@ -2797,6 +2797,11 @@ function renderAttackData(attackTemplate) {
 				let hitsToKillBreakpointHeadshot = !breakpointHeadshot || breakpointHeadshot == 0 || breakpointHeadshot > getMaxHeroPowerBuff() ? hitsToKillHeadshot : hitsToKillHeadshot - 1;
 				let hitsToKillBreakpointCritHeadshot = !breakpointCritHeadshot || breakpointCritHeadshot == 0 || breakpointCritHeadshot > getMaxHeroPowerBuff() ? hitsToKillCritHeadshot : hitsToKillCritHeadshot - 1;
 				
+				let hitsToKillBreakpointNormalCss = hitsToKillNormal > hitsToKillBreakpointNormal ? `hits${hitsToKillBreakpointNormal} boost` : `hits${hitsToKillBreakpointNormal}`;
+				let hitsToKillBreakpointCritCss = hitsToKillCrit > hitsToKillBreakpointCrit ? `hits${hitsToKillBreakpointCrit} boost` : `hits${hitsToKillBreakpointCrit}`;
+				let hitsToKillBreakpointHeadshotCss = hitsToKillHeadshot > hitsToKillBreakpointHeadshot ? `hits${hitsToKillBreakpointHeadshot} boost` : `hits${hitsToKillBreakpointHeadshot}`;
+				let hitsToKillBreakpointCritHeadshotCss = hitsToKillCritHeadshot > hitsToKillBreakpointCritHeadshot ? `hits${hitsToKillBreakpointCritHeadshot} boost` : `hits${hitsToKillBreakpointCritHeadshot}`;
+				
 				breakpointNormalHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointNormal}"><span class="center">${breakpointNormal}</span></div>`;
 				breakpointCritHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointCrit}"><span class="center">${breakpointCrit}</span></div>`;
 				breakpointHeadshotHtml += `<div class="targetValue breakpointIndicator grid hits${hitsToKillBreakpointHeadshot}"><span class="center">${breakpointHeadshot}</span></div>`;

@@ -989,9 +989,11 @@ select, input, textarea {
     color: #fff !important;
 }
 
-.breakpointIndicator {
+.breakpointIndicator.boost {
+    border-bottom: 2px solid white;
     font-size: 0.8em;
 }
+
 
 .breakpointTable {
 	display: none;
