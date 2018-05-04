@@ -2643,7 +2643,7 @@ function renderMultiTargetAttackData(attackTemplate, armor) {
 }
 
 function renderAttackData(attackTemplate) {
-	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable");
+	let attackSwingDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .weaponDamageTable.damageTable");
 	let breakpointDataTable = $(".weaponAttackDataTable .weaponAttackSwingsContainer:last-child .weaponAttackSwingTable:last-child .attackTemplateDataTable.breakpointTable");
 	let attackDamageProfile = getAttackDamageProfile(attackTemplate);
 	
