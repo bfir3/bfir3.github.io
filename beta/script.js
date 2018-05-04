@@ -1193,7 +1193,7 @@ function getMeleeWeaponBreakpoints(weapon) {
 								"attackTemplate": attackGroup[0], //light 1/light 2/heavy 1/etc
 								"attackType": attackType,
 								"damageType": damageType,
-								"targetNumber": breedProfile.hits[i].length - j
+								"targetNumber": j + 1
 							}]
 						});
 					}
