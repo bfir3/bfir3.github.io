@@ -93,6 +93,7 @@ function clearSelections() {
 	$(".buildDescription").val('');
 	$(".relatedVideo").val('');
 	$(".talentSection>div>div").removeClass('selected');
+	$(".talentSection>div>div").removeClass('redBorder');
 	$("iframe").hide();
 	
 	let heroIndex = getHeroIndex();
