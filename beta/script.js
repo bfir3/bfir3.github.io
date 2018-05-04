@@ -123,7 +123,6 @@ function getBuildSetId() {
 	
 	if (!buildSetId || buildSetId.length == 0) {
 		buildSetId = getUniqueIdentifier()
-		window.location.hash = buildSetId;
 	}
 	return buildSetId;
 }
