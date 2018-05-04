@@ -1816,12 +1816,12 @@ $(function() {
 		if ($(".weaponAttackStatsContainer").hasClass('showBreakpoints')) {
 			$(".weaponAttackStatsContainer").removeClass('showBreakpoints');
 			$(".weaponAttackStatsContainer").addClass('showDamage');
-			$($(e.currentTarget).find("span")[0]).html('Show Breakpoints');			
+			$($(e.currentTarget).children("span")[0]).html('Show Breakpoints');			
 			return;
 		}
 		$(".weaponAttackStatsContainer").removeClass('showDamage');
 		$(".weaponAttackStatsContainer").addClass('showBreakpoints');
-		$($(e.currentTarget).find("span")[0]).html('Hide Breakpoints');
+		$($(e.currentTarget).children("span")[0]).html('Hide Breakpoints');
 	});
 	
 	$(".showEnemiesButton").click((e) => {
