@@ -1347,7 +1347,7 @@ function initBuildsBrowser() {
 				query = db.collection("buildTable").where("name", ">", "").startAfter(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 			}
 			else {
-				query = db.collection("buildTable").where("name", ">", "").startAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				query = db.collection("buildTable").where("name", ">", "").endAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 				
 			}
 		  
@@ -1355,10 +1355,8 @@ function initBuildsBrowser() {
 				if (isFirstQuery) {
 					buildBrowserFirstCursor = queryRef.docs[0];
 				}
-				if (!buildBrowserQueryCursor || buildBrowserQueryCursor.id != queryRef.docs[queryRef.docs.length-1].id) {
-					buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[0] : buildBrowserQueryCursor;
-				}
 				
+				buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? queryRef.docs[queryRef.docs.length-1] : buildBrowserQueryCursor;				
 				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
 				queryRef.docs.some((doc) => {
 					let build = doc.data();			
