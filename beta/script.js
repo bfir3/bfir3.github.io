@@ -1347,7 +1347,7 @@ function initBuildsBrowser() {
 				query = db.collection("buildTable").where("name", ">", "").startAfter(buildBrowserQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 			}
 			else {
-				query = db.collection("buildTable").where("name", ">", "").endBefore(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
+				query = db.collection("buildTable").where("name", ">", "").endAt(buildBrowserPreviousQueryCursor).limit(BUILD_BROWSER_PAGE_LIMIT);
 				
 			}
 		  
