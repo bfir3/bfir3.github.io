@@ -1356,7 +1356,7 @@ function initBuildsBrowser() {
 					buildBrowserFirstCursor = queryRef.docs[0];
 				}
 				
-				buildBrowserPreviousQueryCursor = !buildBrowserQueryCursor ? isPreviousQuery ? queryRef.docs[0] : queryRef.docs[queryRef.docs.length-1] : buildBrowserQueryCursor;				
+				buildBrowserPreviousQueryCursor = isPreviousQuery ? queryRef.docs[0] : !buildBrowserQueryCursor ? : queryRef.docs[queryRef.docs.length-1] : buildBrowserQueryCursor;				
 				buildBrowserQueryCursor = queryRef.docs[queryRef.docs.length-1];
 				queryRef.docs.some((doc) => {
 					let build = doc.data();			
