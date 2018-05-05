@@ -1,5 +1,5 @@
-{
-    "two_handed_spears_elf_template_1": {
+[
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "two_handed_spears_elf_template_1",
@@ -614,7 +614,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_swords_executioner_template_1": {
+    {
         "type": "melee",
         "template_name": "two_handed_swords_executioner_template_1",
         "can_wield": [
@@ -1248,7 +1248,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_swords_wood_elf_template": {
+    {
         "type": "melee",
         "template_name": "two_handed_swords_wood_elf_template",
         "can_wield": [
@@ -1801,7 +1801,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_hammers_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "two_handed_hammers_template_1",
@@ -2386,7 +2386,7 @@
         },
         "property_table_name": "melee"
     },
-    "dual_wield_daggers_template_1": {
+    {
         "type": "melee",
         "template_name": "dual_wield_daggers_template_1",
         "can_wield": [
@@ -2885,7 +2885,7 @@
             ]
         }
     },
-    "one_hand_axe_template_1": {
+    {
         "type": "melee",
         "template_name": "one_hand_axe_template_1",
         "can_wield": [
@@ -3288,7 +3288,7 @@
             ]
         }
     },
-    "two_handed_halberds_template_1": {
+    {
         "type": "melee",
         "template_name": "two_handed_halberds_template_1",
         "can_wield": [
@@ -3832,7 +3832,7 @@
             ]
         }
     },
-    "we_one_hand_sword_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "we_one_hand_sword_template_1",
@@ -4506,7 +4506,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_axes_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "two_handed_axes_template_1",
@@ -5063,7 +5063,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_hammer_template_1": {
+    {
         "type": "melee",
         "template_name": "one_handed_hammer_template_1",
         "can_wield": [
@@ -5656,7 +5656,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_hammer_shield_template_1": {
+    {
         "type": "melee",
         "template_name": "one_handed_hammer_shield_template_1",
         "can_wield": [
@@ -6211,7 +6211,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_hand_falchion_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_hand_falchion_template_1",
@@ -6977,7 +6977,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_flail_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_handed_flail_template_1",
@@ -7636,7 +7636,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_picks_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "two_handed_picks_template_1",
@@ -8200,7 +8200,7 @@
         },
         "property_table_name": "melee"
     },
-    "dual_wield_sword_dagger_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "dual_wield_sword_dagger_template_1",
@@ -8821,7 +8821,7 @@
         },
         "property_table_name": "melee"
     },
-    "dual_wield_swords_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "dual_wield_swords_template_1",
@@ -9647,7 +9647,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_swords_template_1": {
+    {
         "type": "melee",
         "template_name": "one_handed_swords_template_1",
         "can_wield": [
@@ -10285,7 +10285,7 @@
             ]
         }
     },
-    "one_handed_hammer_template_2": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_handed_hammer_template_2",
@@ -10879,7 +10879,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_hammer_shield_template_2": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_handed_hammer_shield_template_2",
@@ -11434,7 +11434,7 @@
         },
         "property_table_name": "melee"
     },
-    "flaming_sword_template_1": {
+    {
         "type": "melee",
         "template_name": "flaming_sword_template_1",
         "can_wield": [
@@ -11906,7 +11906,7 @@
             ]
         }
     },
-    "one_hand_axe_template_2": {
+    {
         "type": "melee",
         "template_name": "one_hand_axe_template_2",
         "can_wield": [
@@ -12309,7 +12309,7 @@
             ]
         }
     },
-    "one_handed_hammer_wizard_template_1": {
+    {
         "type": "melee",
         "template_name": "one_handed_hammer_wizard_template_1",
         "can_wield": [
@@ -13112,7 +13112,7 @@
             ]
         }
     },
-    "two_handed_axes_template_2": {
+    {
         "type": "melee",
         "template_name": "two_handed_axes_template_2",
         "can_wield": [
@@ -13815,7 +13815,7 @@
             ]
         }
     },
-    "one_handed_daggers_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_handed_daggers_template_1",
@@ -14325,7 +14325,7 @@
         },
         "property_table_name": "melee"
     },
-    "fencing_sword_template_1": {
+    {
         "type": "melee",
         "template_name": "fencing_sword_template_1",
         "can_wield": [
@@ -14749,7 +14749,7 @@
         },
         "property_table_name": "melee"
     },
-    "dual_wield_axes_template_1": {
+    {
         "type": "melee",
         "template_name": "dual_wield_axes_template_1",
         "can_wield": [
@@ -15477,7 +15477,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_hand_axe_shield_template_1": {
+    {
         "trait_table_name": "melee",
         "type": "melee",
         "template_name": "one_hand_axe_shield_template_1",
@@ -15938,7 +15938,7 @@
         },
         "property_table_name": "melee"
     },
-    "two_handed_swords_template_1": {
+    {
         "type": "melee",
         "template_name": "two_handed_swords_template_1",
         "can_wield": [
@@ -16591,7 +16591,7 @@
         },
         "property_table_name": "melee"
     },
-    "one_handed_sword_shield_template_1": {
+    {
         "type": "melee",
         "template_name": "one_handed_sword_shield_template_1",
         "can_wield": [
@@ -17150,4 +17150,4 @@
         },
         "property_table_name": "melee"
     }
-}
+]

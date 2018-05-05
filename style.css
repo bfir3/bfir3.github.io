@@ -131,7 +131,7 @@ h2 {
 select {
     width: 100%;
     height: 35px;
-    margin: 4px 0;
+    /* margin: 4px 0; */
     border: 0;
     border: 1px solid black;
     color: #c7c7c7;
@@ -149,10 +149,10 @@ select {
 }
 
 input {
-    width: 100%;
+    /* width: 100%; */
     height: 33px;
     padding: 0;
-    margin: 4px 0;
+    /* margin: 4px 0; */
     border: 0;
     border: 1px solid black;
     /* border-top: 3px solid #4b5fc3; */
@@ -311,6 +311,12 @@ input {
 .talentSection>div>div>span:nth-child(2) {
     line-height: 18px;
 }
+.textCenter {
+	text-align: center;
+}
+.sectionTitle>* {
+    margin-top: 10px;
+}
 
 .heroSection {
     height: 80px;
@@ -333,6 +339,8 @@ input {
 .heroSection>div.selected {
     box-shadow: none;
     cursor: default;
+    margin-top: -2px;
+     background: #030c15;
 }
 
 .heroSection .markusHero {
@@ -368,12 +376,12 @@ input {
     grid-template-columns: repeat(3, 33.33%);
 }
 
+.classSection>div.selected {
+	background: #030c15;
+}
 .classSection>div {
     outline: 1px solid #a66f42;
-    /* margin-left: 1px; */
-    /* margin-right: -1px; */
     margin-top: 1px;
-    background: #030c15;
     box-shadow: inset 0 0 0 1000px #ffffff15;
     display: flex;
     align-items: center;
@@ -477,6 +485,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .sectionTitle {
     border-top: 1px solid #313131;
+	position: relative;
 }
 
 .sectionTitle span {
@@ -597,7 +606,11 @@ select {
 
 /* Icon layout */
 
-
+@media (max-width:500px) {
+	.iconLayout .heroSection>div {
+	  background-size: 70% !important;
+	}
+}
 .iconLayout .heroSection .bardinHero {
     background-repeat: no-repeat;
     background-image: url(images/icons/heroes/1/icon.png);
@@ -635,6 +648,7 @@ select {
 
 .iconLayout .classSection {
     height: 50px;
+    margin-bottom: 6px !important;
 }
 
 .iconLayout .classSection>div>span{
@@ -734,15 +748,11 @@ span.talentDescription {
     text-decoration: underline;
 }
 input.buildName {
-    margin-left: -1px;
     grid-row: 1;
 }
 
 textarea.buildDescription {
-    width: calc(100% - 4px);
-    margin-left: -1px !important;
     border: 1px solid black;
-    /* border-top: 3px solid #4b5fc3; */
     color: #c7c7c7;
     background: #313131;
     font-family: 'Arial';
@@ -750,7 +760,8 @@ textarea.buildDescription {
     resize: vertical;
     text-align: center;
     -moz-appearance: none;
-	margin-bottom: -4px;
+    margin: 0;
+    display: grid;
 }
 
 iframe {
@@ -767,20 +778,20 @@ input.relatedVideo::after {
 .buildSelectionContainer {
     display: grid;
     grid-template-columns: auto minmax(80px, 200px) 122px;
-    margin-top: -4px;
 }
 
 .newLoadoutButton {
     background: #313131;
     border: 1px solid black;
-    margin: 4px 0;
+    /* margin: 4px 0; */
     width: 120px;
     text-align: center;
     align-content: center;
     display: grid;
     color: #c7c7c7;
     grid-row: 1;
-	cursor: pointer;
+    cursor: pointer;
+     margin-bottom: 1px;
 }
 
 select.loadoutSelection {
@@ -866,8 +877,9 @@ span.navButton:hover {
 
 .redBorder {
     border-width: 4px;
-    border-image: url('images/border.png') 4 4 stretch!important;
-    border: 4px solid;
+    border: 4px solid !important;
+    border-image: url(images/border.png) 4 4 stretch!important;
+    position: relative;
 }
 
 .userWindow {
@@ -998,10 +1010,9 @@ tbody>tr:hover {
 
 .redBorder {
     border-width: 4px;
-    border-image: url('images/border.png') 4 4 stretch!important;
-    border: 4px solid;
-    border-bottom: 4px solid !important;
-	position: relative;
+    border: 4px solid !important;
+    border-image: url(images/border.png) 4 4 stretch!important;
+    position: relative;
 }
 .redBorder::before, .redBorder::after,
 .redBorder>*:last-child::before, .redBorder>*:last-child::after {
@@ -1036,7 +1047,7 @@ tbody>tr:hover {
 }
 
 input.relatedVideo {
-    margin-left: -1px;
+    /* margin-left: -1px; */
 }
 .mainGrid.iconLayout.locked:not(.buildCollection) .loadoutSelection {
     display: none;
@@ -1162,6 +1173,29 @@ body {
     margin: 0 auto;
 }
 
+.page {
+	display: none;
+}
+
+body.createPage .page.createPage:not(.loading) {
+	display: grid;
+}
+
+body.buildsPage .page.buildsPage:not(.loading) {
+	display: grid;
+}
+
+body.myBuildsPage .page.myBuildsPage:not(.loading) {
+	display: grid;
+}
+body.customBuildPage .page.createPage:not(.loading) {
+	display: grid;
+}
+
+body.weaponsPage .page.weaponsPage:not(.loading) {
+	display: grid;
+}
+
 table#myBuildsTable {
     width: 100% !important;
 }
@@ -1182,10 +1216,19 @@ table#myBuildsTable {
 .buildBrowserSection, .myBuildsSection {
     margin-top: 10px !important;
 }
+
+.center {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+}
 .mainGrid:not(.loggedIn) .buildButtonBar>.navButton {
     display: none;
 }
-
+.talentSection>div>div.selected .talentDescription {
+    font-weight: bold;
+    color: #330e0b;
+}
 
 .buildInfoContainer {
     margin-bottom: 5px;
@@ -1203,4 +1246,21 @@ table#myBuildsTable {
 
 #buildBrowserTable_filter {
     display: none !important;
+}
+
+
+@media (max-width: 800px) {
+.buildSelectionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buildSelectionContainer>* {
+    width: calc(100% - 2px) !important;
+    max-width: none !important;
+}   
+.newLoadoutButton {
+    height: 30px;
+}
+
 }

@@ -1,0 +1,1055 @@
+.weaponAttackDataTable.grid {
+    width: 1200px;
+    margin: 0 auto;
+    color: white;
+}
+.weaponAttackSwingTable.grid {
+    grid-template-rows: auto auto;
+    grid-row-gap: 10px;
+}
+
+.weaponDamageTable>div {
+    grid-template-columns: calc(20% - 110px) 50px 40px 40px 40px repeat(4, calc(20% - 15px));
+}
+
+.weaponDamageTable.grid {
+	grid-row-gap: 1px;
+	margin-bottom: 20px;
+	grid-template-rows: 40px;
+	grid-auto-rows: minmax(35px, auto);
+}
+
+.weaponAttackSwingIcon.grid {
+    font-size: 50px;
+    justify-content: center;
+    color: #fff9c7;
+    border: 1px solid white;
+    width: 90px;
+    grid-template-columns: 100%;
+    text-align: center;
+    margin: 0 5px;
+    background: #795548;
+}
+
+.weaponAttackSwingIcon.grid span {
+    align-self: center;
+    width: 100%;
+}
+
+.weaponDamageEnemy.grid>div {
+    justify-content: center;
+}
+
+.enemyBreakpointBar.grid {
+    width: 80px;
+    height: 100%;
+    align-self: center;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: 50% 50%;
+}.weaponDamageTable>div>span {
+    justify-self: center;
+    align-self: center;
+}
+
+.weaponDamageEnemy.grid>div>span {
+    grid-column: 1;
+}
+
+.enemyBreakpointBar>div.filled {
+    border: 1px solid #000000;
+    background: #4CAF50;
+    background-image: linear-gradient(#4CAF50, #27982b);
+    margin: 2px;
+    border-radius: 1px;
+    height: 10px;
+    width: 11px;
+}
+
+.weaponDamageTable.grid>div {
+    background: #5f1818;
+}
+
+.weaponDamageTable.grid>div>* {
+    /* border-right: 1px solid black; */
+    /* padding: 7px; */
+}
+
+.weaponAttackSwings.flex {
+    justify-content: center;
+}
+
+span.attackText {
+    font-size: 14px;
+    border-top: 1px solid black;
+    padding: 5px 0;
+}
+
+span.arrow-down {
+    margin-bottom: 8px;
+}
+
+.weaponDamageHeader {
+    background: #751818 !important;
+}
+
+.weaponDamageType>div:first-child {
+    background: #3e0c0c !important;
+}
+.emptyCell {
+    grid-column: 1 / span 2;
+}
+
+.weaponDamageType>.damageType {
+    grid-column: 1 / span 5;
+    /* padding: 7px !important; */
+}
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: 14px;
+  /* margin: 0 10px; */
+  position: relative;
+  /* top: calc(50% - 13px); */
+  transform: rotate(-45deg);
+  width: 14px;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 14px;
+  position: absolute;
+  width: 14px;
+}
+
+.heart:before {
+  top: -7px;
+  left: 0;
+}
+
+.heart:after {
+  left: 7px;
+  top: 0;
+}
+.enemyName {
+	padding: 7px 0;
+}
+.enemyName.skaven {
+    background: #803737;
+}
+
+.enemyName.chaos {
+    background: #1e598c;
+}
+
+span.enemyLegendName {
+    grid-column: 2;
+    font-size: 14px;
+    margin: 0 5px;
+    border-right: none !important;
+    justify-self: center;
+    align-self: center;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.filled {
+    border: 1px solid #c5c59e;
+    background: #4CAF50;
+    background-image: linear-gradient(#4CAF50, #27982b);
+    margin: 2px;
+    border-radius: 1px;
+    height: 10px;
+    width: 11px;
+}
+
+.right {
+    justify-self: right;
+}
+
+.enemyLegendIcon {
+    margin-right: 5px;
+    border: 1px solid #c5c59e !important;
+    margin: 2px;
+    border-radius: 1px;
+    height: 10px;
+    width: 11px;
+    margin-right: 5px;
+    padding: 7px;
+    align-self: center;
+}
+
+.enemyLegendRow, .attackTableTitle {
+    /* padding: 5px 0; */
+    width: calc(100% - 1px);
+    height: 100%;
+}
+
+.enemyLegendIcon.skaven {
+    background: #4CAF50;
+    background-image: linear-gradient(#803737, #8e3c3c);
+}
+
+.enemyLegendIcon.chaos {
+    background: #4CAF50;
+    background-image: linear-gradient(#1e598c, #20639c);
+}
+
+.weaponSelectionSection {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.weaponSummaryContainer.grid {
+    grid-template-columns: 68px calc(50% - 148px) 50px 60px calc(50% - 140px) 60px;
+    grid-column-gap: 10px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.weaponIcon {
+    background: url('images/icons/melee/ExecutionerSword.png');
+    width: 68px;
+    height: 68px;
+    background-size: contain;
+    grid-row: 1 / span 2;
+    border: 1px solid rgba(255, 255, 255, .2);
+    margin-top: 1px;
+}
+
+.weaponSummaryContainer .meleeProperty1Selection {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.weaponSummaryContainer .meleeProperty2Selection {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.weaponSummaryContainer .meleeProperty1Value {
+    grid-row: 1;
+    grid-column: 3;
+}
+.weaponSummaryContainer .meleeProperty2Value {
+    grid-row: 2;
+    grid-column: 3;
+}
+.weaponSummaryContainer .traitIcon {
+    background: url('images/icons/traits/Melee_trait_swift_slaying.png');
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+}
+
+.weaponSummaryContainer .traitSelection {
+    grid-row: 1;
+    grid-column: 5;
+}
+
+.weaponSummaryContainer .traitDescription {
+    grid-row: 2;
+    grid-column: 5;
+    max-height: 20px;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.weaponSummaryContainer .stamina {
+    grid-row: 1 / span 2;
+    grid-column: 6;
+}
+
+.weaponSummaryContainer select, .weaponSummaryContainer input {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.weaponSummaryContainer .traitIconContainer {
+    grid-row: 1 / span 2;
+    grid-column: 4;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #bec5a2;
+    border-radius: 16px;
+    background: #000;
+}
+
+.staminaIconContainer {
+    grid-row: 1 / span 2;
+    grid-column: 6;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #bec5a2;
+    border-radius: 16px;
+    background: #000;
+}
+
+.staminaIcon {
+    background: url(images/icons/melee/BlockAngle90.png);
+    background-repeat: no-repeat;
+    width: 39px;
+    height: 36px;
+    background-size: cover;
+    background-position-y: 1px;
+    grid-row: 1 / span 2;
+    grid-column: 6;
+    border: 2px solid #bec5a2;
+    border-radius: 20px;
+}
+
+span.staminaValue {
+    grid-row: 1;
+    grid-column: 6;
+    color: #84c2e8;
+    margin-top: -2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.weaponStatsContainer {
+    grid-template-columns: repeat(3, calc(33% - 10px));
+    grid-column-gap: 20px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.weaponStatContainer {
+    grid-template-columns: 50% 50%;
+    margin-bottom: 3px;
+}
+
+span.weaponStatValue {
+    color: #2196F3;
+    font-weight: bold;
+    text-align: right;
+}
+
+.weaponStatContainer:nth-child(3n) {
+    justify-content: flex-end;
+}
+
+.weaponStatContainer:nth-child(3n-1) {
+    margin-left: 0%;
+}
+
+.swingLeft span.attackIcon::after {
+    content: '\2190';
+    position: relative;
+    top: -5px;
+}
+
+.swingRight span.attackIcon::after {
+    content: '\2192';
+    position: relative;
+    top: -5px;
+}
+
+.swingDown span.attackIcon::after {
+    content: '\2193';
+    position: relative;
+    top: -5px;
+}
+
+.swingUp span.attackIcon::after, .swingStab span.attackIcon::after  {
+    content: '\2191';
+    position: relative;
+    top: -5px;
+}
+
+.swingUpLeft span.attackIcon::after {
+    content: '\2196';
+    position: relative;
+    top: 0px;
+}
+
+.swingUpRight span.attackIcon::after {
+    content: '\2197';
+    position: relative;
+    top: 0px;
+}
+
+.swingDownLeft span.attackIcon::after {
+    content: '\2199';
+    position: relative;
+    top: 0px;
+}
+
+.swingDownRight span.attackIcon::after {
+    content: '\2198';
+    position: relative;
+    top: 0px;
+}
+
+.swingCrossDown span.attackIcon::after {
+    content: '\2929';
+    position: relative;
+    top: 0px;
+}
+
+.swingDoubleDown span.attackIcon::after {
+    content: '\21CA';
+    position: relative;
+    top: 0px;
+}
+
+.weaponsDataPage .sectionTitle {
+    margin-bottom: 10px !important;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.weaponDataTableButtonsContainer.grid {
+	grid-template-columns: repeat(4, calc(25% - 6px));
+    grid-column-gap: 8px;
+    margin-bottom: 10px;
+    grid-row-gap: 8px;
+    grid-auto-rows: minmax(40px, auto);
+}
+
+.weaponDataTableButton {
+}
+
+span.weaponDataTableButton {
+    color: white;
+    text-transform: uppercase;
+}
+
+.weaponDataTableButton {
+    color: white;
+    text-transform: uppercase;
+    background: #5f1818;
+    width: 100%;
+	height: 40px;
+}
+
+.weaponDataTableButton.enabled {
+    background: #803737;
+}
+.weaponSelectionContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+span.blockAngleValue {
+    grid-row: 2;
+    grid-column: 6;
+    color: #84c2e8;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 22px;
+}
+
+span.blockAngleValue::after {
+    content: "\00b0";
+}
+
+.weaponDataTableControlsContainer, .fullWidthButton {
+    cursor: pointer;
+    width: 800px;
+    grid-template-rows: 40px;
+    margin-bottom: 10px;
+    grid-row-gap: 5px;
+    background: #313131;
+}
+.weaponDataTableControlsContainer .weaponDataTableButton {
+    background: #313131;
+}
+.weaponDataTableButton {
+    cursor: pointer;
+}
+
+i.statsIcon {
+    margin-right: 10px;
+}
+
+i.statsIcon {
+    font-size: 26px;
+}
+
+.flex.center {
+    justify-content: center;
+}
+
+span.statsButton.center {font-size: 16px;letter-spacing: 2px;color: #c7c7c7;}
+
+.weaponAttackStatsContainer {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.enemyRace i.raceIcon {
+    grid-row: 1;
+    background-repeat: no-repeat !important;
+    grid-column: 2;
+    background-size: contain !important;
+    background-position: center !important;
+    width: 30px;
+}
+.skaven i.raceIcon {
+    background: url('images/icons/enemy/skaven.png');
+    background-size: 500% !important;
+}
+.chaos i.raceIcon {
+    background: url('images/icons/enemy/chaos.png');
+}
+
+.enemyRace {
+    padding: 0 !important;
+}
+.enemyBreakpointBar>div.filled:first-child:nth-last-child(1) {
+    background: #5e2ce8;
+    background-image: linear-gradient(#5e2ce8, #592adc);
+}
+.enemyBreakpointBar>div.filled:nth-child(1):nth-last-child(2),
+.enemyBreakpointBar>div.filled:nth-child(2):nth-last-child(1) {
+    background: #4CAF50;
+    background-image: linear-gradient(#4CAF50, #27982b);
+}
+.enemyBreakpointBar>div.filled:nth-child(1):nth-last-child(3),
+.enemyBreakpointBar>div.filled:nth-child(2):nth-last-child(2),
+.enemyBreakpointBar>div.filled:nth-child(3):nth-last-child(1) {
+    background: #b19316;
+    background-image: linear-gradient(#b19316, #9e8414);
+}
+
+.enemyBreakpointBar>div.filled:nth-child(1):nth-last-child(4),
+.enemyBreakpointBar>div.filled:nth-child(2):nth-last-child(3),
+.enemyBreakpointBar>div.filled:nth-child(3):nth-last-child(2),
+.enemyBreakpointBar>div.filled:nth-child(4):nth-last-child(1)  {
+    background: #e8d208;
+    background-image: linear-gradient(#e8d208, #dac60b);
+}
+
+.enemyBreakpointBar>div.filled:nth-child(1):nth-last-child(5),
+.enemyBreakpointBar>div.filled:nth-child(2):nth-last-child(4),
+.enemyBreakpointBar>div.filled:nth-child(3):nth-last-child(3),
+.enemyBreakpointBar>div.filled:nth-child(4):nth-last-child(2),
+.enemyBreakpointBar>div.filled:nth-child(5):nth-last-child(1)   {
+    background: #fb9341;
+    background-image: linear-gradient(#fb9341, #e8883c);
+}
+
+.enemyBreakpointBar>div.filled:nth-child(1):nth-last-child(6),
+.enemyBreakpointBar>div.filled:nth-child(2):nth-last-child(5),
+.enemyBreakpointBar>div.filled:nth-child(3):nth-last-child(4),
+.enemyBreakpointBar>div.filled:nth-child(4):nth-last-child(3),
+.enemyBreakpointBar>div.filled:nth-child(5):nth-last-child(2),
+.enemyBreakpointBar>div.filled:nth-child(6):nth-last-child(1)    {
+    background: #cc2813;
+    background-image: linear-gradient(#cc2813, #bd2613);
+}
+
+.enemyLegendIcon.regular,
+.weaponDamageEnemy.regular>div:first-child {
+    background: #772c2c !important;
+}
+
+.enemyLegendIcon.elite,
+.weaponDamageEnemy.elite>div:first-child {
+    background: #b71919 !important;
+}
+
+.enemyLegendIcon.special,
+.weaponDamageEnemy.special>div:first-child {
+    background: #31366b !important;
+}
+
+.enemyLegendIcon.lord,
+.weaponDamageEnemy.lord>div:first-child {
+    background: #670808 !important;
+}
+
+.enemyLegendRow .enemyRace {
+    border-right: none !important;
+}
+
+.enemyLegendRow .chaos i.raceIcon {
+    margin-top: -1px;
+}
+span.tableTitle {
+    border-right: none !important;
+    text-transform: uppercase;
+}
+.weaponDamageEnemy {
+    display: none;
+}
+
+.weaponDamageEnemy {
+    display: none;
+}
+
+.showEnemies .showEnemyButton {
+	display: grid;
+}
+.showEnemies .enemyLegendRow, .showLegend .enemyLegendRow  {
+	display: flex;
+}
+
+.showSpecials .weaponDamageEnemy.special {
+    display: grid;
+}
+.showRegulars .weaponDamageEnemy.regular {
+    display: grid;
+}
+.showElites .weaponDamageEnemy.elite {
+    display: grid;
+}
+.showLords .weaponDamageEnemy.lord {
+    display: grid;
+}
+
+.weaponDataTableButton.showEnemiesButton {
+    grid-column: 3 / span 2;
+}
+.weaponStatsContainer, .weaponSummaryContainer {
+    display: none;
+}
+.enemyLegendRow {
+    background: #5f1818;
+}
+
+.weaponDataTableButtonsContainer.grid.center .enemyLegendRow {
+    grid-column: 1 / span 4;
+}
+span.attackIcon {
+    height: 58px;
+}
+.weaponDamageType{
+	cursor: pointer;
+}
+.showInfantry .weaponDamageEnemy.infantry {
+    display: grid;
+}
+.hideInfantry .weaponDamageEnemy.infantry {
+    display: none !important;
+}
+.showArmored .weaponDamageEnemy.armored:not(.super) {
+    display: grid;
+}
+.hideArmored .weaponDamageEnemy.armored:not(.super) {
+    display: none !important;
+}
+.showMonsters .weaponDamageEnemy.monsters {
+    display: grid;
+}
+.hideMonsters .weaponDamageEnemy.monsters {
+    display: none !important;
+}
+.showBerserkers .weaponDamageEnemy.berserkers {
+    display: grid;
+}
+.hideBerserkers .weaponDamageEnemy.berserkers {
+    display: none !important;
+}
+.showSuperArmor .weaponDamageEnemy.super.armor {
+    display: grid;
+}
+.hideSuperArmor .weaponDamageEnemy.super.armor {
+    display: none !important;
+}
+.hideEnemies .weaponDamageEnemy {
+    display: none !important;	
+}
+
+.hideRegulars .weaponDamageEnemy.regular {
+	display: none !important;
+}
+.hideSpecials .weaponDamageEnemy.special {
+	display: none !important;
+}
+.hideElites .weaponDamageEnemy.elite {
+	display: none !important;
+}
+.hideLords .weaponDamageEnemy.lord, .hideLords .weaponDamageEnemy.boss {
+	display: none !important;
+}
+
+.multiTargetAttack .weaponDamageEnemy>div {
+   /* padding: 0 !important; */
+}
+
+.multiTargetAttack.targets2 .targetValueCell, 
+.multiTargetAttack.targets2 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets2 .weaponDamageHeader>div:nth-child(n+6) {
+    grid-template-columns: repeat(2, 50%);
+}
+.multiTargetAttack.targets3 .targetValueCell, 
+.multiTargetAttack.targets3 .weaponDamageType>div:not(.damageType), 
+.multiTargetAttack.targets3 .weaponDamageHeader>div:nth-child(n+6)  {
+    grid-template-columns: repeat(3, 33.33%);
+}
+.multiTargetAttack.targets4 .targetValueCell, 
+.multiTargetAttack.targets4 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets4 .weaponDamageHeader>div:nth-child(n+6)  {
+    grid-template-columns: repeat(4, 25%);
+}
+.multiTargetAttack.targets5 .targetValueCell, 
+.multiTargetAttack.targets5 .weaponDamageType>div:not(.damageType),
+.multiTargetAttack.targets5 .weaponDamageHeader>div:nth-child(n+6)  {
+    grid-template-columns: repeat(5, 20%);
+    font-size: 12px;
+}
+
+.multiTargetAttack .weaponDamageHeader .damageCell {
+    padding-bottom: 3px !important;
+}
+
+.multiTargetAttack .damageCell, .multiTargetAttack .cleaveCell,.multiTargetAttack .staggerCell {
+    padding: 0px !important;
+    grid-template-rows: 100%;
+    justify-content: center;
+    align-content: center;
+}
+.multiTargetAttack .targetValue {
+    outline: 1px solid black;
+}
+
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType) {
+    grid-template-rows: 30px auto;
+}
+
+.multiTargetAttack .enemyNameHeader>*, .multiTargetAttack .enemyRaceHeader>*, .multiTargetAttack .enemyHealthHeader>* {
+    grid-row: 1 / span 2;
+}
+
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType)>span:first-child {
+    grid-column: 1 / span 5;
+}
+
+.multiTargetAttack .weaponDamageHeader>div:not(.damageType) i {
+    font-size: 95%;
+}
+
+.multiTargetAttack .weaponDamageHeader>div>div:nth-of-type(1)>i:first-child {
+    color: white;
+}
+
+.multiTargetAttack .weaponDamageHeader>.damageCell i {
+    color: #9E9E9E;
+}
+
+.multiTargetAttack.targets5 .damageCell>i {
+    font-size: 100%;    
+}
+
+.multiTargetAttack .damageCell>div:nth-of-type(1)>i:first-child,
+.multiTargetAttack .damageCell>div:nth-of-type(2)>i:nth-child(2),
+.multiTargetAttack .damageCell>div:nth-of-type(3)>i:nth-child(3),
+.multiTargetAttack .damageCell>div:nth-of-type(4)>i:nth-child(4),
+.multiTargetAttack .damageCell>div:nth-of-type(5)>i:nth-child(5) {
+    color: white;
+    font-size: 120%;    
+}
+
+
+.multiTargetAttack .weaponDamageHeader .damageCell>div:last-child {
+    margin-right: 5px;
+}
+
+.multiTargetAttack .weaponDamageHeader .damageCell>div:last-child::after {
+    content: '+';
+    position: absolute;
+}
+
+.multiTargetAttack .damageCell>div {
+    position: relative;
+}
+
+.weaponDamageType .damageCell {
+    /* background: #242592; */
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(1),
+.multiTargetAttack .weaponDamageType .cleaveCell .targetValue:nth-child(1),
+.multiTargetAttack .weaponDamageType .staggerCell .targetValue:nth-child(1) {
+    background: #242592;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(2),
+.multiTargetAttack .weaponDamageType .cleaveCell .targetValue:nth-child(2),
+.multiTargetAttack .weaponDamageType .staggerCell .targetValue:nth-child(2) {
+    background: #1c1886;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(3),
+.multiTargetAttack .weaponDamageType .cleaveCell .targetValue:nth-child(3),
+.multiTargetAttack .weaponDamageType .staggerCell .targetValue:nth-child(3) {
+    background: #120e6d;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(4),
+.multiTargetAttack .weaponDamageType .cleaveCell .targetValue:nth-child(4),
+.multiTargetAttack .weaponDamageType .staggerCell .targetValue:nth-child(4) {
+    background: #0a075d;
+}
+.multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(5),
+.multiTargetAttack .weaponDamageType .cleaveCell .targetValue:nth-child(5),
+.multiTargetAttack .weaponDamageType .staggerCell .targetValue:nth-child(4) {
+    background: #06034c;
+}
+
+/* .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(1) { */
+    /* background: #922424; */
+/* } */
+/* .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(2) { */
+    /* background: #861818; */
+/* } */
+/* .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(3) { */
+    /* background: #5d0707; */
+/* } */
+/* .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(4) { */
+    /* background: #4c0303; */
+/* } */
+/* .multiTargetAttack .weaponDamageType .damageCell .targetValue:nth-child(5) { */
+    /* background: #441a1a; */
+/* } */
+
+.multiTargetAttack .weaponDamageEnemy .targetValue {
+    background: #4e4e4e;
+    color: grey
+}
+.hits1 {
+    background: #11210d !important;
+    color: #fff !important;
+}
+.hits2 {
+    background: #334618 !important;
+    color: #fff !important;
+}
+.hits3 {
+    background: #445E20 !important;
+    color: #fff !important;
+}
+.hits4 {
+    background: #567627 !important;
+    color: #fff !important;
+}
+.hits5 {
+    background: #678F2F !important;
+    color: #fff !important;
+}
+.hits6 {
+    background: #78A836 !important;
+    color: #fff !important;
+}
+.sectionTitle::after {
+    content: '-';
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 21px);
+    font-size: 200%;
+}
+
+.sectionTitle.collapsed::after {
+    content: '+';
+    right: 6px;
+    top: calc(50% - 18px);
+}
+
+.cleaveCell, .damageCell, .staggerCell {
+    border-right: none !important;
+    /* margin-left: -1px; */
+}
+.tableTypeButton.selected {
+    outline: 1px solid #fff;
+}
+.weaponDamageHeader>div:nth-child(n+1) {
+    border-right: 1px solid black !important;
+    border: blue;
+}
+.enemyName, .enemyRace, .enemyHealth,
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div,
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
+    outline: 1px solid black !important;
+    margin-right: 1px;
+}
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div .targetValue {
+    /* margin-left: 1px; */
+    /* outline: 1px solid black !important; */
+    /* border-right: none !important; */
+}
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageType>div {
+    padding: 0;
+}
+.weaponDamageType>div:first-child {
+    background: #3e0c0c !important;
+}
+.weaponDamageType {
+    background: #242592 !important;
+    /* outline: 1px solid black; */
+    /* margin-right: 1px; */
+}
+
+.cleaves2 {
+    background: #7d1c1c !important;
+    color: white !important;
+}
+.cleaves3 {
+    background: #9a2626 !important;
+    color: white !important;
+}
+.cleaves4 {
+    background: #a93636 !important;
+    color: white !important;
+}
+.cleaves5 {
+    background: #c74242 !important;
+    color: white !important;
+}
+.cleaves6 {
+    background: #673131 !important;
+    color: white !important;
+}
+.cleaves7 {
+    background: #a55858 !important;
+    color: white !important;
+}
+.cleaves8 {
+    background: #1b9427 !important;
+    color: white !important;
+}
+.cleaves9 {
+    background: #27ab34 !important;
+    color: white !important;
+}
+.cleaves10 {
+    background: #39d248 !important;
+    color: white !important;
+}
+.enemyTargets {
+    grid-template-columns: 100%;
+    outline: 1px solid black;
+    margin-right: 1px;
+}
+
+.enemyTargets>span {
+    width: 100%;
+    height: 100%;
+}
+
+.enemyHealthHeader>* .enemyTargetsHeader>* {
+    grid-row: 1 / span 2;
+}
+
+.enemyTargetsHeader {
+    align-content: center;
+	font-size: 1.4em;
+}
+
+.weaponDamageType>div {
+    margin-right: 0px;
+}
+
+.attackTemplateDataTable:not(.multiTargetAttack) .weaponDamageEnemy>div:nth-child(n+6) {
+    background: #4e4e4e;
+    color: grey;
+}
+.enemyLegendRow .enemyName, .enemyLegendRow .enemyRace {
+    outline: none !important;
+}
+
+.weaponSelectionContainer .heroSection {
+    margin-bottom: 5px !important;
+}
+
+.weaponSelectionSection {
+    margin-bottom: 5px;
+}
+
+select, input, textarea {
+    margin-bottom: 1px;
+}
+.buildInfoContainer {
+    margin-bottom: 5px;
+}
+
+.showStrengthButton {
+	grid-column: 1 / span 2;
+    cursor: initial;
+}
+
+.showBreakpointsButton {
+	grid-column: 1 / span 4;
+}
+
+.attackTemplateDataTable:not(.multiTargetAttack) .targetValueCell {
+    grid-template-columns: 100%;
+}
+.hits0 {
+    background: #011b0a !important;
+    color: #fff !important;
+}
+
+.breakpointIndicator.boost {
+    font-size: 0.8em;
+}
+.breakpointIndicator.boost.hits1 {
+    border-bottom: 2px solid white;
+}
+
+
+.breakpointTable {
+	display: none;
+}
+
+.showBreakpoints .breakpointTable {
+	display: grid;
+}
+
+.showBreakpoints .damageTable {
+	display: none;
+}
+.showDamageTypeButton {
+	display: none;
+}
+@media (max-width: 800px) {
+    .weaponAttackStatsContainer, .weaponAttackDataTable.grid {
+        width: 100%;
+    }
+    .weaponsDataPage, .weaponAttackDataTable, .weaponAttackSwingTable {
+        grid-template-columns: 100%;
+
+    }
+    .weaponDamageTable>div {
+        grid-template-columns: 110px 40px 40px auto;
+    }
+    .enemyLegendRow {
+        flex-wrap: wrap;
+    }
+    .enemyTargets, .enemyTargetsHeader {
+        display: none;
+    }
+    .showNormalDamage .critDamage, .showNormalDamage .headshotDamage, .showNormalDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showHeadshotDamage .critDamage, .showHeadshotDamage .normalDamage, .showHeadshotDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showCritDamage .normalDamage, .showCritDamage .headshotDamage, .showCritDamage .critHeadshotDamage {
+        display: none;
+    }
+    .showCritHeadshotDamage .critDamage, .showCritHeadshotDamage .headshotDamage, .showCritHeadshotDamage .normalDamage {
+        display: none;
+    }	
+	.showDamageTypeButton {
+		display: grid !important;
+	}
+    .weaponDamageType>.damageType {
+        grid-column: 1 / span 3;
+    }
+}
+
+@media (max-width: 400px) {
+.weaponDataTableButtonsContainer {
+	font-size: 0.8em;
+}
+}

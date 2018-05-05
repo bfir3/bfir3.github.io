@@ -16,8 +16,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>verminbuilds</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="weapons.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
   <script src="script.js?v=1.0.110"></script>
@@ -25,7 +28,7 @@
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
 </head>
 
-<body>
+<body class="createPage" onhashchange="loadPageFromHash()">
 	<div class="statusBar grid">
 		<span class="statusLabel buildCountLabel"></span>
 		<span class="statusLabel myBuildsButton" style="visibility: hidden;">My Builds</span>
@@ -34,19 +37,21 @@
 	<div class="navBar flex">
 		<span class="navButton createButton">Create</span>
 		<span class="navButton browseButton">Browse Builds</span>
+		<span class="navButton weaponsButton">Weapons</span>
+		<span class="navButton hide enemiesButton">Enemies</span>
 	</div>
-	<div class="mainGrid page iconLayout loading">
+	<div class="mainGrid createPage page iconLayout loading">
 		<div class="heroSection">
-			<div class="markusHero selected"></div>
-			<div class="bardinHero"></div>
-			<div class="kerillianHero"></div>
-			<div class="victorHero"></div>
-			<div class="siennaHero"></div>
+			<div class="markusHero selected redBorder"><div class="emptyCell"></div></div>
+			<div class="bardinHero"><div class="emptyCell"></div></div>
+			<div class="kerillianHero"><div class="emptyCell"></div></div>
+			<div class="victorHero"><div class="emptyCell"></div></div>
+			<div class="siennaHero"><div class="emptyCell"></div></div>
 		</div>
 		<div class="classSection">
-			<div class="heroClass1"></div>
-			<div class="heroClass2"></div>
-			<div class="heroClass3"></div>
+			<div class="heroClass1"><div class="emptyCell"></div></div>
+			<div class="heroClass2"><div class="emptyCell"></div></div>
+			<div class="heroClass3"><div class="emptyCell"></div></div>
 		</div>
 		<div class="heroClassContent">		
 			<div class="buildButtonBar flex">
@@ -62,8 +67,10 @@
 				<select class="loadoutSelection"></select>
 				<span class="button newLoadoutButton">New Loadout</span>
 			</div>
-			<textarea type="text" class="buildDescription" placeholder="Build Description" style="height: 66px;"></textarea>
-			<input type="text" class="relatedVideo" placeholder="Related Video">
+			<div class="buildInfoContainer grid">
+				<textarea type="text" class="buildDescription" placeholder="Build Description" style="height: 66px;"></textarea>
+				<input type="text" class="relatedVideo" placeholder="Related Video">
+			</div>
 			<iframe id="ytplayer" class="ytPlayer" type="text/html" width="640" height="360" frameborder="0"></iframe>
 			<iframe class="twitchPlayer" frameborder="0" allowfullscreen="true" scrolling="no" height="360" width="640"></iframe>
 			<div class="sectionTitle heroSummaryTitle">
@@ -298,19 +305,133 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer">
-			<input  onClick="this.select();" type="text"></input>
-		</div>
 	</div>
-	<div class="buildBrowserSection page grid loading">
+	<div class="buildBrowserSection buildsPage page grid loading">
 		<div class="buildBrowserButtons flex">
 			<div class="previousButton">Previous</div>
 			<div class="nextButton">Next</div>
 		</div>
 		<table id="buildBrowserTable" class="redBorder"></table>
 	</div>
-	<div class="myBuildsSection page grid loading">
+	<div class="myBuildsSection myBuildsPage page grid loading">
 		<table id="myBuildsTable" class="redBorder"></table>
+	</div>
+	<div class="weaponsDataPage weaponsPage page grid iconLayout" style="">
+		<div class="weaponSelectionContainer">
+			<div class="heroSection">
+				<div class="markusHero selected redBorder"><div class="emptyCell"></div></div>
+				<div class="bardinHero"><div class="emptyCell"></div></div>
+				<div class="kerillianHero"><div class="emptyCell"></div></div>
+				<div class="victorHero"><div class="emptyCell"></div></div>
+				<div class="siennaHero"><div class="emptyCell"></div></div>
+			</div>
+			<div class="weaponSelectionSection">
+				<select class="weaponDataMeleeSelection"></select>
+			</div>
+		</div>
+		<div class="weaponSummaryContainer grid">
+		  <div class="weaponIcon"></div>
+		  <select class="meleeProperty1Selection propertySelection">
+			 <option value="0">Attack Speed</option>
+			 <option value="1">Stamina</option>
+			 <option value="2">Block Cost Reduction</option>
+			 <option value="3">Crit Chance</option>
+			 <option value="4">Crit Power</option>
+			 <option value="5">Push/Block Angle</option>
+			 <option value="6">Power vs Skaven</option>
+			 <option value="7">Power vs Chaos</option>
+		  </select>
+		  <input type="number" name="meleeProperty1" min="3" max="5" step="0.2" value="5" class="meleeProperty1Value">
+		  <select class="meleeProperty2Selection propertySelection">
+			 <option value="0">Attack Speed</option>
+			 <option value="1">Stamina</option>
+			 <option value="2">Block Cost Reduction</option>
+			 <option value="3">Crit Chance</option>
+			 <option value="4">Crit Power</option>
+			 <option value="5">Push/Block Angle</option>
+			 <option value="6">Power vs Skaven</option>
+			 <option value="7">Power vs Chaos</option>
+		  </select>
+		  <input type="number" name="meleeProperty2" min="3" max="5" step="0.2" value="5" class="meleeProperty2Value">
+		  <div class="traitIconContainer center grid" title="Trait">
+			 <div class="traitIcon center"></div>
+		  </div>
+		  <div class="staminaIcon center" title="Stamina"></div>
+		  <span class="staminaValue textCenter">6</span>
+		  <span class="blockAngleValue textCenter">90</span>
+		  <select class="meleeTraitSelection traitSelection">
+			 <option value="0">Heroic Intervention</option>
+			 <option value="1">Off Balance</option>
+			 <option value="2">Opportunist</option>
+			 <option value="3">Parry</option>
+			 <option value="4">Resourceful Combatant</option>
+			 <option value="5">Swift Slaying</option>
+		  </select>
+		  <div class="traitDescription"></div>
+		</div>
+		<div class="weaponStatsContainer grid">
+		  <div class="weaponStatColumn">
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Attack Speed:</span><span class="weaponStatValue">0.8 (+15%)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Talent Power:</span><span class="weaponStatValue">10%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Skaven:</span><span class="weaponStatValue">10%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Chaos:</span><span class="weaponStatValue">10%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Infantry</span><span class="weaponStatValue">10%</span></div>
+		  </div>
+		  <div class="weaponStatColumn">
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Crit Chance</span><span class="weaponStatValue">15% (+10%)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Crit Power</span><span class="weaponStatValue">28.0 (+10%)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Armored</span><span class="weaponStatValue">10%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Monsters</span><span class="weaponStatValue">10%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">P vs. Berserkers</span><span class="weaponStatValue">10%</span></div>
+		  </div>
+		  <div class="weaponStatColumn">
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Stamina</span><span class="weaponStatValue">8 (+4.0)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Block Angle:</span><span class="weaponStatValue">90 (+50%)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Block Reduction:</span><span class="weaponStatValue">88%</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Stamina Regen:</span><span class="weaponStatValue">0.8 (+15%)</span></div>
+			 <div class="weaponStatContainer grid"><span class="weaponStatName">Block Run Speed:</span><span class="weaponStatValue">0.8 (+15%)</span></div>
+		  </div>
+		</div>
+		<div class="sectionTitle flex center">
+			<i class="statsIcon fa fa-bar-chart"></i>
+			<span class="statsButton center">Stats</span>
+		</div>
+		<div class="weaponAttackStatsContainer showDamage showNormalDamage showRegulars showElites showSpecials showLords showInfantry showArmored showSuperArmor showMonsters showBerserkers">
+			<div class="weaponDataTableButtonsContainer grid center">
+				<div class="weaponDataTableButton tableTypeButton showDamageButton hide selected grid"><span class="center weaponTableTypeLabel">Damage</span></div>
+				<div class="weaponDataTableButton tableTypeButton showCleaveButton hide grid"><span class="center">Cleave</span></div>
+				<div class="weaponDataTableButton tableTypeButton showStaggerButton hide grid"><span class="center">Stagger</span></div>
+				<div class="weaponDataTableButton showStrengthButton disabled hide grid"><span class="center">Show Strength</span></div>
+				<div class="weaponDataTableButton showBreakpointsButton grid"><span class="center">Show Breakpoints</span></div>
+				<div class="weaponDataTableButton showDamageTypeButton showNormalButton grid"><span class="center">Normal</span></div>
+				<div class="weaponDataTableButton showDamageTypeButton showHeadshotButton grid"><span class="center">Headshot</span></div>
+				<div class="weaponDataTableButton showDamageTypeButton showCritButton grid"><span class="center">Crit</span></div>
+				<div class="weaponDataTableButton showDamageTypeButton showCritHeadshotButton grid"><span class="center">Crit Headshot</span></div>
+				<div class="weaponDataTableButton showEnemiesButton hide grid"><span class="center">Hide Enemies</span></div>
+				<div class="weaponDataTableButton showEnemyButton showRegularsButton grid"><span class="center">Hide Regular</span></div>
+				<div class="weaponDataTableButton showEnemyButton showElitesButton grid"><span class="center">Hide Elites</span></div>
+				<div class="weaponDataTableButton showEnemyButton showSpecialsButton grid"><span class="center">Hide Specials</span></div>
+				<div class="weaponDataTableButton showEnemyButton showLordsButton grid"><span class="center">Hide Lords</span></div>
+				<div class="enemyLegendRow showEnemyButton flex center">
+					<div class="enemyLegendIcon regular"></div>
+					<span class="enemyLegendName">Regular</span>
+					<div class="enemyLegendIcon elite"></div>
+					<span class="enemyLegendName">Elite</span>
+					<div class="enemyLegendIcon special"></div>
+					<span class="enemyLegendName">Special</span>
+					<div class="enemyLegendIcon lord"></div>
+					<span class="enemyLegendName left">Lord</span>
+					<div class="enemyRace skaven grid"><i class="raceIcon"></i></div>
+					<span class="enemyLegendName left">Skaven</span>
+					<div class="enemyRace chaos grid"><i class="raceIcon"></i></div>
+					<span class="enemyLegendName left">Chaos</span>
+				</div>
+			</div>	
+			<div class="weaponAttackDataTable grid">
+			</div>
+		</div>
+	</div>
+	<div class="footer">
 	</div>
 	<div class="userWindow registerWindow">
 		<div class="grid">
