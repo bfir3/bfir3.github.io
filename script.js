@@ -3380,8 +3380,9 @@ function renderAttackSwingIcons(attackGroup) {
 
 
 $(document).ready(() => {
-	if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
+	window.location = "https://www.ranalds.gift";
+	/* if (window.location.hash.split('-').length == 2 || window.location.hash.length == 13) {		
 		$(".mainGrid").addClass("locked");
 		$(".buildDescription")[0].disabled = true;
-	}
+	} */
 });
